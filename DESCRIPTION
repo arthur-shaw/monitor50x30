@@ -1,0 +1,52 @@
+Package: monitor50x30
+Title: App for monitoring 50x30 surveys
+Version: 0.0.0.9000
+Authors@R: c(
+        person(
+            given = "Arthur", family = "Shaw",
+            role = c("aut", "cre"), email = "jashaw2002@gmail.com"
+        ),
+        person(
+            given = "Shelmith", family = "Kariuki",
+            role = c("aut"), email = "kariukishelmith@gmail.com"
+        )
+    ) 
+Description: Application for getting data, reporting on data completeness,
+    and performing quality control checks.
+License: MIT + file LICENSE
+Imports: 
+    bsicons,
+    bslib,
+    config (>= 0.3.2),
+    desc,
+    dplyr,
+    fontawesome,
+    fs,
+    gargoyle (>= 0.0.1),
+    glue,
+    golem (>= 0.4.1),
+    haven,
+    htmltools,
+    labelled,
+    purrr,
+    R6,
+    rappdirs,
+    reactable,
+    rlang,
+    shiny (>= 1.8.0),
+    shinyFeedback,
+    shinyjs,
+    susoapi (>= 0.2.0),
+    susoflows (>= 0.1.0),
+    susometa (>= 0.0.0.9000),
+    tibble,
+    waiter,
+    zip
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.1
+Remotes: 
+    github::ColinFay/gargoyle,
+    github::arthur-shaw/susoapi,
+    github::arthur-shaw/susoflows,
+    github::lsms-worldbank/susometa

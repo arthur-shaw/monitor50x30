@@ -1,0 +1,42 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# monitor50x30
+
+<!-- badges: start -->
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- badges: end -->
+
+The goal of monitor50x30 is to provide a user-friendly interface for
+performing regular survye monitoring actions:
+
+- **Getting data.** Downloading survey microdata, combining it, and
+  constructing a single set of data files.
+- **Checking data completeness.** Generating a report on the progress of
+  data collection and on whether all expected data for a PSU has been
+  sent to the server.
+- **Performing data quality checks.** Applying a set of validation
+  rules, determining whether to reject/review each interview, and
+  providing a tool to reject interviews with critical issues.
+
+## Installation
+
+Since monitor50x30 is not yet available on CRAN, it can be installed
+from GitHub as follows:
+
+``` r
+if (!require("pak")) install.packages("pak")
+pak::pak("arthur-shaw/monitor50x30")
+```
+
+## Usage
+
+To open the app’s graphical interface, simply run this command in the R
+console:
+
+``` r
+library(monitor50x30)
+run_app()
+```
