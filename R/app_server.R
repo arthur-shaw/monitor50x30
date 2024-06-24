@@ -37,6 +37,7 @@ app_server <- function(input, output, session) {
   gargoyle::init("save_visit")
   gargoyle::init("save_settings")
   gargoyle::init("download_data")
+  gargoyle::init("select_action")
 
   # load module server logic
   mod_1_setup_server("1_setup_1", r6 = r6)
@@ -131,6 +132,30 @@ app_server <- function(input, output, session) {
 
     enable_navbar_element(id = "completeness")
     enable_navbar_element(id = "quality")
+
+  })
+
+  # ============================================================================
+  # react to selecting an action after getting data
+  # ============================================================================
+
+  gargoyle::on("select_action", {
+
+    if (r6$selected_action == "Data completeness report") {
+
+      bslib::nav_select(
+        id = "navbar",
+        selected = "completeness"
+      )
+
+    } else if (r6$selected_action == "Data quality report") {
+
+      bslib::nav_select(
+        id = "navbar",
+        selected = "quality"
+      )
+
+    }
 
   })
 

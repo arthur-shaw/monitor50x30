@@ -30,6 +30,7 @@
 #' @field visit_details_provided Boolean. Whether all visit details provided.
 #' @field core_settings_saved Boolean. Whether all core settings saved.
 #' @field data_downloaded Boolean. Whether data downloaded.
+#' @field selected_action Character. Next app action selected.
 #'
 #' @importFrom R6 R6Class
 #' @importFrom fs path
@@ -72,6 +73,7 @@ r6 <- R6::R6Class(
     core_settings_saved = NULL,
     # data download
     data_downloaded = NULL,
+    selected_action = NULL,
 
     # ==========================================================================
     # Methods

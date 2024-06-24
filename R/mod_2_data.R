@@ -15,7 +15,7 @@ mod_2_data_ui <- function(id){
       label = "Fetch data"
     ),
     shiny::selectInput(
-      inputId = "select_action",
+      inputId = ns("select_action"),
       label = "Select the action to take",
       choices = c(
         "Data completeness report",
@@ -295,6 +295,16 @@ mod_2_data_server <- function(id, r6){
     # ==========================================================================
     # react to action selection
     # ==========================================================================
+
+    shiny::observeEvent(input$select_action, {
+
+      # send signal that an action was selected
+      # code for updating UI appears in app_server.R
+      gargoyle::trigger("select_action")
+
+      r6$selected_action <- input$select_action
+
+    })
 
 
   })
