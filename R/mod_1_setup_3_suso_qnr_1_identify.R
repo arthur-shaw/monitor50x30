@@ -55,7 +55,7 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
 
     # load info from past session, if applicable
     if (!is.null(r6$qnrs_identified)) {
-      
+
       if (r6$qnrs_identified == TRUE) {
 
         shiny::updateTextInput(
@@ -138,7 +138,7 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
     shiny::observeEvent(input$save, {
 
       # write parameters to R6
-      r6$qnr_stspring <- input$qnr_string
+      r6$qnr_string <- input$qnr_string
       r6$matching_qnr_tbl <- matching_qnrs$df
       r6$qnrs_identified <- TRUE
 
