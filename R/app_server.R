@@ -94,10 +94,11 @@ app_server <- function(input, output, session) {
     disable_navbar_element(id = "completeness")
     disable_navbar_element(id = "quality")
 
-  } else if (is.null(r6$data_downloaded)) {
+  } else if (!is.null(r6$data_downloaded)) {
 
     if (r6$data_downloaded == TRUE) {
 
+      enable_navbar_element(id = "data")
       enable_navbar_element(id = "completeness")
       enable_navbar_element(id = "quality")
 

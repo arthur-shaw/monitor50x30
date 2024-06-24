@@ -269,6 +269,9 @@ mod_2_data_server <- function(id, r6){
       # change flag about whether data downloaded
       r6$data_downloaded <- TRUE
 
+      # write updated R6 to disk
+      r6$write()
+
       # hide the waiter
       waiter::waiter_hide()
 
