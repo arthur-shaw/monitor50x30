@@ -80,8 +80,8 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
       # fetch all questionnaires
       qnrs <- susoapi::get_questionnaires() |>
         dplyr::select(
-          rlang::.data$title, rlang::.data$version, rlang::.data$variable,
-          rlang::.data$questionnaireId
+          .data$title, .data$version, .data$variable,
+          .data$questionnaireId
         )
 
       # show them
@@ -109,13 +109,13 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
       matching_qnrs$df <- susoapi::get_questionnaires() |>
         dplyr::filter(
           grepl(
-            x = rlang::.data$title,
+            x = .data$title,
             pattern = input$qnr_string
           )
         ) |>
         dplyr::select(
-          rlang::.data$title, rlang::.data$version, rlang::.data$variable,
-          rlang::.data$questionnaireId
+          .data$title, .data$version, .data$variable,
+          .data$questionnaireId
         )
 
       output$qnrs <- reactable::renderReactable({

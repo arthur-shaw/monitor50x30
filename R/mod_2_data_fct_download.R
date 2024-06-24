@@ -185,8 +185,8 @@ combine_and_save_dta <- function(
   # file paths
   # so that can locate data files to combine
   file_paths <- file_info_df |>
-    dplyr::filter(rlang::.data$file_name == name) |>
-    dplyr::pull(rlang::.data$path)
+    dplyr::filter(.data$file_name == name) |>
+    dplyr::pull(.data$path)
 
   # data frame
   # so that can assign this value to a name
@@ -238,12 +238,12 @@ combine_and_save_all_dta <- function(
         regexp = "\\.dta$"
       )
     ) |>
-    dplyr::mutate(file_name = fs::path_file(rlang::.data$path))
+    dplyr::mutate(file_name = fs::path_file(.data$path))
 
   # extract a list of all unique files found in the directories
   file_names <- files_df |>
-    dplyr::distinct(rlang::.data$file_name) |>
-    dplyr::pull(rlang::.data$file_name)
+    dplyr::distinct(.data$file_name) |>
+    dplyr::pull(.data$file_name)
 
   # combine and save all same-named Stata files
   purrr::walk(
@@ -360,30 +360,21 @@ extract_vars_metadata <- function(df) {
   vars_df <- df  |>
     # filter to objects that are variables
     # namely, entities that have a `question_type`
-    dplyr::filter(!is.na(rlang::.data$question_type)) |>
+    dplyr::filter(!is.na(.data$question_type)) |>
     # select the variable name, variable label, and question text
-    dplyr::select(
-      rlang::.data$varname,
-      rlang::.data$variable_label,
-      rlang::.data$question_text
-    ) |>
+    dplyr::select(.data$varname, .data$variable_label, .data$question_text) |>
     # create question description that is preferably the label, but question
     # text if the label is empty
     dplyr::mutate(
       variable_description = dplyr::if_else(
-        condition = (
-          is.na(rlang::.data$variable_label) |
-          rlang::.data$variable_label == ""
-        ),
-        true = rlang::.data$question_text,
-        false = rlang::.data$variable_label,
-        missing = rlang::.data$variable_label
+        condition = (is.na(.data$variable_label) | .data$variable_label == ""),
+        true = .data$question_text,
+        false = .data$variable_label,
+        missing = .data$variable_label
       )
     )|>
     dplyr::select(
-      rlang::.data$varname,
-      rlang::.data$variable_label,
-      rlang::.data$variable_description
+      .data$varname, .data$variable_label, .data$variable_description
     )
 
   return(vars_df)

@@ -110,8 +110,8 @@ mod_1_setup_3_suso_qnr_2_select_server <- function(id, parent, r6){
         selected_qnr <- r6$qnr_selected_suso_id <- r6$matching_qnr_tbl |>
           dplyr::filter(dplyr::row_number() == qnr_selected_index)
         r6$qnr_selected_suso_id <- selected_qnr |>
-          dplyr::pull(rlang::.data$questionnaireId)
-        r6$qnr_selected_suso_version <- dplyr::pull(selected_qnr, rlang::.data$version)
+          dplyr::pull(.data$questionnaireId)
+        r6$qnr_selected_suso_version <- dplyr::pull(selected_qnr, .data$version)
         r6$qnr_selected <- TRUE
 
         # write R6 to disk

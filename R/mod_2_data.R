@@ -99,11 +99,9 @@ mod_2_data_server <- function(id, r6){
       qnr_ids <- r6$matching_qnr_tbl |>
         # compose questionnaire ID expected by `susoflows::download_data()`
         # format: {GUID}${version}
-        dplyr::mutate(id = paste0(
-          rlang::.data$questionnaireId, "$", rlang::.data$version)
-        ) |>
+        dplyr::mutate(id = paste0(.data$questionnaireId, "$", .data$version)) |>
         dplyr::pull(id)
-      qnr_titles <- dplyr::pull(r6$matching_qnr_tbl, rlang::.data$title)
+      qnr_titles <- dplyr::pull(r6$matching_qnr_tbl, .data$title)
 
       # prepare to loop over questionnaire IDs
       qnr_tot <- length(qnr_ids)
