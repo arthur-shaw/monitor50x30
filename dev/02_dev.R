@@ -43,9 +43,7 @@ golem::add_module(name = "1_setup_6_save")
 golem::add_module(name = "2_data")
 
 # completeness
-golem::add_module(name = "3_completeness")
-golem::add_module(name = "3_completeness_1_setup")
-golem::add_module(name = "3_completeness_2_report")
+golem::add_module(name = "3_complete")
 
 
 golem::add_module(name = "4_quality")

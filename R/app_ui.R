@@ -32,7 +32,7 @@ app_ui <- function(request) {
       bslib::nav_panel(
         title = "Completeness",
         value = "completeness",
-        mod_3_completeness_ui("3_completeness_1")
+        mod_3_complete_ui("3_complete_1")
       ),
       bslib::nav_panel(
         title = "Quality",

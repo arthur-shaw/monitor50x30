@@ -42,7 +42,7 @@ app_server <- function(input, output, session) {
   # load module server logic
   mod_1_setup_server("1_setup_1", r6 = r6)
   mod_2_data_server("2_data_1", r6 = r6)
-  mod_3_completeness_server("3_completeness_1", r6 = r6)
+  mod_3_complete_server("3_complete_1", r6 = r6)
   mod_4_quality_server("4_quality_1", r6 = r6)
 
   # ============================================================================
