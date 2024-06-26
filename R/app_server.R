@@ -26,6 +26,7 @@ app_server <- function(input, output, session) {
   }
 
   # initialize gargoyle listeners
+  # setup
   gargoyle::init("load_setup")
   gargoyle::init("need_setup")
   gargoyle::init("save_creds")
@@ -36,8 +37,17 @@ app_server <- function(input, output, session) {
   gargoyle::init("save_template")
   gargoyle::init("save_visit")
   gargoyle::init("save_settings")
+  # data
   gargoyle::init("download_data")
   gargoyle::init("select_action")
+  # completeness
+  gargoyle::init("save_domains")
+  gargoyle::init("save_quantify_clusters")
+  gargoyle::init("save_computer_identify_clusters")
+  gargoyle::init("save_manager_identify_clusters")
+  gargoyle::init("save_clusters")
+  gargoyle::init("save_workloads")
+  gargoyle::init("save_completeness_setup")
 
   # load module server logic
   mod_1_setup_server("1_setup_1", r6 = r6)

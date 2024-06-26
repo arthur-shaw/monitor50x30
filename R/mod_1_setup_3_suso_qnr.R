@@ -70,7 +70,7 @@ mod_1_setup_3_suso_qnr_server <- function(id, parent, r6){
 
     # from identify to select
     gargoyle::on("save_suso_qnr_identify", {
-# browser()
+
       # close current
       bslib::accordion_panel_close(
         id = "suso_qnr_accordion",
