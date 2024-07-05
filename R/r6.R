@@ -35,6 +35,11 @@
 #' @field domain_vars_selected Character vector. Domain variable(s) selected
 #' @field obs_per_domain Data frame. Number of observations per domain.
 #' @field domain_details_provided Boolean. Whether domain details provided.
+#' @field n_clusters Numeric. Number of clusters in the survey sample.
+#' @field n_per_cluster Numeric. Number of observations per cluster in the
+#' survey design.
+#' @field cluster_quantity_details_provided Boolean. Whether cluster number and
+#' observations per cluster provided.
 #'
 #' @importFrom R6 R6Class
 #' @importFrom fs path
@@ -83,6 +88,10 @@ r6 <- R6::R6Class(
     domain_vars_selected = NULL,
     obs_per_domain = NULL,
     domain_details_provided = NULL,
+    # clusters
+    n_clusters = NULL,
+    n_per_cluster = NULL,
+    cluster_quantity_details_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -165,6 +174,11 @@ r6 <- R6::R6Class(
     #' @param domain_vars_selected Character vector. Domain var(s) selected.
     #' @param obs_per_domain Data frame. Number of observations per domain.
     #' @param domain_details_provided Boolean. Whether domain details provided.
+    #' @param n_clusters Numeric. Number of clusters in the survey sample.
+    #' @param n_per_cluster Numeric. Number of observations per cluster in the
+    #' survey design.
+    #' @param cluster_quantity_details_provided Boolean. Whether cluster number
+    #' and observations per cluster provided.
     #'
     #' @noRd
     update = function(
@@ -201,7 +215,11 @@ r6 <- R6::R6Class(
       domain_var_choices = NULL,
       domain_vars_selected = NULL,
       obs_per_domain = NULL,
-      domain_details_provided = NULL
+      domain_details_provided = NULL,
+      # clusters
+      n_clusters = NULL,
+      n_per_cluster = NULL,
+      cluster_quantity_details_provided = NULL
 
     ) {
 
