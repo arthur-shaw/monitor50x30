@@ -74,11 +74,16 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
 
       }
 
-    # otherwise, load list of all questionnaires from server
-    } else {
-
+    }
+    # otherwise, load list of all questionnaires from server after creds set
+    gargoyle::on("save_creds", {
       # fetch all questionnaires
-      qnrs <- susoapi::get_questionnaires() |>
+      qnrs <- susoapi::get_questionnaires(
+        server = r6$server,
+        workspace = r6$workspace,
+        user = r6$user,
+        password = r6$password
+      ) |>
         dplyr::select(
           .data$title, .data$version, .data$variable,
           .data$questionnaireId
@@ -93,8 +98,7 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
           )
         )
       })
-
-    }
+    })
 
     # ==========================================================================
     # react to search button
@@ -106,7 +110,12 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$search, {
 
-      matching_qnrs$df <- susoapi::get_questionnaires() |>
+      matching_qnrs$df <- susoapi::get_questionnaires(
+        server = r6$server,
+        workspace = r6$workspace,
+        user = r6$user,
+        password = r6$password
+      ) |>
         dplyr::filter(
           grepl(
             x = .data$title,
