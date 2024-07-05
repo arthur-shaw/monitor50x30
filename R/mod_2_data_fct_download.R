@@ -362,7 +362,9 @@ extract_vars_metadata <- function(df) {
     # namely, entities that have a `question_type`
     dplyr::filter(!is.na(.data$question_type)) |>
     # select the variable name, variable label, and question text
-    dplyr::select(.data$varname, .data$variable_label, .data$question_text) |>
+    dplyr::select(
+      .data$varname, .data$variable_label, .data$question_text, .data$type
+    ) |>
     # create question description that is preferably the label, but question
     # text if the label is empty
     dplyr::mutate(
@@ -374,7 +376,8 @@ extract_vars_metadata <- function(df) {
       )
     )|>
     dplyr::select(
-      .data$varname, .data$variable_label, .data$variable_description
+      .data$varname, .data$variable_label, .data$variable_description,
+      .data$type
     )
 
   return(vars_df)
