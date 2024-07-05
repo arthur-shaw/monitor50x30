@@ -31,6 +31,10 @@
 #' @field core_settings_saved Boolean. Whether all core settings saved.
 #' @field data_downloaded Boolean. Whether data downloaded.
 #' @field selected_action Character. Next app action selected.
+#' @field domain_var_choices Character vector. Domain variable choices to show.
+#' @field domain_vars_selected Character vector. Domain variable(s) selected
+#' @field obs_per_domain Data frame. Number of observations per domain.
+#' @field domain_details_provided Boolean. Whether domain details provided.
 #'
 #' @importFrom R6 R6Class
 #' @importFrom fs path
@@ -74,6 +78,11 @@ r6 <- R6::R6Class(
     # data download
     data_downloaded = NULL,
     selected_action = NULL,
+    # domains
+    domain_var_choices = NULL,
+    domain_vars_selected = NULL,
+    obs_per_domain = NULL,
+    domain_details_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -120,7 +129,7 @@ r6 <- R6::R6Class(
     #' Each argument corresponds to a same-named field in the R6 object.
     #'
     #' Each non-NULL value provided will update the corresponding R6 field
-    #' 
+    #'
     #' @param app_dir Character, atomic. Path to Shiny app's user data directory
     #' @param server Character, atomic. URL of SuSo server.
     #' @param workspace Character, atomic. Name of SuSo workspace.
@@ -151,7 +160,12 @@ r6 <- R6::R6Class(
     #' provided.
     #' @param core_settings_saved Boolean. Whether all core settings saved.
     #' @param data_downloaded Boolean. Whether data downloaded.
-    #' 
+    #' @param domain_var_choices Character vector. Domain variable choices to
+    #' show.
+    #' @param domain_vars_selected Character vector. Domain var(s) selected.
+    #' @param obs_per_domain Data frame. Number of observations per domain.
+    #' @param domain_details_provided Boolean. Whether domain details provided.
+    #'
     #' @noRd
     update = function(
       app_dir = NULL,
@@ -182,7 +196,12 @@ r6 <- R6::R6Class(
       # survey settings checkpoint
       core_settings_saved = NULL,
       # data download
-      data_downloaded = NULL
+      data_downloaded = NULL,
+      # domains
+      domain_var_choices = NULL,
+      domain_vars_selected = NULL,
+      obs_per_domain = NULL,
+      domain_details_provided = NULL
 
     ) {
 
@@ -220,13 +239,16 @@ r6 <- R6::R6Class(
 
       # data frame fields
       df_fields <- c(
-        "matching_qnr_tbl"
+        "matching_qnr_tbl",
+        "obs_per_domain"
       )
 
       # vector fields
       vctr_fields <- c(
         "qnr_templates",
-        "qnr_extensions"
+        "qnr_extensions",
+        "domain_var_choices",
+        "domain_vars_selected"
       )
 
       # other fields not to write

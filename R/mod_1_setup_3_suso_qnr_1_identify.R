@@ -10,7 +10,7 @@
 mod_1_setup_3_suso_qnr_1_identify_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
- 
+
     shiny::textInput(
       inputId = ns("qnr_string"),
       label = bslib::popover(

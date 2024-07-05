@@ -67,6 +67,10 @@ golem::add_fct(
   name = "download",
   module = "2_data"
 )
+golem::add_fct(
+  name = "metadata",
+  module = "3_complete_1_setup_1_domains"
+)
 
 ## External resources
 ## Creates .js and .css files at inst/app/www
