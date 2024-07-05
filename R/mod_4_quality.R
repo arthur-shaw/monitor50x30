@@ -15,7 +15,11 @@ mod_4_quality_ui <- function(id){
       sidebar = bslib::sidebar(
         # settings
         id = ns("settings"),
-        title = shiny::tagList(shiny::icon("cog"), "Settings"),
+        title = shiny::span(
+          "Settings",
+          shiny::icon("cog"),
+          class = "sidebar-title"
+        ),
         position = "left",
         width = "75%",
         open = FALSE,
