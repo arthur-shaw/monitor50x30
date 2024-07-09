@@ -50,8 +50,9 @@ mod_3_complete_1_setup_1_domains_server <- function(id, parent, r6){
     # when data are downloaded, compute the choices and update the choices
     gargoyle::on("download_data", {
 
-      domain_vars$choices <- make_domain_vars_options(
-        path = fs::path(r6$app_dir, "04_qnr_metadata", "qnr_vars.rds")
+      domain_vars$choices <- make_vars_options(
+        path = fs::path(r6$app_dir, "04_qnr_metadata", "qnr_vars.rds"),
+        var_types = "SingleQuestion"
       )
 
       shiny::updateSelectizeInput(

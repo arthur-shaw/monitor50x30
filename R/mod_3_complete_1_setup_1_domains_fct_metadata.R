@@ -1,17 +1,20 @@
-## Display variables as concatenated string of name and variable_description
-
 #' Make display variable options
 #'
 #' @description
 #' Compose domain as `{varname} : {variable_description}`
 #'
 #' @param path Character. Path to questionnaire variables file (qnr_vars.rds).
+#' @param var_types Character. Types of Survey Solutions variable to include.
+#' Use types from SuSo JSON file.
 #'
 #' @return Character vector. Set of variable descriptions
 #'
 #' @importFrom dplyr filter mutate pull
 #' @importFrom stringr str_remove_all str_replace_all
-make_domain_vars_options <- function(path) {
+make_vars_options <- function(
+  path,
+  var_types
+) {
 
   # compose list of allowed colors
   suso_colors <- c(
@@ -50,7 +53,7 @@ make_domain_vars_options <- function(path) {
     # exclude any questionnaire objects that do not have `variable_description`
     dplyr::filter(!is.na(variable_description) & variable_description != "") |>
     # select questions that are single-select
-    dplyr::filter(type == "SingleQuestion") |>
+    dplyr::filter(type %in% var_types) |>
     # remove HTML tags from variable description
     dplyr::mutate(
       # remove font tag
