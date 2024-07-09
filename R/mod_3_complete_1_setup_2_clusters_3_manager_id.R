@@ -24,6 +24,9 @@ mod_3_complete_1_setup_2_clusters_3_manager_id_ui <- function(id){
       bslib::accordion_panel(
         title = "2. Order variables",
         value = "order_vars_panel",
+        mod_3_complete_1_setup_2_clusters_3_manager_id_2_order_ui(
+          ns("3_complete_1_setup_2_clusters_3_manager_id_2_order_1")
+        )
       ),
       bslib::accordion_panel(
         title = "3. Compose description",
@@ -47,6 +50,11 @@ mod_3_complete_1_setup_2_clusters_3_manager_id_server <- function(id, parent, r6
 
     mod_3_complete_1_setup_2_clusters_3_manager_id_1_select_server(
       id = "3_complete_1_setup_2_clusters_3_manager_id_1_select_1",
+      parent = session,
+      r6 = r6
+    )
+    mod_3_complete_1_setup_2_clusters_3_manager_id_2_order_server(
+      id = "3_complete_1_setup_2_clusters_3_manager_id_2_order_1",
       parent = session,
       r6 = r6
     )

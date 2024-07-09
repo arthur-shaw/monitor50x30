@@ -45,6 +45,7 @@ app_server <- function(input, output, session) {
   gargoyle::init("save_quantify_clusters")
   gargoyle::init("save_computer_identify_clusters")
   gargoyle::init("save_manager_select_clusters")
+  gargoyle::init("save_manager_order_clusters")
   gargoyle::init("save_clusters")
   gargoyle::init("save_workloads")
   gargoyle::init("save_completeness_setup")

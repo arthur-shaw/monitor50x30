@@ -50,6 +50,10 @@
 #' a manager to identify a cluster.
 #' @field cluster_manager_id_provided Boolean. Whether provided vars for a
 #' survey manager to identify a cluster.
+#' @field manager_id_vars_order Character vector. Variables put in desired
+#' order for manager reports.
+#' @field cluster_var_order_provided Boolean. Whether cluster variable order
+#' provided.
 #'
 #' @importFrom R6 R6Class
 #' @importFrom fs path
@@ -112,6 +116,9 @@ r6 <- R6::R6Class(
     # 1. select
     manager_id_vars_selected = NULL,
     cluster_manager_id_provided = NULL,
+    # 2. order
+    manager_id_vars_order = NULL,
+    cluster_var_order_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -209,6 +216,10 @@ r6 <- R6::R6Class(
     #' a manager to identify a cluster.
     #' @param cluster_manager_id_provided Boolean. Whether provided vars for a
     #' survey manager to identify a cluster.
+    #' @param manager_id_vars_order Character vector. Variables put in desired
+    #' order for manager reports.
+    #' @param cluster_var_order_provided Boolean. Whether cluster variable order
+    #' provided.
     #'
     #' @noRd
     update = function(
@@ -260,6 +271,9 @@ r6 <- R6::R6Class(
       # 1. select
       manager_id_vars_selected = NULL,
       cluster_manager_id_provided = NULL,
+      # 2. order
+      manager_id_vars_order = NULL,
+      cluster_var_order_provided = NULL,
 
     ) {
 
@@ -310,6 +324,7 @@ r6 <- R6::R6Class(
         "cluster_id_var_choices",
         "computer_id_vars_selected",
         "manager_id_vars_selected",
+        "manager_id_vars_order"
       )
 
       # other fields not to write
