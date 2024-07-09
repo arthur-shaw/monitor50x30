@@ -30,8 +30,8 @@ mod_3_complete_1_setup_2_clusters_ui <- function(id){
       bslib::accordion_panel(
         title = "Identify for survey managers",
         value = "identify_for_managers",
-        mod_3_complete_1_setup_2_clusters_3_human_id_ui(
-          ns("3_complete_1_setup_2_clusters_3_human_id_1")
+        mod_3_complete_1_setup_2_clusters_3_manager_id_ui(
+          ns("3_complete_1_setup_2_clusters_3_manager_id_1")
         )
       ),
 
@@ -62,8 +62,8 @@ mod_3_complete_1_setup_2_clusters_server <- function(id, parent, r6){
       parent = session,
       r6 = r6
     )
-    mod_3_complete_1_setup_2_clusters_3_human_id_server(
-      id = "3_complete_1_setup_2_clusters_3_human_id_1",
+    mod_3_complete_1_setup_2_clusters_3_manager_id_server(
+      id = "3_complete_1_setup_2_clusters_3_manager_id_1",
       parent = session,
       r6 = r6
     )
