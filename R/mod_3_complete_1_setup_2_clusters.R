@@ -107,7 +107,7 @@ mod_3_complete_1_setup_2_clusters_server <- function(id, parent, r6){
     })
 
     # from identify for survey managers to workloads
-    gargoyle::on("save_manager_identify_clusters", {
+    gargoyle::on("save_manager_compose_clusters", {
 
       # close identify for computers
       bslib::accordion_panel_close(

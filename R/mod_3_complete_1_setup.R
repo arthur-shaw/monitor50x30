@@ -101,7 +101,7 @@ mod_3_complete_1_setup_server <- function(id, parent, r6){
     })
 
     # from clusters to workloads
-    gargoyle::on("save_manager_identify_clusters", {
+    gargoyle::on("save_manager_compose_clusters", {
 
       # open workloads
       bslib::accordion_panel_open(
