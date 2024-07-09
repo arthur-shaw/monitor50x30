@@ -54,6 +54,10 @@
 #' order for manager reports.
 #' @field cluster_var_order_provided Boolean. Whether cluster variable order
 #' provided.
+#' @field cluster_template_txt Character. {glue} text template describing a
+#' a cluster.
+#' @field cluster_template_provided Boolean. Whether provided text template
+#' to describe a cluster.
 #'
 #' @importFrom R6 R6Class
 #' @importFrom fs path
@@ -119,6 +123,9 @@ r6 <- R6::R6Class(
     # 2. order
     manager_id_vars_order = NULL,
     cluster_var_order_provided = NULL,
+    # 3. compose
+    cluster_template_txt = NULL,
+    cluster_template_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -220,6 +227,10 @@ r6 <- R6::R6Class(
     #' order for manager reports.
     #' @param cluster_var_order_provided Boolean. Whether cluster variable order
     #' provided.
+    #' @param cluster_template_txt Character. {glue} text template describing a
+    #' a cluster.
+    #' @param cluster_template_provided Boolean. Whether provided text template
+    #' to describe a cluster.
     #'
     #' @noRd
     update = function(
@@ -274,6 +285,9 @@ r6 <- R6::R6Class(
       # 2. order
       manager_id_vars_order = NULL,
       cluster_var_order_provided = NULL,
+      # 3. compose
+      cluster_template_txt = NULL,
+      cluster_template_provided = NULL
 
     ) {
 
