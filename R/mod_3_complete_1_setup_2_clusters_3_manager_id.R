@@ -17,6 +17,9 @@ mod_3_complete_1_setup_2_clusters_3_manager_id_ui <- function(id){
       bslib::accordion_panel(
         title = "1. Select variables",
         value = "select_vars_panel",
+        mod_3_complete_1_setup_2_clusters_3_manager_id_1_select_ui(
+          ns("3_complete_1_setup_2_clusters_3_manager_id_1_select_1")
+        )
       ),
       bslib::accordion_panel(
         title = "2. Order variables",
@@ -42,6 +45,11 @@ mod_3_complete_1_setup_2_clusters_3_manager_id_server <- function(id, parent, r6
     # load child module definitions
     # ==========================================================================
 
+    mod_3_complete_1_setup_2_clusters_3_manager_id_1_select_server(
+      id = "3_complete_1_setup_2_clusters_3_manager_id_1_select_1",
+      parent = session,
+      r6 = r6
+    )
 
     # ==========================================================================
     # move from one accordion panel to the next

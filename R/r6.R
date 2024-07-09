@@ -40,6 +40,16 @@
 #' survey design.
 #' @field cluster_quantity_details_provided Boolean. Whether cluster number and
 #' observations per cluster provided.
+#' @field cluster_id_var_choices Character vector. Choices of variables that
+#' might identify a cluster uniquely.
+#' @field computer_id_vars_selected Character vector. Variables selected to
+#' identify each cluster uniquely
+#' @field cluster_computer_id_provided Boolean. Whether provided vars for
+#' a computer to identify each cluster uniquely.
+#' @field manager_id_vars_selected Character vector. Variables selected for
+#' a manager to identify a cluster.
+#' @field cluster_manager_id_provided Boolean. Whether provided vars for a
+#' survey manager to identify a cluster.
 #'
 #' @importFrom R6 R6Class
 #' @importFrom fs path
@@ -89,9 +99,19 @@ r6 <- R6::R6Class(
     obs_per_domain = NULL,
     domain_details_provided = NULL,
     # clusters
+    # quantity
     n_clusters = NULL,
     n_per_cluster = NULL,
     cluster_quantity_details_provided = NULL,
+    # ID variables
+    cluster_id_var_choices = NULL,
+    # computer ID
+    computer_id_vars_selected = NULL,
+    cluster_computer_id_provided = NULL,
+    # manager ID
+    # 1. select
+    manager_id_vars_selected = NULL,
+    cluster_manager_id_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -179,6 +199,16 @@ r6 <- R6::R6Class(
     #' survey design.
     #' @param cluster_quantity_details_provided Boolean. Whether cluster number
     #' and observations per cluster provided.
+    #' @param cluster_id_var_choices Character vector. Choices of variables that
+    #' might identify a cluster uniquely.
+    #' @param computer_id_vars_selected Character vector. Variables selected to
+    #' identify each cluster uniquely
+    #' @param cluster_computer_id_provided Boolean. Whether provided vars for
+    #' a computer to identify each cluster uniquely.
+    #' @param manager_id_vars_selected Character vector. Variables selected for
+    #' a manager to identify a cluster.
+    #' @param cluster_manager_id_provided Boolean. Whether provided vars for a
+    #' survey manager to identify a cluster.
     #'
     #' @noRd
     update = function(
@@ -217,9 +247,19 @@ r6 <- R6::R6Class(
       obs_per_domain = NULL,
       domain_details_provided = NULL,
       # clusters
+      # quantity
       n_clusters = NULL,
       n_per_cluster = NULL,
-      cluster_quantity_details_provided = NULL
+      cluster_quantity_details_provided = NULL,
+      # ID variables
+      cluster_id_var_choices = NULL,
+      # computer ID
+      computer_id_vars_selected = NULL,
+      cluster_computer_id_provided = NULL,
+      # manager ID
+      # 1. select
+      manager_id_vars_selected = NULL,
+      cluster_manager_id_provided = NULL,
 
     ) {
 
@@ -266,7 +306,10 @@ r6 <- R6::R6Class(
         "qnr_templates",
         "qnr_extensions",
         "domain_var_choices",
-        "domain_vars_selected"
+        "domain_vars_selected",
+        "cluster_id_var_choices",
+        "computer_id_vars_selected",
+        "manager_id_vars_selected",
       )
 
       # other fields not to write
