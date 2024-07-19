@@ -11,6 +11,7 @@ mod_3_complete_1_setup_3_team_workload_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
  
+    rhandsontable::rHandsontableOutput(ns("n_per_team")),
     shiny::actionButton(
       inputId = ns("save"),
       label = "Save"
@@ -26,7 +27,43 @@ mod_3_complete_1_setup_3_team_workload_server <- function(id, parent, r6){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
+    # ==========================================================================
+    # initialize page / compose rhandsontable
+    # ==========================================================================
+
+    output$n_per_team <- rhandsontable::renderRHandsontable({
+
+      if (is.null(r6$team_workload_provided)) {
+
+        teams_df <- haven::read_dta(
+          path = fs::path(
+            r6$app_dir, "03_team_composition",
+            "team_composition.dta")
+        ) |>
+        dplyr::distinct(SupervisorName) |>
+        dplyr::select(team = SupervisorName) |>
+        dplyr::mutate(Obs = NA_integer_)
+
+      } else if (!is.null(r6$team_workload_provided)) {
+
+        r6$n_per_team
+
+      }
+
+    })
+
+    # ==========================================================================
+    # react to save
+    # ==========================================================================
+
     shiny::observeEvent(input$save, {
+
+      # capture inputs in R6
+      r6$n_per_team <- NULL
+      r6$team_workload_provided <- TRUE
+
+      # write R6 to disk
+      r6$write()
 
       # signal that workload by team has been set
       gargoyle::trigger("save_workloads")
