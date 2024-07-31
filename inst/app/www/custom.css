@@ -1,0 +1,122 @@
+
+/*Define the main color palette*/
+
+:root {
+
+  /*Color palette*/
+  --fifty_black: #0a0a0a;
+  --fifty_emerald: #0c5849;
+  --fifty_muted_emerald: #0c584996;
+  --fifty_green: #6cae75;
+  --fifty_muted_green: #6cae7596;
+  --fifty_limegreen: #88b05c;
+  --fifty_achiote: #8d3c42;
+  --fifty_muted_achiote: #8d3c4296;
+  --fifty_white: #fff;
+  --fifty_gray: #e8e5e1;
+  --fifty_brown: #a95f46;
+  --fifty_font: andes-regular;
+  --fifty_disabled: rgb(0 0 51 / 30%);
+
+  --navbar-default-bg: var(--fifty_white);
+  --navbar-inverse-bg: var(--fifty_emerald);
+  --navbar-hover-color: var(--fifty_emerald);
+  --navbar-brand-color: var(--fifty_emerald);
+  --navbar-link-color: var(--fifty_emerald);
+  --navbar-disabled-color: var(--fifty_gray);
+
+  --accordion-color: var(--fifty_emerald);
+  --accordion-bg: var(--fifty_white);
+
+  --accordion-active-color: var(--fifty_white);
+  --accordion-active-bg: var(--fifty_emerald);
+
+  /*Font sizes*/
+  --navbar-brand-font-size: 1.6rem;
+
+}
+
+/*Distance between the title of the app and menu items*/
+body > nav > div{
+  gap: 20vw;
+}
+
+/*App Title*/
+
+.navbar-brand {
+    font-size: var(--navbar-brand-font-size);
+    color: var(--navbar-brand-color);
+    font-weight: bold;
+}
+
+.navbar-brand:hover,.navbar-brand:focus {
+    color: var(--navbar-brand-color);
+}
+
+
+/*Navigation bar*/
+
+.bslib-page-navbar>.navbar,
+.bslib-page-dashboard>.navbar {
+    --bslib-navbar-default-bg: var(--navbar-default-bg);
+    --bslib-navbar-inverse-bg: var(--navbar-inverse-bg);
+}
+
+.navbar-nav {
+    --bs-nav-link-color: var(--navbar-link-color);
+    --bs-nav-link-hover-color: var(--navbar-hover-color);
+    --bs-nav-link-disabled-color: var(--navbar-disabled-color);
+}
+
+.navbar-nav .nav-link.active,.navbar-nav .nav-tabs>li>a.active,.navbar-nav .nav-pills>li>a.active,.navbar-nav :where(ul.nav.navbar-nav > li)>a.active,.navbar-nav .nav-link.show,.navbar-nav .nav-link.in,.navbar-nav .nav-tabs>li>a.show,.navbar-nav .nav-tabs>li>a.in,.navbar-nav .nav-pills>li>a.show,.navbar-nav .nav-pills>li>a.in,.navbar-nav :where(ul.nav.navbar-nav > li)>a.show,.navbar-nav :where(ul.nav.navbar-nav > li)>a.in {
+    color: var(--fifty_achiote);
+}
+
+/*Accordions*/
+
+.accordion-button.collapsed{
+    color: var(--accordion-color);
+    background-color: var(--accordion-bg);
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--accordion-active-color);
+    background-color: var(--accordion-active-bg);
+
+}
+
+
+/*Not working
+#1_setup_1-1_setup_3_suso_qnr_1-suso_qnr_accordion > div:nth-child(1) > div.accordion-header > button >accordion-button:not(.collapsed) {
+  background-color:red!important;
+}
+*/
+
+/*Working but not how we'd want it to
+#\31 _setup_1-1_setup_3_suso_qnr_1-suso_qnr_accordion > div:nth-child(1) > div.accordion-header > button{
+  background-color:var(--fifty_achiote);!important;
+}
+*/
+
+
+/*Buttons*/
+.btn-outline-default, .btn-default:not(.btn-primary,.btn-secondary,.btn-info,.btn-success,.btn-danger,.btn-warning,.btn-light,.btn-dark,.btn-link,[class*="btn-outline-"]) {
+    --bs-btn-color: var(--fifty_white)!important;
+    --bs-btn-bg: var(--fifty_green)!important;
+    --bs-btn-border-color: var(--fifty_green)!important;
+    --bs-btn-hover-color: var(--fifty_green)!important;
+    --bs-btn-hover-bg: var(--fifty_white)!important;
+    --bs-btn-hover-border-color: var(--fifty_green)!important;
+    --bs-btn-focus-shadow-rgb: 64, 64, 64;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--fifty_green)!important;
+    --bs-btn-active-border-color: var(--fifty_green)!important;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+    --bs-btn-disabled-color: var(--fifty_green)!important;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: var(--fifty_green)!important;
+    --bs-btn-bg: transparent;
+    --bs-gradient: none;
+}
+
+
