@@ -4,9 +4,9 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd 
+#' @noRd
 #'
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
 mod_1_setup_3_suso_qnr_1_identify_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
@@ -19,13 +19,14 @@ mod_1_setup_3_suso_qnr_1_identify_ui <- function(id){
           bsicons::bs_icon("info-circle")
         ),
         'To do so, provide either a substring (e.g., "ILP", "post-planting")',
-        ' or a ', 
+        ' or a ',
         htmltools::a(
           'regular expression',
           href = "https://regexlearn.com/"
         ),
         ' (e.g., "[Pp]ost-[Pp]lanting")'
-      )
+      ),
+      width = "50%"
     ),
     shiny::actionButton(
       inputId = ns("search"),
@@ -41,10 +42,10 @@ mod_1_setup_3_suso_qnr_1_identify_ui <- function(id){
 
   )
 }
-    
+
 #' 1_setup_3_suso_qnr_1_identify Server Functions
 #'
-#' @noRd 
+#' @noRd
 mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
@@ -68,7 +69,8 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
             data = r6$matching_qnr_tbl,
             columns = list(
               questionnaireId = reactable::colDef(show = FALSE)
-            )
+            ),
+            selection = "single"
           )
         })
 
@@ -95,7 +97,8 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
           data = qnrs,
           columns = list(
             questionnaireId = reactable::colDef(show = FALSE)
-          )
+          ),
+          selection = "single"
         )
       })
     })
@@ -161,9 +164,9 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
 
   })
 }
-    
+
 ## To be copied in the UI
 # mod_1_setup_3_suso_qnr_1_identify_ui("1_setup_3_suso_qnr_1_identify_1")
-    
+
 ## To be copied in the server
 # mod_1_setup_3_suso_qnr_1_identify_server("1_setup_3_suso_qnr_1_identify_1")

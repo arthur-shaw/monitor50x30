@@ -4,13 +4,13 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd 
+#' @noRd
 #'
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
 mod_1_setup_5_visit_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
- 
+
     shiny::selectizeInput(
       inputId = ns("svy_num_visits"),
       label = "How many visits to the household?",
@@ -20,7 +20,8 @@ mod_1_setup_5_visit_ui <- function(id){
         "3"
       ),
       selected = NULL,
-      multiple = FALSE
+      multiple = FALSE,
+      width = "40%"
     ),
     shiny::selectizeInput(
       inputId = ns("svy_current_visit"),
@@ -34,11 +35,13 @@ mod_1_setup_5_visit_ui <- function(id){
         "Post-harvest for 2nd season"
       ),
       selected = NULL,
-      multiple = FALSE
+      multiple = FALSE,
+      width = "40%"
     ),
     shiny::dateInput(
       inputId = ns("svy_start_date"),
-      label = "When will the survey data collection start?"
+      label = "When will the survey data collection start?",
+      width = "40%"
     ),
     shiny::actionButton(
       inputId = ns("save"),
@@ -47,10 +50,10 @@ mod_1_setup_5_visit_ui <- function(id){
 
   )
 }
-    
+
 #' 1_setup_5_visit Server Functions
 #'
-#' @noRd 
+#' @noRd
 mod_1_setup_5_visit_server <- function(id, parent, r6){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
@@ -89,7 +92,7 @@ mod_1_setup_5_visit_server <- function(id, parent, r6){
     # limit choices of current visit?
     # alternatively, validate answer to current visit in case not understanding
     # prior question?
- 
+
     # ==========================================================================
     # react to save
     # ==========================================================================
@@ -135,9 +138,9 @@ mod_1_setup_5_visit_server <- function(id, parent, r6){
 
   })
 }
-    
+
 ## To be copied in the UI
 # mod_1_setup_5_visit_ui("1_setup_5_visit_1")
-    
+
 ## To be copied in the server
 # mod_1_setup_5_visit_server("1_setup_5_visit_1")

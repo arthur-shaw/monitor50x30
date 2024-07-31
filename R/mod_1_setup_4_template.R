@@ -4,13 +4,13 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd 
+#' @noRd
 #'
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
 mod_1_setup_4_template_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
- 
+
     shiny::selectizeInput(
       inputId = ns("qnr_templates"),
       label = "Which template(s)?",
@@ -22,7 +22,8 @@ mod_1_setup_4_template_ui <- function(id){
         "MEA"
       ),
       multiple = TRUE,
-      selected = NULL
+      selected = NULL,
+      width = "40%"
     ),
     shiny::selectizeInput(
       inputId = ns("qnr_extensions"),
@@ -34,7 +35,8 @@ mod_1_setup_4_template_ui <- function(id){
         "Livestock labor"
       ),
       multiple = TRUE,
-      selected = NULL
+      selected = NULL,
+      width = "40%"
     ),
     shiny::actionButton(
       inputId = ns("save"),
@@ -43,14 +45,14 @@ mod_1_setup_4_template_ui <- function(id){
 
   )
 }
-    
+
 #' 1_setup_4_template Server Functions
 #'
-#' @noRd 
+#' @noRd
 mod_1_setup_4_template_server <- function(id, parent, r6){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
- 
+
     # ==========================================================================
     # initialize page
     # ==========================================================================
@@ -176,9 +178,9 @@ mod_1_setup_4_template_server <- function(id, parent, r6){
 
   })
 }
-    
+
 ## To be copied in the UI
 # mod_1_setup_4_template_ui("1_setup_4_template_1")
-    
+
 ## To be copied in the server
 # mod_1_setup_4_template_server("1_setup_4_template_1")

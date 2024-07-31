@@ -4,9 +4,9 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd 
+#' @noRd
 #'
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
 mod_1_setup_1_load_file_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
@@ -15,7 +15,8 @@ mod_1_setup_1_load_file_ui <- function(id){
       inputId = ns("have_setup_file"),
       label = "Do you have a setup file for this application?",
       choices = list("Yes" = 1, "No" = 2),
-      selected = 2
+      selected = 2,
+      width = "50%"
     ),
     shiny::fileInput(
       inputId = ns("setup_file"),
@@ -30,13 +31,13 @@ mod_1_setup_1_load_file_ui <- function(id){
       inputId = ns("load"),
       label = "Load"
     )
- 
+
   )
 }
-    
+
 #' 1_setup_1_load_file Server Functions
 #'
-#' @noRd 
+#' @noRd
 mod_1_setup_1_load_file_server <- function(id, parent, r6){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
@@ -101,9 +102,9 @@ mod_1_setup_1_load_file_server <- function(id, parent, r6){
 
   })
 }
-    
+
 ## To be copied in the UI
 # mod_1_setup_1_load_file_ui("1_setup_1_load_file_1")
-    
+
 ## To be copied in the server
 # mod_1_setup_1_load_file_server("1_setup_1_load_file_1")
