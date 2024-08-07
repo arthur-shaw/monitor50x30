@@ -72,33 +72,6 @@ body > nav > div{
     color: var(--fifty_achiote);
 }
 
-/*Accordions*/
-
-.accordion-button.collapsed{
-    color: var(--accordion-color);
-    background-color: var(--accordion-bg);
-}
-
-.accordion-button:not(.collapsed) {
-    color: var(--accordion-active-color);
-    background-color: var(--accordion-active-bg);
-
-}
-
-
-/*Not working
-#1_setup_1-1_setup_3_suso_qnr_1-suso_qnr_accordion > div:nth-child(1) > div.accordion-header > button >accordion-button:not(.collapsed) {
-  background-color:red!important;
-}
-*/
-
-/*Working but not how we'd want it to
-#\31 _setup_1-1_setup_3_suso_qnr_1-suso_qnr_accordion > div:nth-child(1) > div.accordion-header > button{
-  background-color:var(--fifty_achiote);!important;
-}
-*/
-
-
 /*Buttons*/
 .btn-outline-default, .btn-default:not(.btn-primary,.btn-secondary,.btn-info,.btn-success,.btn-danger,.btn-warning,.btn-light,.btn-dark,.btn-link,[class*="btn-outline-"]) {
     --bs-btn-color: var(--fifty_white)!important;
@@ -118,5 +91,44 @@ body > nav > div{
     --bs-btn-bg: transparent;
     --bs-gradient: none;
 }
+
+/*Accordions*/
+
+.accordion-button.collapsed{
+    color: var(--accordion-color);
+    background-color: var(--accordion-bg);
+}
+
+
+.accordion-button:not(.collapsed) {
+    color: var(--accordion-active-color);
+    background-color: var(--accordion-active-bg);
+
+}
+
+/*Not working
+#1_setup_1-1_setup_3_suso_qnr_1-suso_qnr_accordion > div:nth-child(1) > div.accordion-header > button >accordion-button:not(.collapsed) {
+  background-color:red!important;
+}
+*/
+
+/*Working but not how we'd want it to
+#\31 _setup_1-1_setup_3_suso_qnr_1-suso_qnr_accordion > div:nth-child(1) > div.accordion-header > button{
+  background-color:var(--fifty_achiote);!important;
+}
+*/
+
+#\31 _setup_1-1_setup_3_suso_qnr_1-suso_qnr_accordion > div > div.accordion-header > button.accordion-button:not(.collapsed) {
+    background-color:var(--fifty_achiote);!important;
+}
+
+/*ChatGPT solution not working
+[data-value="identify_qnrs_panel"] .accordion-header .accordion-button{
+    background-color: #ff0000;
+    color: #ffffff;
+}
+*/
+
+
 
 
