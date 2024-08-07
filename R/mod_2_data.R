@@ -4,41 +4,62 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd 
+#' @noRd
 #'
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
 mod_2_data_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
-    shiny::actionButton(
-      inputId = ns("fetch_data"),
-      label = "Fetch data"
-    ),
-    shiny::selectInput(
-      inputId = ns("select_action"),
-      label = "Select the action to take",
-      choices = c(
-        "Data completeness report",
-        "Data quality report"
-      )
-    ),
-    bslib::accordion(
-      id = ns("download_data"),
-      bslib::accordion_panel(
-        title = "Download data",
-        shiny::p("PLACEHOLDER for data details")
-      )
+    shiny::fluidRow(
+      ## On the left we'll have the 'Fetch data' button
+      shiny::column(
+        width = 6,
 
+        shiny::fluidRow(
 
+        shiny::actionButton(
+          inputId = ns("fetch_data"),
+          label = "Fetch data",
+          width = "80%"
+        )
+          ),
+
+        br(),
+
+        shiny::fluidRow(
+        shiny::selectInput(
+          inputId = ns("select_action"),
+          label = "Select the action to take",
+          choices = c(
+            "Data completeness report",
+            "Data quality report"
+          ),
+          selected = NULL
+        )
+      )
+        ),
+
+      ## ... and on the right we have the 'Download data' accordion
+      shiny::column(
+        width = 6,
+        bslib::accordion(
+          id = ns("download_data"),
+          bslib::accordion_panel(
+            title = "Download data",
+            shiny::p("PLACEHOLDER for data details")
+          )
+
+        )
+      )
     )
 
- 
+
   )
 }
-    
+
 #' 2_data Server Functions
 #'
-#' @noRd 
+#' @noRd
 mod_2_data_server <- function(id, r6){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
@@ -309,9 +330,9 @@ mod_2_data_server <- function(id, r6){
 
   })
 }
-    
+
 ## To be copied in the UI
 # mod_2_data_ui("2_data_1")
-    
+
 ## To be copied in the server
 # mod_2_data_server("2_data_1")
