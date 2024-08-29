@@ -4,9 +4,9 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd 
+#' @noRd
 #'
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
 mod_1_setup_3_suso_qnr_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
@@ -16,6 +16,7 @@ mod_1_setup_3_suso_qnr_ui <- function(id){
       open = FALSE,
 
       bslib::accordion_panel(
+        id = "identify_qnrs_panel",
         title = "Identify all",
         value = "identify_qnrs_panel",
         mod_1_setup_3_suso_qnr_1_identify_ui(
@@ -35,14 +36,14 @@ mod_1_setup_3_suso_qnr_ui <- function(id){
 
   )
 }
-    
+
 #' 1_setup_3_suso_qnr Server Functions
 #'
-#' @noRd 
+#' @noRd
 mod_1_setup_3_suso_qnr_server <- function(id, parent, r6){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
- 
+
     # load child module definitions
     mod_1_setup_3_suso_qnr_1_identify_server(
       "1_setup_3_suso_qnr_1_identify_1",
@@ -98,9 +99,9 @@ mod_1_setup_3_suso_qnr_server <- function(id, parent, r6){
 
   })
 }
-    
+
 ## To be copied in the UI
 # mod_1_setup_3_suso_qnr_ui("1_setup_3_suso_qnr_1")
-    
+
 ## To be copied in the server
 # mod_1_setup_3_suso_qnr_server("1_setup_3_suso_qnr_1")

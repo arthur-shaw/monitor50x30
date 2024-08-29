@@ -92,6 +92,18 @@ body > nav > div{
     --bs-gradient: none;
 }
 
+.btn {
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.btn:focus,
+.btn:hover{
+      background: var(--fifty_white)!important;
+      color: var(--fifty_green)!important;
+}
+
+
 /*Accordions*/
 
 .accordion-button.collapsed{
@@ -122,6 +134,12 @@ body > nav > div{
     background-color:var(--fifty_achiote);!important;
 }
 
+/*
+#complete_1-3_complete_1_setup_1-3_complete_1_setup_1_domains_1-save{
+
+}
+*/
+
 /*ChatGPT solution not working
 [data-value="identify_qnrs_panel"] .accordion-header .accordion-button{
     background-color: #ff0000;
@@ -129,6 +147,24 @@ body > nav > div{
 }
 */
 
+hr {
+    margin: 3rem 0;
+    border-color: :var(--fifty_achiote)!important;
+    border: 0;
+    border-top: 2px solid;
+    opacity: 1;
+}
 
 
+#\32 _data_1-fetch_data.btn{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 
+#toast-container>.toast-error{
+  background: red!important;
+  background-image: none!important;
+}
+#toast-container > div > div.toast-message{
+  font-size: 18px;
+}

@@ -1,0 +1,31 @@
+
+/* Parent accordions */
+
+/* Accordions should have a green background with white text when collapsed*/
+.accordion-button.collapsed{
+    color: white;
+    background-color: green;
+}
+
+/*Accordions should have white background with green text when not collapsed*/
+.accordion-button:not(.collapsed) {
+    color: green;
+    background-color: white;
+
+}
+
+
+/*Nested accordions */
+
+/* Accordions should have a maroon background with white text when collapsed*/
+.accordion-button.collapsed{
+    color: white;
+    background-color: maroon;
+}
+
+/*Accordions should have white background with maroon text when not collapsed*/
+.accordion-button:not(.collapsed) {
+    color: maroon;
+    background-color: white;
+
+}

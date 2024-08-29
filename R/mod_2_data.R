@@ -7,61 +7,73 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_2_data_ui <- function(id){
+mod_2_data_ui <- function(id) {
   ns <- NS(id)
   shiny::tagList(
-    shiny::fluidRow(
-      ## On the left we'll have the 'Fetch data' button
-      shiny::column(
-        width = 6,
-
-        shiny::fluidRow(
-
-        shiny::actionButton(
-          inputId = ns("fetch_data"),
-          label = "Fetch data",
-          width = "80%"
-        )
-          ),
-
-        br(),
-
-        shiny::fluidRow(
-        shiny::selectInput(
-          inputId = ns("select_action"),
-          label = "Select the action to take",
-          choices = c(
-            "Data completeness report",
-            "Data quality report"
-          ),
-          selected = NULL
-        )
-      )
-        ),
-
-      ## ... and on the right we have the 'Download data' accordion
-      shiny::column(
-        width = 6,
+    bslib::page_sidebar(
+      sidebar = bslib::sidebar(
+        # elements in the sidebar
+        id = ns("download_data"),
+        title = "",
+        position = "left",
+        width = "30%",
+        open = FALSE,
+        # contents
         bslib::accordion(
           id = ns("download_data"),
           bslib::accordion_panel(
             title = "Download data",
             shiny::p("PLACEHOLDER for data details")
           )
+        )
+      ),
+      # settings
+      fillable = FALSE,
+      # contents
+      shiny::tags$p(""),
 
+      shiny::fluidRow(
+        style = "height: 15vh"
+      ),
+      shiny::fluidRow(
+        shiny::column(
+          width = 4,
+          offset = 4,
+          shiny::actionButton(
+            inputId = ns("fetch_data"),
+            label = "Fetch data",
+            width = "100%"
+          )
+        )
+      ),
+      shiny::fluidRow(
+        style = "height: 15vh"
+      ),
+      shiny::fluidRow(
+        shiny::column(
+          width = 4,
+          offset = 4,
+          shiny::selectInput(
+            inputId = ns("select_action"),
+            label = "Select the action to take",
+            choices = c(
+              "Data completeness report",
+              "Data quality report"
+            ),
+            selected = NULL,
+            width = "100%"
+          )
         )
       )
     )
-
-
   )
 }
 
 #' 2_data Server Functions
 #'
 #' @noRd
-mod_2_data_server <- function(id, r6){
-  moduleServer( id, function(input, output, session){
+mod_2_data_server <- function(id, r6) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     # ==========================================================================
@@ -69,7 +81,6 @@ mod_2_data_server <- function(id, r6){
     # ==========================================================================
 
     shiny::observeEvent(input$fetch_data, {
-
       # ========================================================================
       # Show waiter
       # ========================================================================
@@ -129,8 +140,7 @@ mod_2_data_server <- function(id, r6){
       qnr_n <- 1
 
       # download by iterating through each matching questionnaire
-      for(qnr_id in qnr_ids) {
-
+      for (qnr_id in qnr_ids) {
         # extract title of current questionnaire
         qnr_title <- qnr_titles[qnr_n]
 
@@ -140,8 +150,7 @@ mod_2_data_server <- function(id, r6){
           shiny::h4(
             glue::glue("
             Downloading data for questionnaire {qnr_n} of {qnr_tot} :
-            {qnr_title}"
-            )
+            {qnr_title}")
           )
         ))
 
@@ -158,7 +167,6 @@ mod_2_data_server <- function(id, r6){
 
         # increment questionnaire counter
         qnr_n <- qnr_n + 1
-
       }
       # unpack downloaded data
       waiter::waiter_show(html = shiny::tagList(
@@ -206,7 +214,6 @@ mod_2_data_server <- function(id, r6){
       )
       # - if so, do the necessary
       if (parse_json == TRUE) {
-
         # update user on process
         waiter::waiter_show(
           html = shiny::tagList(
@@ -229,7 +236,6 @@ mod_2_data_server <- function(id, r6){
           object = vars_metadata,
           file = fs::path(dirs$qnr_dir, "qnr_vars.rds")
         )
-
       }
 
       # ------------------------------------------------------------------------
@@ -310,7 +316,6 @@ mod_2_data_server <- function(id, r6){
       # in a parent module
       # indirectly, by signal that data downloaded
       gargoyle::trigger("download_data")
-
     })
 
     # ==========================================================================
@@ -318,16 +323,12 @@ mod_2_data_server <- function(id, r6){
     # ==========================================================================
 
     shiny::observeEvent(input$select_action, {
-
       # send signal that an action was selected
       # code for updating UI appears in app_server.R
       gargoyle::trigger("select_action")
 
       r6$selected_action <- input$select_action
-
     })
-
-
   })
 }
 
