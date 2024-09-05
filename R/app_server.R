@@ -40,6 +40,9 @@ app_server <- function(input, output, session) {
   # data
   gargoyle::init("download_data")
   gargoyle::init("select_action")
+  gargoyle::init("go_to_completeness_btn")
+  gargoyle::init("go_to_quality_btn")
+
   # completeness
   gargoyle::init("save_domains")
   gargoyle::init("save_quantify_clusters")
@@ -151,24 +154,43 @@ app_server <- function(input, output, session) {
   # react to selecting an action after getting data
   # ============================================================================
 
-  gargoyle::on("select_action", {
+  # gargoyle::on("select_action", {
+  #
+  #   if (r6$selected_action == "Data completeness report") {
+  #
+  #     bslib::nav_select(
+  #       id = "navbar",
+  #       selected = "completeness"
+  #     )
+  #
+  #   } else if (r6$selected_action == "Data quality report") {
+  #
+  #     bslib::nav_select(
+  #       id = "navbar",
+  #       selected = "quality"
+  #     )
+  #
+  #   }
+  #
+  # })
 
-    if (r6$selected_action == "Data completeness report") {
+  # when the data completeness report button is clicked, navigate to that tab
+  gargoyle::on("go_to_completeness_btn", {
 
       bslib::nav_select(
         id = "navbar",
         selected = "completeness"
       )
-
-    } else if (r6$selected_action == "Data quality report") {
-
-      bslib::nav_select(
-        id = "navbar",
-        selected = "quality"
-      )
-
-    }
-
   })
+
+  # when the data quality report button is clicked, navigate to that tab
+  gargoyle::on("go_to_quality_btn", {
+
+    bslib::nav_select(
+      id = "navbar",
+      selected = "quality"
+    )
+  })
+
 
 }
