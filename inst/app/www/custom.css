@@ -8,6 +8,7 @@
   --fifty_emerald: #0c5849;
   --fifty_muted_emerald: #0c584996;
   --fifty_green: #6cae75;
+  --fifty_green2: #457a2ca6;
   --fifty_muted_green: #6cae7596;
   --fifty_limegreen: #88b05c;
   --fifty_achiote: #8d3c42;
@@ -29,7 +30,7 @@
   --accordion-bg: var(--fifty_white);
 
   --accordion-active-color: var(--fifty_white);
-  --accordion-active-bg: var(--fifty_emerald);
+  --accordion-active-bg: var(--fifty_green2);
 
   /*Font sizes*/
   --navbar-brand-font-size: 1.6rem;
@@ -93,8 +94,10 @@ body > nav > div{
 }
 
 .btn {
-    font-size: 18px;
+    font-size: 14px;
     border-radius: 10px;
+    --bs-btn-padding-x: 1em!important;
+    --bs-btn-padding-y: .8em!important;
 }
 
 .btn:focus,
@@ -104,7 +107,20 @@ body > nav > div{
 }
 
 
-/*Accordions*/
+.accordion-button {
+  font-weight: bold;
+}
+
+.accordion-item {
+    color: var(--bs-accordion-color);
+    background-color: var(--bs-accordion-bg);
+    border: var(--bs-accordion-border-width) solid
+    var(--bs-accordion-border-color) !important;
+    margin: 1.1rem 0;
+}
+
+
+/*Parent accordions*/
 
 .accordion-button.collapsed{
     color: var(--accordion-color);
@@ -118,34 +134,31 @@ body > nav > div{
 
 }
 
-/*Not working
-#1_setup_1-1_setup_3_suso_qnr_1-suso_qnr_accordion > div:nth-child(1) > div.accordion-header > button >accordion-button:not(.collapsed) {
-  background-color:red!important;
-}
-*/
+/* Nested accordions */
 
-/*Working but not how we'd want it to
-#\31 _setup_1-1_setup_3_suso_qnr_1-suso_qnr_accordion > div:nth-child(1) > div.accordion-header > button{
-  background-color:var(--fifty_achiote);!important;
-}
-*/
-
-#\31 _setup_1-1_setup_3_suso_qnr_1-suso_qnr_accordion > div > div.accordion-header > button.accordion-button:not(.collapsed) {
-    background-color:var(--fifty_achiote);!important;
+/* Indent titles of nested accordions */
+.accordion .accordion .accordion-button {
+  /*padding-inline-start: 2rem;*/
+  border-botom: 1px solid;
 }
 
-/*
-#complete_1-3_complete_1_setup_1-3_complete_1_setup_1_domains_1-save{
-
+/* Accordions should have a maroon background with white text when collapsed*/
+.accordion .accordion .accordion-button.collapsed {
+  color: white;
+  background-color: var(--fifty_achiote);
 }
-*/
 
-/*ChatGPT solution not working
-[data-value="identify_qnrs_panel"] .accordion-header .accordion-button{
-    background-color: #ff0000;
-    color: #ffffff;
+/* Accordions should have white background with maroon text when not collapsed*/
+.accordion .accordion .accordion-button:not(.collapsed) {
+  color: var(--fifty_achiote);
+  background-color: white;
 }
-*/
+
+.accordion .accordion .accordion-header .accordion-button:not(.collapsed) .accordion-title{
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
 
 hr {
     margin: 3rem 0;
@@ -156,15 +169,20 @@ hr {
 }
 
 
-#\32 _data_1-fetch_data.btn{
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
 #toast-container>.toast-error{
   background: red!important;
   background-image: none!important;
 }
 #toast-container > div > div.toast-message{
   font-size: 18px;
+}
+
+.waiter-overlay .waiter-fullscreen{
+  background-color: var(--fifty_achiote);
+}
+
+.bslib-sidebar-layout>.sidebar>.sidebar-content>.accordion .accordion-body {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
 }
