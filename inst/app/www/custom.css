@@ -18,6 +18,7 @@
   --fifty_brown: #a95f46;
   --fifty_font: andes-regular;
   --fifty_disabled: rgb(0 0 51 / 30%);
+  --fifty_very_muted_green: #00800014;
 
   --navbar-default-bg: var(--fifty_white);
   --navbar-inverse-bg: var(--fifty_emerald);
@@ -41,6 +42,12 @@
 body > nav > div{
   gap: 20vw;
 }
+
+
+.bslib-page-fill {
+  background-color: var(--fifty_very_muted_green);
+}
+
 
 /*App Title*/
 
@@ -142,16 +149,16 @@ body > nav > div{
   border-botom: 1px solid;
 }
 
-/* Accordions should have a maroon background with white text when collapsed*/
+/* Accordions should have a white background with marron text when collapsed*/
 .accordion .accordion .accordion-button.collapsed {
-  color: white;
-  background-color: var(--fifty_achiote);
-}
-
-/* Accordions should have white background with maroon text when not collapsed*/
-.accordion .accordion .accordion-button:not(.collapsed) {
   color: var(--fifty_achiote);
   background-color: white;
+}
+
+/* Accordions should have a maroon background with white text when not collapsed*/
+.accordion .accordion .accordion-button:not(.collapsed) {
+  color: white;
+  background-color: var(--fifty_achiote);
 }
 
 .accordion .accordion .accordion-header .accordion-button:not(.collapsed) .accordion-title{
