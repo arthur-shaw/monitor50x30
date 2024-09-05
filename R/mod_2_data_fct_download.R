@@ -58,7 +58,7 @@ create_data_dirs <- function(app_dir) {
 #' Delete files, directories, and files in those directories.
 #'
 #' @param dir Character. Path to target directory
-#' 
+#'
 #' @return Side-effect of deleting stale files.
 #'
 #' @importFrom fs dir_exists dir_ls dir_delete file_delete
@@ -263,7 +263,7 @@ combine_and_save_all_dta <- function(
 #'
 #' - Rename previously downloaded JSON file, if any
 #' - Download new JSON file, if needed
-#' 
+#'
 #' @param qnr_id Character. SuSo questionnaire GUID.
 #' @param qnr_version Numeric. SuSo questionnaire verion number.
 #'
@@ -497,3 +497,33 @@ get_team_composition <- function(
   )
 
 }
+
+#' Get last date when data was downloaded
+#'
+#'
+#' @param microdata_path The path of the combined microdata. Obtain it using create_data_dirs(r6$app_dir)$micro_combine_dir
+#'
+#' @importFrom magrittr %>%
+#' @importFrom stringr str_glue
+#' @importFrom dplyr distinct
+#' @importFrom dplyr pull
+#' @importFrom fs path
+#'
+#' @noRd
+get_last_data_download_date <- function(microdata_path){
+  last_data_download_date <- fs::dir_info(
+    path = microdata_path,
+    type = "file",
+    recurse = TRUE
+  ) %>%
+    dplyr::distinct(modification_time) %>%
+    dplyr::pull()
+
+  last_data_download_date <- max(last_data_download_date)
+  last_data_download_date <- stringr::str_glue("{format(as.Date(last_data_download_date),
+                                            format = '%A, %B %d %Y')}{' at '}{format(as.POSIXct(last_data_download_date),
+                                            format = '%H:%M:%S %Z')}")
+
+  return(last_data_download_date)
+}
+

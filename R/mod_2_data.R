@@ -13,7 +13,7 @@ mod_2_data_ui <- function(id) {
     bslib::page_sidebar(
       sidebar = bslib::sidebar(
         # elements in the sidebar
-        id = ns("download_data"),
+        id = ns("download_data0"),
         title = "",
         position = "left",
         width = "30%",
@@ -23,7 +23,31 @@ mod_2_data_ui <- function(id) {
           id = ns("download_data"),
           bslib::accordion_panel(
             title = "Download data",
-            shiny::p("PLACEHOLDER for data details")
+            ## Button: Interview microdata
+            shiny::downloadButton(
+              outputId = ns("interview_microdata"),
+              label = "Interview microdata",
+              width = "100%"
+            ),
+            ## Button: Questionnaire metadata
+            shiny::downloadButton(
+              outputId = ns("questionnaire_metadata"),
+              label = "Questionnaire metadata",
+              width = "100%"
+            ),
+            ## Button: Team composition
+            shiny::downloadButton(
+              outputId = ns("team_composition"),
+              label = "Team composition",
+              width = "100%"
+            ),
+
+            ## Button: Sync dates
+            shiny::downloadButton(
+              outputId = ns("sync_dates"),
+              label = "Sync dates",
+              width = "100%"
+            )
           )
         )
       ),
@@ -31,14 +55,22 @@ mod_2_data_ui <- function(id) {
       fillable = FALSE,
       # contents
       shiny::tags$p(""),
-
       shiny::fluidRow(
         style = "height: 15vh"
       ),
       shiny::fluidRow(
         shiny::column(
+          width = 12,
+          align = "center",
+          shiny::htmlOutput(ns("last_download_data_warning"))
+        )
+      ),
+      shiny::br(),
+      shiny::fluidRow(
+        shiny::column(
           width = 4,
           offset = 4,
+          align = "center",
           shiny::actionButton(
             inputId = ns("fetch_data"),
             label = "Fetch data",
@@ -49,21 +81,50 @@ mod_2_data_ui <- function(id) {
       shiny::fluidRow(
         style = "height: 15vh"
       ),
+      shiny::hr(),
       shiny::fluidRow(
         shiny::column(
-          width = 4,
-          offset = 4,
-          shiny::selectInput(
-            inputId = ns("select_action"),
-            label = "Select the action to take",
-            choices = c(
-              "Data completeness report",
-              "Data quality report"
-            ),
-            selected = NULL,
-            width = "100%"
+          width = 12,
+          align = "center",
+          shiny::htmlOutput(ns("navigation_explainer"))
+        )
+      ),
+      shiny::br(),
+      shiny::fluidRow(
+        shiny::column(
+          width = 6,
+          align = "center",
+          shiny::actionButton(
+            inputId = ns("go_to_completeness"),
+            label = "Data Completeness Report",
+            width = "50%",
+            icon = icon("arrow-right")
+          )
+        ),
+        shiny::column(
+          width = 6,
+          align = "center",
+          shiny::actionButton(
+            inputId = ns("go_to_quality"),
+            label = "Data Quality Report",
+            width = "50%",
+            icon = icon("arrow-right")
           )
         )
+        # shiny::column(
+        #   width = 4,
+        #   offset = 4,
+        #   shiny::selectInput(
+        #     inputId = ns("select_action"),
+        #     label = "Select the action to take",
+        #     choices = c(
+        #       "Data completeness report",
+        #       "Data quality report"
+        #     ),
+        #     selected = NULL,
+        #     width = "100%"
+        #   )
+        # )
       )
     )
   )
@@ -75,6 +136,53 @@ mod_2_data_ui <- function(id) {
 mod_2_data_server <- function(id, r6) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
+
+
+    # ==========================================================================
+    # navigation buttons
+    # ==========================================================================
+
+    # if data exists and it is up to date
+
+    if (2 == 2) { ## placeholder
+      #  show the navigation buttons (default)
+      #  display the navigation explainer
+      output$navigation_explainer <- shiny::renderUI({
+        shiny::HTML(
+          "
+          Once you've fetched the data, you can click the buttons below to view the completeness report or
+          data quality report.
+          "
+        )
+      })
+    } else {
+      #  else hide them
+      shinyjs::hide(id = "go_to_completeness")
+      shinyjs::hide(id = "go_to_quality")
+    }
+
+    # ==========================================================================
+    # last data download warning
+    # ==========================================================================
+
+    output$last_download_data_warning <- shiny::renderUI({
+
+      combined_microdata_path = create_data_dirs(r6$app_dir)$micro_combine_dir
+      last_download_date = get_last_data_download_date(combined_microdata_path)
+
+      shiny::HTML(
+        paste0(
+          "
+          You last downloaded data on
+          ",
+          last_download_date
+          ,
+          ". Please click the button below to get the most recent data."
+        )
+
+      )
+    })
+
 
     # ==========================================================================
     # react to fetch download button
@@ -316,19 +424,85 @@ mod_2_data_server <- function(id, r6) {
       # in a parent module
       # indirectly, by signal that data downloaded
       gargoyle::trigger("download_data")
+
+      # show the text that explains where to go next after fetching the data
+
+      output$navigation_explainer <- shiny::renderUI({
+        shiny::HTML(
+          "
+          Once you've fetched the data, you can click the buttons below to view the completeness report or
+          data quality report.
+          "
+        )
+      })
+
+      # enable the navigation buttons
+      shinyjs::show(id = "go_to_completeness")
+      shinyjs::show(id = "go_to_quality")
+
+      # shinyjs::show(id = "select_action")
+
+      ## Hide the last download date info
+      shinyjs::hide(id = "last_download_data_warning")
     })
 
     # ==========================================================================
-    # react to action selection
+    # react to buttons in the sidebar clicked
     # ==========================================================================
 
-    shiny::observeEvent(input$select_action, {
-      # send signal that an action was selected
+    output_ids = c("interview_microdata", "questionnaire_metadata", "team_composition", "sync_dates")
+    file_dirs = c("micro_combine_dir", "qnr_dir", "team_dir", "sync_dir")
+
+    # output$sync_dates <- downloadHandler(
+    #
+    #   filename = function() {
+    #     paste("sync_dates","-", Sys.Date(), '.zip', sep='')
+    #   },
+    #   content = function(file) {
+    #     zip::zip(file,
+    #       files = paste(create_data_dirs(r6$app_dir)$sync_dir),
+    #       mode = "cherry-pick")
+    #   }
+    # )
+
+    lapply(1:4, function(i){
+      output[[output_ids[i]]] <- downloadHandler(
+
+        filename = function() {
+          paste(output_ids[i],"-", Sys.Date(), '.zip', sep='')
+        },
+        content = function(file) {
+          zip::zip(file, files = paste(create_data_dirs(r6$app_dir)[[file_dirs[i]]]), mode = "cherry-pick")
+        }
+      )
+    })
+
+    # ==========================================================================
+    # react to Data Completeness Report button clicked
+    # ==========================================================================
+
+    shiny::observeEvent(input$go_to_completeness, {
+      # send signal that this button was clicked
       # code for updating UI appears in app_server.R
-      gargoyle::trigger("select_action")
+      gargoyle::trigger("go_to_completeness_btn")
 
-      r6$selected_action <- input$select_action
+      r6$go_to_completeness_btn <- input$go_to_completeness
     })
+
+
+    # ==========================================================================
+    # react to Data Quality Report button clicked
+    # ==========================================================================
+
+    shiny::observeEvent(input$go_to_quality, {
+      # send signal that this button was clicked
+      # code for updating UI appears in app_server.R
+      gargoyle::trigger("go_to_quality_btn")
+
+      r6$go_to_quality_btn <- input$go_to_quality
+    })
+
+
   })
 }
 
