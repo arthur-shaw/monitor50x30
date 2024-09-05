@@ -14,6 +14,7 @@ mod_1_setup_3_suso_qnr_ui <- function(id){
     bslib::accordion(
       id = ns("suso_qnr_accordion"),
       open = FALSE,
+      class = "accordion-flush",
 
       bslib::accordion_panel(
         id = "identify_qnrs_panel",
