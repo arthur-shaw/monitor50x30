@@ -1,5 +1,5 @@
 #' Persistant storage of user inputs for Shiny
-#' 
+#'
 #' @description
 #' Stores data in R6 object for intra-module communication and provides
 #' methods for reading and writing fields to disk.
@@ -31,6 +31,8 @@
 #' @field core_settings_saved Boolean. Whether all core settings saved.
 #' @field data_downloaded Boolean. Whether data downloaded.
 #' @field selected_action Character. Next app action selected.
+#' @field go_to_completeness_btn Character. Data Completeness Report clicked.
+#' @field go_to_quality_btn Character. Data Quality Report clicked.
 #' @field domain_var_choices Character vector. Domain variable choices to show.
 #' @field domain_vars_selected Character vector. Domain variable(s) selected
 #' @field obs_per_domain Data frame. Number of observations per domain.
@@ -101,6 +103,8 @@ r6 <- R6::R6Class(
     # data download
     data_downloaded = NULL,
     selected_action = NULL,
+    go_to_completeness_btn = NULL,
+    go_to_quality_btn = NULL,
     # domains
     domain_var_choices = NULL,
     domain_vars_selected = NULL,
