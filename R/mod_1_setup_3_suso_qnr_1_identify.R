@@ -69,8 +69,8 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
             data = r6$matching_qnr_tbl,
             columns = list(
               questionnaireId = reactable::colDef(show = FALSE)
-            ),
-            selection = "single"
+            )#,
+            #selection = "single"
           )
         })
 
@@ -97,8 +97,8 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
           data = qnrs,
           columns = list(
             questionnaireId = reactable::colDef(show = FALSE)
-          ),
-          selection = "single"
+          )#,
+          #selection = "single"
         )
       })
     })
@@ -133,6 +133,8 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
       output$qnrs <- reactable::renderReactable({
         reactable::reactable(
           data = matching_qnrs$df,
+          # selection = "single",
+          ## Added the line above to clear the error : Warning: Error in reactable::reactable: `data` must be a data frame or matrix
           columns = list(
             questionnaireId = reactable::colDef(show = FALSE)
           )

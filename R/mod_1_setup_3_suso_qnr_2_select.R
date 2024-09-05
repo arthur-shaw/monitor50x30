@@ -4,13 +4,13 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd 
+#' @noRd
 #'
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
 mod_1_setup_3_suso_qnr_2_select_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
- 
+
     reactable::reactableOutput(
       outputId = ns("main_qnr")
     ),
@@ -21,14 +21,14 @@ mod_1_setup_3_suso_qnr_2_select_ui <- function(id){
 
   )
 }
-    
+
 #' 1_setup_3_suso_qnr_2_select Server Functions
 #'
-#' @noRd 
+#' @noRd
 mod_1_setup_3_suso_qnr_2_select_server <- function(id, parent, r6){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
- 
+
     # ==========================================================================
     # initialize page
     # ==========================================================================
@@ -127,9 +127,9 @@ mod_1_setup_3_suso_qnr_2_select_server <- function(id, parent, r6){
 
   })
 }
-    
+
 ## To be copied in the UI
 # mod_1_setup_3_suso_qnr_2_select_ui("1_setup_3_suso_qnr_2_select_1")
-    
+
 ## To be copied in the server
 # mod_1_setup_3_suso_qnr_2_select_server("1_setup_3_suso_qnr_2_select_1")
