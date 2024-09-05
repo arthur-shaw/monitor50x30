@@ -4,9 +4,9 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd 
+#' @noRd
 #'
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
 mod_1_setup_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
@@ -26,10 +26,11 @@ mod_1_setup_ui <- function(id){
       bslib::accordion_panel(
         title = "Survey Solutions questionnaire",
         value = "suso_qnr_panel",
+        # class = "p-0",
         mod_1_setup_3_suso_qnr_ui(ns("1_setup_3_suso_qnr_1"))
       ),
-      bslib::accordion(
-        id = ns("give_oth_details_accordion"),
+      # bslib::accordion(
+      #   id = ns("give_oth_details_accordion"),
         open = FALSE,
         bslib::accordion_panel(
           title = "Survey instrument template",
@@ -46,16 +47,16 @@ mod_1_setup_ui <- function(id){
           title = "Save settings",
           value = "save_settings_panel",
           mod_1_setup_6_save_ui(ns("1_setup_6_save_1"))
-        )
+        # )
       )
 
     )
   )
 }
-    
+
 #' 1_setup Server Functions
 #'
-#' @noRd 
+#' @noRd
 mod_1_setup_server <- function(id, r6){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
@@ -152,7 +153,7 @@ mod_1_setup_server <- function(id, r6){
 
       # open next sibling panel
       bslib::accordion_panel_open(
-        id = "give_oth_details_accordion",
+        id = "setup",
         values =  "survey_instrument_panel"
       )
 
@@ -163,13 +164,13 @@ mod_1_setup_server <- function(id, r6){
 
       # close current
       bslib::accordion_panel_close(
-        id = "give_oth_details_accordion",
+        id = "setup",
         value = "survey_instrument_panel"
       )
 
       # open next
       bslib::accordion_panel_open(
-        id = "give_oth_details_accordion",
+        id = "setup",
         value = "survey_visit_panel"
       )
 
@@ -180,13 +181,13 @@ mod_1_setup_server <- function(id, r6){
 
       # close current
       bslib::accordion_panel_close(
-        id = "give_oth_details_accordion",
+        id = "setup",
         value = "survey_visit_panel"
       )
 
       # open next
       bslib::accordion_panel_open(
-        id = "give_oth_details_accordion",
+        id = "setup",
         value = "save_settings_panel"
       )
 
@@ -197,7 +198,7 @@ mod_1_setup_server <- function(id, r6){
 
       # close save settings
       bslib::accordion_panel_close(
-        id = "give_oth_details_accordion",
+        id = "setup",
         value = "save_settings_panel"
       )
 
@@ -209,9 +210,9 @@ mod_1_setup_server <- function(id, r6){
 
   })
 }
-    
+
 ## To be copied in the UI
 # mod_1_setup_ui("1_setup_1")
-    
+
 ## To be copied in the server
 # mod_1_setup_server("1_setup_1")
