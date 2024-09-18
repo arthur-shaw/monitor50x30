@@ -144,7 +144,7 @@ mod_2_data_server <- function(id, r6) {
 
     # if data exists and it is up to date
 
-    if (2 == 2) { ## placeholder
+    if(combined_data_exists(r6$app_dir)){# data exists
       #  show the navigation buttons (default)
       #  display the navigation explainer
       output$navigation_explainer <- shiny::renderUI({
@@ -167,21 +167,14 @@ mod_2_data_server <- function(id, r6) {
 
     output$last_download_data_warning <- shiny::renderUI({
 
+      if(combined_data_exists(r6$app_dir)){# data exists
+
       combined_microdata_path = create_data_dirs(r6$app_dir)$micro_combine_dir
       last_download_date = get_last_data_download_date(combined_microdata_path)
 
-      # print(last_download_date)
-
-      if(!is.null(last_download_date[[1]])){
         time_diff_in_hours = difftime(Sys.time(),last_download_date[[1]], units = "hours")
         time_diff_in_hours = round(as.numeric(trimws(gsub("Time difference of|hours", "", time_diff_in_hours))),0)
-      }else{
-        time_diff_in_hours = 0
-      }
 
-      if(time_diff_in_hours == 0){
-        "Please click the button below to fetch the data."
-      }else{
         if(time_diff_in_hours >= 1 & time_diff_in_hours < 24){
         shiny::HTML(
           paste0(
@@ -204,7 +197,11 @@ mod_2_data_server <- function(id, r6) {
 
         )
       }
+
+      }else{
+          "Please click the button below to fetch the data."
       }
+
 
 
     })

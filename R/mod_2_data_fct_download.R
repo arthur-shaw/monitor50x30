@@ -498,6 +498,24 @@ get_team_composition <- function(
 
 }
 
+##
+#' Check if the combined data exists
+#'
+#'
+#' @param microdata_path The path of the combined microdata. Obtain it using create_data_dirs(r6$app_dir)$micro_combine_dir
+#'
+#' @importFrom fs path
+#'
+#' @noRd
+combined_data_exists = function(microdata_path){
+
+  if(fs::file_exists(microdata_path)){
+    TRUE
+  }else{
+    FALSE
+  }
+}
+
 #' Get last date when data was downloaded
 #'
 #'
@@ -511,6 +529,9 @@ get_team_composition <- function(
 #'
 #' @noRd
 get_last_data_download_date <- function(microdata_path){
+
+  if(combined_data_exists(microdata_path)){
+
   last_data_download_date <- fs::dir_info(
     path = microdata_path,
     type = "file",
@@ -520,7 +541,6 @@ get_last_data_download_date <- function(microdata_path){
     dplyr::pull()
 
 
-  if(length(last_data_download_date) > 0){
 
   last_data_download_date_raw <- max(last_data_download_date)
   last_data_download_date_formatted <- stringr::str_glue("{format(as.Date(last_data_download_date_raw),
@@ -529,9 +549,14 @@ get_last_data_download_date <- function(microdata_path){
   }else{
     last_data_download_date_raw = NULL
     last_data_download_date_formatted = NULL
-  }
+}
 
   to_return = list(last_data_download_date_raw, last_data_download_date_formatted)
   return(to_return)
 }
+
+
+
+
+
 
