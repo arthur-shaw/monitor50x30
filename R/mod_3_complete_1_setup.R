@@ -4,12 +4,15 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd 
+#' @noRd
 #'
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
 mod_3_complete_1_setup_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
+
+    shiny::column(
+      width = 12,
 
     bslib::accordion(
       id = ns("setup"),
@@ -42,13 +45,15 @@ mod_3_complete_1_setup_ui <- function(id){
         )
       )
     )
- 
+
+    )
+
   )
 }
-    
+
 #' 3_complete_1_setup Server Functions
 #'
-#' @noRd 
+#' @noRd
 mod_3_complete_1_setup_server <- function(id, parent, r6){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
@@ -129,9 +134,9 @@ mod_3_complete_1_setup_server <- function(id, parent, r6){
 
   })
 }
-    
+
 ## To be copied in the UI
 # mod_3_complete_1_setup_ui("3_complete_1_setup_1")
-    
+
 ## To be copied in the server
 # mod_3_complete_1_setup_server("3_complete_1_setup_1")
