@@ -519,11 +519,19 @@ get_last_data_download_date <- function(microdata_path){
     dplyr::distinct(modification_time) %>%
     dplyr::pull()
 
-  last_data_download_date <- max(last_data_download_date)
-  last_data_download_date <- stringr::str_glue("{format(as.Date(last_data_download_date),
-                                            format = '%A, %B %d %Y')}{' at '}{format(as.POSIXct(last_data_download_date),
-                                            format = '%H:%M:%S %Z')}")
 
-  return(last_data_download_date)
+  if(length(last_data_download_date) > 0){
+
+  last_data_download_date_raw <- max(last_data_download_date)
+  last_data_download_date_formatted <- stringr::str_glue("{format(as.Date(last_data_download_date_raw),
+                                            format = '%A, %B %d %Y')}{' at '}{format(as.POSIXct(last_data_download_date_raw),
+                                            format = '%H:%M:%S %Z')}")
+  }else{
+    last_data_download_date_raw = NULL
+    last_data_download_date_formatted = NULL
+  }
+
+  to_return = list(last_data_download_date_raw, last_data_download_date_formatted)
+  return(to_return)
 }
 
