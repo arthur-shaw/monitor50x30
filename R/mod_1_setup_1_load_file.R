@@ -13,7 +13,7 @@ mod_1_setup_1_load_file_ui <- function(id){
 
     shiny::radioButtons(
       inputId = ns("have_setup_file"),
-      label = "Do you have a setup file for this application?",
+      label = i18n$t("Do you have a setup file for this application?"),
       choices = list("Yes" = 1, "No" = 2),
       selected = 2,
       width = "50%"
@@ -25,7 +25,7 @@ mod_1_setup_1_load_file_ui <- function(id){
     ),
     shiny::actionButton(
       inputId = ns("fill"),
-      label = "Next"
+      label = i18n$t("Next")
     ),
     shiny::actionButton(
       inputId = ns("load"),

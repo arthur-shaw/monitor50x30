@@ -4,7 +4,7 @@ library(shiny)
 library(shiny.i18n)
 
 # Folder that contains csv translation files
-i18n <- Translator$new(translation_csvs_path = "../data")
+i18n <- Translator$new(translation_csvs_path = "../monitor50x30/translations/shiny.i18n/data/")
 
 # Default language of the app
 i18n$set_translation_language("en")

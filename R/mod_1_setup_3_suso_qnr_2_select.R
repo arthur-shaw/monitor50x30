@@ -16,7 +16,7 @@ mod_1_setup_3_suso_qnr_2_select_ui <- function(id){
     ),
     shiny::actionButton(
       inputId = ns("save"),
-      label = "Save"
+      label = i18n$t("Save")
     )
 
   )

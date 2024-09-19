@@ -4,8 +4,20 @@
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @noRd
+#
+
+library(shiny.i18n)
+
+# Folder that contains csv translation files
+i18n <- Translator$new(translation_csvs_path = "translations_data")
+
+# Default language of the app
+i18n$set_translation_language("fr")
+
 app_ui <- function(request) {
   shiny::tagList(
+
+    shiny.i18n::usei18n(i18n),
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic
@@ -67,6 +79,7 @@ golem_add_external_resources <- function() {
     # for example, you can add shinyalert::useShinyalert()
     shinyjs::useShinyjs(),
     shinyFeedback::useShinyFeedback(),
-    waiter::use_waiter()
+    waiter::use_waiter(),
+    shiny.i18n::usei18n(i18n),
   )
 }

@@ -7,24 +7,36 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
+
 mod_1_setup_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
+
+    selectInput(
+      inputId = ns("selected_language"),
+      label = i18n$t("Change language"),
+      choices = setNames(
+        i18n$get_languages(),
+        c("English", "French")
+      ),
+      selected = "fr"
+    ),
+
     bslib::accordion(
       id = ns("setup"),
       icon = fontawesome::fa(name = "cogs"),
       bslib::accordion_panel(
-        title = "Load setup file",
+        title = i18n$t("Load setup file"),
         value = "load_setup_panel",
         mod_1_setup_1_load_file_ui(ns("1_setup_1_load_file_1"))
       ),
       bslib::accordion_panel(
-        title = "Provide server credentials",
+        title = i18n$t("Provide server credentials"),
         value = "provide_creds_panel",
         mod_1_setup_2_suso_creds_ui(ns("1_setup_2_suso_creds_1"))
       ),
       bslib::accordion_panel(
-        title = "Survey Solutions questionnaire",
+        title = i18n$t("Survey Solutions questionnaire"),
         value = "suso_qnr_panel",
         # class = "p-0",
         mod_1_setup_3_suso_qnr_ui(ns("1_setup_3_suso_qnr_1"))
@@ -33,18 +45,18 @@ mod_1_setup_ui <- function(id){
       #   id = ns("give_oth_details_accordion"),
         open = FALSE,
         bslib::accordion_panel(
-          title = "Survey instrument template",
+          title = i18n$t("Survey instrument template"),
           value = "survey_instrument_panel",
           open = FALSE,
           mod_1_setup_4_template_ui(ns("1_setup_4_template_1"))
         ),
         bslib::accordion_panel(
-          title = "Survey visit",
+          title = i18n$t("Survey visit"),
           value = "survey_visit_panel",
           mod_1_setup_5_visit_ui(ns("1_setup_5_visit_1"))
         ),
         bslib::accordion_panel(
-          title = "Save settings",
+          title = i18n$t("Save settings"),
           value = "save_settings_panel",
           mod_1_setup_6_save_ui(ns("1_setup_6_save_1"))
         # )
@@ -60,6 +72,12 @@ mod_1_setup_ui <- function(id){
 mod_1_setup_server <- function(id, r6){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
+
+    # Change the language according to user input
+    observeEvent(input$selected_language, {
+      update_lang(input$selected_language)
+    })
+
 
     # load server logic of child modules
     # note: parent param passes the session down to descendent modules

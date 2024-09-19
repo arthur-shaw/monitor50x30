@@ -22,7 +22,7 @@ mod_3_complete_ui <- function(id){
         ),
         position = "left",
         width = "50%",
-        open = FALSE,
+        open = TRUE,
         # contents
         mod_3_complete_1_setup_ui(ns("3_complete_1_setup_1"))
       ),
@@ -47,28 +47,49 @@ mod_3_complete_server <- function(id, r6){
     # initialize page
     # ==========================================================================
 
-
     # when do not have (all) settings provided
-    if (is.null(r6$core_settings_saved)) {
-
       bslib::toggle_sidebar(
         id = "settings",
-        open = TRUE
+        open = FALSE
+
       )
+    #
+    # if (is.null(r6$core_settings_saved)) {
+    #
+    #   bslib::toggle_sidebar(
+    #     id = "settings",
+    #     open = TRUE
+    #   )
+    #
+    # } else if (!is.null(r6$core_settings_saved)) {
+    #
+    #
+    #   if (r6$core_settings_saved == TRUE) {
+    #
+    #     bslib::toggle_sidebar(
+    #       id = "settings",
+    #       open = NULL
+    #
+    #     )
+    #
+    #   }
+    # }
 
-    } else if (!is.null(r6$core_settings_saved)) {
-
-
-      if (r6$core_settings_saved == TRUE) {
-
-        bslib::toggle_sidebar(
-          id = "settings",
-          open = NULL
-
-        )
-
-      }
-    }
+    # if (2 == 2) {
+    #
+    #   bslib::toggle_sidebar(
+    #     id = "settings",
+    #     open = "closed"
+    #
+    #   )
+    #
+    # }else{
+    #   bslib::toggle_sidebar(
+    #     id = "settings",
+    #     open = TRUE
+    #
+    #   )
+    # }
 
     # ==========================================================================
     # load server logic of child modules

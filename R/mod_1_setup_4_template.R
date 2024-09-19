@@ -13,7 +13,7 @@ mod_1_setup_4_template_ui <- function(id){
 
     shiny::selectizeInput(
       inputId = ns("qnr_templates"),
-      label = "Which template(s)?",
+      label = i18n$t("Which template(s)?"),
       choices = c(
         "CORE-AG",
         "ILP",
@@ -27,20 +27,27 @@ mod_1_setup_4_template_ui <- function(id){
     ),
     shiny::selectizeInput(
       inputId = ns("qnr_extensions"),
-      label = "Which optional extension(s)?",
+      label = i18n$t("Which optional extension(s)?"),
       choices = c(
         "None",
-        "Crop labor inputs",
-        "Input use",
-        "Livestock labor"
-      ),
+          "Crop labor inputs",
+            "Input use",
+              "Livestock labor"
+       ), #%>%
+        # stats::setNames(nm =
+        #     c(i18n$t("None"),
+        #       i18n$t("Crop labor inputs"),
+        #       i18n$t("Input use"),
+        #       i18n$t("Livestock labor")
+        #       )
+        #   ),
       multiple = TRUE,
       selected = NULL,
       width = "40%"
     ),
     shiny::actionButton(
       inputId = ns("save"),
-      label = "Save"
+      label = i18n$t("Save")
     )
 
   )

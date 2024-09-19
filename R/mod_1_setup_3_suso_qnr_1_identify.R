@@ -15,7 +15,7 @@ mod_1_setup_3_suso_qnr_1_identify_ui <- function(id){
       inputId = ns("qnr_string"),
       label = bslib::popover(
         trigger = list(
-          "Provide a string that identifies the questionnaire(s) of interest",
+          i18n$t("Provide a string that identifies the questionnaire(s) of interest"),
           bsicons::bs_icon("info-circle")
         ),
         'To do so, provide either a substring (e.g., "ILP", "post-planting")',
@@ -30,14 +30,14 @@ mod_1_setup_3_suso_qnr_1_identify_ui <- function(id){
     ),
     shiny::actionButton(
       inputId = ns("search"),
-      label = "Search"
+      label =  i18n$t("Search")
     ),
     reactable::reactableOutput(
       outputId = ns("qnrs")
     ),
     shiny::actionButton(
       inputId = ns("save"),
-      label = "Save"
+      label =  i18n$t("Save")
     )
 
   )

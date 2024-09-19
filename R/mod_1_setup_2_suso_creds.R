@@ -13,34 +13,34 @@ mod_1_setup_2_suso_creds_ui <- function(id) {
     shiny::textInput(
       inputId = ns("server"),
       label = shiny::tags$p(
-        "Server URL",
+        i18n$t("Server URL"),
         bsicons::bs_icon("browser-chrome")
       )
     ),
     shiny::textInput(
       inputId = ns("workspace"),
       label = shiny::tags$p(
-        "Workspace",
+        i18n$t("Workspace"),
         bsicons::bs_icon("diagram-3-fill")
       ),
     ),
     shiny::textInput(
       inputId = ns("user"),
       label = shiny::tags$p(
-        "API user name",
+        i18n$t("API user name"),
         fontawesome::fa(name = "user-shield")
       )
     ),
     shiny::passwordInput(
       inputId = ns("password"),
       label = shiny::tags$p(
-        "API user's password",
+        i18n$t("API user's password"),
         bsicons::bs_icon("unlock-fill")
       )
     ),
     shiny::actionButton(
       inputId = ns("save"),
-      label = "Save"
+      label = i18n$t("Save")
     )
   )
 }

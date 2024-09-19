@@ -18,7 +18,7 @@ mod_1_setup_3_suso_qnr_ui <- function(id){
 
       bslib::accordion_panel(
         id = "identify_qnrs_panel",
-        title = "Identify all",
+        title = i18n$t("Identify all"),
         value = "identify_qnrs_panel",
         mod_1_setup_3_suso_qnr_1_identify_ui(
           ns("1_setup_3_suso_qnr_1_identify_1")
@@ -26,7 +26,7 @@ mod_1_setup_3_suso_qnr_ui <- function(id){
       ),
 
       bslib::accordion_panel(
-        title = "Select main",
+        title = i18n$t("Select main"),
         value = "select_qnr_panel",
         mod_1_setup_3_suso_qnr_2_select_ui(
           ns("1_setup_3_suso_qnr_2_select_1")
