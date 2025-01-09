@@ -46,9 +46,29 @@ mod_3_complete_1_setup_3_team_workload_server <- function(id, parent, r6){
 
       } else if (!is.null(r6$team_workload_provided)) {
 
-        r6$n_per_team
+        teams_df <- r6$n_per_team
 
       }
+
+      rhandsontable::rhandsontable(data = teams_df) |>
+        # make supervisor name column read-only
+        rhandsontable::hot_col(
+          col = "team",
+          readOnly = TRUE
+        ) |>
+        # format inputs as whole nubmers
+        rhandsontable::hot_col("Obs", format = "0") |>
+        # allow column sorting and 
+        rhandsontable::hot_cols(columnSorting = TRUE, colWidths = 110) |>
+        # require inputs to be non-negative
+        rhandsontable::hot_cols(
+          validator = "
+            function (value, callback) {
+              setTimeout(function(){
+                callback(value >= 0 );
+              }, 1000)
+            }",
+          allowInvalid = FALSE)
 
     })
 
