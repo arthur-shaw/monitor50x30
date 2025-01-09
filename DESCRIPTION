@@ -36,6 +36,7 @@ Imports:
     shiny (>= 1.8.0),
     shinyFeedback,
     shinyjs,
+    sortable,
     susoapi (>= 0.2.0),
     susoflows (>= 0.1.0),
     susometa (>= 0.0.0.9000),
