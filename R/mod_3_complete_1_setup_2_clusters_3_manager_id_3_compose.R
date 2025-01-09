@@ -22,9 +22,9 @@ mod_3_complete_1_setup_2_clusters_3_manager_id_3_compose_ui <- function(id){
         # content of popover text
         paste0(
           "This text provides a template for how a PSU should appear in the ",
-          "completeness report.",
-          "As a conveniene, it has been constructed from the variables that ",
-          "where previously selected and ordered.",
+          "completeness report. ",
+          "As a convenience, it has been constructed from the variables that ",
+          "where previously selected and ordered. ",
           "The text can be edited as needed and saved. ",
           "The text in curly brackets are variable names (e.g., `{s00_q01}`). ",
           "They will be replaced with the value of the variable .",
