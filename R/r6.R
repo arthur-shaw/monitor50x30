@@ -332,6 +332,7 @@ r6 <- R6::R6Class(
       # data frame fields
       df_fields <- c(
         "matching_qnr_tbl",
+        "obs_per_domain",
         "n_per_team"
       )
 
