@@ -14,6 +14,8 @@ Authors@R: c(
 Description: Application for getting data, reporting on data completeness,
     and performing quality control checks.
 License: MIT + file LICENSE
+Depends: 
+    R (>= 4.1)
 Imports: 
     bsicons,
     bslib,
