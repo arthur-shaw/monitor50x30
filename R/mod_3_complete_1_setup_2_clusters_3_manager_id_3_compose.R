@@ -48,12 +48,13 @@ mod_3_complete_1_setup_2_clusters_3_manager_id_3_compose_ui <- function(id){
 mod_3_complete_1_setup_2_clusters_3_manager_id_3_compose_server <- function(id, parent, r6){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
- 
+
     # ==========================================================================
     # initialize page
     # ==========================================================================
 
-    if (is.null(r6$cluster_template_provided)) {
+    # if order provided in current session, update it
+    gargoyle::on("save_manager_order_clusters", {
 
       cluster_template_txt <- paste(r6$manager_id_vars_order, collapse = " , ")
 
@@ -61,8 +62,10 @@ mod_3_complete_1_setup_2_clusters_3_manager_id_3_compose_server <- function(id, 
         inputId = "cluster_vars_template",
         value = cluster_template_txt
       )
+    })
 
-    } else if (!is.null(r6$cluster_template_provided)) {
+    # if cluster description template provided in previous session
+    if (!is.null(r6$cluster_template_provided)) {
 
       shiny::updateTextInput(
         inputId = "cluster_vars_template",
