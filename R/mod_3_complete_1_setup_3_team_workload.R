@@ -79,7 +79,7 @@ mod_3_complete_1_setup_3_team_workload_server <- function(id, parent, r6){
     shiny::observeEvent(input$save, {
 
       # capture inputs in R6
-      r6$n_per_team <- NULL
+      r6$n_per_team <- rhandsontable::hot_to_r(input$n_per_team)
       r6$team_workload_provided <- TRUE
 
       # write R6 to disk
