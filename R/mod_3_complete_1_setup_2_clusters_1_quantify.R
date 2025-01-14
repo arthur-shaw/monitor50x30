@@ -21,6 +21,7 @@ mod_3_complete_1_setup_2_clusters_1_quantify_ui <- function(id){
       label = "Number of observations per clusters",
       value = NULL
     ),
+    shiny::textOutput(outputId = ns("save_error")),
     shiny::actionButton(
       inputId = ns("save"),
       label = "Save"
@@ -82,6 +83,46 @@ mod_3_complete_1_setup_2_clusters_1_quantify_server <- function(id, parent, r6){
         }
 
       } else if (!is.null(input$n_clusters) & !is.null(input$n_per_cluster)) {
+
+        # ----------------------------------------------------------------------
+        # check that domain obs == cluster obs
+        # ----------------------------------------------------------------------
+
+        # compute total obs from domain table
+        tot_obs_domain <- r6$obs_per_domain |>
+          dplyr::pull(Obs) |>
+          sum(na.rm = TRUE)
+
+        # compute total obs implied by cluster number and size
+        tot_obs_cluster <- input$n_clusters * input$n_per_cluster
+
+        # check whether sample sizes implied by domain and cluster are the same
+        tot_obs_domain_cluster_same <- identical(
+          tot_obs_domain,
+          tot_obs_cluster
+        )
+
+        # display an error if the same sizes are not the same.
+        output$save_error <- shiny::renderText(
+          if (!tot_obs_domain_cluster_same) {
+            shiny::validate(
+              message = glue::glue(
+                "Domain observations ({tot_obs_domain}) !=",
+                "cluster observations ({tot_obs_cluster}).",
+                "The total observation counts should match.",
+                "Please correct.",
+                .sep = " "
+              )
+            )
+          }
+        )
+
+        # halt execution until obs counts agree
+        req(tot_obs_domain_cluster_same)
+
+        # ----------------------------------------------------------------------
+        # store values in R6, save R6 to disk, and send completion signal
+        # ----------------------------------------------------------------------
 
         # store user inputs in R6
         r6$n_clusters <- input$n_clusters
