@@ -13,9 +13,10 @@ mod_3_complete_1_setup_2_clusters_2_computer_id_ui <- function(id){
 
     shiny::selectizeInput(
       inputId = ns("computer_id_vars"),
-      label = paste0(
+      label = paste(
         "Select the variables that a computer needs to",
-        "identify a cluster uniquely"
+        "identify a cluster uniquely",
+        sep = " "
       ),
       choices = NULL,
       selected = NULL,
