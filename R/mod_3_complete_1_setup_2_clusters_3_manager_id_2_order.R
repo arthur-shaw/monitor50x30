@@ -31,16 +31,19 @@ mod_3_complete_1_setup_2_clusters_3_manager_id_2_order_server <- function(id, pa
     # initialize page
     # ==========================================================================
 
-    # determine the vector to show
-    if (is.null(r6$cluster_var_order_provided)) {
+    # compute choices
+    # initialize as the values stored in R6
+    # if never set, the value will be null
+    manager_id_vars <- shiny::reactiveValues(
+      order = r6$manager_id_vars_order
+    )
 
-      cluster_vars <- r6$manager_id_vars_selected
+    # if cluster vars provided in session
+    gargoyle::on("save_manager_select_clusters", {
 
-    } else if (!is.null(r6$cluster_var_order_provided)) {
+      manager_id_vars$order <- r6$manager_id_vars_selected
 
-      cluster_vars <- r6$manager_id_vars_order
-
-    }
+    })
 
     # render the UI
     # note: this appears in the server since there is not a method for updating
@@ -54,7 +57,7 @@ mod_3_complete_1_setup_2_clusters_3_manager_id_2_order_server <- function(id, pa
         ),
         sortable::add_rank_list(
           text = "Click and drag items to reorder them",
-          labels = cluster_vars,
+          labels = manager_id_vars$order,
           input_id = ns("cluster_vars_ordered")
         )
       )
