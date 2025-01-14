@@ -10,7 +10,7 @@
 mod_3_complete_1_setup_3_team_workload_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
- 
+
     rhandsontable::rHandsontableOutput(ns("n_per_team")),
     shiny::actionButton(
       inputId = ns("save"),
