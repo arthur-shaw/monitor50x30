@@ -12,6 +12,7 @@ mod_3_complete_1_setup_3_team_workload_ui <- function(id){
   shiny::tagList(
 
     rhandsontable::rHandsontableOutput(ns("n_per_team")),
+    shiny::textOutput(outputId = ns("save_error")),
     shiny::actionButton(
       inputId = ns("save"),
       label = "Save"
@@ -78,6 +79,43 @@ mod_3_complete_1_setup_3_team_workload_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$save, {
 
+      # ----------------------------------------------------------------------
+      # check that domain obs == cluster obs
+      # ----------------------------------------------------------------------
+
+      # compute total obs implied by cluster number and size
+      tot_obs_cluster <- r6$n_clusters * r6$n_per_cluster
+
+      # compute total obs from domain table
+      tot_obs_team <- rhandsontable::hot_to_r(input$n_per_team) |>
+        dplyr::pull(Obs) |>
+        sum(na.rm = TRUE)
+
+      # check whether sample sizes implied by cluster and team workload are same
+      tot_obs_cluster_team_same <- identical(tot_obs_cluster, tot_obs_team)
+
+      # display an error if the same sizes are not the same.
+      output$save_error <- shiny::renderText(
+        if (!tot_obs_cluster_team_same) {
+          shiny::validate(
+            message = glue::glue(
+              "Cluster observations ({tot_obs_cluster}) !=",
+              "workload observations ({tot_obs_team}).",
+              "The total observation counts should match.",
+              "Please correct.",
+              .sep = " "
+            )
+          )
+        }
+      )
+
+      # halt execution until obs counts agree
+      req(tot_obs_cluster_team_same)
+
+      # ----------------------------------------------------------------------
+      # store values in R6, save R6 to disk, and send completion signal
+      # ----------------------------------------------------------------------
+
       # capture inputs in R6
       r6$n_per_team <- rhandsontable::hot_to_r(input$n_per_team)
       r6$team_workload_provided <- TRUE
@@ -89,7 +127,7 @@ mod_3_complete_1_setup_3_team_workload_server <- function(id, parent, r6){
       gargoyle::trigger("save_workloads")
 
     })
- 
+
   })
 }
     
