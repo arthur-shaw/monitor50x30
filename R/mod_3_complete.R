@@ -47,24 +47,15 @@ mod_3_complete_server <- function(id, r6){
     # initialize page
     # ==========================================================================
 
-    # when do not have (all) settings provided
-    if (is.null(r6$core_setting_saved)) {
+    # when do not have (all) settings provided, open the sidebar
+    # otherwise, leave it in its default (closed) state
+    if (is.null(r6$completeness_settings_saved)) {
 
       bslib::toggle_sidebar(
         id = "settings",
         open = TRUE
       )
 
-    } else if (!is.null(r6$core_setting_saved)) {
-
-      if (r6$core_setting_saved == TRUE) {
-
-        bslib::toggle_sidebar(
-          id = "settings",
-          open = NULL
-        )
-
-      }
     }
 
     # ==========================================================================
