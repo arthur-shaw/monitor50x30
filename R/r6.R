@@ -60,6 +60,8 @@
 #' to describe a cluster.
 #' @field n_per_team Data frame of number of interviews per team.
 #' @field team_workload_provided Boolean. Whether team workload provided.
+#' @field completeness_settings_saved Boolean. Whether completeness report
+#' settings saved.
 #'
 #' @importFrom R6 R6Class
 #' @importFrom fs path
@@ -131,6 +133,7 @@ r6 <- R6::R6Class(
     # workload
     n_per_team = NULL,
     team_workload_provided = NULL,
+    completeness_settings_saved = NULL,
 
     # ==========================================================================
     # Methods
@@ -238,6 +241,8 @@ r6 <- R6::R6Class(
     #' to describe a cluster.
     #' @param n_per_team Data frame of number of interviews per team.
     #' @param team_workload_provided Boolean. Whether team workload provided.
+    #' @param completeness_settings_saved Boolean. Whether completeness report
+    #' settings saved.
     #'
     #' @noRd
     update = function(
@@ -297,7 +302,8 @@ r6 <- R6::R6Class(
       cluster_template_provided = NULL,
       # workload
       n_per_team = NULL,
-      team_workload_provided = NULL
+      team_workload_provided = NULL,
+      completeness_settings_saved = NULL
 
     ) {
 

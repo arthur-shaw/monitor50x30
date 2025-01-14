@@ -15,7 +15,7 @@ mod_3_complete_1_setup_4_save_ui <- function(id){
       inputId = ns("save"),
       label = "Save"
     )
- 
+
   )
 }
     
@@ -27,6 +27,12 @@ mod_3_complete_1_setup_4_save_server <- function(id, parent, r6){
     ns <- session$ns
 
     shiny::observeEvent(input$save, {
+
+      # write settings status to R6
+      r6$completeness_settings_saved <- TRUE
+
+      # write R6 to disk
+      r6$write()
 
       # signal that settings have been saved
       gargoyle::trigger("save_completeness_setup")
