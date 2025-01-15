@@ -64,6 +64,10 @@
 #' @field team_workload_provided Boolean. Whether team workload provided.
 #' @field completeness_settings_saved Boolean. Whether completeness report
 #' settings saved.
+#' @field report_teams Character vector. Teams extracted from the team
+#' composition file
+#' @field report_teams_selected Character vector. Team(s) selected for report
+#' production.
 #'
 #' @importFrom R6 R6Class
 #' @importFrom fs path
@@ -137,6 +141,8 @@ r6 <- R6::R6Class(
     n_per_team = NULL,
     team_workload_provided = NULL,
     completeness_settings_saved = NULL,
+    report_teams = NULL,
+    report_teams_selected = NULL,
 
     # ==========================================================================
     # Methods
@@ -248,6 +254,10 @@ r6 <- R6::R6Class(
     #' @param team_workload_provided Boolean. Whether team workload provided.
     #' @param completeness_settings_saved Boolean. Whether completeness report
     #' settings saved.
+    #' @param report_teams Character vector. Teams extracted from the team
+    #' composition file
+    #' @param report_teams_selected Character vector. Team(s) selected for
+    #' report production.
     #'
     #' @noRd
     update = function(
@@ -309,7 +319,10 @@ r6 <- R6::R6Class(
       # workload
       n_per_team = NULL,
       team_workload_provided = NULL,
-      completeness_settings_saved = NULL
+      completeness_settings_saved = NULL,
+      # report parameters
+      report_teams = NULL,
+      report_teams_selected = NULL
 
     ) {
 
@@ -361,7 +374,9 @@ r6 <- R6::R6Class(
         "cluster_id_var_choices",
         "computer_id_vars_selected",
         "manager_id_vars_selected",
-        "manager_id_vars_order"
+        "manager_id_vars_order",
+        "report_teams",
+        "report_teams_selected"
       )
 
       # other fields not to write
