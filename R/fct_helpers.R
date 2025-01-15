@@ -95,3 +95,37 @@ disable_navbar_element <- function(id) {
   shinyjs::disable(selector = glue::glue("a[data-value='{id}']"))
 
 }
+
+#' Create team options for UI
+#'
+#' @description
+#' Construct team UI choices from team composition file saved on disk.
+#'
+#' @param path Character. Path to team composition Stata file.
+#'
+#' @return Character vector of team choices for UI
+#'
+#' @importFrom haven read_dta
+#' @importFrom dplyr distinct pull
+#'
+#' @noRd
+create_team_choices <- function(
+  path,
+  all_teams_txt = "All teams"
+) {
+
+  teams_from_df <- path |>
+    haven::read_dta() |>
+    # data frame of supervisors and their interviewers
+    # reduced to distinct supervisors (aka teams)
+    dplyr::distinct(SupervisorName) |>
+    dplyr::pull(SupervisorName)
+
+  # pre-pend "All teams" option
+  teams <- c(all_teams_txt, teams_from_df)
+
+  return(teams)
+
+}
+
+}
