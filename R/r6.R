@@ -14,6 +14,8 @@
 #' @field qnr_string Character, atomic. Questionnaire search string.
 #' search string.
 #' @field matching_qnr_tbl Data frame. Questionnaires that match `qnr_string`
+#' @field qnr_var Character. Questionnaire variable of (first) identified
+#' matching questionnaire.
 #' @field qnrs_identified Boolean. Whether questionnaires identified with query
 #' string.
 #' @field qnr_selected_index Integer. Row number of the selected questionnaire.
@@ -85,6 +87,7 @@ r6 <- R6::R6Class(
     # questionanires identified
     qnr_string = NULL,
     matching_qnr_tbl = NULL,
+    qnr_var = NULL,
     qnrs_identified = NULL,
     # questionnaire selected
     qnr_selected_index = NULL,
@@ -191,6 +194,8 @@ r6 <- R6::R6Class(
     #' @param qnr_string Character, atomic. Questionnaire search string.
     #' @param matching_qnr_tbl Data frame. Questionnaires that
     #' match `qnr_string`
+    #' @param qnr_var Character. Questionnaire variable of (first) identified
+    #' matching questionnaire.
     #' @param qnrs_identified Boolean. Whether questionnaires identified
     #' with query
     #' @param qnr_selected_index Integer. Row number of the selected
@@ -256,6 +261,7 @@ r6 <- R6::R6Class(
       # questionanires identified
       qnr_string = NULL,
       matching_qnr_tbl = NULL,
+      qnr_var = NULL,
       qnrs_identified = NULL,
       # questionnaire selected
       qnr_selected_index = NULL,

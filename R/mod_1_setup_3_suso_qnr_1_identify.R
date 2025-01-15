@@ -104,9 +104,12 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
     # react to search button
     # ==========================================================================
 
-    # create a reactive container for the table
-    # so that its values are accessible outside of the observeEvent scope
-    matching_qnrs <- shiny::reactiveValues(df = r6$matching_qnr_tbl)
+    # create a reactive container for the table and questionnaire variable
+    # so that values are accessible outside of the observeEvent scope
+    matching_qnrs <- shiny::reactiveValues(
+      df = r6$matching_qnr_tbl,
+      qnr_var = r6$qnr_var
+    )
 
     shiny::observeEvent(input$search, {
 
@@ -126,6 +129,12 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
           .data$title, .data$version, .data$variable,
           .data$questionnaireId
         )
+
+      matching_qnrs$qnr_var <- matching_qnrs$df |>
+        # take the first row, where variable qnr variable is assumed the same
+        dplyr::filter(dplyr::row_number() == 1) |>
+        # extract the variable column
+        dplyr::pull(variable)
 
       output$qnrs <- reactable::renderReactable({
         reactable::reactable(
@@ -149,6 +158,7 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
       # write parameters to R6
       r6$qnr_string <- input$qnr_string
       r6$matching_qnr_tbl <- matching_qnrs$df
+      r6$qnr_var <- matching_qnrs$qnr_var
       r6$qnrs_identified <- TRUE
 
       # write R6 object to disk
