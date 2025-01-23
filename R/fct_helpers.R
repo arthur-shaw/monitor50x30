@@ -26,6 +26,7 @@ construct_user_data_path <- function() {
       "Package",
       file = app_description_path
     ),
+    appauthor = NULL,
     version = desc::desc_get(
       "Version",
       file = app_description_path
