@@ -37,9 +37,7 @@ mod_3_complete_1_setup_3_team_workload_server <- function(id, parent, r6){
       if (is.null(r6$team_workload_provided)) {
 
         teams_df <- haven::read_dta(
-          file = fs::path(
-            r6$app_dir, "03_team_composition",
-            "team_composition.dta")
+          file = fs::path(r6$dirs$team, "team_composition.dta")
         ) |>
         dplyr::distinct(SupervisorName) |>
         dplyr::select(team = SupervisorName) |>

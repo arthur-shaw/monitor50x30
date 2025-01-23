@@ -51,7 +51,7 @@ mod_3_complete_1_setup_1_domains_server <- function(id, parent, r6){
     gargoyle::on("download_data", {
 
       domain_vars$choices <- make_vars_options(
-        path = fs::path(r6$app_dir, "04_qnr_metadata", "qnr_vars.rds"),
+        path = fs::path(r6$dirs$qnr, "qnr_vars.rds"),
         var_types = "SingleQuestion"
       )
 
@@ -97,7 +97,7 @@ mod_3_complete_1_setup_1_domains_server <- function(id, parent, r6){
 
           # create a table of all possible values of selected variables
           obs_per_domain_df <- create_domain_var_val_df(
-            path = fs::path(r6$app_dir, "04_qnr_metadata", "qnr_full.rds"),
+            path = fs::path(r6$dirs$qnr, "qnr_full.rds"),
             domain_vars = domain_df_col_names
           )
 

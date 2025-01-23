@@ -51,7 +51,7 @@ mod_3_complete_1_setup_2_clusters_3_manager_id_1_select_server <- function(id, p
     gargoyle::on("download_data", {
 
       manager_id_vars$choices <- make_vars_options(
-        path = fs::path(r6$app_dir, "04_qnr_metadata", "qnr_vars.rds"),
+        path = fs::path(r6$dirs$qnr, "qnr_vars.rds"),
         var_types = c(
           "SingleQuestion",
           "TextQuestion",

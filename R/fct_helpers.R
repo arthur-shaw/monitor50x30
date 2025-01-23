@@ -65,6 +65,121 @@ create_user_app_dir <- function() {
   }
 }
 
+#' Create app file system
+#'
+#' @description Create the folders for persistent storage of app data and
+#' other artifacts. In particular:
+#'
+#' - Microdata
+#' - Metadata (e.g., sync dates, team composition, questionnaire content, etc.)
+#' - Reports (i.e., completeness, data quality)
+#' - Results of high-frequency checks
+#'
+#' @param app_dir Character. Path to the user's application directory
+#'
+#' @return List of paths to directories created by this function
+#'
+#' @importFrom fs path dir_create
+create_app_file_system <- function(app_dir) {
+
+  # ===========================================================================
+  # create directories and sub-directories
+  # ===========================================================================
+
+  # ---------------------------------------------------------------------------
+  # data
+  # ---------------------------------------------------------------------------
+
+  # main data
+  data_dir <- fs::path(app_dir, "01_data")
+  fs::dir_create(data_dir)
+
+  # microdata
+  micro_dir <- fs::path(data_dir, "01_micro")
+  micro_dirs <- c(
+    micro_dir,
+    fs::path(micro_dir, "01_downloaded"),
+    fs::path(micro_dir, "02_combined")
+  )
+  fs::dir_create(micro_dirs)
+
+  # metadata
+  metadata_dir <- fs::path(data_dir, "02_meta")
+  meta_dirs <- c(
+    metadata_dir,
+    fs::path(metadata_dir, "01_sync"),
+    fs::path(metadata_dir, "02_teams"),
+    fs::path(metadata_dir, "03_qnr"),
+    fs::path(metadata_dir, "04_obs_per"),
+    fs::path(metadata_dir, "04_obs_per", "01_domain"),
+    fs::path(metadata_dir, "04_obs_per", "02_team")
+  )
+  fs::dir_create(meta_dirs)
+
+  # ---------------------------------------------------------------------------
+  # reports
+  # ---------------------------------------------------------------------------
+
+  # compose main paths
+  reports_dir <- fs::path(app_dir, "02_reports")
+  completeness_dir <- fs::path(reports_dir, "01_completeness")
+  quality_dir <- fs::path(reports_dir, "02_quality")
+
+  # compile paths and compose child paths
+  report_dirs <- c(
+    reports_dir,
+    completeness_dir,
+    quality_dir,
+    fs::path(completeness_dir, "resources"),
+    fs::path(quality_dir, "resources")
+  )
+  # create all compiled paths
+  fs::dir_create(report_dirs)
+
+  # ---------------------------------------------------------------------------
+  # decisions
+  # ---------------------------------------------------------------------------
+
+  decisions_dir <- fs::path(app_dir, "03_decisions")
+  decision_dirs <- c(
+    decisions_dir,
+    fs::path(decisions_dir, "01_cases"),
+    fs::path(decisions_dir, "02_recommendations"),
+    fs::path(decisions_dir, "03_decisions"),
+    fs::path(decisions_dir, "04_reports")
+  )
+  fs::dir_create(decision_dirs)
+
+  # ===========================================================================
+  # compose return value that is a list of directory paths
+  # ===========================================================================
+
+  dirs <- list(
+    # 01_data
+    data = data_dir,
+    # micro
+    micro_dl = micro_dirs[2],
+    micro_combine = micro_dirs[3],
+    # meta
+    sync = meta_dirs[2],
+    team = meta_dirs[3],
+    qnr = meta_dirs[4],
+    obs_per_domain = meta_dirs[6],
+    obs_per_team = meta_dirs[7],
+    # 02_reports
+    report_completeness = report_dirs[2],
+    report_quality = report_dirs[3],
+    # 03_decisions
+    cases = decision_dirs[2],
+    recommendations = decision_dirs[3],
+    decisions = decision_dirs[4],
+    reports = decision_dirs[5]
+  )
+
+  return(dirs)
+
+}
+
 #' Enable navbar element
 #' 
 #' @param id Character. Shiny id given to navbar element.
@@ -190,7 +305,7 @@ render_report <- function(
   )
 
   template_pkg_path <- fs::path(
-    pkg_path, glue::glue("{report_type}"), report_name
+    pkg_path, glue::glue("{report_dir}"), report_name
   )
 
   # ============================================================================

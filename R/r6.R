@@ -5,6 +5,8 @@
 #' methods for reading and writing fields to disk.
 #'
 #' @field app_dir Character, atomic. Path to Shiny app's user data directory
+#' @field dirs List. Paths to directories with data, reports, and other app
+#' artifacts
 #' @field server Character, atomic. URL of SuSo server.
 #' @field workspace Character, atomic. Name of SuSo workspace.
 #' @field user Character, atomic. API user name.
@@ -81,7 +83,9 @@ r6 <- R6::R6Class(
     # Fields
     # ==========================================================================
 
+    # app directories
     app_dir = NULL,
+    dirs = NULL,
     # server credentials
     server = NULL,
     workspace = NULL,
@@ -191,6 +195,8 @@ r6 <- R6::R6Class(
     #' Each non-NULL value provided will update the corresponding R6 field
     #'
     #' @param app_dir Character, atomic. Path to Shiny app's user data directory
+    #' @param dirs List. Paths to directories with data, reports, and other app
+    #' artifacts
     #' @param server Character, atomic. URL of SuSo server.
     #' @param workspace Character, atomic. Name of SuSo workspace.
     #' @param user Character, atomic. API user name.
@@ -261,7 +267,9 @@ r6 <- R6::R6Class(
     #'
     #' @noRd
     update = function(
+      # app directories
       app_dir = NULL,
+      dirs = NULL,
       # server credentials
       server = NULL,
       workspace = NULL,
@@ -365,6 +373,11 @@ r6 <- R6::R6Class(
         "n_per_team"
       )
 
+      # list fields
+      list_fields <- c(
+        "dirs"
+      )
+
       # vector fields
       vctr_fields <- c(
         "qnr_templates",
@@ -393,8 +406,8 @@ r6 <- R6::R6Class(
           ".__enclos_env__", "clone",
           # methods
           "write", "update", "read",
-          # omitting data frames and vectors
-          df_fields, vctr_fields,
+          # omitting data frames, lists, and vectors
+          df_fields, list_fields, vctr_fields,
           # omitting other fields
           other_fields
         )
@@ -416,7 +429,7 @@ r6 <- R6::R6Class(
       df <- df[, order]
 
       # put data frames and vectors in parameter data frame
-      non_atomic_fields <- c(df_fields, vctr_fields)
+      non_atomic_fields <- c(df_fields, list_fields, vctr_fields)
 
       for (non_atomic_field in non_atomic_fields) {
         df[[non_atomic_field]] <- list(self[[non_atomic_field]])

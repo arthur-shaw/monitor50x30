@@ -58,7 +58,7 @@ mod_3_complete_2_report_server <- function(id, parent, r6){
 
       # construct path to teams composition data file
       teams_dta_path <- fs::path(
-        r6$app_dir, "03_team_composition", "team_composition.dta"
+        r6$dirs$team, "team_composition.dta"
       )
 
       # create team choice options

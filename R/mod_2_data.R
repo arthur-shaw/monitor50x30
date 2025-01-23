@@ -66,22 +66,16 @@ mod_2_data_server <- function(id, r6){
       # ========================================================================
 
       # ------------------------------------------------------------------------
-      # create directories to hold data
-      # ------------------------------------------------------------------------
-
-      dirs <- create_data_dirs(app_dir = r6$app_dir)
-
-      # ------------------------------------------------------------------------
       # delete stale files from previous session
       # ------------------------------------------------------------------------
 
       # microdata
-      delete_stale_data(dir = dirs$micro_dl_dir)
-      delete_stale_data(dir = dirs$micro_combine_dir)
+      delete_stale_data(dir = r6$dirs$micro_dl)
+      delete_stale_data(dir = r6$dirs$micro_combine)
       # sync data
-      delete_stale_data(dir = dirs$sync_dir)
+      delete_stale_data(dir = r6$dirs$sync)
       # team composition
-      delete_stale_data(dir = dirs$team_dir)
+      delete_stale_data(dir = r6$dirs$team)
 
       # ------------------------------------------------------------------------
       # get microdata
@@ -128,7 +122,7 @@ mod_2_data_server <- function(id, r6){
         susoflows::download_data(
           qnr_id = qnr_id,
           export_type = "STATA",
-          path = dirs$micro_dl_dir,
+          path = r6$dirs$micro_dl,
           server = r6$server,
           workspace = r6$workspace,
           user = r6$user,
@@ -144,7 +138,7 @@ mod_2_data_server <- function(id, r6){
         waiter::spin_ring(),
         shiny::h4("Unzipping downloaded microdata data")
       ))
-      unpack_all_zip_to_dir(dirs$micro_dl_dir)
+      unpack_all_zip_to_dir(r6$dirs$micro_dl)
 
       # combine downloaded data
       waiter::waiter_show(html = shiny::tagList(
@@ -152,8 +146,8 @@ mod_2_data_server <- function(id, r6){
         shiny::h4("Combining downloaded microdata")
       ))
       combine_and_save_all_dta(
-        dir_in = dirs$micro_dl_dir,
-        dir_out = dirs$micro_combine_dir
+        dir_in = r6$dirs$micro_dl,
+        dir_out = r6$dirs$micro_combine
       )
 
       # ------------------------------------------------------------------------
@@ -172,7 +166,7 @@ mod_2_data_server <- function(id, r6){
       get_qnr_json(
         qnr_id = r6$qnr_selected_suso_id,
         qnr_version = as.numeric(r6$qnr_selected_suso_version),
-        qnr_dir = dirs$qnr_dir,
+        qnr_dir = r6$dirs$qnr,
         server = r6$server,
         workspace = r6$workspace,
         user = r6$user,
@@ -181,7 +175,7 @@ mod_2_data_server <- function(id, r6){
 
       # parse questionnaire JSON file if needed
       parse_json <- decide_whether_to_parse_json(
-        qnr_dir = dirs$qnr_dir
+        qnr_dir = r6$dirs$qnr
       )
       # - if so, do the necessary
       if (parse_json == TRUE) {
@@ -195,18 +189,18 @@ mod_2_data_server <- function(id, r6){
         )
 
         # parse and save JSON file
-        qnr_file_path <- fs::path(dirs$qnr_dir, "document.json")
+        qnr_file_path <- fs::path(r6$dirs$qnr, "document.json")
         qnr_metadata <- susometa::parse_questionnaire(qnr_file_path)
         saveRDS(
           object = qnr_metadata,
-          file = fs::path(dirs$qnr_dir, "qnr_full.rds")
+          file = fs::path(r6$dirs$qnr, "qnr_full.rds")
         )
 
         # create and save variables data frame
         vars_metadata <- extract_vars_metadata(df = qnr_metadata)
         saveRDS(
           object = vars_metadata,
-          file = fs::path(dirs$qnr_dir, "qnr_vars.rds")
+          file = fs::path(r6$dirs$qnr, "qnr_vars.rds")
         )
 
       }
@@ -226,7 +220,7 @@ mod_2_data_server <- function(id, r6){
       # get action logs, compute last sync by user, and save both logs and sync
       get_sync_data(
         start_date = r6$svy_start_date,
-        dir = dirs$sync_dir,
+        dir = r6$dirs$sync,
         server = r6$server,
         workspace = r6$workspace,
         user = r6$user,
@@ -247,7 +241,7 @@ mod_2_data_server <- function(id, r6){
 
       # fetch team composition table and save it to disk
       get_team_composition(
-        dir = dirs$team_dir,
+        dir = r6$dirs$team,
         server = r6$server,
         workspace = r6$workspace,
         user = r6$user,

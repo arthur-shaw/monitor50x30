@@ -9,9 +9,13 @@ app_server <- function(input, output, session) {
   # create application directory
   app_dir <- create_user_app_dir()
 
+  # create file system for storing data, reports, and other app artifacts
+  dirs <- create_app_file_system(app_dir = app_dir)
+
   # initialize R6 object
   r6 <- r6$new()
   r6$app_dir <- app_dir
+  r6$dirs <- dirs
 
   # handle R6 object as a function of (past) app state
   # case 1: app never used => ; past R6 not found as RDS in local storage
