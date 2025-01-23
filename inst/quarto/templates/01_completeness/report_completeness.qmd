@@ -1,0 +1,476 @@
+---
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 2
+execute: 
+  echo: false
+  error: false
+  warning: false
+params:
+  # paths
+  data_dir: ""
+  qnr_var: ""
+  # domains
+  domain_vars_selected: ""
+    # TODO: write data to path
+  # clusters
+  n_clusters: null
+  n_per_cluster: null
+  computer_id_vars_selected: null
+  cluster_id_vars_selected: null
+    # note: is a character vector of templated variables: `{description} : {variable}`
+    # need to extract `{variable}` from each element of vector
+  cluster_template_txt: ""
+---
+
+```{r}
+#| label: define utility functions
+
+#' Convert target columns from labelled number to string of label
+#'
+#' @param df Data frame.
+#' @param cols Character vector of column names in the data frame.
+#'
+#' @return Data frame where target columns are transformed to character
+#'
+#' @importFrom dplyr mutate across all_of
+#' @importFrom labelled to_character
+convert_labelled_cols_to_string <- function(
+  df,
+  cols
+) {
+
+  has_labelled_cols <- length(cols) > 0
+
+  if (has_labelled_cols) {
+
+    df_mod <- dplyr::mutate(
+      .data = df,
+      dplyr::across(
+        .cols = dplyr::all_of(cols),
+        .fns = ~ labelled::to_character(.x, levels = "labels")
+      )
+    )
+
+  } else {
+
+    df_mod <- df
+
+  }
+
+  return(df_mod)
+
+}
+
+#' Extract variable name from user-facing variable string
+#'
+#' @description Variables selected in UI are stored as glue interpolation
+#' templates of the following form `"Some text {varname}"`. This function
+#' extracts `{varname}`.
+#'
+#' @param vars_selected Character vector
+#'
+#' @return Character vector of variable names.
+#'
+#' @importFrom stringr str_extract
+extract_var_names <- function(vars) {
+
+  vars_extracted <- purrr::map_chr(
+    .x = vars,
+    .f = ~ stringr::str_extract(
+      string = .x,
+      pattern = "(?<=\\{).+(?=\\})"
+    )
+  )
+
+}
+
+```
+
+```{r}
+#| label: extract variable names from strings captured in UI
+
+# ==============================================================================
+# PSU variables
+# ==============================================================================
+
+# extract variable names from `r6$cluster_id_vars_selected`
+psu_computer_vars <- extract_var_names(vars = params$cluster_vars_computer)
+
+# extract variable names from variables for survey manager
+psu_manager_vars <- extract_var_names(vars = params$cluster_vars_manager)
+
+# identify manager variables not in computer variables
+psu_vars_in_mngr_not_pc <- psu_manager_vars[!psu_manager_vars %in% psu_computer_vars]
+
+# ==============================================================================
+# domain variables
+# ==============================================================================
+
+# extract domain vars from `r6$domain_vars_selected`
+domain_vars <- extract_var_names(vars = params$domain_vars)
+
+```
+
+## Progress `r fontawesome::fa(name = "bars-progress")`
+
+```{r}
+#| label: compute hhold count
+
+# expected in survey design
+n_hholds_expected <- params$n_clusters * params$n_per_cluster
+
+# received in data
+hhold_df_path <- fs::path(params$dir_data, paste0(params$main_df_name, ".dta"))
+hhold_df <- hhold_df_path |>
+	haven::read_dta()
+
+n_hholds_received <- nrow(hhold_df)
+
+# TODO: revise when can have definition of a completed interview
+n_hholds_completed <- n_hholds_received
+pct_hholds_completed <- n_hholds_completed / n_hholds_expected
+```
+
+```{r}
+#| label: compute PSU count
+
+
+# received in data
+psu_stats <- hhold_df |>
+  convert_labelled_cols_to_string(cols = psu_computer_vars) |>
+  dplyr::mutate(
+    psu_desc = glue::glue(params$cluster_template_txt)
+  ) |>
+	dplyr::group_by(!!!rlang::data_syms(psu_computer_vars), psu_desc) |>
+	dplyr::summarize(
+    n_obs_received = dplyr::n(),
+    n_obs_missing = params$n_per_cluster - n_obs_received,
+    psu_complete = dplyr::n() >= params$n_per_cluster,
+    psu_in_progress = dplyr::n() < params$n_per_cluster
+  ) |>
+	dplyr::ungroup()
+
+n_psu_expected <- params$n_clusters
+
+n_psu_received <- nrow(psu_stats)
+
+n_psu_completed <- psu_stats |>
+	dplyr::filter(psu_complete == TRUE) |>
+	nrow()
+
+n_psu_in_progress <- psu_stats |>
+	dplyr::filter(psu_in_progress == TRUE) |>
+	nrow()
+
+pct_psu_completed <- n_psu_completed / n_psu_expected
+```
+
+### Overall
+
+::: {.grid}
+
+::: {.g-col-6}
+
+```{r}
+#| label: compose household progress value box
+bslib::value_box(
+  showcase = bsicons::bs_icon(name = "house-door-fill"),
+  showcase_layout = "left center",
+  title = "Households",
+  value = paste0(scales::percent(pct_hholds_completed), " completed"),
+  htmltools::p(glue::glue("{n_hholds_completed} received / {n_hholds_expected} expected")),
+  theme = bslib::value_box_theme(fg = "white", bg = "#004434")
+)
+```
+
+:::
+
+::: {.g-col-6}
+
+```{r}
+#| label: compose PSU progress value box
+bslib::value_box(
+  showcase = bsicons::bs_icon(name = "bounding-box"),
+  showcase_layout = "left center",
+  title = "PSUs",
+  value = paste0(scales::percent(pct_psu_completed), " completed"),
+  htmltools::p(glue::glue("Completed: {n_psu_completed} / {n_psu_expected}")),
+  htmltools::p(glue::glue("In progress: {n_psu_in_progress}")),
+  theme = bslib::value_box_theme(fg = "white", bg = "#004434")
+)
+```
+
+:::
+
+:::
+
+### By domain
+
+```{r}
+#| label: constuct domain table
+
+# domains expected
+n_per_domain_path <- fs::path(params$dir_by_domain, "obs_per_domain.rds")
+
+n_per_domain_expected_df <- n_per_domain_path |>
+	readRDS() |>
+	dplyr::rename(n_expected = Obs)
+
+
+n_per_domain_received_df <- hhold_df |>
+  # match data type of expectations data frame
+  # convert data from labelled numbers to strings
+  convert_labelled_cols_to_string(cols = domain_vars) |>
+	dplyr::group_by(!!!rlang::data_syms(domain_vars)) |>
+	dplyr::summarise(n_received = dplyr::n()) |>
+  dplyr::ungroup()
+
+n_per_domain_df <- n_per_domain_expected_df |>
+	dplyr::left_join(
+    n_per_domain_received_df,
+    by = domain_vars
+  ) |>
+	dplyr::mutate(pct_complete = n_received / n_expected) |>
+  dplyr::select(
+    c(
+      dplyr::all_of(domain_vars),
+      pct_complete
+    )
+  )
+	
+```
+
+```{r}
+#| label: compose display table for obs by domain
+
+reactable::reactable(
+  data = n_per_domain_df,
+  columns = list(
+    pct_complete = reactable::colDef(
+      cell = reactablefmtr::data_bars(
+        data = n_per_domain_df,
+        max_value = 1,
+        number_fmt = scales::percent,
+        text_position = "outside-base"
+      )
+    )
+  )
+)
+```
+
+### By team
+
+```{r}
+#| label: construct team table
+
+n_per_team_path <- fs::path(params$dir_by_team, "obs_per_team.rds")
+
+n_per_team_expected <- n_per_team_path |>
+	readRDS() |>
+	dplyr::rename(n_expected = Obs)
+
+# create mapping between interview and interviewer
+interview_diagnostic_path <- fs::path(
+  params$dir_data, "interview__diagnostics.dta"
+)
+interviewer_per_interview <- interview_diagnostic_path |>
+	haven::read_dta() |>
+  dplyr::select(
+    interview__id, 
+    interviewer = responsible
+  )
+
+# clean mapping between interviewer and team
+team_composition_path <- fs::path(params$dir_teams, "team_composition.dta")
+
+team_per_interviewer <- team_composition_path |>
+	haven::read_dta() |>
+	dplyr::select(
+    team = SupervisorName,
+    interviewer = UserName
+  )
+
+n_per_team_received <- team_per_interviewer |>
+	dplyr::left_join(
+    interviewer_per_interview,
+    by = "interviewer"
+  ) |>
+	dplyr::group_by(team) |>
+	dplyr::summarise(
+    n_received = dplyr::n()
+  ) |>
+	dplyr::ungroup()
+
+n_per_team_df <- n_per_team_expected |>
+	dplyr::left_join(
+    n_per_team_received,
+    by = "team"
+  ) |>
+	dplyr::mutate(pct_complete = n_received / n_expected) |>
+	dplyr::select(team, pct_complete)
+
+```
+
+```{r}
+#| label: compose display table for obs by team
+
+reactable::reactable(
+  data = n_per_team_df,
+  columns = list(
+    pct_complete = reactable::colDef(
+      cell = reactablefmtr::data_bars(
+        data = n_per_team_df,
+        max_value = 1,
+        number_fmt = scales::percent,
+        text_position = "outside-base"
+      )
+    )
+  )
+)
+```
+
+## Completeness `r fontawesome::fa(name = "list-check")`
+
+```{r}
+#| label: construct domain variable glue expression to populate filter selector
+
+make_glue_template <- function(txt) {
+  paste0("{", txt, "}")
+}
+
+# transform variable names into glue templates
+domain_vars_glue <- purrr::map_chr(
+  .x = domain_vars,
+  .f = ~ make_glue_template(txt = .x)
+)
+
+# construct glue expression by collapsing above
+domain_expr <- glue::glue_collapse(
+  x = domain_vars_glue,
+  sep = " ; "
+)
+
+```
+
+```{r}
+#| label: construct table data
+
+# construct PSU status table
+psu_tbl_df <- hhold_df |>
+  # TODO: see if can push this to the first chunk that creates PSU stats
+  convert_labelled_cols_to_string(cols = psu_computer_vars) |>
+  convert_labelled_cols_to_string(cols = psu_vars_in_mngr_not_pc) |>
+  dplyr::mutate(
+    psu_desc = glue::glue(params$cluster_template_txt)
+  ) |>
+  dplyr::left_join(
+    y = interviewer_per_interview,
+    by = "interview__id"
+  ) |>
+  dplyr::left_join(
+    y = team_per_interviewer,
+    by = "interviewer"
+  ) |>
+	dplyr::group_by(psu_desc, !!!rlang::data_syms(psu_computer_vars), team) |>
+	dplyr::summarize(
+    psu_complete = dplyr::n() >= params$n_per_cluster,
+  ) |>
+  dplyr::ungroup() |>
+  dplyr::mutate(
+    status = dplyr::if_else(
+      condition = psu_complete == TRUE,
+      true = "Complete",
+      false = "In progress"
+    ),
+    domain = glue::glue(domain_expr)
+  ) |>
+  dplyr::select(psu_desc, domain, team, status)
+
+# make data shared between cross-talk widgets
+psu_tbl_df_shared <- crosstalk::SharedData$new(psu_tbl_df)
+
+```
+```{r}
+#| label: compose psu reactable
+
+psu_tbl <- reactable::reactable(
+  data = psu_tbl_df_shared,
+  elementId = "psu_tbl",
+  columns = list(
+    domain = reactable::colDef(show = FALSE)
+  )
+) 
+```
+
+```{ojs}
+//| label: compute PSU stats from filtered data
+//| output: false
+// 👆 to stop outputting `f()` since the cell doesn't resolve to a value
+
+// initialize variables as mutable
+mutable n_obs = 0;
+mutable n_obs_in_progress = 0;
+mutable n_obs_complete = 0;
+
+// each time the reactable table changes state (e.g., sorted, filtered, etc), 
+// update the computed values
+Reactable.onStateChange(
+  "psu_tbl",
+  state => {
+    mutable n_obs = state.sortedData.length;
+    mutable n_obs_in_progress = state.sortedData.filter(d => d.status == "In progress").length;
+    mutable n_obs_complete = state.sortedData.filter(d => d.status == "Complete").length;
+  }
+);
+
+```
+
+```{ojs}
+//| label: compose value box containing PSU stats for filtered data
+
+valueBox = html`<div style="
+  padding: 20px; 
+  background-color:#22572e; 
+  border-radius: 8px; 
+  text-align: center;">
+  <h2 style="margin: 0; font-size: 2em; color: white;">PSUs: ${n_obs}</h2>
+  <br><br>
+  <h3 style="margin: 0; font-size: 2em; color: white;">Started: ${n_obs_in_progress}</h2>
+  <h3 style="margin: 0; font-size: 2em; white;">Completed: ${n_obs_complete}</h2>
+</div>`
+```
+
+```{r}
+#| label: lay out and display filters and table
+
+crosstalk::bscols(
+  widths = c(3, 9),
+  list(
+    crosstalk::filter_select(
+      id = "domain",
+      label = "Domain",
+      sharedData = psu_tbl_df_shared,
+      group = ~ domain,
+      multiple = TRUE
+    ),
+    crosstalk::filter_select(
+      id = "team",
+      label = "Team",
+      sharedData = psu_tbl_df_shared,
+      group = ~ team,
+      multiple = TRUE
+    ),
+    crosstalk::filter_select(
+      id = "status",
+      label = "Status",
+      sharedData = psu_tbl_df_shared,
+      group = ~ status,
+      multiple = FALSE
+    )
+  ),
+  psu_tbl
+)
+```
