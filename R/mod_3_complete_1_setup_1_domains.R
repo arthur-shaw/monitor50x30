@@ -192,6 +192,12 @@ mod_3_complete_1_setup_1_domains_server <- function(id, parent, r6){
           # write R6 to disk
           r6$write()
 
+          # write data to disk for use by report
+          saveRDS(
+            object = r6$obs_per_domain,
+            file = fs::path(r6$dirs$obs_per_domain, "obs_per_domain.rds")
+          )
+
           # signal that domain variables saved
           gargoyle::trigger("save_domains")
 

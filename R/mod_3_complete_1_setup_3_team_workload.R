@@ -121,6 +121,12 @@ mod_3_complete_1_setup_3_team_workload_server <- function(id, parent, r6){
       # write R6 to disk
       r6$write()
 
+      # write data to disk for use by report
+      saveRDS(
+        object = r6$n_per_team,
+        file = fs::path(r6$dirs$obs_per_team, "obs_per_team.rds")
+      )
+
       # signal that workload by team has been set
       gargoyle::trigger("save_workloads")
 
