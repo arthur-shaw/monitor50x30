@@ -1,6 +1,6 @@
 #' Delete all stale data files inside target directory
 #'
-#' Delete files, directories, and files in those directories.
+#' Delete files, sub-directories, and files in those sub-directories.
 #'
 #' @param dir Character. Path to target directory
 #' 
@@ -14,17 +14,17 @@ delete_stale_data <- function(dir) {
   # if folder exists, purge its contents
   if (fs::dir_exists(dir)) {
 
-    # list directories
+    # list sub-directories
     directories <- fs::dir_ls(
       path = dir,
       type = "directory",
       recurse = FALSE
     )
 
-    # remove directories, if they exist
+    # remove sub-directories (and their contents), if they exist
     fs::dir_delete(directories)
 
-    # remove all files
+    # remove all files in directory
     files <- fs::dir_ls(
       path = dir,
       type = "file",
