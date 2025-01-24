@@ -10,7 +10,7 @@
 mod_1_setup_4_template_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
- 
+
     shiny::selectizeInput(
       inputId = ns("qnr_templates"),
       label = "Which template(s)?",
@@ -176,7 +176,7 @@ mod_1_setup_4_template_server <- function(id, parent, r6){
 
   })
 }
-    
+
 ## To be copied in the UI
 # mod_1_setup_4_template_ui("1_setup_4_template_1")
     
