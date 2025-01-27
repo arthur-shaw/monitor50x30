@@ -10,18 +10,20 @@ execute:
   warning: false
 params:
   # paths
-  data_dir: ""
-  qnr_var: ""
+  dir_data: ""
+  dir_teams: ""
+  dir_sync: ""
+  dir_by_domain: ""
+  dir_by_team: ""
+  # main data file
+  main_df_name: ""
   # domains
-  domain_vars_selected: ""
-    # TODO: write data to path
+  domain_vars: ""
   # clusters
   n_clusters: null
   n_per_cluster: null
-  computer_id_vars_selected: null
-  cluster_id_vars_selected: null
-    # note: is a character vector of templated variables: `{description} : {variable}`
-    # need to extract `{variable}` from each element of vector
+  cluster_vars_computer: null
+  cluster_vars_manager: null
   cluster_template_txt: ""
 ---
 

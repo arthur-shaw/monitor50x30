@@ -145,10 +145,22 @@ mod_3_complete_2_report_server <- function(id, parent, r6){
 
       # compose parameter list
       doc_params <- list(
-        proj_dir = r6$app_dir,
-        # TODO: revise after refactoring app directory architecture
-        data_dir = r6$app_dir,
-        main_df_name = r6$qnr_var
+        # paths
+        dir_data = r6$dirs$micro_combine,
+        dir_teams = r6$dirs$team,
+        dir_sync = r6$dirs$sync,
+        dir_by_domain = r6$dirs$obs_per_domain,
+        dir_by_team = r6$dirs$obs_per_team,
+        # main data file
+        main_df_name = r6$qnr_var,
+        # domains
+        domain_vars = r6$domain_vars_selected,
+        # clusters
+        n_clusters = r6$n_clusters,
+        n_per_cluster = r6$n_per_cluster,
+        cluster_vars_computer = r6$computer_id_vars_selected,
+        cluster_vars_manager = r6$manager_id_vars_selected,
+        cluster_template_txt = r6$cluster_template_txt
       )
 
       # render document
