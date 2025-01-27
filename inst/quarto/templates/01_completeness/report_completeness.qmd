@@ -405,44 +405,7 @@ psu_tbl <- reactable::reactable(
     domain = reactable::colDef(show = FALSE)
   )
 ) 
-```
 
-```{ojs}
-//| label: compute PSU stats from filtered data
-//| output: false
-// 👆 to stop outputting `f()` since the cell doesn't resolve to a value
-
-// initialize variables as mutable
-mutable n_obs = 0;
-mutable n_obs_in_progress = 0;
-mutable n_obs_complete = 0;
-
-// each time the reactable table changes state (e.g., sorted, filtered, etc), 
-// update the computed values
-Reactable.onStateChange(
-  "psu_tbl",
-  state => {
-    mutable n_obs = state.sortedData.length;
-    mutable n_obs_in_progress = state.sortedData.filter(d => d.status == "In progress").length;
-    mutable n_obs_complete = state.sortedData.filter(d => d.status == "Complete").length;
-  }
-);
-
-```
-
-```{ojs}
-//| label: compose value box containing PSU stats for filtered data
-
-valueBox = html`<div style="
-  padding: 20px; 
-  background-color:#22572e; 
-  border-radius: 8px; 
-  text-align: center;">
-  <h2 style="margin: 0; font-size: 2em; color: white;">PSUs: ${n_obs}</h2>
-  <br><br>
-  <h3 style="margin: 0; font-size: 2em; color: white;">Started: ${n_obs_in_progress}</h2>
-  <h3 style="margin: 0; font-size: 2em; white;">Completed: ${n_obs_complete}</h2>
-</div>`
 ```
 
 ```{r}
