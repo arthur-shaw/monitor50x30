@@ -160,7 +160,9 @@ mod_3_complete_2_report_server <- function(id, parent, r6){
         n_per_cluster = r6$n_per_cluster,
         cluster_vars_computer = r6$computer_id_vars_selected,
         cluster_vars_manager = r6$manager_id_vars_selected,
-        cluster_template_txt = r6$cluster_template_txt
+        cluster_template_txt = r6$cluster_template_txt,
+        # report scope
+        which_teams = r6$report_teams_selected
       )
 
       # render document

@@ -25,6 +25,8 @@ params:
   cluster_vars_computer: null
   cluster_vars_manager: null
   cluster_template_txt: ""
+  # report scope
+  which_teams: null
 ---
 
 ```{r}
@@ -116,18 +118,83 @@ domain_vars <- extract_var_names(vars = params$domain_vars)
 
 ```
 
+```{r}
+#| label: process data for linking interviews to teams
+
+# create mapping between interview and interviewer
+interview_diagnostic_path <- fs::path(
+  params$dir_data, "interview__diagnostics.dta"
+)
+interviewer_per_interview <- interview_diagnostic_path |>
+	haven::read_dta() |>
+  dplyr::select(
+    interview__id, 
+    interviewer = responsible
+  )
+
+# clean mapping between interviewer and team
+team_composition_path <- fs::path(params$dir_teams, "team_composition.dta")
+
+team_per_interviewer <- team_composition_path |>
+	haven::read_dta() |>
+	dplyr::select(
+    team = SupervisorName,
+    interviewer = UserName
+  )
+```
+
+```{r}
+#| label: filter scope of hhold data to selected teams
+
+# construct path to data
+hhold_df_path <- fs::path(params$dir_data, paste0(params$main_df_name, ".dta"))
+
+# ingest data and add interviewer and team attributes
+hhold_df <- hhold_df_path |>
+  haven::read_dta() |>
+  dplyr::left_join(
+    y = interviewer_per_interview,
+    by = "interview__id"
+  ) |>
+  dplyr::left_join(
+    y = team_per_interviewer,
+    by = "interviewer"
+  )
+
+# filter to selected teams, if not all teams
+if (!params$which_teams %in% "All teams") {
+
+  hhold_df <- hhold_df |>
+    dplyr::filter(team %in% params$which_teams)
+
+}
+
+```
+
 ## Progress `r fontawesome::fa(name = "bars-progress")`
 
 ```{r}
 #| label: compute hhold count
 
-# expected in survey design
-n_hholds_expected <- params$n_clusters * params$n_per_cluster
+# compute the number of households expected differently
+# if all teams, use survey design
+if (params$which_teams == "All teams") {
 
-# received in data
-hhold_df_path <- fs::path(params$dir_data, paste0(params$main_df_name, ".dta"))
-hhold_df <- hhold_df_path |>
-	haven::read_dta()
+  # expected in survey design
+  n_hholds_expected <- params$n_clusters * params$n_per_cluster
+
+# if not all teams, compute as sum of team-level work allocations
+} else if (!params$which_teams %in% "All teams") {
+
+  n_per_team_path <- fs::path(params$dir_by_team, "obs_per_team.rds")
+  
+  n_hholds_expected <- n_per_team_path |>
+    readRDS() |>
+    dplyr::filter(team %in% params$which_teams) |>
+    dplyr::pull(Obs) |>
+    sum(na.rm = TRUE)
+
+}
 
 n_hholds_received <- nrow(hhold_df)
 
@@ -139,6 +206,21 @@ pct_hholds_completed <- n_hholds_completed / n_hholds_expected
 ```{r}
 #| label: compute PSU count
 
+# compute expected PSUs differently depending on teams selected
+# if all teams, use survey design
+if (params$which_teams == "All teams") {
+
+  # number expected comes directly from the survey design parameter
+  n_psu_expected <- params$n_clusters
+
+# if not all teams, infer clusters from sum of work allocations
+} else if (!params$which_teams %in% "All teams") {
+
+  # infer number of clusters by dividing households expected for selected teams
+  # by the number of households per each cluster
+  n_psu_expected <- n_hholds_expected / params$n_per_cluster
+
+}
 
 # received in data
 psu_stats <- hhold_df |>
@@ -146,26 +228,24 @@ psu_stats <- hhold_df |>
   dplyr::mutate(
     psu_desc = glue::glue(params$cluster_template_txt)
   ) |>
-	dplyr::group_by(!!!rlang::data_syms(psu_computer_vars), psu_desc) |>
-	dplyr::summarize(
+  dplyr::group_by(!!!rlang::data_syms(psu_computer_vars), psu_desc) |>
+  dplyr::summarize(
     n_obs_received = dplyr::n(),
     n_obs_missing = params$n_per_cluster - n_obs_received,
     psu_complete = dplyr::n() >= params$n_per_cluster,
     psu_in_progress = dplyr::n() < params$n_per_cluster
   ) |>
-	dplyr::ungroup()
-
-n_psu_expected <- params$n_clusters
+  dplyr::ungroup()
 
 n_psu_received <- nrow(psu_stats)
 
 n_psu_completed <- psu_stats |>
-	dplyr::filter(psu_complete == TRUE) |>
-	nrow()
+  dplyr::filter(psu_complete == TRUE) |>
+  nrow()
 
 n_psu_in_progress <- psu_stats |>
-	dplyr::filter(psu_in_progress == TRUE) |>
-	nrow()
+  dplyr::filter(psu_in_progress == TRUE) |>
+  nrow()
 
 pct_psu_completed <- n_psu_completed / n_psu_expected
 ```
@@ -209,10 +289,16 @@ bslib::value_box(
 
 :::
 
-### By domain
+```{r}
+#| label: by domain header
+#| eval: !expr params$which_teams == "All teams"
+#| output: asis
+cat("### By domain")
+```
 
 ```{r}
 #| label: constuct domain table
+#| eval: !expr params$which_teams == "All teams"
 
 # domains expected
 n_per_domain_path <- fs::path(params$dir_by_domain, "obs_per_domain.rds")
@@ -247,6 +333,7 @@ n_per_domain_df <- n_per_domain_expected_df |>
 
 ```{r}
 #| label: compose display table for obs by domain
+#| eval: !expr params$which_teams == "All teams"
 
 reactable::reactable(
   data = n_per_domain_df,
@@ -274,27 +361,6 @@ n_per_team_expected <- n_per_team_path |>
 	readRDS() |>
 	dplyr::rename(n_expected = Obs)
 
-# create mapping between interview and interviewer
-interview_diagnostic_path <- fs::path(
-  params$dir_data, "interview__diagnostics.dta"
-)
-interviewer_per_interview <- interview_diagnostic_path |>
-	haven::read_dta() |>
-  dplyr::select(
-    interview__id, 
-    interviewer = responsible
-  )
-
-# clean mapping between interviewer and team
-team_composition_path <- fs::path(params$dir_teams, "team_composition.dta")
-
-team_per_interviewer <- team_composition_path |>
-	haven::read_dta() |>
-	dplyr::select(
-    team = SupervisorName,
-    interviewer = UserName
-  )
-
 n_per_team_received <- team_per_interviewer |>
 	dplyr::left_join(
     interviewer_per_interview,
@@ -314,6 +380,14 @@ n_per_team_df <- n_per_team_expected |>
 	dplyr::mutate(pct_complete = n_received / n_expected) |>
 	dplyr::select(team, pct_complete)
 
+# filter by-team to the teams of interest, if applicable
+if (!params$which_teams %in% "All teams") {
+
+  n_per_team_df <- n_per_team_df |>
+    dplyr::filter(team %in% params$which_teams)
+
+}
+
 ```
 
 ```{r}
@@ -332,6 +406,7 @@ reactable::reactable(
     )
   )
 )
+
 ```
 
 ## Completeness `r fontawesome::fa(name = "list-check")`
@@ -367,14 +442,6 @@ psu_tbl_df <- hhold_df |>
   convert_labelled_cols_to_string(cols = psu_vars_in_mngr_not_pc) |>
   dplyr::mutate(
     psu_desc = glue::glue(params$cluster_template_txt)
-  ) |>
-  dplyr::left_join(
-    y = interviewer_per_interview,
-    by = "interview__id"
-  ) |>
-  dplyr::left_join(
-    y = team_per_interviewer,
-    by = "interviewer"
   ) |>
 	dplyr::group_by(psu_desc, !!!rlang::data_syms(psu_computer_vars), team) |>
 	dplyr::summarize(
