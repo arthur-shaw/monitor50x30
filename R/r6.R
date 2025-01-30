@@ -68,8 +68,36 @@
 #' settings saved.
 #' @field report_teams Character vector. Teams extracted from the team
 #' composition file
-#' @field report_teams_selected Character vector. Team(s) selected for report
+# ' @field report_teams_selected Character vector. Team(s) selected for report
 #' production.
+#' @field use_parcels_per_hhold Boolean. Whether use plots per household table.
+#' @field use_parcel_gps Boolean. Whether use parcel GPS measurement table.
+#' @field use_plots_per_parcel Boolean. Whether to use plots per parcel table.
+#' @field use_plot_use Boolean. Whether to use plot use table.
+#' @field use_plot_gps Boolean. Whether to use plot GPS measurement table.
+#' @field use_crops_per_plot Boolean. Whether to use crops per plot table.
+#' @field use_crop_types Boolean. Whether to use crop types table.
+#' @field use_temp_crop_harvest Boolean. Whether to use crop harvest table.
+#' @field use_temp_crop_sales Boolean. Whether to use crop sales table.
+#' @field use_perm_crop_harvest Boolean. Whether use crop permanent harvest
+#' table.
+#' @field use_perm_crop_sales Boolean. Whether to use crop permanent sales
+#' table.
+#' @field use_livestock_owership Boolean. Whether to use livestock ownership
+#' table.
+#' @field use_cow_displacement Boolean. Whether to use cow displacement
+#' table.
+#' @field use_hen_displacement Boolean. Whether to use hen displacement table.
+#' @field use_anim_prod_sales Boolean. Whether to use animal product sales
+#' table.
+#' @field use_other_prod_sales Boolean. Whether to use other animal product
+#' sales table.
+#' @field use_process_crop_prod Boolean. Whether to use processing crop
+#' production table.
+#' @field use_crop_labor Boolean. Whether to use crop labor table.
+#' @field use_livestock_labor_tbl Boolean. Whether to use livestock labor table.
+#' @field use_sector_labor Boolean. Whether to use sector labor table.
+#' @field use_income_sources Boolean. Whether to use income sources table.
 #'
 #' @importFrom R6 R6Class
 #' @importFrom fs path
@@ -145,8 +173,31 @@ r6 <- R6::R6Class(
     n_per_team = NULL,
     team_workload_provided = NULL,
     completeness_settings_saved = NULL,
+    # report parameters
     report_teams = NULL,
     report_teams_selected = NULL,
+    # tables selected
+    use_parcels_per_hhold = NULL,
+    use_parcel_gps = NULL,
+    use_plots_per_parcel = NULL,
+    use_plot_use = NULL,
+    use_plot_gps = NULL,
+    use_crops_per_plot = NULL,
+    use_crop_types = NULL,
+    use_temp_crop_harvest = NULL,
+    use_temp_crop_sales = NULL,
+    use_perm_crop_harvest = NULL,
+    use_perm_crop_sales = NULL,
+    use_livestock_owership = NULL,
+    use_cow_displacement = NULL,
+    use_hen_displacement = NULL,
+    use_anim_prod_sales = NULL,
+    use_other_prod_sales = NULL,
+    use_process_crop_prod = NULL,
+    use_crop_labor = NULL,
+    use_livestock_labor_tbl = NULL,
+    use_sector_labor = NULL,
+    use_income_sources = NULL,
 
     # ==========================================================================
     # Methods
@@ -264,6 +315,38 @@ r6 <- R6::R6Class(
     #' composition file
     #' @param report_teams_selected Character vector. Team(s) selected for
     #' report production.
+    #' @param use_parcels_per_hhold Boolean. Whether use plots per household
+    #' table.
+    #' @param use_parcels_gps Boolean. Whether use parcel GPS measurement table.
+    #' @param use_plots_per_parcel Boolean. Whether to use plots per parcel
+    #' table.
+    #' @param use_plot_use Boolean. Whether to use plot use table.
+    #' @param use_plot_gps Boolean. Whether to use plot GPS measurement table.
+    #' @param use_crops_per_plot Boolean. Whether to use crops per plot table.
+    #' @param use_crop_types Boolean. Whether to use crop types table.
+    #' @param use_temp_crop_harvest Boolean. Whether to use crop harvest table.
+    #' @param use_temp_crop_sales Boolean. Whether to use crop sales table.
+    #' @param use_perm_crop_harvest Boolean. Whether use permanent crop harvest
+    #' table.
+    #' @param use_perm_crop_sales Boolean. Whether to use crop permanent sales
+    #' table.
+    #' @param use_livestock_owership Boolean. Whether to use livestock ownership
+    #' table.
+    #' @param use_cow_displacement Boolean. Whether to use cow displacement
+    #' table.
+    #' @param use_hen_displacement Boolean. Whether to use hen displacement
+    #' table.
+    #' @param use_anim_prod_sales Boolean. Whether to use animal product sales
+    #' table.
+    #' @param use_other_prod_sales Boolean. Whether to use other animal product
+    #' sales table.
+    #' @param use_process_crop_prod Boolean. Whether to use processing crop
+    #' production table.
+    #' @param use_crop_labor Boolean. Whether to use crop labor table.
+    #' @param use_livestock_labor_tbl Boolean. Whether to use livestock labor
+    #' @param use_sector_labor Boolean. Whether to use sector labor table.
+    #' @param use_income_sources Boolean. Whether to use income sources table.
+    #' table.
     #'
     #' @noRd
     update = function(
@@ -330,7 +413,29 @@ r6 <- R6::R6Class(
       completeness_settings_saved = NULL,
       # report parameters
       report_teams = NULL,
-      report_teams_selected = NULL
+      report_teams_selected = NULL,
+      # tables selected
+      use_parcels_per_hhold = NULL,
+      use_parcel_gps = NULL,
+      use_plots_per_parcel = NULL,
+      use_plot_use = NULL,
+      use_plot_gps = NULL,
+      use_crops_per_plot = NULL,
+      use_crop_types = NULL,
+      use_temp_crop_harvest = NULL,
+      use_temp_crop_sales = NULL,
+      use_perm_crop_harvest = NULL,
+      use_perm_crop_sales = NULL,
+      use_livestock_owership = NULL,
+      use_cow_displacement = NULL,
+      use_hen_displacement = NULL,
+      use_anim_prod_sales = NULL,
+      use_other_prod_sales = NULL,
+      use_process_crop_prod = NULL,
+      use_crop_labor = NULL,
+      use_livestock_labor_tbl = NULL,
+      use_sector_labor = NULL,
+      use_income_sources = NULL
 
     ) {
 
