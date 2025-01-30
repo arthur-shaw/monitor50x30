@@ -59,6 +59,12 @@ golem::add_module(name = "3_complete_2_report")
 
 
 golem::add_module(name = "4_quality")
+golem::add_module(name = "4_quality_1_setup")
+golem::add_module(name = "4_quality_1_setup_1_tables")
+golem::add_module(name = "4_quality_1_setup_1_tables_details")
+golem::add_module(name = "4_quality_1_setup_2_data")
+golem::add_module(name = "4_quality_1_setup_3_interviews")
+golem::add_module(name = "4_quality_2_report")
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*
