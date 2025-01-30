@@ -13,6 +13,7 @@ app_server <- function(input, output, session) {
   dirs <- create_app_file_system(app_dir = app_dir)
 
   # initialize R6 object
+  # setting directories so that r6's read and write methods have a target path
   r6 <- r6$new()
   r6$app_dir <- app_dir
   r6$dirs <- dirs
