@@ -16,8 +16,8 @@ mod_1_setup_5_visit_ui <- function(id){
       label = "How many visits to the household?",
       choices = c(
         "1",
-        "2",
-        "3"
+        "2"
+        # "3"
       ),
       selected = NULL,
       multiple = FALSE
@@ -28,10 +28,10 @@ mod_1_setup_5_visit_ui <- function(id){
       choices = c(
         "Single visit",
         "Post-planting",
-        "Post-harvest",
-        "Post-planting for 1st season",
-        "Post-harvest for 1st season/post-planting for 2nd season",
-        "Post-harvest for 2nd season"
+        "Post-harvest"
+        # "Post-planting for 1st season",
+        # "Post-harvest for 1st season/post-planting for 2nd season",
+        # "Post-harvest for 2nd season"
       ),
       selected = NULL,
       multiple = FALSE
