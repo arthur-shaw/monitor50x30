@@ -25,7 +25,8 @@ mod_4_quality_1_setup_1_tables_details_ui <- function(id) {
 #' @noRd 
 mod_4_quality_1_setup_1_tables_details_server <- function(
   id, parent, r6,
-  show,
+  show = FALSE,
+  remove = FALSE,
   tbl_id,
   tbl_desc
 ) {
@@ -42,6 +43,18 @@ mod_4_quality_1_setup_1_tables_details_server <- function(
       # draw UI and update it to stored value, if relevant
       # ------------------------------------------------------------------------
 
+      # compose names of R6 field based on `tbl_id`
+      # avoids recomputation of the same in a few places
+      r6_field_name <- glue::glue("use_{tbl_id}")
+
+      # extract value of switch to the value stored in R6
+      # if no value found, default to `FALSE`
+      switch_value <- ifelse(
+        test = !is.null(r6[[r6_field_name]]),
+        yes = r6[[r6_field_name]],
+        no = FALSE
+      )
+
       shiny::insertUI(
         # construct selector of element relative to which to inject
         # concatenate `#` and namespaced element ID
@@ -50,25 +63,24 @@ mod_4_quality_1_setup_1_tables_details_server <- function(
         ),
         where = "afterEnd",
         ui = shiny::tagList(
-          bslib::layout_columns(
-            bslib::input_switch(
-              id = ns("use"),
-              label = glue::glue("Use {tbl_desc} table"),
-              # set the switch to the value stored in R6
-              # if no value found, default to `FALSE`
-              value = ifelse(
-                test = !is.null(r6[[glue::glue("use_{tbl_id}")]]),
-                yes = r6[[glue::glue("use_{tbl_id}")]],
-                no = FALSE
-              )
-            ),
-            shiny::actionButton(
-              inputId = ns("describe"),
-              label = "Describe"
-            ),
-            # since the area is 75% of Bootstrap's 12 points
-            # allocate within the 9 points available for the sidebar
-            col_widths = c(7, 2)
+          # to make it easy to select and remove UI, wrap all inserted UI
+          # in a div with a (namespaced) ID that `removeUI` can select
+          htmltools::div(
+            id = ns("inserted_ui"),
+            bslib::layout_columns(
+              bslib::input_switch(
+                id = ns("use"),
+                label = glue::glue("Use {tbl_desc} table"),
+                value = switch_value,
+              ),
+              shiny::actionButton(
+                inputId = ns("describe"),
+                label = "Describe"
+              ),
+              # since the area is 75% of Bootstrap's 12 points
+              # allocate within the 9 points available for the sidebar
+              col_widths = c(7, 2)
+            )
           )
         )
       )
@@ -106,6 +118,31 @@ mod_4_quality_1_setup_1_tables_details_server <- function(
         )
 
       })
+
+    } else if (remove == TRUE) {
+
+      # remove UI elements
+      # first, the reference element relative to which the UI is inserted
+      shiny::removeUI(
+        selector = paste0(
+          "#", ns("insert_reference")
+        )
+      )
+      # then, the div that contains all inserted UI
+      shiny::removeUI(
+        selector = paste0(
+          "#", ns("inserted_ui")
+        )
+      )
+
+      # reset associated r6 field, if not already `NULL`
+      # this avoids needless write operations
+      if (!is.null(
+        r6[[glue::glue("use_{tbl_id}")]]
+      )) {
+        r6[[glue::glue("use_{tbl_id}")]] <- NULL
+        r6$write()
+      }
 
     }
 
