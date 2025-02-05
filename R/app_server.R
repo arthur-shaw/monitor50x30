@@ -55,6 +55,8 @@ app_server <- function(input, output, session) {
   gargoyle::init("save_clusters")
   gargoyle::init("save_workloads")
   gargoyle::init("save_completeness_setup")
+  # quality
+  gargoyle::init("save_tables")
 
   # load module server logic
   mod_1_setup_server("1_setup_1", r6 = r6)
