@@ -229,7 +229,7 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
         show = TRUE,
         remove = FALSE,
         tbl_id = "process_crop_prod",
-        tbl_desc = "crop processing"
+        tbl_desc = "processing of crop production"
       ),
       crop_labor = list(
         id = "4_quality_1_setup_1_tables_details_crop_labor",
