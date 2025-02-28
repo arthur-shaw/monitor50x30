@@ -112,7 +112,11 @@ mod_4_quality_1_setup_1_tables_details_server <- function(
         shiny::showModal(
           shiny::modalDialog(
             title = stringr::str_to_sentence(tbl_desc),
-            "some content",
+            shiny::tags$img(
+              src = glue::glue("www/{tbl_id}.png"),
+              style = "max-width: 90%; height: auto;"
+            ),
+            size = "xl",
             footer = shiny::modalButton("Close")
           )
         )
