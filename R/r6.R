@@ -88,7 +88,9 @@
 #' @field use_cow_displacement Boolean. Whether to use cow displacement
 #' table.
 #' @field use_hen_displacement Boolean. Whether to use hen displacement table.
-#' @field use_anim_prod_sales Boolean. Whether to use animal product sales
+#' @field use_milk_prod_sales Boolean. Whether to use mlik production and sales
+#' table.
+#' @field use_egg_prod_sales Boolean. Whether to use eggs production and sales
 #' table.
 #' @field use_fisheries_prod_sales Boolean. Whether to use fisheries product
 #' sales table.
@@ -195,7 +197,8 @@ r6 <- R6::R6Class(
     use_livestock_owership = NULL,
     use_cow_displacement = NULL,
     use_hen_displacement = NULL,
-    use_anim_prod_sales = NULL,
+    use_milk_prod_sales = NULL,
+    use_egg_prod_sales = NULL,
     use_fisheries_prod_sales = NULL,
     use_aquaculture_prod_sales = NULL,
     use_forestry_prod_sales = NULL,
@@ -342,8 +345,10 @@ r6 <- R6::R6Class(
     #' table.
     #' @param use_hen_displacement Boolean. Whether to use hen displacement
     #' table.
-    #' @param use_anim_prod_sales Boolean. Whether to use animal product sales
-    #' table.
+    #' @param use_milk_prod_sales Boolean. Whether to use mlik production and
+    #' sales table.
+    #' @param use_egg_prod_sales Boolean. Whether to use eggs production and
+    #' sales table.
     #' @param use_fisheries_prod_sales Boolean. Whether to use fisheries product
     #' sales table.
     #' @param use_aquaculture_prod_sales Boolean. Whether to use aquaculture
@@ -439,7 +444,8 @@ r6 <- R6::R6Class(
       use_livestock_owership = NULL,
       use_cow_displacement = NULL,
       use_hen_displacement = NULL,
-      use_anim_prod_sales = NULL,
+      use_milk_prod_sales = NULL,
+      use_egg_prod_sales = NULL,
       use_fisheries_prod_sales = NULL,
       use_aquaculture_prod_sales = NULL,
       use_forestry_prod_sales = NULL,
