@@ -56,3 +56,5 @@ Remotes:
     github::arthur-shaw/susoapi,
     github::arthur-shaw/susoflows,
     github::lsms-worldbank/susometa
+Suggests: 
+    webshot2
