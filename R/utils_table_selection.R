@@ -62,14 +62,18 @@ set_tbls_to_remove <- function(
   names
 ) {
 
-  tbls_mod <- purrr::imap(
+  tbls_mod <- purrr::map_at(
     .x = tbls,
-    .f = function(x, name) {
-      if (x$id %in% names) {
-        x$show <- FALSE
-        x$remove <- TRUE
-      }
+    .at = ~ .x %in% names,
+    .f = \(x) {
+
+      # modify show and remove elements in place
+      x$show <- FALSE
+      x$remove <- TRUE
+
+      # return modified object
       return(x)
+
     }
   )
 
