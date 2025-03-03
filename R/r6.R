@@ -102,7 +102,9 @@
 #' production table.
 #' @field use_crop_labor Boolean. Whether to use crop labor table.
 #' @field use_livestock_labor_tbl Boolean. Whether to use livestock labor table.
-#' @field use_sector_labor Boolean. Whether to use sector labor table.
+#' @field use_fisheries_labor Boolean. Whether to use fisheries labor table.
+#' @field use_aquaculture_labor Boolean. Whether to use aquaculture labor table.
+#' @field use_forestry_labor Boolean. Whether to use forestry labor table.
 #' @field use_income_sources Boolean. Whether to use income sources table.
 #'
 #' @importFrom R6 R6Class
@@ -205,7 +207,9 @@ r6 <- R6::R6Class(
     use_process_crop_prod = NULL,
     use_crop_labor = NULL,
     use_livestock_labor_tbl = NULL,
-    use_sector_labor = NULL,
+    use_fisheries_labor = NULL,
+    use_aquaculture_labor = NULL,
+    use_forestry_labor = NULL,
     use_income_sources = NULL,
 
     # ==========================================================================
@@ -359,7 +363,10 @@ r6 <- R6::R6Class(
     #' production table.
     #' @param use_crop_labor Boolean. Whether to use crop labor table.
     #' @param use_livestock_labor_tbl Boolean. Whether to use livestock labor
-    #' @param use_sector_labor Boolean. Whether to use sector labor table.
+    #' @param use_fisheries_labor Boolean. Whether to use fisheries labor table.
+    #' @param use_aquaculture_labor Boolean. Whether to use aquaculture labor
+    #' table.
+    #' @param use_forestry_labor Boolean. Whether to use forestry labor table.
     #' @param use_income_sources Boolean. Whether to use income sources table.
     #' table.
     #'
@@ -452,7 +459,9 @@ r6 <- R6::R6Class(
       use_process_crop_prod = NULL,
       use_crop_labor = NULL,
       use_livestock_labor_tbl = NULL,
-      use_sector_labor = NULL,
+      use_fisheries_labor = NULL,
+      use_aquaculture_labor = NULL,
+      use_forestry_labor = NULL,
       use_income_sources = NULL
 
     ) {

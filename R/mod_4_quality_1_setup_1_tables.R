@@ -83,7 +83,13 @@ mod_4_quality_1_setup_1_tables_ui <- function(id) {
       id = ns("4_quality_1_setup_1_tables_details_livestock_labor_tbl")
     ),
     mod_4_quality_1_setup_1_tables_details_ui(
-      id = ns("4_quality_1_setup_1_tables_details_sector_labor")
+      id = ns("4_quality_1_setup_1_tables_details_fisheries_labor")
+    ),
+    mod_4_quality_1_setup_1_tables_details_ui(
+      id = ns("4_quality_1_setup_1_tables_details_aquaculture_labor")
+    ),
+    mod_4_quality_1_setup_1_tables_details_ui(
+      id = ns("4_quality_1_setup_1_tables_details_forestry_labor")
     ),
     mod_4_quality_1_setup_1_tables_details_ui(
       id = ns("4_quality_1_setup_1_tables_details_income_sources")
@@ -275,12 +281,26 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
         tbl_id = "livestock_labor_tbl",
         tbl_desc = "livestock labor"
       ),
-      sector_labor = list(
-        id = "4_quality_1_setup_1_tables_details_sector_labor",
+      fisheries_labor = list(
+        id = "4_quality_1_setup_1_tables_details_fisheries_labor",
         show = TRUE,
         remove = FALSE,
-        tbl_id = "sector_labor",
-        tbl_desc = "sector labor"
+        tbl_id = "fisheries_labor",
+        tbl_desc = "fisheries labor"
+      ),
+      aquaculture_labor = list(
+        id = "4_quality_1_setup_1_tables_details_aquaculture_labor",
+        show = TRUE,
+        remove = FALSE,
+        tbl_id = "aquaculture_labor",
+        tbl_desc = "aquaculture labor"
+      ),
+      forestry_labor = list(
+        id = "4_quality_1_setup_1_tables_details_forestry_labor",
+        show = TRUE,
+        remove = FALSE,
+        tbl_id = "forestry_labor",
+        tbl_desc = "forestry labor"
       ),
       income_sources = list(
         id = "4_quality_1_setup_1_tables_details_income_sources",
@@ -321,7 +341,8 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
     core_ag_2v_ph <- set_tbls_to_remove(
       tbls = ph_tlbs,
       names = c(
-        "process_crop_prod", "crop_labor", "livestock_labor_tbl", "sector_labor"
+        "process_crop_prod", "crop_labor", "livestock_labor_tbl",
+        "fisheries_labor", "aquaculture_labor", "forestry_labor"
       )
     )
 
@@ -336,14 +357,19 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
         "milk_prod_sales", "eggs_prod_sales",
         "fisheries_prod_sales", "aquaculture_prod_sales", "forestry_prod_sales",
         "process_crop_prod",
-        "crop_labor", "livestock_labor_tbl", "sector_labor", "income_sources"
+        "crop_labor", "livestock_labor_tbl",
+        "fisheries_labor", "aquaculture_labor", "forestry_labor",
+        "income_sources"
       )
     )
 
     ilp_2v_ph <- ph_tlbs
     ilp_1v_ph <- set_tbls_to_remove(
       tbls = ph_tlbs,
-      names = c("crop_labor", "livestock_labor_tbl", "sector_labor")
+      names = c(
+        "crop_labor", "livestock_labor_tbl",
+        "fisheries_labor", "aquaculture_labor", "forestry_labor"
+      )
     )
     pme_2v_ph <- ilp_1v_ph
 
