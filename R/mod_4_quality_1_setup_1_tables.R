@@ -119,7 +119,7 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
     # post-planting tables
     # --------------------------------------------------------------------------
 
-    pp_tlbs <- list(
+    pp_tbls <- list(
       parcels_per_hhold = list(
         id = "4_quality_1_setup_1_tables_details_parcels_per_hhold",
         show = TRUE,
@@ -175,7 +175,7 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
     # post-harvest tables
     # --------------------------------------------------------------------------
 
-    ph_tlbs <- list(
+    ph_tbls <- list(
       temp_crop_harvest = list(
         id = "4_quality_1_setup_1_tables_details_temp_crop_harvest",
         show = TRUE,
@@ -316,45 +316,60 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
     # ==========================================================================
 
     # --------------------------------------------------------------------------
+    # all tables
+    # --------------------------------------------------------------------------
+
+    all_tbls <- c(pp_tbls, ph_tbls)
+
+    # --------------------------------------------------------------------------
     # post-planting
     # --------------------------------------------------------------------------
 
-    core_ag_2v_pp <- pp_tlbs
-    core_ag_1v_hh_pp <- pp_tlbs
-    ilp_2v_pp <- pp_tlbs
-    pme_2v_pp <- pp_tlbs
-
-    core_ag_1v_non_hh_pp <- set_tbls_to_remove(
-      tbls = pp_tlbs,
-      names = c("parcels_per_hhold", "parcel_gps")
+    # create a table list where all PP tables are shown and all PH ones removed
+    pp_visit_tbls <- set_tbls_to_remove(
+      tbls = all_tbls,
+      names = names(ph_tbls)
     )
 
-    ilp_1v_pp <- set_tbls_to_remove(
-      tbls = pp_tlbs,
-      names = c("parcels_per_hhold", "parcel_gps", "plot_gps")
+    # define tables for questionnaires that use all PP tables
+    core_ag_2v_pp <- pp_visit_tbls
+    ilp_2v_pp <- pp_visit_tbls
+    pme_2v_pp <- pp_visit_tbls
+
+    # create CORE-AG 1-visit from all PP tables and remove a few
+    core_ag_1v_non_hh_pp <- set_tbls_to_remove(
+      tbls = pp_visit_tbls,
+      names = c("parcels_per_hhold", "parcel_gps")
     )
 
     # --------------------------------------------------------------------------
     # post-harvest
     # --------------------------------------------------------------------------
 
-    core_ag_2v_ph <- set_tbls_to_remove(
-      tbls = ph_tlbs,
-      names = c(
+    # create a table list where all PH tables are shown and all PP ones removed
+    ph_visit_tbls <- set_tbls_to_remove(
+      tbls = all_tbls,
+      names = names(pp_tbls)
+    )
+
+    # specify tables to remove for 2-visit CORE-AG
+    # shared by 1-visit CORE-AG variants
+    core_ag_2v_to_remove <- c(
         "process_crop_prod", "crop_labor", "livestock_labor_tbl",
         "fisheries_labor", "aquaculture_labor", "forestry_labor"
       )
+
+    core_ag_2v_ph <- set_tbls_to_remove(
+      tbls = ph_visit_tbls,
+      names = core_ag_2v_to_remove
     )
 
-    core_ag_1v_hh_ph <- core_ag_2v_ph
-    core_ag_1v_non_hh_ph <- core_ag_2v_ph
-
     core_ag_minor <- set_tbls_to_remove(
-      tbls = ph_tlbs,
+      tbls = ph_visit_tbls,
       names = c(
         "perm_crop_harvest", "perm_crop_sales", "livestock_ownership",
         "cow_displacement", "hen_displacement",
-        "milk_prod_sales", "eggs_prod_sales",
+        "milk_prod_sales", "egg_prod_sales",
         "fisheries_prod_sales", "aquaculture_prod_sales", "forestry_prod_sales",
         "process_crop_prod",
         "crop_labor", "livestock_labor_tbl",
@@ -363,28 +378,61 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
       )
     )
 
-    ilp_2v_ph <- ph_tlbs
-    ilp_1v_ph <- set_tbls_to_remove(
-      tbls = ph_tlbs,
-      names = c(
+    ilp_2v_ph <- ph_visit_tbls
+
+    # specify tables to remove for ILP 1-visit
+    # shared by PME and MEA
+    ilp_1v_ph_to_remove <- c(
         "crop_labor", "livestock_labor_tbl",
         "fisheries_labor", "aquaculture_labor", "forestry_labor"
       )
+
+    pme_2v_ph <- set_tbls_to_remove(
+      tbls = ph_visit_tbls,
+      names = ilp_1v_ph_to_remove
     )
-    pme_2v_ph <- ilp_1v_ph
 
     mea_2v_ph <- set_tbls_to_remove(
-      tbls = ilp_1v_ph,
+      tbls = pme_2v_ph,
       names = "process_crop_prod"
     )
 
     # --------------------------------------------------------------------------
-    # combine post-planting and post-harvest lists of single-visit cases
+    # single-visit
     # --------------------------------------------------------------------------
 
-    core_ag_1v_hh <- c(core_ag_1v_hh_pp, core_ag_1v_hh_ph)
-    core_ag_1v_non_hh <- c(core_ag_1v_non_hh_pp, core_ag_1v_non_hh_ph)
-    ilp_1v <- c(ilp_1v_pp, ilp_1v_ph)
+    core_ag_1v_hh <- set_tbls_to_remove(
+      tbls = all_tbls,
+      names = c(
+        # remove from PP
+        # none
+        # remove from PH
+        "process_crop_prod", "crop_labor", "livestock_labor_tbl",
+        "fisheries_labor", "aquaculture_labor", "forestry_labor"
+      )
+    )
+
+    core_ag_1v_non_hh <- set_tbls_to_remove(
+      tbls = all_tbls,
+      names = c(
+        # remove from PP
+        "parcels_per_hhold", "parcel_gps",
+        # remove from PH
+        "process_crop_prod", "crop_labor", "livestock_labor_tbl",
+        "fisheries_labor", "aquaculture_labor", "forestry_labor"
+      )
+    )
+
+    # create ILP 1-visit from all PP tables and remove a few
+    ilp_1v <- set_tbls_to_remove(
+      tbls = all_tbls,
+      names = c(
+        # remove from PP
+        "parcels_per_hhold", "parcel_gps", "plot_gps",
+        # remove from PH
+        ilp_1v_ph_to_remove
+      )
+    )
 
     # ==========================================================================
     # initialize page, by loading server logic of relevant child modules
