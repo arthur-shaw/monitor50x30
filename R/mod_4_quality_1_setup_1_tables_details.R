@@ -70,7 +70,7 @@ mod_4_quality_1_setup_1_tables_details_server <- function(
             bslib::layout_columns(
               bslib::input_switch(
                 id = ns("use"),
-                label = glue::glue("Use {tbl_desc} table"),
+                label = glue::glue("{tbl_desc} table"),
                 value = switch_value,
               ),
               shiny::actionButton(
