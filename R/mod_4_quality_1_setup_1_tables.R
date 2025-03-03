@@ -477,14 +477,17 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
 
         if (r6$svy_current_visit == "Post-planting") {
 
+          shiny::req(ilp_2v_pp)
           set_table_choices(tbls = ilp_2v_pp, session = session, r6 = r6)
 
         } else if (r6$svy_current_visit == "Post-harvest") {
 
+          shiny::req(ilp_2v_ph)
           set_table_choices(tbls = ilp_2v_ph, session = session, r6 = r6)
 
         } else if (r6$svy_current_visit == "Single visit") {
 
+          shiny::req(ilp_1v)
           set_table_choices(tbls = ilp_1v, session = session, r6 = r6)
 
         }
@@ -527,6 +530,14 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
 
     gargoyle::on("save_settings", {
 
+      # parameters
+      shiny::req(r6$qnr_templates)
+      shiny::req(r6$svy_current_visit)
+
+      # calcultations of table specs
+      shiny::req(pp_tbls)
+      shiny::req(ph_tbls)
+
       # -----------------------------------------------------------------------
       # CORE-AG
       # -----------------------------------------------------------------------
@@ -537,16 +548,19 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
   # when done, disable parcels_per_hhold and parcel_gps
         if (r6$svy_current_visit == "Single visit") {
 
+          shiny::req(core_ag_1v_hh)
           set_table_choices(tbls = core_ag_1v_hh, session = session, r6 = r6)
 
         }
 
         if (r6$svy_current_visit == "Post-planting") {
 
+          shiny::req(core_ag_2v_pp)
           set_table_choices(tbls = core_ag_2v_pp, session = session, r6 = r6)
 
         } else if (r6$svy_current_visit == "Post-harvest") {
 
+          shiny::req(core_ag_2v_ph)
           set_table_choices(tbls = core_ag_2v_ph, session = session, r6 = r6)
 
         }
@@ -561,14 +575,17 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
 
         if (r6$svy_current_visit == "Post-planting") {
 
+          shiny::req(ilp_2v_pp)
           set_table_choices(tbls = ilp_2v_pp, session = session, r6 = r6)
 
         } else if (r6$svy_current_visit == "Post-harvest") {
 
+          shiny::req(ilp_2v_ph)
           set_table_choices(tbls = ilp_2v_ph, session = session, r6 = r6)
 
         } else if (r6$svy_current_visit == "Single visit") {
 
+          shiny::req(ilp_1v)
           set_table_choices(tbls = ilp_1v, session = session, r6 = r6)
 
         }
@@ -583,10 +600,12 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
 
         if (r6$svy_current_visit == "Post-planting") {
 
+          shiny::req(pme_2v_pp)
           set_table_choices(tbls = pme_2v_pp, session = session, r6 = r6)
 
         } else if (r6$svy_current_visit == "Post-harvest") {
 
+          shiny::req(pme_2v_ph)
           set_table_choices(tbls = pme_2v_ph, session = session, r6 = r6)
 
         }
@@ -599,6 +618,7 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
 
       if (r6$qnr_templates == "MEA") {
 
+        shiny::req(mea_2v_ph)
         set_table_choices(tbls = mea_2v_ph, session = session, r6 = r6)
 
       }
