@@ -90,7 +90,11 @@
 #' @field use_hen_displacement Boolean. Whether to use hen displacement table.
 #' @field use_anim_prod_sales Boolean. Whether to use animal product sales
 #' table.
-#' @field use_other_prod_sales Boolean. Whether to use other animal product
+#' @field use_fisheries_prod_sales Boolean. Whether to use fisheries product
+#' sales table.
+#' @field use_aquaculture_prod_sales Boolean. Whether to use aquaculture product
+#' sales table.
+#' @field use_forestry_prod_sales Boolean. Whether to use forestry product
 #' sales table.
 #' @field use_process_crop_prod Boolean. Whether to use processing crop
 #' production table.
@@ -192,7 +196,9 @@ r6 <- R6::R6Class(
     use_cow_displacement = NULL,
     use_hen_displacement = NULL,
     use_anim_prod_sales = NULL,
-    use_other_prod_sales = NULL,
+    use_fisheries_prod_sales = NULL,
+    use_aquaculture_prod_sales = NULL,
+    use_forestry_prod_sales = NULL,
     use_process_crop_prod = NULL,
     use_crop_labor = NULL,
     use_livestock_labor_tbl = NULL,
@@ -338,7 +344,11 @@ r6 <- R6::R6Class(
     #' table.
     #' @param use_anim_prod_sales Boolean. Whether to use animal product sales
     #' table.
-    #' @param use_other_prod_sales Boolean. Whether to use other animal product
+    #' @param use_fisheries_prod_sales Boolean. Whether to use fisheries product
+    #' sales table.
+    #' @param use_aquaculture_prod_sales Boolean. Whether to use aquaculture
+    #' product sales table.
+    #' @param use_forestry_prod_sales Boolean. Whether to use forestry product
     #' sales table.
     #' @param use_process_crop_prod Boolean. Whether to use processing crop
     #' production table.
@@ -430,7 +440,9 @@ r6 <- R6::R6Class(
       use_cow_displacement = NULL,
       use_hen_displacement = NULL,
       use_anim_prod_sales = NULL,
-      use_other_prod_sales = NULL,
+      use_fisheries_prod_sales = NULL,
+      use_aquaculture_prod_sales = NULL,
+      use_forestry_prod_sales = NULL,
       use_process_crop_prod = NULL,
       use_crop_labor = NULL,
       use_livestock_labor_tbl = NULL,

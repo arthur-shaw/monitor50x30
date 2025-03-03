@@ -62,7 +62,13 @@ mod_4_quality_1_setup_1_tables_ui <- function(id) {
       id = ns("4_quality_1_setup_1_tables_details_anim_prod_sales")
     ),
     mod_4_quality_1_setup_1_tables_details_ui(
-      id = ns("4_quality_1_setup_1_tables_details_other_prod_sales")
+      id = ns("4_quality_1_setup_1_tables_details_fisheries_prod_sales")
+    ),
+    mod_4_quality_1_setup_1_tables_details_ui(
+      id = ns("4_quality_1_setup_1_tables_details_aquaculture_prod_sales")
+    ),
+    mod_4_quality_1_setup_1_tables_details_ui(
+      id = ns("4_quality_1_setup_1_tables_details_forestry_prod_sales")
     ),
     mod_4_quality_1_setup_1_tables_details_ui(
       id = ns("4_quality_1_setup_1_tables_details_process_crop_prod")
@@ -217,12 +223,26 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
         tbl_id = "anim_prod_sales",
         tbl_desc = "sales and production of milk or eggs"
       ),
-      other_prod_sales = list(
-        id = "4_quality_1_setup_1_tables_details_other_prod_sales",
+      fisheries_prod_sales = list(
+        id = "4_quality_1_setup_1_tables_details_fisheries_prod_sales",
         show = TRUE,
         remove = FALSE,
-        tbl_id = "other_prod_sales",
-        tbl_desc = "production and sales of other animal products"
+        tbl_id = "fisheries_prod_sales",
+        tbl_desc = "production and sales of fisheries products"
+      ),
+      aquaculture_prod_sales = list(
+        id = "4_quality_1_setup_1_tables_details_aquaculture_prod_sales",
+        show = TRUE,
+        remove = FALSE,
+        tbl_id = "aquaculture_prod_sales",
+        tbl_desc = "production and sales of aquaculture products"
+      ),
+      forestry_prod_sales = list(
+        id = "4_quality_1_setup_1_tables_details_forestry_prod_sales",
+        show = TRUE,
+        remove = FALSE,
+        tbl_id = "forestry_prod_sales",
+        tbl_desc = "production and sales of forestry products"
       ),
       process_crop_prod = list(
         id = "4_quality_1_setup_1_tables_details_process_crop_prod",
@@ -303,7 +323,8 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
       names = c(
         "perm_crop_harvest", "perm_crop_sales", "livestock_ownership",
         "cow_displacement", "hen_displacement", "anim_prod_sales",
-        "other_prod_sales", "process_crop_prod",
+        "fisheries_prod_sales", "aquaculture_prod_sales", "forestry_prod_sales",
+        "process_crop_prod",
         "crop_labor", "livestock_labor_tbl", "sector_labor", "income_sources"
       )
     )
