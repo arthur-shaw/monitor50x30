@@ -117,6 +117,7 @@ mod_4_quality_1_setup_1_tables_details_server <- function(
               style = "max-width: 90%; height: auto;"
             ),
             size = "xl",
+            easyClose = TRUE,
             footer = shiny::modalButton("Close")
           )
         )
