@@ -576,18 +576,55 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
         if (r6$svy_current_visit == "Post-planting") {
 
           shiny::req(ilp_2v_pp)
+cat("\nSwitched to ILP post-planting")
+# cat("\nPost-planting's table spec")
+# str(ilp_2v_pp)
+          shiny::removeUI(
+            selector = '[id$="insert_reference"]',
+            multiple = TRUE
+          )
+          shiny::removeUI(
+            selector = '[id$="inserted_ui"]',
+            multiple = TRUE
+          )
+
           set_table_choices(tbls = ilp_2v_pp, session = session, r6 = r6)
 
         } else if (r6$svy_current_visit == "Post-harvest") {
 
           shiny::req(ilp_2v_ph)
+cat("\nSwitched to ILP post-harvest")
+# cat("\nPost-planting's table spec")
+# str(ilp_2v_ph)
+          shiny::removeUI(
+            selector = '[id$="insert_reference"]',
+            multiple = TRUE
+          )
+          shiny::removeUI(
+            selector = '[id$="inserted_ui"]',
+            multiple = TRUE
+          )
           set_table_choices(tbls = ilp_2v_ph, session = session, r6 = r6)
+# cat("\nPost-planting's table spec")
+# str(ilp_2v_ph)
 
         } else if (r6$svy_current_visit == "Single visit") {
 
           shiny::req(ilp_1v)
+cat("\nSwitched to single-visit ILP")
+# cat("\nSingle-visit's table spec")
+# str(ilp_1v)
+          shiny::removeUI(
+            selector = '[id$="insert_reference"]',
+            multiple = TRUE
+          )
+          shiny::removeUI(
+            selector = '[id$="inserted_ui"]',
+            multiple = TRUE
+          )
           set_table_choices(tbls = ilp_1v, session = session, r6 = r6)
-
+# cat("\nSingle-visit's table spec")
+# str(ilp_1v)
         }
 
       }
