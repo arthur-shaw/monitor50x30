@@ -11,6 +11,24 @@ mod_4_quality_1_setup_1_tables_details_ui <- function(id) {
   ns <- NS(id)
   shiny::tagList(
 
+    # script to determine whether UI element already exists in DOM
+    tags$script(
+      shiny::HTML(
+        sprintf(
+          "
+          $(document).on('shiny:sessioninitialized', function() {
+            var exists = document.getElementById('%s') !== null;
+            Shiny.setInputValue('%s', exists, {priority: 'event'});
+          });
+          ",
+          # element ID
+          ns("insert_ui"),
+          # input name
+          ns("ui_exists")
+        )
+      )
+  ),
+    
     # provides a reference point for UI insertion
     # since `shiny::insertUI()` inserts relative to a selected element
     htmltools::div(
@@ -33,11 +51,40 @@ mod_4_quality_1_setup_1_tables_details_server <- function(
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
-    if (show == TRUE) {
-
       # ========================================================================
       # initialize page
       # ========================================================================
+
+shiny::observeEvent(input$ui_exists, {
+  if (shiny::isTruthy(input$ui_exists)) {
+    # cat(paste0("\n", glue::glue("{tbl_id} DOES element exists")))
+# browser()
+      # remove UI elements
+      # first, the reference element relative to which the UI is inserted
+      shiny::removeUI(
+        selector = paste0(
+          "#", ns("insert_reference")
+        )
+      )
+      # then, the div that contains all inserted UI
+      shiny::removeUI(
+        selector = paste0(
+          "#", ns("inserted_ui")
+        )
+      )
+
+      # reset associated r6 field, if not already `NULL`
+      # this avoids needless write operations
+      if (!is.null(
+        r6[[glue::glue("use_{tbl_id}")]]
+      )) {
+        r6[[glue::glue("use_{tbl_id}")]] <- NULL
+        r6$write()
+      }
+  } else {
+    # cat(paste0("\n", glue::glue("{tbl_id} element doesn't exist")))
+# browser()
+    if (show == TRUE) {
 
       # ------------------------------------------------------------------------
       # draw UI and update it to stored value, if relevant
@@ -61,7 +108,8 @@ mod_4_quality_1_setup_1_tables_details_server <- function(
         selector = paste0(
           "#", ns("insert_reference")
         ),
-        where = "afterEnd",
+# TODO: check whether this should be "beforeEnd"
+        where = "beforeEnd",
         ui = shiny::tagList(
           # to make it easy to select and remove UI, wrap all inserted UI
           # in a div with a (namespaced) ID that `removeUI` can select
@@ -124,32 +172,10 @@ mod_4_quality_1_setup_1_tables_details_server <- function(
 
       })
 
-    } else if (remove == TRUE) {
-
-      # remove UI elements
-      # first, the reference element relative to which the UI is inserted
-      shiny::removeUI(
-        selector = paste0(
-          "#", ns("insert_reference")
-        )
-      )
-      # then, the div that contains all inserted UI
-      shiny::removeUI(
-        selector = paste0(
-          "#", ns("inserted_ui")
-        )
-      )
-
-      # reset associated r6 field, if not already `NULL`
-      # this avoids needless write operations
-      if (!is.null(
-        r6[[glue::glue("use_{tbl_id}")]]
-      )) {
-        r6[[glue::glue("use_{tbl_id}")]] <- NULL
-        r6$write()
-      }
-
     }
+  }
+})
+
 
   })
 }
