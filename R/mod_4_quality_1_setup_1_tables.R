@@ -355,9 +355,9 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
     # specify tables to remove for 2-visit CORE-AG
     # shared by 1-visit CORE-AG variants
     core_ag_2v_to_remove <- c(
-        "process_crop_prod", "crop_labor", "livestock_labor_tbl",
-        "fisheries_labor", "aquaculture_labor", "forestry_labor"
-      )
+      "process_crop_prod", "crop_labor", "livestock_labor_tbl",
+      "fisheries_labor", "aquaculture_labor", "forestry_labor"
+    )
 
     core_ag_2v_ph <- set_tbls_to_remove(
       tbls = ph_visit_tbls,
@@ -383,9 +383,9 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
     # specify tables to remove for ILP 1-visit
     # shared by PME and MEA
     ilp_1v_ph_to_remove <- c(
-        "crop_labor", "livestock_labor_tbl",
-        "fisheries_labor", "aquaculture_labor", "forestry_labor"
-      )
+      "crop_labor", "livestock_labor_tbl",
+      "fisheries_labor", "aquaculture_labor", "forestry_labor"
+    )
 
     pme_2v_ph <- set_tbls_to_remove(
       tbls = ph_visit_tbls,
@@ -478,16 +478,19 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
         if (r6$svy_current_visit == "Post-planting") {
 
           shiny::req(ilp_2v_pp)
+          cat("\nInitalizing as ILP post-planting")
           set_table_choices(tbls = ilp_2v_pp, session = session, r6 = r6)
 
         } else if (r6$svy_current_visit == "Post-harvest") {
 
           shiny::req(ilp_2v_ph)
+          cat("\nInitalizing as ILP post-harvest")
           set_table_choices(tbls = ilp_2v_ph, session = session, r6 = r6)
 
         } else if (r6$svy_current_visit == "Single visit") {
 
           shiny::req(ilp_1v)
+          cat("\nInitalizing as ILP single visit")
           set_table_choices(tbls = ilp_1v, session = session, r6 = r6)
 
         }
