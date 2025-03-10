@@ -10,7 +10,183 @@
 mod_4_quality_1_setup_2_data_ui <- function(id) {
   ns <- NS(id)
   tagList(
- 
+
+    bslib::accordion(
+      id = ns("table_data"),
+
+      # ------------------------------------------------------------------------
+      # post-planting tables
+      # ------------------------------------------------------------------------
+
+      bslib::accordion_panel(
+        title = "Parcels per household",
+        value = "parcels_per_hhold",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Parcel GPS measurement",
+        value = "parcel_gps",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Plots per parcel",
+        value = "plots_per_parcel",
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Plot use",
+        value = "plot_use",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Plot GPS measurement",
+        value = "plot_gps",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Crops per plot",
+        value = "crops_per_plot",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Crop types",
+        value = "crop_types",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+
+      # ------------------------------------------------------------------------
+      # post-harvest tables
+      # ------------------------------------------------------------------------
+
+      bslib::accordion_panel(
+        title = "Temporary crop harvest",
+        value = "temp_crop_harvest",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Temporary crop sales",
+        value = "temp_crop_sales",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Permanent crop harvest",
+        value = "perm_crop_harvest",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Permanent crop sales",
+        value = "perm_crop_sales",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Livestock owership",
+        value = "livestock_owership",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Cow displacement",
+        value = "cow_displacement",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Hen displacement",
+        value = "hen_displacement",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Sales and production of milk",
+        value = "milk_prod_sales",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Sales and production of eggs",
+        value = "egg_prod_sales",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Production and sales of fisheries products",
+        value = "fisheries_prod_sales",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Production and sales of aquaculture products",
+        value = "aquaculture_prod_sales",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Production and sales of forestry products",
+        value = "forestry_prod_sales",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Processing of crop production",
+        value = "process_crop_prod",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Crop labor",
+        value = "crop_labor",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Livestock labor",
+        value = "livestock_labor_tbl",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Fisheries labor",
+        value = "fisheries_labor",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Aquaculture labor",
+        value = "aquaculture_labor",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Forestry labor",
+        value = "forestry_labor",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      ),
+      bslib::accordion_panel(
+        title = "Income sources",
+        value = "income_sources",
+        # TODO: insert UI function
+        shiny::tags$p("TODO")
+      )
+
+    ),
+
+    # save button to close accordion panel
+    shiny::actionButton(
+      inputId = ns("save"),
+      label = "Save"
+    )
+
   )
 }
     
