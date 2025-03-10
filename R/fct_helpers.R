@@ -341,3 +341,86 @@ render_report <- function(
   )
 
 }
+
+#' Hide accordion panel
+#'
+#' @description Hide the div containing the full accordion panel, creating a
+#' JS selctor using the class of the accordion panel container and the
+#' data value.
+#'
+#' @param value Value panel from the accordion panel's definition.
+#'
+#' @return Side-effect of hiding the target accordion panel
+#'
+#' @importFrom shinyjs hide
+#' @importFrom glue glue
+hide_accordion_panel <- function(value) {
+
+  shinyjs::hide(
+    selector = glue::glue(".accordion-item[data-value='{value}']")
+  )
+
+}
+
+#' Show accordion panel
+#'
+#' @description
+#' Show the div containing the full accordion panel, creating a
+#' JS selctor using the class of the accordion panel container and the
+#' data value.
+#'
+#' @param value Value panel from the accordion panel's definition.
+#'
+#' @return Side-effect of showing the target accordion panel
+#'
+#' @importFrom shinyjs show
+#' @importFrom glue glue
+show_accordion_panel <- function(value) {
+  shinyjs::show(
+    selector = glue::glue(".accordion-item[data-value='{value}']")
+  )
+}
+
+#' Set the table accordion state: hidden or shown
+#'
+#' @description
+#' First, determien whether the target table was selected.
+#' Then, set the state of the accordion panel UI:
+#' - hidden, if the table was not selected
+#' - shown, if selected
+#'
+#' @param r6 App's R6 object to get the value of its fields
+#' @param tbl_id Name of the table, common between R6 field and UI element
+#'
+#' @return Side-effect of hiding/showing the target accordion panel in the UI
+#'
+#' @importFrom glue glue
+set_table_accordion_state <- function(r6, tbl_id) {
+
+  # compose name of target table field in R6 object
+  r6_tbl_field <- glue::glue("use_{tbl_id}")
+
+  # first, check whether the field is non-null
+  # if so, evalute the contents of the field
+  if (!is.null(r6[[r6_tbl_field]])) {
+
+    # if `TRUE`, show the accordion panel in the UI
+    if (r6[[r6_tbl_field]] == TRUE) {
+
+      show_accordion_panel(value = tbl_id)
+
+    # if `FALSE`, hide the accordion panel in the UI
+    } else if (r6[[r6_tbl_field]] == FALSE) {
+
+      hide_accordion_panel(value = tbl_id)
+
+    }
+
+  # if the field is `NULL`, meaning not selected, hide the accordion panel
+  } else {
+
+    hide_accordion_panel(value = tbl_id)
+
+  }
+
+}

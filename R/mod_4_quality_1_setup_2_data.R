@@ -196,7 +196,70 @@ mod_4_quality_1_setup_2_data_ui <- function(id) {
 mod_4_quality_1_setup_2_data_server <- function(id, parent, r6){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
- 
+
+    # ==========================================================================
+    # collect table names
+    # ==========================================================================
+
+    accordion_panel_values <- c(
+      # post-planting tables
+      "parcels_per_hhold",
+      "parcel_gps",
+      "plots_per_parcel",
+      "plot_use",
+      "plot_gps",
+      "crops_per_plot",
+      "crop_types",
+      # post-harvest tables
+      "temp_crop_harvest",
+      "temp_crop_sales",
+      "perm_crop_harvest",
+      "perm_crop_sales",
+      "livestock_owership",
+      "cow_displacement",
+      "hen_displacement",
+      "milk_prod_sales",
+      "egg_prod_sales",
+      "fisheries_prod_sales",
+      "aquaculture_prod_sales",
+      "forestry_prod_sales",
+      "process_crop_prod",
+      "crop_labor",
+      "livestock_labor_tbl",
+      "fisheries_labor",
+      "aquaculture_labor",
+      "forestry_labor",
+      "income_sources"
+    )
+
+    # ==========================================================================
+    # initialize page
+    # ==========================================================================
+
+    purrr::walk(
+      .x = accordion_panel_values,
+      .f = ~ set_table_accordion_state(
+        r6 = r6,
+        tbl_id = .x
+      )
+    )
+
+    # ==========================================================================
+    # update upon saving table selections
+    # ==========================================================================
+
+    gargoyle::on("save_tables", {
+
+      purrr::walk(
+        .x = accordion_panel_values,
+        .f = ~ set_table_accordion_state(
+          r6 = r6,
+          tbl_id = .x
+        )
+      )
+
+    })
+
   })
 }
     
