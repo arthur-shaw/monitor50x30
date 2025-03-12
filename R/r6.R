@@ -1,5 +1,5 @@
 #' Persistant storage of user inputs for Shiny
-#' 
+#'
 #' @description
 #' Stores data in R6 object for intra-module communication and provides
 #' methods for reading and writing fields to disk.
@@ -211,6 +211,15 @@ r6 <- R6::R6Class(
     use_aquaculture_labor = NULL,
     use_forestry_labor = NULL,
     use_income_sources = NULL,
+    # tables data
+    # parcels_per_household
+    parcels_per_hhold_df_choices = NULL,
+    parcels_per_hhold_df = NULL,
+    parcels_per_hhold_use_choices = NULL,
+    parcels_per_hhold_use = NULL,
+    parcels_per_hhold_use_val_choices = NULL,
+    parcels_per_hhold_use_val = NULL,
+    parcels_per_hhold_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -462,7 +471,16 @@ r6 <- R6::R6Class(
       use_fisheries_labor = NULL,
       use_aquaculture_labor = NULL,
       use_forestry_labor = NULL,
-      use_income_sources = NULL
+      use_income_sources = NULL,
+      # tables data
+      # parcels_per_household
+      parcels_per_hhold_df_choices = NULL,
+      parcels_per_hhold_df = NULL,
+      parcels_per_hhold_use_choices = NULL,
+      parcels_per_hhold_use = NULL,
+      parcels_per_hhold_use_val_choices = NULL,
+      parcels_per_hhold_use_val = NULL,
+      parcels_per_hhold_provided = NULL
 
     ) {
 
@@ -521,7 +539,13 @@ r6 <- R6::R6Class(
         "manager_id_vars_selected",
         "manager_id_vars_order",
         "report_teams",
-        "report_teams_selected"
+        "report_teams_selected",
+        # tables
+        # parcels_per_hhold
+        "parcels_per_hhold_df_choices",
+        "parcels_per_hhold_use_choices",
+        "parcels_per_hhold_use_val_choices",
+        "parcels_per_hhold_use_val"
       )
 
       # other fields not to write

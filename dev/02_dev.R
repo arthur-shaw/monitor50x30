@@ -64,6 +64,7 @@ golem::add_module(name = "4_quality_1_setup_1_tables")
 golem::add_utils(name = "table_selection")
 golem::add_module(name = "4_quality_1_setup_1_tables_details")
 golem::add_module(name = "4_quality_1_setup_2_data")
+golem::add_module(name = "4_quality_1_setup_2_data_parcels_per_hhold")
 golem::add_module(name = "4_quality_1_setup_3_interviews")
 golem::add_module(name = "4_quality_2_report")
 
