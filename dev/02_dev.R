@@ -79,6 +79,8 @@ golem::add_fct(
   module = "3_complete_1_setup_1_domains"
 )
 
+golem::add_utils(name = "prepare_data_choices")
+
 ## External resources
 ## Creates .js and .css files at inst/app/www
 golem::add_js_file("script")

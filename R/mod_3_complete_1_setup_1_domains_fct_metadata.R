@@ -1,20 +1,16 @@
-#' Make display variable options
+#' Sanitize Survey Solutions text
 #'
 #' @description
-#' Compose domain as `{varname} : {variable_description}`
+#' Santitizes by:
+#' - Removing HTML font tags
+#' - Removing HTML line breaks
+#' - Replacing roster substitutions with `[ITEM]`
 #'
-#' @param path Character. Path to questionnaire variables file (qnr_vars.rds).
-#' @param var_types Character. Types of Survey Solutions variable to include.
-#' Use types from SuSo JSON file.
+#' @return Character vector.
 #'
-#' @return Character vector. Set of variable descriptions
-#'
-#' @importFrom dplyr filter mutate pull
+#' @importFrom glue glue
 #' @importFrom stringr str_remove_all str_replace_all
-make_vars_options <- function(
-  path,
-  var_types
-) {
+sanitize_suso_text <- function(string) {
 
   # compose list of allowed colors
   suso_colors <- c(
@@ -47,6 +43,45 @@ make_vars_options <- function(
     "({glue::glue_collapse(x = suso_colors, sep = '|')})"
   )
 
+  santitized_text <- string |>
+    # remove font tag
+    stringr::str_remove_all(
+      pattern = paste0('<font color[ ]*=[ ]*\"', font_colors_expr, '\">')
+    ) |>
+    stringr::str_remove_all(
+      pattern = '</font>'
+    ) |>
+    # remove line break tag
+    stringr::str_replace_all(
+      pattern = "<br>",
+      replacement = ""
+    ) |>
+    # remove roster text substitution
+    stringr::str_replace_all(
+      pattern = "%rostertitle%",
+      replacement = "[ITEM]"
+    )
+
+}
+
+#' Make display variable options
+#'
+#' @description
+#' Compose domain as `{varname} : {variable_description}`
+#'
+#' @param path Character. Path to questionnaire variables file (qnr_vars.rds).
+#' @param var_types Character. Types of Survey Solutions variable to include.
+#' Use types from SuSo JSON file.
+#'
+#' @return Character vector. Set of variable descriptions
+#'
+#' @importFrom dplyr filter mutate pull
+#' @importFrom stringr str_remove_all str_replace_all
+make_vars_options <- function(
+  path,
+  var_types
+) {
+
   q_vars_out <-
     # load data frame of questionnaire metadata
     readRDS(file = path) |>
@@ -56,27 +91,7 @@ make_vars_options <- function(
     dplyr::filter(type %in% var_types) |>
     # remove HTML tags from variable description
     dplyr::mutate(
-      # remove font tag
-      variable_description = stringr::str_remove_all(
-        string = variable_description,
-        pattern = paste0('<font color[ ]*=[ ]*\"', font_colors_expr, '\">')
-      ),
-      variable_description = stringr::str_remove_all(
-        string = variable_description,
-        pattern = '</font>'
-      ),
-      # remove line break tag
-      variable_description = stringr::str_replace_all(
-        string = variable_description,
-        pattern = "<br>",
-        replacement = ""
-      ),
-      # remove roster text substitution
-      variable_description = stringr::str_replace_all(
-        string = variable_description,
-        pattern = "%rostertitle%",
-        replacement = "[ITEM]"
-      )
+      variable_description = sanitize_suso_text(variable_description)
     ) |>
     # compose the variable display text as `{varname} : {variable_description}`
     dplyr::mutate(
