@@ -306,9 +306,13 @@ extract_vars_metadata <- function(df) {
     # filter to objects that are variables
     # namely, entities that have a `question_type`
     dplyr::filter(!is.na(.data$question_type)) |>
-    # select the variable name, variable label, and question text
-    dplyr::select(
-      .data$varname, .data$variable_label, .data$question_text, .data$type
+    # capture for filtering variables
+    dplyr::mutate(
+      is_linked = (
+        (!linked_to_roster_id  %in% c("", NA_character_)) |
+        (!linked_to_question_id  %in% c("", NA_character_))
+      ),
+      uses_reusable_categories = (!categories_id %in% c("", NA_character_))
     ) |>
     # create question description that is preferably the label, but question
     # text if the label is empty
@@ -320,9 +324,17 @@ extract_vars_metadata <- function(df) {
         missing = .data$variable_label
       )
     )|>
+    # keep relevant variables
     dplyr::select(
-      .data$varname, .data$variable_label, .data$variable_description,
-      .data$type
+      # ID
+      .data$varname,
+      # constructed description
+      .data$variable_description,
+      # attributes for filtering
+      .data$type, .data$is_linked, .data$uses_reusable_categories,
+      # answer options or links to them
+      categories_id,
+      dplyr::starts_with("answer_text_"), dplyr::starts_with("answer_value_")
     )
 
   return(vars_df)
