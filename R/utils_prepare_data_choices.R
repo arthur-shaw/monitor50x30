@@ -211,3 +211,27 @@ make_val_options <- function(
   return(options_as_chars)
 
 }
+
+#' Extract variable values from selections
+#'
+#' @param vals Character vector. Variable value selections of this form:
+#' `[{value}] Value label text`
+#'
+#' @return Numeric vector. Values extracted as numbers.
+#'
+#' @importFrom purrr map_chr
+#' @importFrom stringr str_extract
+extract_var_values <- function(vals) {
+
+  vals_extracted <- vals |>
+    purrr::map_chr(
+      .f = ~ stringr::str_extract(
+        string = .x,
+        pattern = "(?<=\\[)[-]*[0-9]+(?=\\] )"
+      )
+    ) |>
+    as.numeric()
+
+  return(vals_extracted)
+
+}
