@@ -45,16 +45,18 @@ Imports:
     susoapi (>= 0.2.0),
     susoflows (>= 0.1.0),
     susometa (>= 0.0.0.9000),
+    tbls50x30 (>= 0.0.0.9001),
     tibble,
     waiter,
     zip
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.1
-Remotes: 
+Remotes:  
     github::ColinFay/gargoyle,
     github::arthur-shaw/susoapi,
     github::arthur-shaw/susoflows,
-    github::lsms-worldbank/susometa
+    github::lsms-worldbank/susometa,
+    github::arthur-shaw/tbls50x30
 Suggests: 
     webshot2

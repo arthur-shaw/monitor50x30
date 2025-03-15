@@ -23,6 +23,10 @@ usethis::use_dev_package(package = "gargoyle", remote = "github::ColinFay/gargoy
 usethis::use_dev_package(package = "susoapi", remote = "github::arthur-shaw/susoapi")
 usethis::use_dev_package(package = "susoflows", remote = "github::arthur-shaw/susoflows")
 usethis::use_dev_package(package = "susometa", remote = "lsms-worldbank/susometa")
+usethis::use_dev_package(
+  package = "tbls50x30",
+  remote = "github::arthur-shaw/tbls50x30"
+)
 
 ## Add modules ----
 ## Create a module infrastructure in R/
@@ -65,6 +69,31 @@ golem::add_utils(name = "table_selection")
 golem::add_module(name = "4_quality_1_setup_1_tables_details")
 golem::add_module(name = "4_quality_1_setup_2_data")
 golem::add_module(name = "4_quality_1_setup_2_data_parcels_per_hhold")
+golem::add_module(name = "4_quality_1_setup_2_data_parcel_gps")
+golem::add_module(name = "4_quality_1_setup_2_data_plots_per_parcel")
+golem::add_module(name = "4_quality_1_setup_2_data_plot_use")
+golem::add_module(name = "4_quality_1_setup_2_data_plot_gps")
+golem::add_module(name = "4_quality_1_setup_2_data_crops_per_plot")
+golem::add_module(name = "4_quality_1_setup_2_data_crop_types")
+golem::add_module(name = "4_quality_1_setup_2_data_temp_crop_harvest")
+golem::add_module(name = "4_quality_1_setup_2_data_temp_crop_sales")
+golem::add_module(name = "4_quality_1_setup_2_data_perm_crop_harvest")
+golem::add_module(name = "4_quality_1_setup_2_data_perm_crop_sales")
+golem::add_module(name = "4_quality_1_setup_2_data_livestock_owership")
+golem::add_module(name = "4_quality_1_setup_2_data_cow_displacement")
+golem::add_module(name = "4_quality_1_setup_2_data_hen_displacement")
+golem::add_module(name = "4_quality_1_setup_2_data_milk_prod_sales")
+golem::add_module(name = "4_quality_1_setup_2_data_egg_prod_sales")
+golem::add_module(name = "4_quality_1_setup_2_data_fisheries_prod_sales")
+golem::add_module(name = "4_quality_1_setup_2_data_aquaculture_prod_sales")
+golem::add_module(name = "4_quality_1_setup_2_data_forestry_prod_sales")
+golem::add_module(name = "4_quality_1_setup_2_data_process_crop_prod")
+golem::add_module(name = "4_quality_1_setup_2_data_crop_labor")
+golem::add_module(name = "4_quality_1_setup_2_data_livestock_labor_tbl")
+golem::add_module(name = "4_quality_1_setup_2_data_fisheries_labor")
+golem::add_module(name = "4_quality_1_setup_2_data_aquaculture_labor")
+golem::add_module(name = "4_quality_1_setup_2_data_forestry_labor")
+golem::add_module(name = "4_quality_1_setup_2_data_income_sources")
 golem::add_module(name = "4_quality_1_setup_3_interviews")
 golem::add_module(name = "4_quality_2_report")
 
