@@ -37,7 +37,7 @@ mod_4_quality_1_setup_2_data_parcels_per_hhold_ui <- function(id) {
 
   )
 }
-    
+
 #' 4_quality_1_setup_2_data_parcels_per_hhold Server Functions
 #'
 #' @noRd 
@@ -237,7 +237,7 @@ mod_4_quality_1_setup_2_data_parcels_per_hhold_server <- function(id,  parent, r
 
   })
 }
-    
+
 ## To be copied in the UI
 # mod_4_quality_1_setup_2_data_parcels_per_hhold_ui("4_quality_1_setup_2_data_parcels_per_hhold_1")
     
