@@ -312,7 +312,16 @@ extract_vars_metadata <- function(df) {
         (!linked_to_roster_id  %in% c("", NA_character_)) |
         (!linked_to_question_id  %in% c("", NA_character_))
       ),
-      uses_reusable_categories = (!categories_id %in% c("", NA_character_))
+      uses_reusable_categories = (!categories_id %in% c("", NA_character_)),
+      has_val_labels = rowSums(
+        (
+          # either answer categories input manually
+          !is.na(dplyr::pick(dplyr::starts_with("answer_value"))) |
+          # or reusuable categories specified
+          !is.na(categories_id)
+        ),
+        na.rm = TRUE
+      ) > 0
     ) |>
     # create question description that is preferably the label, but question
     # text if the label is empty
@@ -332,6 +341,7 @@ extract_vars_metadata <- function(df) {
       .data$variable_description,
       # attributes for filtering
       .data$type, .data$is_linked, .data$uses_reusable_categories,
+      .data$has_val_labels,
       # answer options or links to them
       categories_id,
       dplyr::starts_with("answer_text_"), dplyr::starts_with("answer_value_")
