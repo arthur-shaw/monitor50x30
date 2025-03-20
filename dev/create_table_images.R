@@ -147,7 +147,7 @@ parcel_gps_tbl <- table_df |>
       - Data set of parcels<br>
       - Question that captures the GPS measurement<br>
       - Value of the question that indicates the parcel was not measured<br>
-      - Question the area was not measured (optional)<br>
+      - Question about the area was not measured (optional)<br>
       <b>Objective:</b> 
       See overall rate of measurement. See whether reasons for non-measurement 
       are reasonable, or indicate laziness.<br>
