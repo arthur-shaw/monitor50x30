@@ -35,7 +35,9 @@ mod_4_quality_1_setup_2_data_ui <- function(id) {
       bslib::accordion_panel(
         title = "Plots per parcel",
         value = "plots_per_parcel",
-        shiny::tags$p("TODO")
+        mod_4_quality_1_setup_2_data_plots_per_parcel_ui(
+          id = ns("4_quality_1_setup_2_data_plots_per_parcel_1")
+        )
       ),
       bslib::accordion_panel(
         title = "Plot use",
@@ -273,6 +275,11 @@ mod_4_quality_1_setup_2_data_server <- function(id, parent, r6){
     )
     mod_4_quality_1_setup_2_data_parcel_gps_server(
       id = "4_quality_1_setup_2_data_parcel_gps_1",
+      parent = session,
+      r6 = r6
+    )
+    mod_4_quality_1_setup_2_data_plots_per_parcel_server(
+      id = "4_quality_1_setup_2_data_plots_per_parcel_1",
       parent = session,
       r6 = r6
     )

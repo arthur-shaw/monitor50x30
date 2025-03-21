@@ -230,6 +230,12 @@ r6 <- R6::R6Class(
     parcel_gps_why_not_measured_var_choices = NULL,
     parcel_gps_why_not_measured_var = NULL,
     parcel_gps_provided = NULL,
+    # plots_per_parcel
+    plots_per_parcel_df_choices = NULL,
+    plots_per_parcel_df = NULL,
+    plots_per_parcel_parcel_id_var_choices = NULL,
+    plots_per_parcel_parcel_id_var = NULL,
+    plots_per_parcel_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -500,7 +506,13 @@ r6 <- R6::R6Class(
       parcel_gps_not_measured_val = NULL,
       parcel_gps_why_not_measured_var_choices = NULL,
       parcel_gps_why_not_measured_var = NULL,
-      parcel_gps_provided = NULL
+      parcel_gps_provided = NULL,
+      # plots_per_parcel
+      plots_per_parcel_df_choices = NULL,
+      plots_per_parcel_df = NULL,
+      plots_per_parcel_parcel_id_var_choices = NULL,
+      plots_per_parcel_parcel_id_var = NULL,
+      plots_per_parcel_provided = NULL
 
     ) {
 
@@ -570,7 +582,10 @@ r6 <- R6::R6Class(
         "parcel_gps_df_choices",
         "parcel_gps_gps_var_choices",
         "parcel_gps_not_measured_val_choices",
-        "parcel_gps_why_not_measured_var_choices"
+        "parcel_gps_why_not_measured_var_choices",
+        # plots_per_parcel
+        "plots_per_parcel_df_choices",
+        "plots_per_parcel_parcel_id_var_choices"
       )
 
       # other fields not to write
