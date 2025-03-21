@@ -162,6 +162,33 @@ make_data_var_choices <- function(
 
 }
 
+#' Make variable ID choices
+#'
+#' @param path Atomic character. Path to target data file.
+#'
+#' @return Character vector. Entries are of the form:
+#' `{varname} : {variable_description}`
+#'
+#' @importFrom haven read_dta
+#' @importFrom labelled look_for
+#' @importFrom dplyr mutate pull
+#' @importFrom glue glue
+make_id_var_choices <- function(path) {
+
+  id_var_choices <- path |>
+    haven::read_dta() |>
+    labelled::look_for(
+      "__id",
+      labels = TRUE,
+      values = FALSE
+    ) |>
+    dplyr::mutate(choices = glue::glue("{variable} : {label}")) |>
+    dplyr::pull(choices)
+
+  return(id_var_choices)
+
+}
+
 #' Extract variable names from variable choices
 #'
 #' @param vars Character vector. Variable choices of the following form:
