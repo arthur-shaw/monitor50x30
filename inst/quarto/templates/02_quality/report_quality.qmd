@@ -16,3 +16,68 @@ params:
   # main data file
   main_df_name: ""
 ---
+
+```{r}
+#| label: load parameters from RDS
+
+params_df <- fs::path(params$dir_app, "saved_params.rds") |>
+	readRDS()
+
+```
+
+```{r}
+#| label: determine which cases to include
+
+cases_for_report <- fs::path(
+    params$dir_data,
+    paste0(params$main_df_name, ".dta")
+  ) |>
+	haven::read_dta() |>
+	dplyr::select(interview__id)
+
+```
+
+```{r}
+#| label: load interview metadata to add to all data files
+
+interview_actions <- fs::path(params$dir_data, "interview__actions.dta") |>
+  # ingest
+	haven::read_dta()
+
+# compile supervisors and their interviewers
+supervisor_interviewer <- fs::path(params$dir_teams, "team_composition.dta") |>
+  # ingest
+	haven::read_dta() |>
+  # remove any archived users
+  dplyr::filter(IsArchived == 0) |>
+  # keep supervisor and interviewer columns, renaming them to match
+  # names in the df of who is responsible for each interview
+	dplyr::select(
+    supervisor = SupervisorName,
+    interviewer = UserName
+  )
+
+# inventory interviews and the interviewer responsible
+interviews_who_is_responsible <- interview_actions |>
+  # get the last completion event for each interview
+	dplyr::group_by(interview__id, interview__key) |>
+	dplyr::filter(action == 3) |>
+	dplyr::filter(dplyr::row_number() == dplyr::n()) |>
+  dplyr::ungroup() |>
+  # keep variables
+	dplyr::select(
+    interview__id, interview__key,
+    interviewer = originator,
+    supervisor = responsible__name
+  )
+
+# create metadata on who is responsible for each interview
+# - interviewer
+# - supervisor (team)
+supervisor_interviewer_interview <- supervisor_interviewer |>
+	dplyr::left_join(
+    y = interviews_who_is_responsible,
+    by = c("supervisor", "interviewer")
+  ) |>
+	dplyr::select(supervisor, interviewer, interview__id, interview__key)
+```
