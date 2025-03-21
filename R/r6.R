@@ -220,6 +220,16 @@ r6 <- R6::R6Class(
     parcels_per_hhold_use_val_choices = NULL,
     parcels_per_hhold_use_val = NULL,
     parcels_per_hhold_provided = NULL,
+    # parcel_gps
+    parcel_gps_df_choices = NULL,
+    parcel_gps_df = NULL,
+    parcel_gps_gps_var_choices = NULL,
+    parcel_gps_gps_var = NULL,
+    parcel_gps_not_measured_val_choices = NULL,
+    parcel_gps_not_measured_val = NULL,
+    parcel_gps_why_not_measured_var_choices = NULL,
+    parcel_gps_why_not_measured_var = NULL,
+    parcel_gps_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -480,7 +490,17 @@ r6 <- R6::R6Class(
       parcels_per_hhold_use = NULL,
       parcels_per_hhold_use_val_choices = NULL,
       parcels_per_hhold_use_val = NULL,
-      parcels_per_hhold_provided = NULL
+      parcels_per_hhold_provided = NULL,
+      # parcel_gps
+      parcel_gps_df_choices = NULL,
+      parcel_gps_df = NULL,
+      parcel_gps_gps_var_choices = NULL,
+      parcel_gps_gps_var = NULL,
+      parcel_gps_not_measured_val_choices = NULL,
+      parcel_gps_not_measured_val = NULL,
+      parcel_gps_why_not_measured_var_choices = NULL,
+      parcel_gps_why_not_measured_var = NULL,
+      parcel_gps_provided = NULL
 
     ) {
 
@@ -545,7 +565,12 @@ r6 <- R6::R6Class(
         "parcels_per_hhold_df_choices",
         "parcels_per_hhold_use_choices",
         "parcels_per_hhold_use_val_choices",
-        "parcels_per_hhold_use_val"
+        "parcels_per_hhold_use_val",
+        # parcel_gps
+        "parcel_gps_df_choices",
+        "parcel_gps_gps_var_choices",
+        "parcel_gps_not_measured_val_choices",
+        "parcel_gps_why_not_measured_var_choices"
       )
 
       # other fields not to write
