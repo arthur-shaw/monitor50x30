@@ -143,7 +143,7 @@ make_data_var_choices <- function(
     # exclude linked questions
     dplyr::filter(is_linked == FALSE) |>
     # UNTIL SUSOMETA READS REUSABLE CATEGORIES...
-    # ... drop questions that use categorical answers
+    # ... drop questions that use reusable categorical answers
     dplyr::filter(uses_reusable_categories == FALSE) |>
     # select only desired variable types
     dplyr::filter(type %in% var_type_json) |>
@@ -193,7 +193,7 @@ extract_var_names <- function(vars) {
 #'
 #' @return Named numeric vector. Values are codes. Names are value labels.
 #'
-#' @importFrom rlang sym
+#' @importFrom rlang data_sym
 #' @importFrom susometa get_answer_options
 #' @importFrom glue glue
 make_val_options <- function(
@@ -201,12 +201,35 @@ make_val_options <- function(
   varname
 ) {
 
-  options <- susometa::get_answer_options(
-    qnr_df = qnr_df,
-    varname = !!rlang::data_sym(varname)
+  options <- tryCatch(
+    # case 1: answers available; extract them
+    expr = {
+
+      # extract answer options
+      susometa::get_answer_options(
+        qnr_df = qnr_df,
+        varname = !!rlang::data_sym(varname)
+      )
+
+    },
+    # case 2: no answers available; return `NULL`
+    error = function(cnd) {
+
+      NULL
+
+    }
+
   )
 
-  options_as_chars <- glue::glue("[{unname(options)}] {names(options)}")
+  # transform answer options into structured choices
+  # if answer options found, a character vector of structured choices
+  # if answer options not found, return an emtpy character vector
+  # NOTE: this doesn't work with base's `ifelse()`
+  if (length(options) >= 1) {
+    options_as_chars <- glue::glue("[{unname(options)}] {names(options)}")
+  } else {
+    options_as_chars <- character(0)
+  }
 
   return(options_as_chars)
 
