@@ -1,0 +1,18 @@
+---
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 2
+execute: 
+  echo: false
+  error: false
+  warning: false
+params:
+  # paths
+  dir_app: ""
+  dir_data: ""
+  dir_teams: ""
+  # main data file
+  main_df_name: ""
+---
