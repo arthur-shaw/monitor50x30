@@ -94,7 +94,8 @@ convert_vars_from_export_to_designer <- function(vars) {
 #' @param data_path Character. Path to the export data file.
 #' @param vars_df Data frame. Variable metadata data frame.
 #' @param var_type Atomic character vector. Type(s) of variable to select.
-#' One of: "categorical", "numeric", "gps", "all"
+#' One of: "categorical", "multi-select", "single-select", "numeric", "gps",
+#' "all".
 #'
 #' @return Character vector. Entries are of the form:
 #' `{varname} : {variable_description}`
@@ -105,12 +106,20 @@ convert_vars_from_export_to_designer <- function(vars) {
 make_data_var_choices <- function(
   data_path,
   vars_df,
-  var_type = c("categorical", "numeric", "gps", "all")
+  var_type = c(
+    "categorical", "multi-select", "single-select",
+    "numeric", "gps",
+    "all"
+  )
 ) {
 
   # translate user-facing variable types into JSON-friendly types
   if (var_type == "categorical") {
     var_type_json <- c("MultyOptionsQuestion", "SingleQuestion")
+  } else if (var_type == "multi-select") {
+    var_type_json <- "MultyOptionsQuestion"
+  } else if (var_type == "single-select") {
+    var_type_json <- "SingleQuestion"
   } else if (var_type == "numeric") {
     var_type_json <- "NumericQuestion" 
   } else if (var_type == "numeric") {
