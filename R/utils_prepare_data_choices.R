@@ -123,7 +123,7 @@ make_data_var_choices <- function(
   } else if (var_type == "numeric") {
     var_type_json <- "NumericQuestion" 
   } else if (var_type == "numeric") {
-     "NumericQuestion"
+     var_type_json <- "NumericQuestion"
   } else if (var_type == "gps") {
     var_type_json <- "GpsCoordinateQuestion"
   } else if (var_type == "all") {
