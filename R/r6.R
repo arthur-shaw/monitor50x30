@@ -211,6 +211,7 @@ r6 <- R6::R6Class(
     use_aquaculture_labor = NULL,
     use_forestry_labor = NULL,
     use_income_sources = NULL,
+    table_selections_saved = NULL,
     # tables data
     # parcels_per_household
     parcels_per_hhold_df_choices = NULL,
@@ -488,6 +489,7 @@ r6 <- R6::R6Class(
       use_aquaculture_labor = NULL,
       use_forestry_labor = NULL,
       use_income_sources = NULL,
+      table_selections_saved = NULL,
       # tables data
       # parcels_per_household
       parcels_per_hhold_df_choices = NULL,
