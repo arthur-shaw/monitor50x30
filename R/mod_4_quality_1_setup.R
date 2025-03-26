@@ -71,7 +71,7 @@ mod_4_quality_1_setup_server <- function(id, parent, r6){
     # manage opening/closing of accordion panels
     # ==========================================================================
 
-    gargoyle::on("save_tables", {
+    gargoyle::on("save_table_selections", {
 
       # close table selections
       bslib::accordion_panel_close(

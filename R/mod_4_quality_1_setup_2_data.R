@@ -252,7 +252,7 @@ mod_4_quality_1_setup_2_data_server <- function(id, parent, r6){
     # update upon saving table selections
     # ==========================================================================
 
-    gargoyle::on("save_tables", {
+    gargoyle::on("save_table_selections", {
 
       purrr::walk(
         .x = accordion_panel_values,

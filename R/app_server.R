@@ -56,7 +56,7 @@ app_server <- function(input, output, session) {
   gargoyle::init("save_workloads")
   gargoyle::init("save_completeness_setup")
   # quality
-  gargoyle::init("save_tables")
+  gargoyle::init("save_table_selections")
   gargoyle::init("saved_parcels_per_hhold")
   gargoyle::init("saved_parcel_gps")
   gargoyle::init("saved_plots_per_parcel")

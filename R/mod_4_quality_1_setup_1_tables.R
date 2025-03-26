@@ -310,11 +310,14 @@ mod_4_quality_1_setup_1_tables_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$save, {
 
-      gargoyle::trigger("save_tables")
+      # capture in R6
       r6$table_selections_saved <- TRUE
 
       # write to disk
       r6$write()
+
+      # send a signal that table selections have been saved
+      gargoyle::trigger("save_table_selections")
 
     })
 
