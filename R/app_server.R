@@ -61,6 +61,7 @@ app_server <- function(input, output, session) {
   gargoyle::init("saved_parcel_gps")
   gargoyle::init("saved_plots_per_parcel")
   gargoyle::init("saved_plot_use")
+  gargoyle::init("saved_plot_gps")
 
   # load module server logic
   mod_1_setup_server("1_setup_1", r6 = r6)
