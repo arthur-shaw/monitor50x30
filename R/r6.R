@@ -237,6 +237,12 @@ r6 <- R6::R6Class(
     plots_per_parcel_parcel_id_var_choices = NULL,
     plots_per_parcel_parcel_id_var = NULL,
     plots_per_parcel_provided = NULL,
+    # plot_use
+    plot_use_df_choices = NULL,
+    plot_use_df = NULL,
+    plot_use_plot_use_var_choices = NULL,
+    plot_use_plot_use_var = NULL,
+    plot_use_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -514,7 +520,13 @@ r6 <- R6::R6Class(
       plots_per_parcel_df = NULL,
       plots_per_parcel_parcel_id_var_choices = NULL,
       plots_per_parcel_parcel_id_var = NULL,
-      plots_per_parcel_provided = NULL
+      plots_per_parcel_provided = NULL,
+      # plot_use
+      plot_use_df_choices = NULL,
+      plot_use_df = NULL,
+      plot_use_plot_use_var_choices = NULL,
+      plot_use_plot_use_var = NULL,
+      plot_use_provided = NULL
 
     ) {
 
@@ -587,7 +599,10 @@ r6 <- R6::R6Class(
         "parcel_gps_why_not_measured_var_choices",
         # plots_per_parcel
         "plots_per_parcel_df_choices",
-        "plots_per_parcel_parcel_id_var_choices"
+        "plots_per_parcel_parcel_id_var_choices",
+        # plot_use
+        "plot_use_df_choices",
+        "plot_use_plot_use_var_choices"
       )
 
       # other fields not to write
