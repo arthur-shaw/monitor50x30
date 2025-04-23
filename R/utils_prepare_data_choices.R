@@ -116,16 +116,19 @@ make_data_var_choices <- function(
   # translate user-facing variable types into JSON-friendly types
   if (var_type == "categorical") {
     var_type_json <- c("MultyOptionsQuestion", "SingleQuestion")
+    calc_var_type_json <- c(1, 2, 4)
   } else if (var_type == "multi-select") {
     var_type_json <- "MultyOptionsQuestion"
+    calc_var_type_json <- NA
   } else if (var_type == "single-select") {
     var_type_json <- "SingleQuestion"
+    calc_var_type_json <- c(1, 2, 4)
   } else if (var_type == "numeric") {
-    var_type_json <- "NumericQuestion" 
-  } else if (var_type == "numeric") {
-     var_type_json <- "NumericQuestion"
+    var_type_json <- "NumericQuestion"
+    calc_var_type_json <- c(1, 2, 4)
   } else if (var_type == "gps") {
     var_type_json <- "GpsCoordinateQuestion"
+    calc_var_type_json <- NA
   } else if (var_type == "all") {
     var_type_json <- c(
       "SingleQuestion",
@@ -133,6 +136,7 @@ make_data_var_choices <- function(
       "NumericQuestion",
       "GpsCoordinateQuestion"
     )
+    calc_var_type_json <- c(1, 2, 3, 4, 5)
   }
 
   data_var_choices <- data_path |>
@@ -155,7 +159,12 @@ make_data_var_choices <- function(
     # ... drop questions that use reusable categorical answers
     dplyr::filter(uses_reusable_categories == FALSE) |>
     # select only desired variable types
-    dplyr::filter(type %in% var_type_json) |>
+    dplyr::filter(
+      # questions
+      type %in% var_type_json |
+      # computed variables
+      type_variable %in% calc_var_type_json
+    ) |>
     # prepare option text for display
     dplyr::mutate(
       # santize variable description,
