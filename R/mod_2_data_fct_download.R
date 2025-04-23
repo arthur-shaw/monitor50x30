@@ -305,9 +305,12 @@ extract_vars_metadata <- function(df) {
   vars_df <- df  |>
     # filter to objects that are variables
     # namely, entities that have a `question_type`
-    dplyr::filter(!is.na(.data$question_type)) |>
+    # include computed variables
+    dplyr::filter(!is.na(.data$question_type) | .data$type == "Variable") |>
     # capture for filtering variables
     dplyr::mutate(
+      is_question = !is.na(.data$question_type),
+      is_variable = !is.na(.data$type_variable),
       is_linked = (
         (!linked_to_roster_id  %in% c("", NA_character_)) |
         (!linked_to_question_id  %in% c("", NA_character_))
@@ -326,11 +329,18 @@ extract_vars_metadata <- function(df) {
     # create question description that is preferably the label, but question
     # text if the label is empty
     dplyr::mutate(
-      variable_description = dplyr::if_else(
-        condition = (is.na(.data$variable_label) | .data$variable_label == ""),
-        true = .data$question_text,
-        false = .data$variable_label,
-        missing = .data$variable_label
+      variable_description = dplyr::case_when(
+        is_question == TRUE ~ dplyr::if_else(
+          condition = (
+            is.na(.data$variable_label) |
+            .data$variable_label == ""
+          ),
+          true = .data$question_text,
+          false = .data$variable_label,
+          missing = .data$variable_label
+        ),
+        is_variable == TRUE ~ label_variable,
+        TRUE ~ NA_character_
       )
     )|>
     # keep relevant variables
@@ -340,7 +350,9 @@ extract_vars_metadata <- function(df) {
       # constructed description
       .data$variable_description,
       # attributes for filtering
-      .data$type, .data$is_linked, .data$uses_reusable_categories,
+      .data$is_question, .data$is_variable,
+      .data$type, .data$type_variable,
+      .data$is_linked, .data$uses_reusable_categories,
       .data$has_val_labels,
       # answer options or links to them
       categories_id,
