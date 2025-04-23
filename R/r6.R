@@ -253,6 +253,14 @@ r6 <- R6::R6Class(
     plot_gps_why_not_measured_var_choices = NULL,
     plot_gps_why_not_measured_var = NULL,
     plot_gps_provided = NULL,
+    # crops_per_plot
+    crops_per_plot_df_choices = NULL,
+    crops_per_plot_df = NULL,
+    crops_per_plot_parcel_id_var_choices = NULL,
+    crops_per_plot_parcel_id_var = NULL,
+    crops_per_plot_plot_id_var_choices = NULL,
+    crops_per_plot_plot_id_var = NULL,
+    crops_per_plot_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -546,7 +554,15 @@ r6 <- R6::R6Class(
       plot_gps_not_measured_val = NULL,
       plot_gps_why_not_measured_var_choices = NULL,
       plot_gps_why_not_measured_var = NULL,
-      plot_gps_provided = NULL
+      plot_gps_provided = NULL,
+      # crops_per_plot
+      crops_per_plot_df_choices = NULL,
+      crops_per_plot_df = NULL,
+      crops_per_plot_parcel_id_var_choices = NULL,
+      crops_per_plot_parcel_id_var = NULL,
+      crops_per_plot_plot_id_var_choices = NULL,
+      crops_per_plot_plot_id_var = NULL,
+      crops_per_plot_provided = NULL
 
     ) {
 
@@ -627,7 +643,11 @@ r6 <- R6::R6Class(
         "plot_gps_df_choices",
         "plot_gps_gps_var_choices",
         "plot_gps_not_measured_val_choices",
-        "plot_gps_why_not_measured_var_choices"
+        "plot_gps_why_not_measured_var_choices",
+        # crops_per_parcel
+        "crops_per_plot_df_choices",
+        "crops_per_plot_parcel_id_var_choices",
+        "crops_per_plot_plot_id_var_choices"
       )
 
       # other fields not to write
