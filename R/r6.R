@@ -261,6 +261,14 @@ r6 <- R6::R6Class(
     crops_per_plot_plot_id_var_choices = NULL,
     crops_per_plot_plot_id_var = NULL,
     crops_per_plot_provided = NULL,
+    # crop_types
+    crop_types_df_choices = NULL,
+    crop_types_df = NULL,
+    crop_types_var_choices = NULL,
+    crop_types_var = NULL,
+    crop_type_temp_val = NULL,
+    crop_type_perm_val = NULL,
+    crop_types_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -562,7 +570,15 @@ r6 <- R6::R6Class(
       crops_per_plot_parcel_id_var = NULL,
       crops_per_plot_plot_id_var_choices = NULL,
       crops_per_plot_plot_id_var = NULL,
-      crops_per_plot_provided = NULL
+      crops_per_plot_provided = NULL,
+      # crop_types
+      crop_types_df_choices = NULL,
+      crop_types_df = NULL,
+      crop_types_var_choices = NULL,
+      crop_types_var = NULL,
+      crop_type_temp_val = NULL,
+      crop_type_perm_val = NULL,
+      crop_types_provided = NULL
 
     ) {
 
@@ -647,7 +663,10 @@ r6 <- R6::R6Class(
         # crops_per_parcel
         "crops_per_plot_df_choices",
         "crops_per_plot_parcel_id_var_choices",
-        "crops_per_plot_plot_id_var_choices"
+        "crops_per_plot_plot_id_var_choices",
+        # crop_types
+        "crop_types_df_choices",
+        "crop_types_var_choices"
       )
 
       # other fields not to write
