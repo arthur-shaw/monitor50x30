@@ -384,7 +384,7 @@ show_accordion_panel <- function(value) {
 #' Set the table accordion state: hidden or shown
 #'
 #' @description
-#' First, determien whether the target table was selected.
+#' First, determine whether the target table was selected.
 #' Then, set the state of the accordion panel UI:
 #' - hidden, if the table was not selected
 #' - shown, if selected
