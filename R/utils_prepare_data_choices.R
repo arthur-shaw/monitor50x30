@@ -230,6 +230,29 @@ extract_var_names <- function(vars) {
 
 }
 
+#' Extract varname names from ID variable choices
+#'
+#' @param vars Character vector. Variable choices of the following form:
+#' `{varname} : {variable_description}`
+#'
+#' @return Character vector. Contains only variable names.
+#'
+#' @importFrom purrr map_chr
+#' @importFrom stringr str_extract
+extract_id_var_names <- function(vars) {
+
+  vars_extracted <- purrr::map_chr(
+    .x = vars,
+    .f = ~ stringr::str_extract(
+      string = .x,
+      pattern = "^.+(?= :)"
+    )
+  )
+
+  return(vars_extracted)
+
+}
+
 #' Construct variable value options for selection in UI
 #'
 #' @param qnr_df Data frame. Of the form returned by
