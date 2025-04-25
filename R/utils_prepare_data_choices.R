@@ -303,6 +303,59 @@ make_val_options <- function(
 
 }
 
+#' Make value choices for ID variables
+#' 
+#' @param dir Character. Path to the directory where data are stored.
+#' @param varname Character. Name of the target variable in the exported data.
+#' (e.g., `crop__id`)
+#'
+#' @return Character vector. Variable values this form:
+#' `[{value}] Value label text`
+#'
+#' @importFrom haven read_dta
+#' @importFrom labelled get_value_labels
+#' @importFrom purrr pluck
+#' @importFrom tibble enframe
+#' @importFrom dplyr mutate pull
+#' @importFrom glue glue
+make_id_val_options <- function(
+  path,
+  varname
+) {
+
+  val_lbls <- path |>
+    # ingest data
+    # selecting target column and
+    # keeping only header row
+    haven::read_dta(
+      col_select = !!rlang::sym(varname),
+      n_max = 0
+    ) |>
+    # extract the value labels in the data frame
+    labelled::get_value_labels() |>
+    # since 👆 returns a list of labelled vectors, select the 1st list element
+    # which is also the only element
+    purrr::pluck(1)
+
+  # if the labells are null, pass an empty character vector
+  if (is.null(val_lbls)) {
+
+    id_val_options <- character(0)
+
+  # otherwise, construct options as a structured character vector
+  } else {
+
+    id_val_options <- val_lbls |>
+      tibble::enframe() |>
+      dplyr::mutate(choices = glue::glue("[{value}] : {name}")) |>
+      dplyr::pull(choices)
+
+  }
+
+  return(id_val_options)
+
+}
+
 #' Extract variable values from selections
 #'
 #' @param vals Character vector. Variable value selections of this form:
