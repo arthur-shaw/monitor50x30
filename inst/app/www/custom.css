@@ -1,0 +1,135 @@
+/* COLORS */
+
+:root {
+
+  /* primary colors */
+  --emerald: #0c5849;
+  --blue: #8baeaa;
+  --blue-darker: #7aa19a;
+  --green: #88b05c; 
+  --green-darker: #769a50;
+
+  /* secondary colors */
+  --lime: #c9d559; 
+  --grey: #e8e5e1;
+  --grey-muted: #999999;
+  --achiote: #8d3c42;
+
+  /* other colors */
+  --white: #ffffff;
+  --black: #000000;
+}
+
+/* ============================================
+   Base Reset / Transitions
+   ============================================ */
+
+/* Smooth transitions for interactive components (other than accordion) */
+.accordion-button,
+.btn,
+.form-control,
+.nav-link {
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+/* ============================================
+   Accordion
+   ============================================ */
+
+/* Collapsed accordion header */
+.accordion-button.collapsed {
+  background-color: var(--blue);
+  color: var(--white);
+  transition: none; /* No transition for accordion button */
+}
+
+/* Expanded accordion header */
+.accordion-button:not(.collapsed) {
+  background-color: var(--emerald);
+  color: var(--white);
+  transition: none; /* No transition for accordion button */
+}
+
+/* Hover over accordion header */
+.accordion-button:hover {
+  background-color: var(--blue-darker);
+  color: var(--white);
+}
+
+/* Accordion body background */
+.accordion-body {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+/* ============================================
+   Button (Shiny action buttons)
+   ============================================ */
+
+/* Default action buttons */
+.btn.action-button {
+  background-color: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+}
+
+/* Hover and focus for action buttons */
+.btn.action-button:hover,
+.btn.action-button:focus {
+  background-color: var(--green-darker);
+  border-color: var(--green-darker);
+  color: var(--white);
+}
+
+/* Focus visible outline for accessibility */
+.btn.action-button:focus-visible {
+  outline: 3px solid var(--lime);
+  outline-offset: 2px;
+}
+
+/* Disabled state for buttons */
+.btn.action-button:disabled,
+.btn.action-button.disabled {
+  background-color: var(--grey);
+  border-color: var(--grey);
+  color: var(--grey-muted);
+}
+
+/* ============================================
+   Navbar
+   ============================================ */
+
+/* Navbar background */
+.navbar {
+  background-color: var(--white);
+  border-bottom: 1px solid var(--grey); /* soft divider line */
+}
+
+/* Navbar link */
+.navbar .nav-link {
+  font-weight: 500; /* semi-bold text */
+  position: relative;
+  transition: color 0.2s ease, border-bottom 0.2s ease;
+  border-bottom: 3px solid transparent; /* reserve space for active underline */
+  padding-bottom: 0.5rem; /* add bottom padding for spacing */
+}
+
+/* Navbar link hover */
+.navbar .nav-link:hover {
+  color: var(--emerald);
+  border-bottom: 3px solid var(--blue);
+}
+
+/* Active navbar link */
+.navbar .nav-link.active {
+  color: var(--emerald);
+  font-size: 1.05rem;
+  border-bottom: 5px solid var(--emerald);
+}
+
+/* Focused navbar link */
+.navbar .nav-link:focus {
+  color: var(--emerald);
+  border-bottom: 3px solid var(--emerald);
+  outline: none;
+}
