@@ -283,6 +283,21 @@ r6 <- R6::R6Class(
     temp_crop_harvest_why_not_harvest_var_choices = NULL,
     temp_crop_harvest_why_not_harvest_var = NULL,
     temp_crop_harvest_provided = NULL,
+    # temp_crop_sales
+    temp_crop_sales_df_choices = NULL,
+    temp_crop_sales_df = NULL,
+    temp_crop_sales_crop_id_var_choices = NULL,
+    temp_crop_sales_crop_id_var = NULL,
+    temp_crop_sales_crop_vals_choices = NULL,
+    temp_crop_sales_crop_vals = NULL,
+    temp_crop_sales_sold_var_choices = NULL,
+    temp_crop_sales_sold_var = NULL,
+    temp_crop_sales_sold_val_choices = NULL,
+    temp_crop_sales_sold_val = NULL,
+    temp_crop_sales_amt_sold_vars_choices = NULL,
+    temp_crop_sales_amt_sold_vars = NULL,
+    temp_crop_sales_amt_sold_dk_val = NULL,
+    temp_crop_sales_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -606,8 +621,22 @@ r6 <- R6::R6Class(
       temp_crop_harvest_harvest_val = NULL,
       temp_crop_harvest_why_not_harvest_var_choices = NULL,
       temp_crop_harvest_why_not_harvest_var = NULL,
-      temp_crop_harvest_provided = NULL
-
+      temp_crop_harvest_provided = NULL,
+      # temp_crop_sales
+      temp_crop_sales_df_choices = NULL,
+      temp_crop_sales_df = NULL,
+      temp_crop_sales_crop_id_var_choices = NULL,
+      temp_crop_sales_crop_id_var = NULL,
+      temp_crop_sales_crop_vals_choices = NULL,
+      temp_crop_sales_crop_vals = NULL,
+      temp_crop_sales_sold_var_choices = NULL,
+      temp_crop_sales_sold_var = NULL,
+      temp_crop_sales_sold_val_choices = NULL,
+      temp_crop_sales_sold_val = NULL,
+      temp_crop_sales_amt_sold_vars_choices = NULL,
+      temp_crop_sales_amt_sold_vars = NULL,
+      temp_crop_sales_amt_sold_dk_val = NULL,
+      temp_crop_sales_provided = NULL
     ) {
 
       # get function arguments as character vector
@@ -702,6 +731,15 @@ r6 <- R6::R6Class(
         "temp_crop_harvest_harvest_var_choices",
         "temp_crop_harvest_harvest_val_choices",
         "temp_crop_harvest_why_not_harvest_var_choices",
+        # temp_crop_sales
+        "temp_crop_sales_df_choices",
+        "temp_crop_sales_crop_id_var_choices",
+        "temp_crop_sales_crop_vals_choices",
+        "temp_crop_sales_crop_vals",
+        "temp_crop_sales_sold_var_choices",
+        "temp_crop_sales_sold_val_choices",
+        "temp_crop_sales_amt_sold_vars_choices",
+        "temp_crop_sales_amt_sold_vars"
       )
 
       # other fields not to write
