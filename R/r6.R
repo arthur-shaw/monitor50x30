@@ -298,6 +298,20 @@ r6 <- R6::R6Class(
     temp_crop_sales_amt_sold_vars = NULL,
     temp_crop_sales_amt_sold_dk_val = NULL,
     temp_crop_sales_provided = NULL,
+    # perm_crop_harvest
+    perm_crop_harvest_df_choices = NULL,
+    perm_crop_harvest_df = NULL,
+    perm_crop_harvest_crop_id_var_choices = NULL,
+    perm_crop_harvest_crop_id_var = NULL,
+    perm_crop_harvest_crop_vals_choices = NULL,
+    perm_crop_harvest_crop_vals = NULL,
+    perm_crop_harvest_harvest_var_choices = NULL,
+    perm_crop_harvest_harvest_var = NULL,
+    perm_crop_harvest_harvest_val_choices = NULL,
+    perm_crop_harvest_harvest_val = NULL,
+    perm_crop_harvest_why_not_harvest_var_choices = NULL,
+    perm_crop_harvest_why_not_harvest_var = NULL,
+    perm_crop_harvest_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -636,7 +650,21 @@ r6 <- R6::R6Class(
       temp_crop_sales_amt_sold_vars_choices = NULL,
       temp_crop_sales_amt_sold_vars = NULL,
       temp_crop_sales_amt_sold_dk_val = NULL,
-      temp_crop_sales_provided = NULL
+      temp_crop_sales_provided = NULL,
+      # perm_crop_harvest
+      perm_crop_harvest_df_choices = NULL,
+      perm_crop_harvest_df = NULL,
+      perm_crop_harvest_crop_id_var_choices = NULL,
+      perm_crop_harvest_crop_id_var = NULL,
+      perm_crop_harvest_crop_vals_choices = NULL,
+      perm_crop_harvest_crop_vals = NULL,
+      perm_crop_harvest_harvest_var_choices = NULL,
+      perm_crop_harvest_harvest_var = NULL,
+      perm_crop_harvest_harvest_val_choices = NULL,
+      perm_crop_harvest_harvest_val = NULL,
+      perm_crop_harvest_why_not_harvest_var_choices = NULL,
+      perm_crop_harvest_why_not_harvest_var = NULL,
+      perm_crop_harvest_provided = NULL
     ) {
 
       # get function arguments as character vector
@@ -739,7 +767,34 @@ r6 <- R6::R6Class(
         "temp_crop_sales_sold_var_choices",
         "temp_crop_sales_sold_val_choices",
         "temp_crop_sales_amt_sold_vars_choices",
-        "temp_crop_sales_amt_sold_vars"
+        "temp_crop_sales_amt_sold_vars",
+        # perm_crop_harvest
+        "perm_crop_harvest_df_choices",
+        "perm_crop_harvest_crop_id_var_choices",
+        "perm_crop_harvest_crop_vals_choices",
+        "perm_crop_harvest_harvest_var_choices",
+        "perm_crop_harvest_harvest_val_choices",
+        "perm_crop_harvest_why_not_harvest_var_choices",
+        # perm_crop_sales
+        "perm_crop_sales_df_choices",
+        "perm_crop_sales_crop_id_var_choices",
+        "perm_crop_sales_crop_vals_choices",
+        "perm_crop_sales_crop_vals",
+        "perm_crop_sales_sold_var_choices",
+        "perm_crop_sales_sold_val_choices",
+        "perm_crop_sales_amt_sold_vars_choices",
+        "perm_crop_sales_amt_sold_vars",
+        # livestock_ownership
+        "livestock_ownership_df_choices",
+        "livestock_ownership_animal_var_choices",
+        # cow_displacement
+        "cow_displacement_df_choices",
+        "cow_displacement_animal_var_choices",
+        "cow_displacement_val_choices",
+        # hen_displacement
+        "hen_displacement_df_choices",
+        "hen_displacement_animal_var_choices",
+        "hen_displacement_val_choices"
       )
 
       # other fields not to write
