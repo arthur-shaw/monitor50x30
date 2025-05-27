@@ -96,8 +96,9 @@ mod_4_quality_1_setup_2_data_ui <- function(id) {
       bslib::accordion_panel(
         title = "Permanent crop sales",
         value = "perm_crop_sales",
-        # TODO: insert UI function
-        shiny::tags$p("TODO")
+        mod_4_quality_1_setup_2_data_perm_crop_sales_ui(
+          id = ns("4_quality_1_setup_2_data_perm_crop_sales_1")
+        )
       ),
       bslib::accordion_panel(
         title = "Livestock owership",
@@ -322,6 +323,11 @@ mod_4_quality_1_setup_2_data_server <- function(id, parent, r6){
     )
     mod_4_quality_1_setup_2_data_perm_crop_harvest_server(
       id = "4_quality_1_setup_2_data_perm_crop_harvest_1",
+      parent = session,
+      r6 = r6
+    )
+    mod_4_quality_1_setup_2_data_perm_crop_sales_server(
+      id = "4_quality_1_setup_2_data_perm_crop_sales_1",
       parent = session,
       r6 = r6
     )

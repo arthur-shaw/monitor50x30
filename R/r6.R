@@ -312,6 +312,21 @@ r6 <- R6::R6Class(
     perm_crop_harvest_why_not_harvest_var_choices = NULL,
     perm_crop_harvest_why_not_harvest_var = NULL,
     perm_crop_harvest_provided = NULL,
+    # perm_crop_sales
+    perm_crop_sales_df_choices = NULL,
+    perm_crop_sales_df = NULL,
+    perm_crop_sales_crop_id_var_choices = NULL,
+    perm_crop_sales_crop_id_var = NULL,
+    perm_crop_sales_crop_vals_choices = NULL,
+    perm_crop_sales_crop_vals = NULL,
+    perm_crop_sales_sold_var_choices = NULL,
+    perm_crop_sales_sold_var = NULL,
+    perm_crop_sales_sold_val_choices = NULL,
+    perm_crop_sales_sold_val = NULL,
+    perm_crop_sales_amt_sold_vars_choices = NULL,
+    perm_crop_sales_amt_sold_vars = NULL,
+    perm_crop_sales_amt_sold_dk_val = NULL,
+    perm_crop_sales_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -664,7 +679,22 @@ r6 <- R6::R6Class(
       perm_crop_harvest_harvest_val = NULL,
       perm_crop_harvest_why_not_harvest_var_choices = NULL,
       perm_crop_harvest_why_not_harvest_var = NULL,
-      perm_crop_harvest_provided = NULL
+      perm_crop_harvest_provided = NULL,
+      # perm_crop_sales
+      perm_crop_sales_df_choices = NULL,
+      perm_crop_sales_df = NULL,
+      perm_crop_sales_crop_id_var_choices = NULL,
+      perm_crop_sales_crop_id_var = NULL,
+      perm_crop_sales_crop_vals_choices = NULL,
+      perm_crop_sales_crop_vals = NULL,
+      perm_crop_sales_sold_var_choices = NULL,
+      perm_crop_sales_sold_var = NULL,
+      perm_crop_sales_sold_val_choices = NULL,
+      perm_crop_sales_sold_val = NULL,
+      perm_crop_sales_amt_sold_vars_choices = NULL,
+      perm_crop_sales_amt_sold_vars = NULL,
+      perm_crop_sales_amt_sold_dk_val = NULL,
+      perm_crop_sales_provided = NULL
     ) {
 
       # get function arguments as character vector
