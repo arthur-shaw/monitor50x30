@@ -327,6 +327,11 @@ r6 <- R6::R6Class(
     perm_crop_sales_amt_sold_vars = NULL,
     perm_crop_sales_amt_sold_dk_val = NULL,
     perm_crop_sales_provided = NULL,
+    # livestock_ownership
+    livestock_ownership_df_choices = NULL,
+    livestock_ownership_df = NULL,
+    livestock_ownership_animal_var_choices = NULL,
+    livestock_ownership_animal_var = NULL,
 
     # ==========================================================================
     # Methods
@@ -694,7 +699,12 @@ r6 <- R6::R6Class(
       perm_crop_sales_amt_sold_vars_choices = NULL,
       perm_crop_sales_amt_sold_vars = NULL,
       perm_crop_sales_amt_sold_dk_val = NULL,
-      perm_crop_sales_provided = NULL
+      perm_crop_sales_provided = NULL,
+      # livestock_ownership
+      livestock_ownership_df_choices = NULL,
+      livestock_ownership_df = NULL,
+      livestock_ownership_animal_var_choices = NULL,
+      livestock_ownership_animal_var = NULL
     ) {
 
       # get function arguments as character vector
