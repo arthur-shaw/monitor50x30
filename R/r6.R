@@ -332,6 +332,17 @@ r6 <- R6::R6Class(
     livestock_ownership_df = NULL,
     livestock_ownership_animal_var_choices = NULL,
     livestock_ownership_animal_var = NULL,
+    # cow_displacement
+    cow_displacement_df_choices = NULL,
+    cow_displacement_df  = NULL,
+    cow_displacement_animal_var_choices = NULL,
+    cow_displacement_animal_var = NULL,
+    cow_displacement_val_choices = NULL,
+    cow_displacement_bull_val = NULL,
+    cow_displacement_cow_val = NULL,
+    cow_displacement_steer_heifer_val = NULL,
+    cow_displacement_calf_val = NULL,
+    cow_displacement_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -704,7 +715,18 @@ r6 <- R6::R6Class(
       livestock_ownership_df_choices = NULL,
       livestock_ownership_df = NULL,
       livestock_ownership_animal_var_choices = NULL,
-      livestock_ownership_animal_var = NULL
+      livestock_ownership_animal_var = NULL,
+      # cow_displacement
+      cow_displacement_df_choices = NULL,
+      cow_displacement_df  = NULL,
+      cow_displacement_animal_var_choices = NULL,
+      cow_displacement_animal_var = NULL,
+      cow_displacement_val_choices = NULL,
+      cow_displacement_bull_val = NULL,
+      cow_displacement_cow_val = NULL,
+      cow_displacement_steer_heifer_val = NULL,
+      cow_displacement_calf_val = NULL,
+      cow_displacement_provided = NULL
     ) {
 
       # get function arguments as character vector
