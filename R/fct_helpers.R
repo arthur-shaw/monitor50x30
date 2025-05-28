@@ -424,3 +424,46 @@ set_table_accordion_state <- function(r6, tbl_id) {
   }
 
 }
+
+#' Update several Shiny inputs
+#'
+#' @param input Shiny input object
+#' @param session Shiny session object
+#' @param specs Data frame of update specfications. In particular:
+#' - `id`. Name of target `inputId`
+#' - `updater`. Shiny update function (e.g., `updateSelectInput`)
+#' - `args`. List of arguments to pass to the Shiny update function
+#' (e.g., `choices`, `selected`, `value`, etc.)
+#'
+#' @return Side-effect of updating target inputs in the UI
+#'
+#' @importFrom purrr pwalk
+#' @importFrom shiny freezeReactiveValue
+#' @importFrom rlang exec
+update_inputs <- function(input, session, specs) {
+
+  purrr::pwalk(
+    .l = specs,
+    .f = function(id, updater, args) {
+
+      # step 1: "freeze" the target input
+      # so that reactives that depend on it will not be triggered
+      shiny::freezeReactiveValue(
+        x = input, 
+        name = id
+      )
+
+      # step 2: update the target input
+      # by composing and executing a call to update
+      rlang::exec(
+        .fn = updater,
+        # arguments that are always required/relevant
+        inputId = id,
+        session = session,
+        # splice list of arbitrary arguments so as to pass to `.fn`
+        !!!args
+      )
+    }
+  )
+
+}
