@@ -372,7 +372,25 @@ r6 <- R6::R6Class(
     milk_prod_amt_sold_var = NULL,
     milk_prod_amt_sold_dk_val = NULL,
     milk_prod_provided = NULL,
-
+    # egg_prod_sales
+    egg_prod_df_choices = NULL,
+    egg_prod_df = NULL,
+    egg_prod_animal_id_var_choices = NULL,
+    egg_prod_animal_id_var = NULL,
+    egg_prod_animal_vals_choices = NULL,
+    egg_prod_animal_vals = NULL,
+    egg_prod_produced_var_choices = NULL,
+    egg_prod_produced_var = NULL,
+    egg_prod_produced_val_choices = NULL,
+    egg_prod_produced_val = NULL,
+    egg_prod_sold_var_choices = NULL,
+    egg_prod_sold_var = NULL,
+    egg_prod_sold_val_choices = NULL,
+    egg_prod_sold_val = NULL,
+    egg_prod_amt_sold_var_choices = NULL,
+    egg_prod_amt_sold_var = NULL,
+    egg_prod_amt_sold_dk_val = NULL,
+    egg_prod_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -785,7 +803,26 @@ r6 <- R6::R6Class(
       milk_prod_amt_sold_var_choices = NULL,
       milk_prod_amt_sold_var = NULL,
       milk_prod_amt_sold_dk_val = NULL,
-      milk_prod_provided = NULL
+      milk_prod_provided = NULL,
+      # egg_prod_sales
+      egg_prod_df_choices = NULL,
+      egg_prod_df = NULL,
+      egg_prod_animal_id_var_choices = NULL,
+      egg_prod_animal_id_var = NULL,
+      egg_prod_animal_vals_choices = NULL,
+      egg_prod_animal_vals = NULL,
+      egg_prod_produced_var_choices = NULL,
+      egg_prod_produced_var = NULL,
+      egg_prod_produced_val_choices = NULL,
+      egg_prod_produced_val = NULL,
+      egg_prod_sold_var_choices = NULL,
+      egg_prod_sold_var = NULL,
+      egg_prod_sold_val_choices = NULL,
+      egg_prod_sold_val = NULL,
+      egg_prod_amt_sold_var_choices = NULL,
+      egg_prod_amt_sold_var = NULL,
+      egg_prod_amt_sold_dk_val = NULL,
+      egg_prod_provided = NULL
     ) {
 
       # get function arguments as character vector
@@ -925,7 +962,17 @@ r6 <- R6::R6Class(
         "milk_prod_produced_val_choices",
         "milk_prod_sold_var_choices",
         "milk_prod_sold_val_choices",
-        "milk_prod_amt_sold_var_choices"
+        "milk_prod_amt_sold_var_choices",
+        # egg_prod_sales
+        "egg_prod_df_choices",
+        "egg_prod_animal_id_var_choices",
+        "egg_prod_animal_vals_choices",
+        "egg_prod_animal_vals",
+        "egg_prod_produced_var_choices",
+        "egg_prod_produced_val_choices",
+        "egg_prod_sold_var_choices",
+        "egg_prod_sold_val_choices",
+        "egg_prod_amt_sold_var_choices"
       )
 
       # other fields not to write
