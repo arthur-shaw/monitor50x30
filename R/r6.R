@@ -353,6 +353,26 @@ r6 <- R6::R6Class(
     hen_displacement_hen_val = NULL,
     hen_displacement_pullet_val = NULL,
     hen_displacement_provided = NULL,
+    # milk_prod_sales
+    milk_prod_df_choices = NULL,
+    milk_prod_df = NULL,
+    milk_prod_animal_id_var_choices = NULL,
+    milk_prod_animal_id_var = NULL,
+    milk_prod_animal_vals_choices = NULL,
+    milk_prod_animal_vals = NULL,
+    milk_prod_produced_var_choices = NULL,
+    milk_prod_produced_var = NULL,
+    milk_prod_produced_val_choices = NULL,
+    milk_prod_produced_val = NULL,
+    milk_prod_sold_var_choices = NULL,
+    milk_prod_sold_var = NULL,
+    milk_prod_sold_val_choices = NULL,
+    milk_prod_sold_val = NULL,
+    milk_prod_amt_sold_var_choices = NULL,
+    milk_prod_amt_sold_var = NULL,
+    milk_prod_amt_sold_dk_val = NULL,
+    milk_prod_provided = NULL,
+
 
     # ==========================================================================
     # Methods
@@ -746,7 +766,26 @@ r6 <- R6::R6Class(
       hen_displacement_cock_val = NULL,
       hen_displacement_hen_val = NULL,
       hen_displacement_pullet_val = NULL,
-      hen_displacement_provided = NULL
+      hen_displacement_provided = NULL,
+      # milk_prod_sales
+      milk_prod_df_choices = NULL,
+      milk_prod_df = NULL,
+      milk_prod_animal_id_var_choices = NULL,
+      milk_prod_animal_id_var = NULL,
+      milk_prod_animal_vals_choices = NULL,
+      milk_prod_animal_vals = NULL,
+      milk_prod_produced_var_choices = NULL,
+      milk_prod_produced_var = NULL,
+      milk_prod_produced_val_choices = NULL,
+      milk_prod_produced_val = NULL,
+      milk_prod_sold_var_choices = NULL,
+      milk_prod_sold_var = NULL,
+      milk_prod_sold_val_choices = NULL,
+      milk_prod_sold_val = NULL,
+      milk_prod_amt_sold_var_choices = NULL,
+      milk_prod_amt_sold_var = NULL,
+      milk_prod_amt_sold_dk_val = NULL,
+      milk_prod_provided = NULL
     ) {
 
       # get function arguments as character vector
@@ -876,7 +915,17 @@ r6 <- R6::R6Class(
         # hen_displacement
         "hen_displacement_df_choices",
         "hen_displacement_animal_var_choices",
-        "hen_displacement_val_choices"
+        "hen_displacement_val_choices",
+        # milk_prod_sales
+        "milk_prod_df_choices",
+        "milk_prod_animal_id_var_choices",
+        "milk_prod_animal_vals_choices",
+        "milk_prod_animal_vals",
+        "milk_prod_produced_var_choices",
+        "milk_prod_produced_val_choices",
+        "milk_prod_sold_var_choices",
+        "milk_prod_sold_val_choices",
+        "milk_prod_amt_sold_var_choices"
       )
 
       # other fields not to write
