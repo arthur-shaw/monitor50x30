@@ -448,6 +448,29 @@ r6 <- R6::R6Class(
     forestry_prod_amt_sold_var = NULL,
     forestry_prod_amt_sold_dk_val = NULL,
     forestry_prod_provided = NULL,
+    # process_crop_prod
+    process_crop_prod_hhold_df_choices = NULL,
+    process_crop_prod_hhold_df = NULL,
+    process_crop_prod_temp_crops_var_choices = NULL,
+    process_crop_prod_temp_crops_var = NULL,
+    process_crop_prod_perm_crops_var_choices = NULL,
+    process_crop_prod_perm_crops_var = NULL,
+    process_crop_prod_processed_var_choices = NULL,
+    process_crop_prod_processed_var = NULL,
+    process_crop_prod_processed_val_choices = NULL,
+    process_crop_prod_processed_val = NULL,
+    process_crop_prod_products_var_choices = NULL,
+    process_crop_prod_products_var = NULL,
+    process_crop_prod_product_df_choices = NULL,
+    process_crop_prod_product_df = NULL,
+    process_crop_prod_sold_var_choices = NULL,
+    process_crop_prod_sold_var = NULL,
+    process_crop_prod_sold_val_choices = NULL,
+    process_crop_prod_sold_val = NULL,
+    process_crop_prod_amt_sold_var_choices = NULL,
+    process_crop_prod_amt_sold_var = NULL,
+    process_crop_prod_amt_sold_dk_val = NULL,
+    process_crop_prod_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -936,7 +959,30 @@ r6 <- R6::R6Class(
       forestry_prod_amt_sold_var_choices = NULL,
       forestry_prod_amt_sold_var = NULL,
       forestry_prod_amt_sold_dk_val = NULL,
-      forestry_prod_provided = NULL
+      forestry_prod_provided = NULL,
+      # process_crop_prod
+      process_crop_prod_hhold_df_choices = NULL,
+      process_crop_prod_hhold_df = NULL,
+      process_crop_prod_temp_crops_var_choices = NULL,
+      process_crop_prod_temp_crops_var = NULL,
+      process_crop_prod_perm_crops_var_choices = NULL,
+      process_crop_prod_perm_crops_var = NULL,
+      process_crop_prod_processed_var_choices = NULL,
+      process_crop_prod_processed_var = NULL,
+      process_crop_prod_processed_val_choices = NULL,
+      process_crop_prod_processed_val = NULL,
+      process_crop_prod_products_var_choices = NULL,
+      process_crop_prod_products_var = NULL,
+      process_crop_prod_product_df_choices = NULL,
+      process_crop_prod_product_df = NULL,
+      process_crop_prod_sold_var_choices = NULL,
+      process_crop_prod_sold_var = NULL,
+      process_crop_prod_sold_val_choices = NULL,
+      process_crop_prod_sold_val = NULL,
+      process_crop_prod_amt_sold_var_choices = NULL,
+      process_crop_prod_amt_sold_var = NULL,
+      process_crop_prod_amt_sold_dk_val = NULL,
+      process_crop_prod_provided = NULL
     ) {
 
       # get function arguments as character vector
@@ -1116,7 +1162,19 @@ r6 <- R6::R6Class(
         "forestry_prod_sold_var_choices",
         "forestry_prod_sold_val_choices",
         "forestry_prod_amt_sold_var_choices",
-        "forestry_prod_amt_sold_var"
+        "forestry_prod_amt_sold_var",
+        # process_crop_prod
+        "process_crop_prod_hhold_df_choices",
+        "process_crop_prod_temp_crops_var_choices",
+        "process_crop_prod_perm_crops_var_choices",
+        "process_crop_prod_processed_var_choices",
+        "process_crop_prod_processed_val_choices",
+        "process_crop_prod_products_var_choices",
+        "process_crop_prod_product_df_choices",
+        "process_crop_prod_sold_var_choices",
+        "process_crop_prod_sold_val_choices",
+        "process_crop_prod_amt_sold_var_choices",
+        "process_crop_prod_amt_sold_var"
       )
 
       # other fields not to write
