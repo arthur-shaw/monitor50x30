@@ -410,6 +410,25 @@ r6 <- R6::R6Class(
     fisheries_prod_amt_sold_var = NULL,
     fisheries_prod_amt_sold_dk_val = NULL,
     fisheries_prod_provided = NULL,
+    # aquaculture_prod_sales
+    aquaculture_prod_hhold_df_choices = NULL,
+    aquaculture_prod_hhold_df = NULL,
+    aquaculture_prod_practice_var_choices = NULL,
+    aquaculture_prod_practice_var = NULL,
+    aquaculture_prod_practice_val_choices = NULL,
+    aquaculture_prod_practice_val = NULL,
+    aquaculture_prod_products_var_choices = NULL,
+    aquaculture_prod_products_var = NULL,
+    aquaculture_prod_product_df_choices = NULL,
+    aquaculture_prod_product_df = NULL,
+    aquaculture_prod_sold_var_choices = NULL,
+    aquaculture_prod_sold_var = NULL,
+    aquaculture_prod_sold_val_choices = NULL,
+    aquaculture_prod_sold_val = NULL,
+    aquaculture_prod_amt_sold_var_choices = NULL,
+    aquaculture_prod_amt_sold_var = NULL,
+    aquaculture_prod_amt_sold_dk_val = NULL,
+    aquaculture_prod_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -860,7 +879,26 @@ r6 <- R6::R6Class(
       fisheries_prod_amt_sold_var_choices = NULL,
       fisheries_prod_amt_sold_var = NULL,
       fisheries_prod_amt_sold_dk_val = NULL,
-      fisheries_prod_provided = NULL
+      fisheries_prod_provided = NULL,
+      # aquaculture_prod_sales
+      aquaculture_prod_hhold_df_choices = NULL,
+      aquaculture_prod_hhold_df = NULL,
+      aquaculture_prod_practice_var_choices = NULL,
+      aquaculture_prod_practice_var = NULL,
+      aquaculture_prod_practice_val_choices = NULL,
+      aquaculture_prod_practice_val = NULL,
+      aquaculture_prod_products_var_choices = NULL,
+      aquaculture_prod_products_var = NULL,
+      aquaculture_prod_product_df_choices = NULL,
+      aquaculture_prod_product_df = NULL,
+      aquaculture_prod_sold_var_choices = NULL,
+      aquaculture_prod_sold_var = NULL,
+      aquaculture_prod_sold_val_choices = NULL,
+      aquaculture_prod_sold_val = NULL,
+      aquaculture_prod_amt_sold_var_choices = NULL,
+      aquaculture_prod_amt_sold_var = NULL,
+      aquaculture_prod_amt_sold_dk_val = NULL,
+      aquaculture_prod_provided = NULL
     ) {
 
       # get function arguments as character vector
@@ -1020,7 +1058,17 @@ r6 <- R6::R6Class(
         "fisheries_prod_sold_var_choices",
         "fisheries_prod_sold_val_choices",
         "fisheries_prod_amt_sold_var_choices",
-        "fisheries_prod_amt_sold_var"
+        "fisheries_prod_amt_sold_var",
+        # aquaculture_prod_sales
+        "aquaculture_prod_hhold_df_choices",
+        "aquaculture_prod_practice_var_choices",
+        "aquaculture_prod_practice_val_choices",
+        "aquaculture_prod_products_var_choices",
+        "aquaculture_prod_product_df_choices",
+        "aquaculture_prod_sold_var_choices",
+        "aquaculture_prod_sold_val_choices",
+        "aquaculture_prod_amt_sold_var_choices",
+        "aquaculture_prod_amt_sold_var"
       )
 
       # other fields not to write
