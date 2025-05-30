@@ -116,16 +116,28 @@ make_data_var_choices <- function(
   # translate user-facing variable types into JSON-friendly types
   if (var_type == "categorical") {
     var_type_json <- c("MultyOptionsQuestion", "SingleQuestion")
-    calc_var_type_json <- c(1, 2, 4)
+    calc_var_type_json <- c(
+      1, # Boolean
+      2, # Double
+      4 # Long Integer
+    )
   } else if (var_type == "multi-select") {
     var_type_json <- "MultyOptionsQuestion"
     calc_var_type_json <- NA
   } else if (var_type == "single-select") {
     var_type_json <- "SingleQuestion"
-    calc_var_type_json <- c(1, 2, 4)
+    calc_var_type_json <- c(
+      1, # Boolean
+      2, # Double
+      4 # Long Integer
+    )
   } else if (var_type == "numeric") {
     var_type_json <- "NumericQuestion"
-    calc_var_type_json <- c(1, 2, 4)
+    calc_var_type_json <- c(
+      1, # Boolean
+      2, # Double
+      4 # Long Integer
+    )
   } else if (var_type == "gps") {
     var_type_json <- "GpsCoordinateQuestion"
     calc_var_type_json <- NA
@@ -136,7 +148,13 @@ make_data_var_choices <- function(
       "NumericQuestion",
       "GpsCoordinateQuestion"
     )
-    calc_var_type_json <- c(1, 2, 3, 4, 5)
+    calc_var_type_json <- c(
+      1, # Boolean
+      2, # Double
+      3, # Date/Time
+      4, # Long Integer
+      5 # String
+    )
   }
 
   data_var_choices <- data_path |>
