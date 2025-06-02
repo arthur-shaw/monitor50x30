@@ -489,6 +489,23 @@ r6 <- R6::R6Class(
     crop_labor_member_worked_val_choices = NULL,
     crop_labor_member_worked_val = NULL,
     crop_labor_provided = NULL,
+    # livestock_labor
+    livestock_labor_hhold_df_choices = NULL,
+    livestock_labor_hhold_df = NULL,
+    livestock_labor_have_anim_var_choices = NULL,
+    livestock_labor_have_anim_var = NULL,
+    livestock_labor_have_anim_val_choices = NULL,
+    livestock_labor_have_anim_val = NULL,
+    livestock_labor_anim_labor_df_choices = NULL,
+    livestock_labor_anim_labor_df = NULL,
+    livestock_labor_anim_labor_id_var_choices = NULL,
+    livestock_labor_anim_labor_id_var = NULL,
+    livestock_anim_id_val_choices = NULL,
+    livestock_labor_anim_labor_none_val = NULL,
+    livestock_labor_hhold_labor_vals = NULL,
+    livestock_labor_free_labor_val = NULL,
+    livestock_labor_paid_labor_val = NULL,
+    livestock_labor_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -1018,7 +1035,24 @@ r6 <- R6::R6Class(
       crop_labor_member_worked_var = NULL,
       crop_labor_member_worked_val_choices = NULL,
       crop_labor_member_worked_val = NULL,
-      crop_labor_provided = NULL
+      crop_labor_provided = NULL,
+      # livestock_labor
+      livestock_labor_hhold_df_choices = NULL,
+      livestock_labor_hhold_df = NULL,
+      livestock_labor_have_anim_var_choices = NULL,
+      livestock_labor_have_anim_var = NULL,
+      livestock_labor_have_anim_val_choices = NULL,
+      livestock_labor_have_anim_val = NULL,
+      livestock_labor_anim_labor_df_choices = NULL,
+      livestock_labor_anim_labor_df = NULL,
+      livestock_labor_anim_labor_id_var_choices = NULL,
+      livestock_labor_anim_labor_id_var = NULL,
+      livestock_anim_id_val_choices = NULL,
+      livestock_labor_anim_labor_none_val = NULL,
+      livestock_labor_hhold_labor_vals = NULL,
+      livestock_labor_free_labor_val = NULL,
+      livestock_labor_paid_labor_val = NULL,
+      livestock_labor_provided = NULL
 
     ) {
 
@@ -1220,7 +1254,15 @@ r6 <- R6::R6Class(
         "crop_labor_free_var_choices",
         "crop_labor_members_df_choices",
         "crop_labor_member_worked_var_choices",
-        "crop_labor_member_worked_val_choices"
+        "crop_labor_member_worked_val_choices",
+        # livestock_labor
+        "livestock_labor_hhold_df_choices",
+        "livestock_labor_have_anim_var_choices",
+        "livestock_labor_have_anim_val_choices",
+        "livestock_labor_anim_labor_df_choices",
+        "livestock_labor_anim_labor_id_var_choices",
+        "livestock_anim_id_val_choices",
+        "livestock_labor_hhold_labor_vals"
       )
 
       # other fields not to write

@@ -1,0 +1,497 @@
+#' 4_quality_1_setup_2_data_livestock_labor UI Function
+#'
+#' @description A shiny Module.
+#'
+#' @param id,input,output,session Internal parameters for {shiny}.
+#'
+#' @noRd 
+#'
+#' @importFrom shiny NS tagList 
+mod_4_quality_1_setup_2_data_livestock_labor_ui <- function(id) {
+  ns <- NS(id)
+  tagList(
+
+    shiny::selectInput(
+      inputId = ns("hhold_df"),
+      label = "Household-level data set",
+      choices = NULL,
+      selected = NULL
+    ),
+    shiny::selectInput(
+      inputId = ns("have_anim_var"),
+      label = "Question: whether keep any livestock",
+      choices = NULL,
+      selected = NULL
+    ),
+    shiny::selectInput(
+      inputId = ns("have_anim_val"),
+      label = "Value: keep livestock",
+      choices = NULL,
+      selected = NULL
+    ),
+    shiny::selectInput(
+      inputId = ns("anim_labor_df"),
+      label = "Data set: livestock labor",
+      choices = NULL,
+      selected = NULL
+    ),
+    shiny::selectInput(
+      inputId = ns("anim_labor_id_var"),
+      label = "Variable: labor category ID variable",
+      choices = NULL,
+      selected = NULL
+    ),
+    shiny::selectInput(
+      inputId = ns("anim_labor_none_val"),
+      label = "Value: none as number keeping/managing livestock",
+      choices = NULL,
+      selected = NULL
+    ),
+    shiny::selectInput(
+      inputId = ns("hhold_labor_vals"),
+      label = "Value: household labor inputs",
+      choices = NULL,
+      selected = NULL,
+      multiple = TRUE
+    ),
+    shiny::selectInput(
+      inputId = ns("free_labor_val"),
+      label = "Value: free labor inputs",
+      choices = NULL,
+      selected = NULL
+    ),
+    shiny::selectInput(
+      inputId = ns("paid_labor_val"),
+      label = "Value: paid labor inputs",
+      choices = NULL,
+      selected = NULL
+    ),
+    shiny::actionButton(
+      inputId = ns("save"),
+      label = "Save"
+    )
+
+  )
+}
+
+#' 4_quality_1_setup_2_data_livestock_labor Server Functions
+#'
+#' @noRd 
+mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
+  moduleServer(id, function(input, output, session){
+    ns <- session$ns
+
+    # ==========================================================================
+    # create a reactive container for input choices
+    # ==========================================================================
+
+    input_choices <- shiny::reactiveValues(
+      hhold_dfs = r6$livestock_labor_hhold_df_choices,
+      have_anim_vars = r6$livestock_labor_have_anim_var_choices,
+      have_anim_vals = r6$livestock_labor_have_anim_val_choices,
+      anim_labor_dfs = r6$livestock_labor_anim_labor_dfs_choices,
+      anim_labor_id_vars = r6$livestock_labor_anim_labor_id_var_choices,
+      anim_labor_id_vals = r6$livestock_labor_anim_labor_id_vals
+    )
+
+    # ==========================================================================
+    # initialize page
+    # ==========================================================================
+
+    # --------------------------------------------------------------------------
+    # when data are downloaded
+    # --------------------------------------------------------------------------
+
+    gargoyle::on("download_data", {
+
+      shiny::req(r6$dirs$micro_combine)
+
+      # ------------------------------------------------------------------------
+      # compute choices from downloaded data
+      # ------------------------------------------------------------------------
+
+      # get list of data files in combined folder
+      input_choices$hhold_dfs <- r6$dirs$micro_combine |>
+        make_data_choices()
+      input_choices$anim_labor_dfs <- input_choices$hhold_dfs
+
+      # update UI to reflect data choices
+      # but do not trigger reactive
+      shiny::freezeReactiveValue(input, "hhold_df")
+      shiny::updateSelectInput(
+        inputId = "hhold_df",
+        choices = input_choices$hhold_dfs,
+        selected = NULL
+      )
+      shiny::freezeReactiveValue(input, "anim_labor_df")
+      shiny::updateSelectInput(
+        inputId = "anim_labor_df",
+        choices = input_choices$anim_labor_dfs,
+        selected = NULL
+      )
+
+      # ------------------------------------------------------------------------
+      # (re)set to `NULL` variable and value selections
+      # but do not trigger reactive
+      # ------------------------------------------------------------------------
+
+      input_specs <- tibble::tribble(
+        ~ id,             ~ updater,            ~ args,
+        # hhold
+        "have_anim_var",   updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "have_anim_val",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        # labor data
+        "anim_labor_id_var",   updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "anim_labor_none_val",   updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "hhold_labor_vals",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "free_labor_val",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "paid_labor_val",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+      )
+
+      update_inputs(
+        input = input,
+        session = session,
+        specs = input_specs
+      )
+
+    })
+
+    # --------------------------------------------------------------------------
+    # load past selections from R6
+    # --------------------------------------------------------------------------
+
+    if (!is.null(r6$livestock_labor_provided)) {
+
+      shiny::req(
+        # data directory
+        r6$dirs$micro_combine,
+        # household data
+        r6$livestock_labor_hhold_df_choices,
+        r6$livestock_labor_hhold_df,
+        # have animals variable
+        r6$livestock_labor_have_anim_var_choices,
+        r6$livestock_labor_have_anim_var,
+        # have animal values
+        r6$livestock_labor_have_anim_val_choices,
+        r6$livestock_labor_have_anim_val,
+        # livestock labor data
+        r6$livestock_labor_anim_labor_df_choices,
+        r6$livestock_labor_anim_labor_df,
+        # livestock labor ID variable
+        r6$livestock_labor_anim_labor_id_var_choices,
+        r6$livestock_labor_anim_labor_id_var,
+        # livestock labor values
+        r6$livestock_labor_anim_labor_id_val_choices,
+        r6$livestock_labor_anim_labor_none_val,
+        r6$livestock_labor_hhold_labor_vals,
+        r6$livestock_labor_free_labor_val,
+        r6$livestock_labor_paid_labor_val
+      )
+
+      input_specs <- tibble::tribble(
+        ~ id,             ~ updater,            ~ args,
+        # hhold data
+        "hhold_df",           updateSelectInput,    list(
+          choices = r6$livestock_labor_hhold_df_choices,
+          selected = r6$livestock_labor_hhold_df
+        ),
+        "have_anim_var",  updateSelectInput,    list(
+          choices = r6$livestock_labor_have_anim_var_choices,
+          selected = r6$livestock_labor_have_anim_var
+        ),
+        "have_anim_val",  updateSelectInput,    list(
+          choices = r6$livestock_labor_have_anim_val_choices,
+          selected = r6$livestock_labor_have_anim_val
+        ),
+        # labor data
+        "anim_labor_df",           updateSelectInput,    list(
+          choices = r6$livestock_labor_anim_labor_df_choices,
+          selected = r6$livestock_labor_anim_labor_df
+        ),
+        "anim_labor_id_var",   updateSelectInput,    list(
+          choices = r6$livestock_labor_anim_labor_id_var_choices,
+          selected = r6$livestock_labor_anim_labor_id_var
+        ),
+        "anim_labor_none_val",   updateSelectInput,    list(
+          choices = r6$livestock_anim_id_val_choices,
+          selected = r6$livestock_labor_anim_labor_none_val
+        ),
+        "anim_labor_hhold_labor_val",   updateSelectInput,    list(
+          choices = r6$livestock_anim_id_val_choices,
+          selected = r6$livestock_labor_hhold_labor_vals
+        ),
+        "free_labor_val",   updateSelectInput,    list(
+          choices = r6$livestock_anim_id_val_choices,
+          selected = r6$livestock_labor_free_labor_val
+        ),
+        "paid_labor_val",   updateSelectInput,    list(
+          choices = r6$livestock_anim_id_val_choices,
+          selected = r6$livestock_labor_paid_labor_val
+        ),
+
+      )
+
+      update_inputs(
+        input = input,
+        session = session,
+        specs = input_specs
+      )
+
+    }
+
+    # ==========================================================================
+    # react to selections
+    # ==========================================================================
+
+    # --------------------------------------------------------------------------
+    # hhold data -> variables in data
+    # --------------------------------------------------------------------------
+
+    shiny::observeEvent(input$hhold_df, {
+
+      shiny::req(
+        r6$dirs$qnr, r6$dirs$micro_combine,
+        input$hhold_df
+      )
+
+      # ------------------------------------------------------------------------
+      # compute choices
+      # ------------------------------------------------------------------------
+
+      # load variables data frame from disk
+      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
+        readRDS()
+
+      # temporary and permanent crop harvest variables
+      input_choices$have_anim_vars <- r6$dirs$micro_combine |>
+        fs::path(paste0(input$hhold_df, ".dta")) |>
+        make_data_var_choices(
+          vars_df = qnr_vars_df,
+          var_type = "multi-select"
+        )
+
+      # ------------------------------------------------------------------------
+      # update choices in the UI
+      # ------------------------------------------------------------------------
+
+      input_specs <- tibble::tribble(
+        ~ id,             ~ updater,            ~ args,
+        "have_anim_var",  updateSelectInput,    list(
+          choices = input_choices$anim_labor_id_vars,
+          selected = NULL
+        ),
+        "have_anim_val",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+      )
+
+      update_inputs(
+        input = input,
+        session = session,
+        specs = input_specs
+      )
+
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
+
+    # --------------------------------------------------------------------------
+    # have anim variable -> have anim values
+    # --------------------------------------------------------------------------
+
+    shiny::observeEvent(input$have_anim_var, {
+
+      shiny::req(
+        r6$dirs$qnr,
+        input$have_anim_var
+      )
+
+      # ------------------------------------------------------------------------
+      # compute choices
+      # ------------------------------------------------------------------------
+
+      # load variables data frame from disk
+      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
+        readRDS()
+
+      # compute choices
+      input_choices$have_anim_vals <- make_val_options(
+        qnr_df = qnr_vars_df,
+        varname = extract_var_names(input$have_anim_var)
+      )
+
+      # ------------------------------------------------------------------------
+      # update choices in the UI
+      # ------------------------------------------------------------------------
+
+      shiny::freezeReactiveVal("have_anim_val")
+      shiny::updateSelectInput(
+        choices = input_choices$have_anim_val,
+        selected = NULL
+      )
+
+    }, ignoreInit = TRUE)
+
+    # --------------------------------------------------------------------------
+    # anim_labor_df data -> variables in data
+    # --------------------------------------------------------------------------
+
+    shiny::observeEvent(input$anim_labor_df_df, {
+
+      shiny::req(
+        r6$dirs$qnr, r6$dirs$micro_combine,
+        input$anim_labor_df_df
+      )
+
+      # ------------------------------------------------------------------------
+      # compute choices
+      # ------------------------------------------------------------------------
+
+      # load variables data frame from disk
+      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
+        readRDS()
+
+      # labor category ID variable variable
+      input_choices$anim_labor_id_vars <- r6$dirs$micro_combine |>
+        fs::path(paste0(input$member_df, ".dta")) |>
+        make_id_var_choices()
+
+      # ------------------------------------------------------------------------
+      # update choices in the UI
+      # ------------------------------------------------------------------------
+
+      shiny::freezeReactiveVal("anim_labor_id_var")
+      shiny::updateSelectInput(
+        choices = input_choices$anim_labor_id_var,
+        selected = NULL
+      )
+
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
+
+    # --------------------------------------------------------------------------
+    # anim_labor_var variable -> anim_labor_var values
+    # --------------------------------------------------------------------------
+
+    shiny::observeEvent(input$anim_labor_var, {
+
+      shiny::req(
+        r6$dirs$qnr,
+        input$anim_labor_var
+      )
+
+      # ------------------------------------------------------------------------
+      # compute choices
+      # ------------------------------------------------------------------------
+
+      # load variables data frame from disk
+      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
+        readRDS()
+
+      # compute choices
+      input_choices$anim_labor_vals <- make_val_options(
+        qnr_df = qnr_vars_df,
+        varname = extract_var_names(input$anim_labor_var)
+      )
+
+      # ------------------------------------------------------------------------
+      # update choices in the UI
+      # ------------------------------------------------------------------------
+
+      input_specs <- tibble::tribble(
+        ~ id,             ~ updater,            ~ args,
+        "anim_labor_none_val",  updateSelectInput,    list(
+          choices = input_choices$anim_labor_vals,
+          selected = NULL
+        ),
+        "hhold_labor_vals",  updateSelectInput,    list(
+          choices = input_choices$anim_labor_vals,
+          selected = NULL
+        ),
+        "free_labor_val",  updateSelectInput,    list(
+          choices = input_choices$anim_labor_vals,
+          selected = NULL
+        ),
+        "paid_labor_val",  updateSelectInput,    list(
+          choices = input_choices$anim_labor_vals,
+          selected = NULL
+        ),
+      )
+
+      update_inputs(
+        input = input,
+        session = session,
+        specs = input_specs
+      )
+
+    }, ignoreInit = TRUE)
+
+    # ==========================================================================
+    # react to save
+    # ==========================================================================
+
+    shiny::observeEvent(input$save, {
+
+      # capture values in R6
+
+      # household data
+      r6$livestock_labor_hhold_df_choices <- input_choices$hhold_dfs
+      r6$livestock_labor_hhold_df <- input$hhold_df
+      # have animals variable
+      r6$livestock_labor_have_anim_var_choices <- input_choices$have_anim_vars
+      r6$livestock_labor_have_anim_var <- input$have_anim_var
+      # have animal values
+      r6$livestock_labor_have_anim_val_choices <- input_choices$have_anim_vals
+      r6$livestock_labor_have_anim_val <- input$have_anim_val
+      # livestock labor data
+      r6$livestock_labor_anim_labor_df_choices <- input_choices$anim_labor_dfs
+      r6$livestock_labor_anim_labor_df <- input$anim_labor_df
+      # livestock labor ID variable
+      r6$livestock_labor_anim_labor_id_var_choices <-
+        input_choices$anim_labor_id_vars
+      r6$livestock_labor_anim_labor_id_var <- input$anim_labor_id_var
+      # livestock labor values
+      r6$livestock_anim_id_val_choices <- input_choices$anim_labor_id_vals
+      r6$livestock_labor_anim_labor_none_val <- input$anim_labor_none_val
+      r6$livestock_labor_hhold_labor_vals <- input$hhold_labor_vals
+      r6$livestock_labor_free_labor_val <- input$free_labor_val
+      r6$livestock_labor_paid_labor_val <- input$paid_labor_val
+      # save action
+      r6$livestock_labor_provided <- TRUE
+
+      # write R6 to disk
+      r6$write()
+
+      # send signal that info provided
+      gargoyle::trigger("saved_livestock_labor_sales")
+
+    })
+
+
+  })
+}
+
+## To be copied in the UI
+# mod_4_quality_1_setup_2_data_livestock_labor_ui("4_quality_1_setup_2_data_livestock_labor_1")
+
+## To be copied in the server
+# mod_4_quality_1_setup_2_data_livestock_labor_server("4_quality_1_setup_2_data_livestock_labor_1")
