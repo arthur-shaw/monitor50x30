@@ -471,6 +471,24 @@ r6 <- R6::R6Class(
     process_crop_prod_amt_sold_var = NULL,
     process_crop_prod_amt_sold_dk_val = NULL,
     process_crop_prod_provided = NULL,
+    # crop_labor
+    crop_labor_hhold_df_choices = NULL,
+    crop_labor_hhold_df = NULL,
+    crop_labor_grew_crops_var_choices = NULL,
+    crop_labor_grew_crops_var = NULL,
+    crop_labor_grew_crops_val_choices = NULL,
+    crop_labor_grew_crops_val = NULL,
+    crop_labor_paid_var_choices = NULL,
+    crop_labor_paid_var = NULL,
+    crop_labor_free_var_choices = NULL,
+    crop_labor_free_var = NULL,
+    crop_labor_members_df_choices = NULL,
+    crop_labor_members_df = NULL,
+    crop_labor_member_worked_var_choices = NULL,
+    crop_labor_member_worked_var = NULL,
+    crop_labor_member_worked_val_choices = NULL,
+    crop_labor_member_worked_val = NULL,
+    crop_labor_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -982,7 +1000,26 @@ r6 <- R6::R6Class(
       process_crop_prod_amt_sold_var_choices = NULL,
       process_crop_prod_amt_sold_var = NULL,
       process_crop_prod_amt_sold_dk_val = NULL,
-      process_crop_prod_provided = NULL
+      process_crop_prod_provided = NULL,
+      # crop_labor
+      crop_labor_hhold_df_choices = NULL,
+      crop_labor_hhold_df = NULL,
+      crop_labor_grew_crops_var_choices = NULL,
+      crop_labor_grew_crops_var = NULL,
+      crop_labor_grew_crops_val_choices = NULL,
+      crop_labor_grew_crops_val = NULL,
+      crop_labor_paid_var_choices = NULL,
+      crop_labor_paid_var = NULL,
+      crop_labor_free_var_choices = NULL,
+      crop_labor_free_var = NULL,
+      crop_labor_members_df_choices = NULL,
+      crop_labor_members_df = NULL,
+      crop_labor_member_worked_var_choices = NULL,
+      crop_labor_member_worked_var = NULL,
+      crop_labor_member_worked_val_choices = NULL,
+      crop_labor_member_worked_val = NULL,
+      crop_labor_provided = NULL
+
     ) {
 
       # get function arguments as character vector
@@ -1174,7 +1211,16 @@ r6 <- R6::R6Class(
         "process_crop_prod_sold_var_choices",
         "process_crop_prod_sold_val_choices",
         "process_crop_prod_amt_sold_var_choices",
-        "process_crop_prod_amt_sold_var"
+        "process_crop_prod_amt_sold_var",
+        # crop_labor
+        "crop_labor_hhold_df_choices",
+        "crop_labor_grew_crops_var_choices",
+        "crop_labor_grew_crops_val_choices",
+        "crop_labor_paid_var_choices",
+        "crop_labor_free_var_choices",
+        "crop_labor_members_df_choices",
+        "crop_labor_member_worked_var_choices",
+        "crop_labor_member_worked_val_choices"
       )
 
       # other fields not to write
