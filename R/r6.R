@@ -506,6 +506,20 @@ r6 <- R6::R6Class(
     livestock_labor_free_labor_val = NULL,
     livestock_labor_paid_labor_val = NULL,
     livestock_labor_provided = NULL,
+    # fisheries_labor
+    fisheries_labor_hhold_df_choices = NULL,
+    fisheries_labor_hhold_df = NULL,
+    fisheries_labor_produce_var_choices = NULL,
+    fisheries_labor_produce_var = NULL,
+    fisheries_labor_produce_val_choices = NULL,
+    fisheries_labor_produce_val = NULL,
+    fisheries_labor_labor_var_choices = NULL,
+    fisheries_labor_labor_var = NULL,
+    fisheries_labor_labor_val_choices = NULL,
+    fisheries_labor_hhold_labor_vals = NULL,
+    fisheries_labor_free_labor_val = NULL,
+    fisheries_labor_paid_labor_val = NULL,
+    fisheries_labor_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -1052,7 +1066,21 @@ r6 <- R6::R6Class(
       livestock_labor_hhold_labor_vals = NULL,
       livestock_labor_free_labor_val = NULL,
       livestock_labor_paid_labor_val = NULL,
-      livestock_labor_provided = NULL
+      livestock_labor_provided = NULL,
+      # fisheries_labor
+      fisheries_labor_hhold_df_choices = NULL,
+      fisheries_labor_hhold_df = NULL,
+      fisheries_labor_produce_var_choices = NULL,
+      fisheries_labor_produce_var = NULL,
+      fisheries_labor_produce_val_choices = NULL,
+      fisheries_labor_produce_val = NULL,
+      fisheries_labor_labor_var_choices = NULL,
+      fisheries_labor_labor_var = NULL,
+      fisheries_labor_labor_val_choices = NULL,
+      fisheries_labor_hhold_labor_vals = NULL,
+      fisheries_labor_free_labor_val = NULL,
+      fisheries_labor_paid_labor_val = NULL,
+      fisheries_labor_provided = NULL
 
     ) {
 
@@ -1262,7 +1290,14 @@ r6 <- R6::R6Class(
         "livestock_labor_anim_labor_df_choices",
         "livestock_labor_anim_labor_id_var_choices",
         "livestock_anim_id_val_choices",
-        "livestock_labor_hhold_labor_vals"
+        "livestock_labor_hhold_labor_vals",
+        # fisheries_labor
+        "fisheries_labor_hhold_df_choices",
+        "fisheries_labor_produce_var_choices",
+        "fisheries_labor_produce_val_choices",
+        "fisheries_labor_labor_var_choices",
+        "fisheries_labor_labor_val_choices",
+        "fisheries_labor_hhold_labor_vals"
       )
 
       # other fields not to write
