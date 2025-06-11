@@ -194,8 +194,9 @@ mod_4_quality_1_setup_2_data_ui <- function(id) {
       bslib::accordion_panel(
         title = "Forestry labor",
         value = "forestry_labor",
-        # TODO: insert UI function
-        shiny::tags$p("TODO")
+        mod_4_quality_1_setup_2_data_forestry_labor_ui(
+          id = ns("4_quality_1_setup_2_data_forestry_labor_1")
+        )
       ),
       bslib::accordion_panel(
         title = "Income sources",
@@ -406,6 +407,11 @@ mod_4_quality_1_setup_2_data_server <- function(id, parent, r6){
     )
     mod_4_quality_1_setup_2_data_aquaculture_labor_server(
       id = "4_quality_1_setup_2_data_aquaculture_labor_1",
+      parent = session,
+      r6 = r6
+    )
+    mod_4_quality_1_setup_2_data_forestry_labor_server(
+      id = "4_quality_1_setup_2_data_forestry_labor_1",
       parent = session,
       r6 = r6
     )

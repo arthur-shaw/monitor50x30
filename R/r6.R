@@ -534,6 +534,20 @@ r6 <- R6::R6Class(
     aquaculture_labor_free_labor_val = NULL,
     aquaculture_labor_paid_labor_val = NULL,
     aquaculture_labor_provided = NULL,
+    # forestry_labor
+    forestry_labor_hhold_df_choices = NULL,
+    forestry_labor_hhold_df = NULL,
+    forestry_labor_produce_var_choices = NULL,
+    forestry_labor_produce_var = NULL,
+    forestry_labor_produce_val_choices = NULL,
+    forestry_labor_produce_val = NULL,
+    forestry_labor_labor_var_choices = NULL,
+    forestry_labor_labor_var = NULL,
+    forestry_labor_labor_val_choices = NULL,
+    forestry_labor_hhold_labor_vals = NULL,
+    forestry_labor_free_labor_val = NULL,
+    forestry_labor_paid_labor_val = NULL,
+    forestry_labor_provided = NULL,
 
     # ==========================================================================
     # Methods
@@ -1108,7 +1122,21 @@ r6 <- R6::R6Class(
       aquaculture_labor_hhold_labor_vals = NULL,
       aquaculture_labor_free_labor_val = NULL,
       aquaculture_labor_paid_labor_val = NULL,
-      aquaculture_labor_provided = NULL
+      aquaculture_labor_provided = NULL,
+      # forestry_labor
+      forestry_labor_hhold_df_choices = NULL,
+      forestry_labor_hhold_df = NULL,
+      forestry_labor_produce_var_choices = NULL,
+      forestry_labor_produce_var = NULL,
+      forestry_labor_produce_val_choices = NULL,
+      forestry_labor_produce_val = NULL,
+      forestry_labor_labor_var_choices = NULL,
+      forestry_labor_labor_var = NULL,
+      forestry_labor_labor_val_choices = NULL,
+      forestry_labor_hhold_labor_vals = NULL,
+      forestry_labor_free_labor_val = NULL,
+      forestry_labor_paid_labor_val = NULL,
+      forestry_labor_provided = NULL
 
     ) {
 
@@ -1332,7 +1360,14 @@ r6 <- R6::R6Class(
         "aquaculture_labor_produce_val_choices",
         "aquaculture_labor_labor_var_choices",
         "aquaculture_labor_labor_val_choices",
-        "aquaculture_labor_hhold_labor_vals"
+        "aquaculture_labor_hhold_labor_vals",
+        # forestry_labor
+        "forestry_labor_hhold_df_choices",
+        "forestry_labor_produce_var_choices",
+        "forestry_labor_produce_val_choices",
+        "forestry_labor_labor_var_choices",
+        "forestry_labor_labor_val_choices",
+        "forestry_labor_hhold_labor_vals"
       )
 
       # other fields not to write
