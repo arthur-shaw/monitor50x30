@@ -45,11 +45,13 @@ mod_4_quality_1_setup_2_data_fisheries_labor_ui <- function(id) {
     shiny::selectInput(
       inputId = ns("free_labor_val"),
       label = "Value: free labor",
+      choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("paid_labor_val"),
       label = "Value: paid labor",
+      choices = NULL,
       selected = NULL
     ),
     shiny::actionButton(
