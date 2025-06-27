@@ -203,6 +203,46 @@ mod_2_data_server <- function(id, r6){
           file = fs::path(r6$dirs$qnr, "qnr_vars.rds")
         )
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+        # resusable categories for questions
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+        # find the folder of the main questionnaire
+        main_qnr_dl_dir <- fs::dir_ls(
+          path = r6$dirs$micro_dl,
+          type = "directory",
+          regexp = glue::glue("{r6$qnr_var}_{r6$qnr_selected_suso_version}")
+        )
+
+        # if main directory path is not right, take the first directory
+        if (length(main_qnr_dl_dir) == 0) {
+
+          # collect all directories in microdata downloads
+          all_dl_dirs <- r6$dirs$micro_dl |>
+            fs::dir_ls(type = "directory")
+
+          # take the first one
+          main_qnr_dl_dir <- all_dl_dirs[1]
+
+        }
+
+        # unzip the categories file to a categories folder
+        zip::unzip(
+          zipfile = fs::path(main_qnr_dl_dir, "Questionnaire", "content.zip"),
+          exdir = fs::path(main_qnr_dl_dir, "Questionnaire", "content")
+        )
+
+        # parse the categories into a data frame
+        categories_df <- susometa::parse_categories(
+          dir = fs::path(main_qnr_dl_dir, "Questionnaire", "content")
+        )
+
+        # write that data frame to disk
+        saveRDS(
+          object = categories_df,
+          file = fs::path(r6$dirs$qnr, "categories.rds")
+        )
+
       }
 
       # ------------------------------------------------------------------------
