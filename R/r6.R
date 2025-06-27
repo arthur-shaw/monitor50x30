@@ -153,6 +153,7 @@ r6 <- R6::R6Class(
     qnr_meta_df = NULL,
     qnr_vars_df = NULL,
     q_categories_df = NULL,
+    data_choices = NULL,
     # data download
     data_downloaded = NULL,
     selected_action = NULL,
@@ -799,6 +800,7 @@ r6 <- R6::R6Class(
       qnr_meta_df = NULL,
       qnr_vars_df = NULL,
       q_categories_df = NULL,
+      data_choices = NULL,
       # data download
       data_downloaded = NULL,
       # domains
@@ -1301,8 +1303,12 @@ r6 <- R6::R6Class(
 
       # vector fields
       vctr_fields <- c(
+        # questionnaire metadata
         "qnr_templates",
         "qnr_extensions",
+        # data
+        "data_choices",
+        # completeness report
         "domain_var_choices",
         "domain_vars_selected",
         "cluster_id_var_choices",

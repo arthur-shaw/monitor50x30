@@ -254,6 +254,12 @@ mod_2_data_server <- function(id, r6){
         # store value in R6
         r6$q_categories_df <- categories_df
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+        # data set answer options
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+        r6$data_choices <- make_data_choices(dir = r6$dirs$micro_combine )
+
       }
 
       # ------------------------------------------------------------------------
