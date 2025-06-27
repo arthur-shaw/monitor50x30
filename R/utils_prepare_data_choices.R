@@ -275,15 +275,18 @@ extract_id_var_names <- function(vars) {
 #'
 #' @param qnr_df Data frame. Of the form returned by
 #' `susometa::parse_questionnaire()`.
+#' @param categories_df Data frame. Of the form returned by
+#' `susometa::parse_categories()`.
 #' @param varname Character. Name of the target variable.
 #'
 #' @return Named numeric vector. Values are codes. Names are value labels.
 #'
-#' @importFrom rlang data_sym
+#' @importFrom rlang sym
 #' @importFrom susometa get_answer_options
 #' @importFrom glue glue
 make_val_options <- function(
   qnr_df,
+  categories_df,
   varname
 ) {
 
@@ -294,7 +297,8 @@ make_val_options <- function(
       # extract answer options
       susometa::get_answer_options(
         qnr_df = qnr_df,
-        varname = !!rlang::data_sym(varname)
+        categories_df = categories_df,
+        varname = !!rlang::sym(varname)
       )
 
     },
