@@ -149,6 +149,10 @@ r6 <- R6::R6Class(
     visit_details_provided = NULL,
     # survey settings checkpoint
     core_settings_saved = NULL,
+    # questionnaire metadata
+    qnr_meta_df = NULL,
+    qnr_vars_df = NULL,
+    q_categories_df = NULL,
     # data download
     data_downloaded = NULL,
     selected_action = NULL,
@@ -791,6 +795,10 @@ r6 <- R6::R6Class(
       visit_details_provided = NULL,
       # survey settings checkpoint
       core_settings_saved = NULL,
+      # questionnaire metadata
+      qnr_meta_df = NULL,
+      qnr_vars_df = NULL,
+      q_categories_df = NULL,
       # data download
       data_downloaded = NULL,
       # domains
@@ -1280,6 +1288,9 @@ r6 <- R6::R6Class(
       df_fields <- c(
         "matching_qnr_tbl",
         "obs_per_domain",
+        "qnr_meta_df",
+        "qnr_vars_df",
+        "q_categories_df",
         "n_per_team"
       )
 

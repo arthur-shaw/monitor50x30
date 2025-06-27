@@ -188,6 +188,10 @@ mod_2_data_server <- function(id, r6){
           )
         )
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+        # questionnaire metadata
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
         # parse and save JSON file
         qnr_file_path <- fs::path(r6$dirs$qnr, "document.json")
         qnr_metadata <- susometa::parse_questionnaire(qnr_file_path)
@@ -202,6 +206,10 @@ mod_2_data_server <- function(id, r6){
           object = vars_metadata,
           file = fs::path(r6$dirs$qnr, "qnr_vars.rds")
         )
+
+        # store metadata in R6 fields
+        r6$qnr_meta_df <- qnr_metadata
+        r6$qnr_vars_df <- vars_metadata
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
         # resusable categories for questions
@@ -242,6 +250,9 @@ mod_2_data_server <- function(id, r6){
           object = categories_df,
           file = fs::path(r6$dirs$qnr, "categories.rds")
         )
+
+        # store value in R6
+        r6$q_categories_df <- categories_df
 
       }
 
