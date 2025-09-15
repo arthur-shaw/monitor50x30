@@ -169,7 +169,7 @@ manage_tbl_toggles <- function(r6) {
         action = "hide"
       )
       # reset values of hidden fields
-      reset_tbl_val(r6 = r6, tbl = ph_tbls)
+      reset_tbl_val(r6 = r6, tbl = pp_tbls)
       r6$write()
 
     } else if (r6$svy_current_visit == "Single visit") {
