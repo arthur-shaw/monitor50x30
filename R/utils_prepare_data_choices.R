@@ -173,9 +173,6 @@ make_data_var_choices <- function(
     ) |>
     # exclude linked questions
     dplyr::filter(is_linked == FALSE) |>
-    # UNTIL SUSOMETA READS REUSABLE CATEGORIES...
-    # ... drop questions that use reusable categorical answers
-    dplyr::filter(uses_reusable_categories == FALSE) |>
     # select only desired variable types
     dplyr::filter(
       # questions
