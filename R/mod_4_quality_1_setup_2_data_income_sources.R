@@ -1025,11 +1025,11 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
-        "sold_live_anim_var",   updateNumericInput,    list(
+        "sold_live_anim_var",   updateSelectInput,    list(
           choices = input_choices$sold_live_anim_vars,
           selected = NULL
         ),
-        "slaughter_anim_var",   updateNumericInput,    list(
+        "slaughter_anim_var",   updateSelectInput,    list(
           choices = input_choices$slaughter_anim_vars,
           selected = NULL
         ),
