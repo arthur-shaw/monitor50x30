@@ -45,7 +45,7 @@ mod_4_quality_1_setup_2_data_plots_per_parcel_server <- function(
     # ==========================================================================
 
     input_choices <- shiny::reactiveValues(
-      data = r6$plots_per_parcel_df_choices,
+      data = r6$data_choices,
       parcel_id_var = r6$plots_per_parcel_gps_var_choices
     )
 
@@ -61,10 +61,6 @@ mod_4_quality_1_setup_2_data_plots_per_parcel_server <- function(
     gargoyle::on("download_data", {
 
       shiny::req(r6$dirs$micro_combine)
-
-      # get list of data files in combined folder
-      input_choices$data <- r6$dirs$micro_combine |>
-        make_data_choices()
 
       # update UI to reflect data choices
       shiny::updateSelectInput(
@@ -98,7 +94,7 @@ mod_4_quality_1_setup_2_data_plots_per_parcel_server <- function(
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
-        choice = r6$plots_per_parcel_df_choices,
+        choice = r6$data_choices,
         selected = r6$plots_per_parcel_df
       )
 
