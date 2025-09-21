@@ -169,7 +169,7 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_server <- function(id, parent, r6
       shiny::freezeReactiveValue(input, "crop_id_var")
       shiny::updateSelectInput(
         inputId = "crop_id_var",
-        choice = r6$temp_crop_harvest_crop_id_var_choices,
+        choices = r6$temp_crop_harvest_crop_id_var_choices,
         selected = r6$temp_crop_harvest_crop_id_var
       )
 
@@ -177,7 +177,7 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_server <- function(id, parent, r6
       shiny::freezeReactiveValue(input, "crop_vals")
       shiny::updateSelectInput(
         inputId = "crop_vals",
-        choice = r6$temp_crop_harvest_crop_vals_choices,
+        choices = r6$temp_crop_harvest_crop_vals_choices,
         selected = r6$temp_crop_harvest_crop_vals
       )
 
@@ -185,7 +185,7 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_server <- function(id, parent, r6
       shiny::freezeReactiveValue(input, "harvest_var")
       shiny::updateSelectInput(
         inputId = "harvest_var",
-        choice = r6$temp_crop_harvest_harvest_var_choices,
+        choices = r6$temp_crop_harvest_harvest_var_choices,
         selected = r6$temp_crop_harvest_harvest_var
       )
 
@@ -193,7 +193,7 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_server <- function(id, parent, r6
       shiny::freezeReactiveValue(input, "harvest_val")
       shiny::updateSelectInput(
         inputId = "harvest_val",
-        choice = r6$temp_crop_harvest_harvest_val_choices,
+        choices = r6$temp_crop_harvest_harvest_val_choices,
         selected = r6$temp_crop_harvest_harvest_val
       )
 
@@ -201,7 +201,7 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_server <- function(id, parent, r6
       shiny::freezeReactiveValue(input, "why_not_harvest_var")
       shiny::updateSelectInput(
         inputId = "why_not_harvest_var",
-        choice = r6$temp_crop_harvest_why_not_harvest_var_choices,
+        choices = r6$temp_crop_harvest_why_not_harvest_var_choices,
         selected = r6$temp_crop_harvest_why_not_harvest_var
       )
 
