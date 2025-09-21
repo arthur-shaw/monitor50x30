@@ -120,7 +120,7 @@ mod_4_quality_1_setup_2_data_plots_per_parcel_server <- function(
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
-        choice = r6$data_choices,
+        choices = r6$data_choices,
         selected = r6$plots_per_parcel_df
       )
 
@@ -128,7 +128,7 @@ mod_4_quality_1_setup_2_data_plots_per_parcel_server <- function(
       shiny::freezeReactiveValue(input, "parcel_id_var")
       shiny::updateSelectInput(
         inputId = "parcel_id_var",
-        choice = r6$plots_per_parcel_parcel_id_var_choices,
+        choices = r6$plots_per_parcel_parcel_id_var_choices,
         selected = r6$plots_per_parcel_parcel_id_var
       )
 
