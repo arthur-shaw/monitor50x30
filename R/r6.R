@@ -1352,6 +1352,7 @@ r6 <- R6::R6Class(
         "temp_crop_harvest_df_choices",
         "temp_crop_harvest_crop_id_var_choices",
         "temp_crop_harvest_crop_vals_choices",
+        "temp_crop_harvest_crop_vals",
         "temp_crop_harvest_harvest_var_choices",
         "temp_crop_harvest_harvest_val_choices",
         "temp_crop_harvest_why_not_harvest_var_choices",
