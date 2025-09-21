@@ -72,8 +72,8 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_server <- function(id, parent, r6
       crop_id_var = r6$temp_crop_harvest_crop_id_var_choices,
       crop_id_vals = r6$temp_crop_harvest_crop_vals_choices,
       harvest_var = r6$temp_crop_harvest_harvest_var_choices,
-      harvest_var_vals = r6$temp_crop_harvest_crop_id_var_choices,
-      why_not_harvest_var = r6$temp_crop_harvest_why_not_var_choices
+      harvest_var_vals = r6$temp_crop_harvest_harvest_val_choices,
+      why_not_harvest_var = r6$temp_crop_harvest_why_not_harvest_var_choices
     )
 
     # ==========================================================================
