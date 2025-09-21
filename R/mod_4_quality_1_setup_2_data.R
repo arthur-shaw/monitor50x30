@@ -272,6 +272,26 @@ mod_4_quality_1_setup_2_data_server <- function(id, parent, r6){
     )
 
     # ==========================================================================
+    # update upon setting questionnaire details
+    # ==========================================================================
+
+    # this will have the effect of "resetting" the data selections when
+    # the questionnaire is changed
+    # NOTE: the `save_settings` signal is taken as an imperfect proxy for
+    # questionnaire change, until a new event is added
+    gargoyle::on("save_settings", {
+
+      purrr::walk(
+        .x = accordion_panel_values,
+        .f = ~ set_table_accordion_state(
+          r6 = r6,
+          tbl_id = .x
+        )
+      )
+
+    })
+
+    # ==========================================================================
     # update upon saving table selections
     # ==========================================================================
 
