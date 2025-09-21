@@ -86,7 +86,7 @@ mod_4_quality_1_setup_1_tables_details_server <- function(
       # write R6 to disk
       r6$write()
 
-    })
+    }, ignoreInit = TRUE)
 
     # ========================================================================
     # react to details button
