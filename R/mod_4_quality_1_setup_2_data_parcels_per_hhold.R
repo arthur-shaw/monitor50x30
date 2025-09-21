@@ -218,6 +218,7 @@ mod_4_quality_1_setup_2_data_parcels_per_hhold_server <- function(id,  parent, r
       # get use value answer options
       input_choices$use_val <- make_val_options(
         qnr_df = qnr_df,
+        categories_df = r6$q_categories_df,
         varname = use_var_selected
       )
 
