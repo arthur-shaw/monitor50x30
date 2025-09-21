@@ -109,7 +109,7 @@ mod_4_quality_1_setup_2_data_parcels_per_hhold_server <- function(id,  parent, r
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
-        choice = r6$parcels_per_hhold_df_choices,
+        choices = r6$parcels_per_hhold_df_choices,
         selected = r6$parcels_per_hhold_df
       )
 
@@ -117,7 +117,7 @@ mod_4_quality_1_setup_2_data_parcels_per_hhold_server <- function(id,  parent, r
       shiny::freezeReactiveValue(input, "use")
       shiny::updateSelectInput(
         inputId = "use",
-        choice = r6$parcels_per_hhold_use_choices,
+        choices = r6$parcels_per_hhold_use_choices,
         selected = r6$parcels_per_hhold_use
       )
 
@@ -125,7 +125,7 @@ mod_4_quality_1_setup_2_data_parcels_per_hhold_server <- function(id,  parent, r
       shiny::freezeReactiveValue(input, "use_val")
       shiny::updateSelectInput(
         inputId = "use_val",
-        choice = r6$parcels_per_hhold_use_val_choices,
+        choices = r6$parcels_per_hhold_use_val_choices,
         selected = r6$parcels_per_hhold_use_val
       )
 
