@@ -62,6 +62,8 @@ mod_4_quality_1_setup_1_tables_details_server <- function(
       no = FALSE
     )
 
+    # update without triggering an event for listeners
+    shiny::freezeReactiveValue(input, "use")
     bslib::update_switch(
       id = "use",
       label = glue::glue("{tbl_desc} table"),
