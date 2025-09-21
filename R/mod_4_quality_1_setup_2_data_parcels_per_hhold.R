@@ -88,6 +88,36 @@ mod_4_quality_1_setup_2_data_parcels_per_hhold_server <- function(id,  parent, r
     })
 
     # --------------------------------------------------------------------------
+    # load null values since values not previously saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$parcels_per_hhold_provided)) {
+
+      # update UI to reflect data choices
+      # but do not trigger reactive
+      shiny::freezeReactiveValue(input, "data")
+      shiny::updateSelectInput(
+        inputId = "data",
+        choices = r6$data_choices,
+        selected = NULL
+      )
+
+      # (re)set to `NULL` variable and value selections
+      # but do not trigger reactive
+      shiny::updateSelectInput(
+        inputId = "use",
+        choices = NULL,
+        selected = NULL
+      )
+      shiny::updateSelectInput(
+        inputId = "use_val",
+        choices = NULL,
+        selected = NULL
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
