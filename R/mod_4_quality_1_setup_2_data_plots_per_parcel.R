@@ -60,8 +60,6 @@ mod_4_quality_1_setup_2_data_plots_per_parcel_server <- function(
     # when data are downloaded, compute the choices and update the choices
     gargoyle::on("download_data", {
 
-      shiny::req(r6$dirs$micro_combine)
-
       # update UI to reflect data choices
       shiny::updateSelectInput(
         inputId = "data",
@@ -111,12 +109,6 @@ mod_4_quality_1_setup_2_data_plots_per_parcel_server <- function(
 
     if (!is.null(r6$plots_per_parcel_provided)) {
 
-      shiny::req(
-        r6$plots_per_parcel_df_choices, r6$plots_per_parcel_df,
-        r6$plots_per_parcel_parcel_id_var_choices, r6$plots_per_parcel_parcel_id_var,
-        r6$plots_per_parcel_provided
-      )
-
       # data
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
@@ -125,7 +117,7 @@ mod_4_quality_1_setup_2_data_plots_per_parcel_server <- function(
         selected = r6$plots_per_parcel_df
       )
 
-      # GPS area variable
+      # parcel ID variable
       shiny::freezeReactiveValue(input, "parcel_id_var")
       shiny::updateSelectInput(
         inputId = "parcel_id_var",
@@ -170,7 +162,7 @@ mod_4_quality_1_setup_2_data_plots_per_parcel_server <- function(
       # data
       r6$plots_per_parcel_df_choices <- input_choices$data
       r6$plots_per_parcel_df <- input$data
-      # GPS measurement variable
+      # parcel ID variable
       r6$plots_per_parcel_parcel_id_var_choices <- input_choices$parcel_id_var
       r6$plots_per_parcel_parcel_id_var <- input$parcel_id_var
       # save action
