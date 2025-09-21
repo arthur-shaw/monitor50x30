@@ -377,7 +377,7 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_server <- function(id, parent, r6
       r6$temp_crop_harvest_why_not_harvest_var <- input$why_not_harvest_var
 
       # save action
-      r6$temp_crop_sales_provided <- TRUE
+      r6$temp_crop_harvest_provided <- TRUE
 
       # write R6 to disk
       r6$write()
