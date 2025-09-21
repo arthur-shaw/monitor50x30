@@ -270,6 +270,7 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_server <- function(id, parent, r6
         selected = NULL
       )
       # harvest values
+      shiny::freezeReactiveValue(input, "harvest_val")
       shiny::updateSelectInput(
         inputId = "harvest_val",
         choices = NULL,
