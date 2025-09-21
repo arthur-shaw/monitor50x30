@@ -136,6 +136,55 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_server <- function(id, parent, r6
       )
 
     })
+    # --------------------------------------------------------------------------
+    # load null values since values not previously saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$temp_crop_harvest_provided)) {
+
+      # update UI to reflect data choices
+      # but do not trigger reactive
+      shiny::freezeReactiveValue(input, "data")
+      shiny::updateSelectInput(
+        inputId = "data",
+        choices = r6$data_choices,
+        selected = NULL
+      )
+
+      # (re)set to `NULL` variable and value selections
+      # but do not trigger reactive
+      shiny::freezeReactiveValue(input, "crop_id_var")
+      shiny::updateSelectInput(
+        inputId = "crop_id_var",
+        choices = NULL,
+        selected = NULL
+      )
+      shiny::freezeReactiveValue(input, "crop_vals")
+      shiny::updateSelectInput(
+        inputId = "crop_vals",
+        choices = NULL,
+        selected = NULL
+      )
+      shiny::freezeReactiveValue(input, "harvest_var")
+      shiny::updateSelectInput(
+        inputId = "harvest_var",
+        choices = NULL,
+        selected = NULL
+      )
+      shiny::freezeReactiveValue(input, "harvest_val")
+      shiny::updateSelectInput(
+        inputId = "harvest_val",
+        choices = NULL,
+        selected = NULL
+      )
+      shiny::freezeReactiveValue(input, "why_not_harvest_var")
+      shiny::updateSelectInput(
+        inputId = "why_not_harvest_var",
+        choices = NULL,
+        selected = NULL
+      )
+
+    }
 
     # --------------------------------------------------------------------------
     # load past selections from R6
