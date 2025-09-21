@@ -46,7 +46,7 @@ mod_4_quality_1_setup_2_data_plots_per_parcel_server <- function(
 
     input_choices <- shiny::reactiveValues(
       data = r6$data_choices,
-      parcel_id_var = r6$plots_per_parcel_gps_var_choices
+      parcel_id_var = r6$plots_per_parcel_parcel_id_var_choices
     )
 
     # ==========================================================================
