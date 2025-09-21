@@ -360,7 +360,7 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_server <- function(id, parent, r6
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
     # harvest variable
@@ -391,7 +391,7 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_server <- function(id, parent, r6
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
