@@ -144,6 +144,8 @@ mod_4_quality_1_setup_2_data_plots_per_parcel_server <- function(
 
     shiny::observeEvent(input$data, {
 
+      shiny::req(input$data)
+
       input_choices$parcel_id_var <- r6$dirs$micro_combine |>
         fs::path(paste0(input$data, ".dta")) |>
         make_id_var_choices()
@@ -155,7 +157,7 @@ mod_4_quality_1_setup_2_data_plots_per_parcel_server <- function(
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
