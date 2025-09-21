@@ -306,7 +306,7 @@ mod_2_data_server <- function(id, r6){
       )
 
       # ------------------------------------------------------------------------
-      # signal that process is complete
+      # signal to the user that the process is complete
       # ------------------------------------------------------------------------
 
       # signal that download process is complete
@@ -339,8 +339,54 @@ mod_2_data_server <- function(id, r6){
 
       # in a parent module
       # indirectly, by signal that data downloaded
-      gargoyle::trigger("download_data")
+      # if the downloaded data is for a different questionnaire
+      if (
+        is.null(r6$last_qnr_selected_sudo_id) ||
+        (r6$last_qnr_selected_sudo_id != r6$qnr_selected_suso_id)
+      ) {
 
+        # reset to `NULL` any fields for restoring questionnaire-specific data
+        # note: done before gargoyle because need to change r6 state first
+        # otherwise, modules will react and restore from old, out of sync values
+        qnr_data_fields_provided <- c(
+          "parcels_per_hhold_provided",
+          "parcel_gps_provided",
+          "plots_per_parcel_provided",
+          "plot_use_provided",
+          "plot_gps_provided",
+          "crops_per_plot_provided",
+          "crop_types_provided",
+          "temp_crop_harvest_provided",
+          "temp_crop_sales_provided",
+          "perm_crop_harvest_provided",
+          "perm_crop_sales_provided",
+          "cow_displacement_provided",
+          "hen_displacement_provided",
+          "milk_prod_provided",
+          "egg_prod_provided",
+          "fisheries_prod_provided",
+          "aquaculture_prod_provided",
+          "forestry_prod_provided",
+          "process_crop_prod_provided",
+          "crop_labor_provided",
+          "livestock_labor_provided",
+          "fisheries_labor_provided",
+          "aquaculture_labor_provided",
+          "forestry_labor_provided",
+          "income_sources_provided"
+        )
+        purrr::walk(
+          .x = qnr_data_fields_provided,
+          .f = \(x) {
+            r6[[x]] <- NULL
+          }
+        )
+
+        # send signal that new questionnaire data downloaded
+        gargoyle::trigger("download_data")
+
+
+      }
     })
 
     # ==========================================================================

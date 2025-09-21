@@ -136,6 +136,7 @@ r6 <- R6::R6Class(
     # questionnaire selected
     qnr_selected_index = NULL,
     qnr_selected_suso_id = NULL,
+    last_qnr_selected_sudo_id = NULL,
     qnr_selected_suso_version = NULL,
     qnr_selected = NULL,
     # template details
@@ -783,6 +784,7 @@ r6 <- R6::R6Class(
       # questionnaire selected
       qnr_selected_index = NULL,
       qnr_selected_suso_id = NULL,
+      last_qnr_selected_sudo_id = NULL,
       qnr_selected_suso_version = NULL,
       qnr_selected = NULL,
       # questionnaire template details

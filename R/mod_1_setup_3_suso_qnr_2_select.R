@@ -104,6 +104,8 @@ mod_1_setup_3_suso_qnr_2_select_server <- function(id, parent, r6){
         )
 
       } else if (!is.null(qnr_selected_index)) {
+        # save old selected questionnaire ID for later comparison with current
+        r6$last_qnr_selected_sudo_id <- r6$qnr_selected_suso_id
 
         # save params to R6
         r6$qnr_selected_index <- qnr_selected_index
