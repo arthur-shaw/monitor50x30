@@ -337,7 +337,8 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_server <- function(id, parent, r6
 
       shiny::req(
         r6$dirs$qnr,
-        input$crop_id_var
+        input$crop_id_var,
+        input$data
       )
 
       # load variables data frame from disk
