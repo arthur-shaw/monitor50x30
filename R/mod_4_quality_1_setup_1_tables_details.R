@@ -76,9 +76,8 @@ mod_4_quality_1_setup_1_tables_details_server <- function(
 
     shiny::observeEvent(input$use, {
 
-      # filter out events related to initializing/inserting the UI
       # require that the input be non-NULL to continue
-      shiny::req(input$use)
+      shiny::req(!is.null(input$use))
 
       # store user inputs in R6
       r6[[glue::glue("use_{tbl_id}")]] <- input$use
