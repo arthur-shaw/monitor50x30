@@ -381,8 +381,9 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       # update choices in the UI
       # ------------------------------------------------------------------------
 
-      shiny::freezeReactiveVal("animal_vals")
+      shiny::freezeReactiveValue(input, "animal_vals")
       shiny::updateSelectInput(
+        inputId = "animal_vals",
         choices = input_choices$animal_vals,
         selected = NULL
       )
@@ -418,8 +419,9 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       # update choices in the UI
       # ------------------------------------------------------------------------
 
-      shiny::freezeReactiveVal("produced_val")
+      shiny::freezeReactiveValue(input, "produced_val")
       shiny::updateSelectInput(
+        inputId = "produced_val",
         choices = input_choices$produced_val,
         selected = NULL
       )
@@ -455,8 +457,9 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       # update choices in the UI
       # ------------------------------------------------------------------------
 
-      shiny::freezeReactiveVal("sold_val")
+      shiny::freezeReactiveValue(input, "sold_val")
       shiny::updateSelectInput(
+        inputId = "sold_val",
         choices = input_choices$sold_val,
         selected = NULL
       )

@@ -346,8 +346,9 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       # update choices in the UI
       # ------------------------------------------------------------------------
 
-      shiny::freezeReactiveVal("grew_crops_val")
+      shiny::freezeReactiveValue(input, "grew_crops_val")
       shiny::updateSelectInput(
+        inputId = "grew_crops_val",
         choices = input_choices$grew_crops_val,
         selected = NULL
       )
@@ -383,8 +384,9 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       # update choices in the UI
       # ------------------------------------------------------------------------
 
-      shiny::freezeReactiveVal("paid_val")
+      shiny::freezeReactiveValue(input, "paid_val")
       shiny::updateSelectInput(
+        inputId = "paid_val",
         choices = input_choices$paid_val,
         selected = NULL
       )
@@ -420,8 +422,9 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       # update choices in the UI
       # ------------------------------------------------------------------------
 
-      shiny::freezeReactiveVal("free_val")
+      shiny::freezeReactiveValue(input, "free_val")
       shiny::updateSelectInput(
+        inputId = "free_val",
         choices = input_choices$free_val,
         selected = NULL
       )
@@ -449,7 +452,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
 
       # member worked variable
       input_choices$member_worked_vars <- r6$dirs$micro_combine |>
-        fs::path(paste0(input$member_df, ".dta")) |>
+        fs::path(paste0(input$members_df, ".dta")) |>
         make_data_var_choices(
           vars_df = qnr_vars_df,
           var_type = "single-select"
@@ -459,9 +462,10 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       # update choices in the UI
       # ------------------------------------------------------------------------
 
-      shiny::freezeReactiveVal("member_worked_var")
+      shiny::freezeReactiveValue(input, "member_worked_var")
       shiny::updateSelectInput(
-        choices = input_choices$member_worked_var,
+        inputId = "member_worked_var",
+        choices = input_choices$member_worked_vars,
         selected = NULL
       )
 
@@ -496,8 +500,9 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       # update choices in the UI
       # ------------------------------------------------------------------------
 
-      shiny::freezeReactiveVal("member_worked_val")
+      shiny::freezeReactiveValue(input, "member_worked_val")
       shiny::updateSelectInput(
+        inputId = "member_worked_val",
         choices = input_choices$member_worked_val,
         selected = NULL
       )
