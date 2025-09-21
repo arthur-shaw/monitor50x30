@@ -95,6 +95,7 @@ mod_4_quality_1_setup_2_data_plots_per_parcel_server <- function(
 
       # (re)set to `NULL` variable and value selections
       # but do not trigger reactive
+      shiny::freezeReactiveValue(input, "parcel_id_var")
       shiny::updateSelectInput(
         inputId = "parcel_id_var",
         choices = NULL,
