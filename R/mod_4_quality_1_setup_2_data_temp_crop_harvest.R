@@ -379,7 +379,8 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_server <- function(id, parent, r6
 
       # make harvest value choices
       input_choices$harvest_var_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$harvest_var)
       )
 
