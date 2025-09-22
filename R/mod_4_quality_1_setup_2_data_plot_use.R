@@ -43,7 +43,7 @@ mod_4_quality_1_setup_2_data_plot_use_server <- function(id, parent, r6){
     # ==========================================================================
 
     input_choices <- shiny::reactiveValues(
-      data = r6$plot_use_df_choices,
+      data = r6$data_choices,
       plot_use_var = r6$plot_use_plot_use_var_choices
     )
 
@@ -57,12 +57,6 @@ mod_4_quality_1_setup_2_data_plot_use_server <- function(id, parent, r6){
 
     # when data are downloaded, compute the choices and update the choices
     gargoyle::on("download_data", {
-
-      shiny::req(r6$dirs$micro_combine)
-
-      # get list of data files in combined folder
-      input_choices$data <- r6$dirs$micro_combine |>
-        make_data_choices()
 
       # update UI to reflect data choices
       shiny::updateSelectInput(
@@ -95,7 +89,7 @@ mod_4_quality_1_setup_2_data_plot_use_server <- function(id, parent, r6){
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
-        choice = r6$plot_use_df_choices,
+        choice = r6$data_choices,
         selected = r6$plot_use_df
       )
 
