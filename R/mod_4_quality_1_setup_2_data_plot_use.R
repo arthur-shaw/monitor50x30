@@ -75,6 +75,32 @@ mod_4_quality_1_setup_2_data_plot_use_server <- function(id, parent, r6){
     })
 
     # --------------------------------------------------------------------------
+    # load null values since values not previously saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$plot_use_provided)) {
+
+      # update UI to reflect data choices
+      # but do not trigger reactive
+      shiny::freezeReactiveValue(input, "data")
+      shiny::updateSelectInput(
+        inputId = "data",
+        choices = r6$data_choices,
+        selected = NULL
+      )
+
+      # (re)set to `NULL` variable and value selections
+      # but do not trigger reactive
+      shiny::freezeReactiveValue(input, "plot_use_var")
+      shiny::updateSelectInput(
+        inputId = "plot_use_var",
+        choices = NULL,
+        selected = NULL
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
