@@ -394,25 +394,29 @@ mod_4_quality_1_setup_2_data_temp_crop_sales_server <- function(id, parent, r6){
     }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
-    # sold variable
+    # sold_var -> sold_val
     # --------------------------------------------------------------------------
 
-    shiny::observeEvent(input$sold_val, {
+    shiny::observeEvent(input$sold_var, {
+
+      shiny::req(input$sold_var)
 
       # extract values options sold variable
+      input_choices$sold_vals <- make_val_options(
         qnr_df = r6$qnr_vars_df,
         categories_df = r6$q_categories_df,
         varname = extract_var_names(input$sold_var)
       )
 
       # update sold value options in UI
+      shiny::freezeReactiveValue(input, "sold_val")
       shiny::updateSelectInput(
         inputId = "sold_val",
-        choices = input_choices$sold_val,
+        choices = input_choices$sold_vals,
         selected = NULL
       )
 
-    })
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
