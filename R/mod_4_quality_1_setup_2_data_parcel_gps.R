@@ -139,14 +139,6 @@ mod_4_quality_1_setup_2_data_parcel_gps_server <- function(id, parent, r6){
 
     if (!is.null(r6$parcel_gps_provided)) {
 
-      shiny::req(
-        r6$parcel_gps_df_choices, r6$parcel_gps_df,
-        r6$parcel_gps_gps_var_choices, r6$parcel_gps_gps_var,
-        r6$parcel_gps_not_measured_val_choices, r6$parcel_gps_not_measured_val,
-        r6$parcel_gps_why_not_measured_var_choices, r6$parcel_gps_why_not_measured_var,
-        r6$parcel_gps_provided
-      )
-
       # data
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
@@ -189,6 +181,8 @@ mod_4_quality_1_setup_2_data_parcel_gps_server <- function(id, parent, r6){
     # --------------------------------------------------------------------------
 
     shiny::observeEvent(input$data, {
+
+      shiny::req(input$data)
 
       # load variables data frame from disk
       qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
@@ -246,10 +240,7 @@ mod_4_quality_1_setup_2_data_parcel_gps_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$gps_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$gps_var
-      )
+      shiny::req(input$gps_var)
 
       # load questionnaire data frame from disk
       qnr_df <- fs::path(r6$dirs$qnr, "qnr_full.rds") |>
