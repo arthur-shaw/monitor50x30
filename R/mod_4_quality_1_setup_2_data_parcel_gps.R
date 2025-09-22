@@ -232,7 +232,7 @@ mod_4_quality_1_setup_2_data_parcel_gps_server <- function(id, parent, r6){
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
     # GPS measurement variable
@@ -293,7 +293,7 @@ mod_4_quality_1_setup_2_data_parcel_gps_server <- function(id, parent, r6){
 
       })
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
