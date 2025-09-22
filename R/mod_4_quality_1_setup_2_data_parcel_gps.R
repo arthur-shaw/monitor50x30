@@ -84,10 +84,9 @@ mod_4_quality_1_setup_2_data_parcel_gps_server <- function(id, parent, r6){
         choices = NULL,
         selected = NULL
       )
-      shiny::updateSelectInput(
+      shiny::updateNumericInput(
         inputId = "not_measured_val",
-        choices = NULL,
-        selected = NULL
+        value = NULL
       )
       shiny::updateSelectInput(
         inputId = "why_not_measured_var",
@@ -129,10 +128,9 @@ mod_4_quality_1_setup_2_data_parcel_gps_server <- function(id, parent, r6){
 
       # GPS area not measured value
       shiny::freezeReactiveValue(input, "not_measured_val")
-      shiny::updateSelectInput(
+      shiny::updateNumericInput(
         inputId = "not_measured_val",
-        choice = r6$parcel_gps_not_measured_val_choices,
-        selected = r6$parcel_gps_not_measured_val
+        value = r6$parcel_gps_not_measured_val
       )
 
       # why parcel not measured variable
