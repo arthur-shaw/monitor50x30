@@ -72,6 +72,7 @@ mod_4_quality_1_setup_2_data_plot_gps_server <- function(id, parent, r6){
     gargoyle::on("download_data", {
 
       # update UI to reflect data choices
+      shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
         choices = input_choices$data,
@@ -79,16 +80,19 @@ mod_4_quality_1_setup_2_data_plot_gps_server <- function(id, parent, r6){
       )
 
       # (re)set to `NULL` variable and value selections
+      shiny::freezeReactiveValue(input, "gps_var")
       shiny::updateSelectInput(
         inputId = "gps_var",
         choices = NULL,
         selected = NULL
       )
+      shiny::freezeReactiveValue(input, "not_measured_val")
       shiny::updateSelectInput(
         inputId = "not_measured_val",
         choices = NULL,
         selected = NULL
       )
+      shiny::freezeReactiveValue(input, "why_not_measured_var")
       shiny::updateSelectInput(
         inputId = "why_not_measured_var",
         choices = NULL,
@@ -98,18 +102,50 @@ mod_4_quality_1_setup_2_data_plot_gps_server <- function(id, parent, r6){
     })
 
     # --------------------------------------------------------------------------
+    # load NULL values if not previously saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$plot_gps_provided)) {
+
+      # data
+      shiny::freezeReactiveValue(input, "data")
+      shiny::updateSelectInput(
+        inputId = "data",
+        choice = r6$data_choices,
+        selected = NULL
+      )
+
+      # GPS area variable
+      shiny::freezeReactiveValue(input, "gps_var")
+      shiny::updateSelectInput(
+        inputId = "gps_var",
+        choice = NULL,
+        selected = NULL
+      )
+
+      # GPS area not measured value
+      shiny::freezeReactiveValue(input, "not_measured_val")
+      shiny::updateSelectInput(
+        inputId = "not_measured_val",
+        choice = NULL,
+        selected = NULL
+      )
+
+      # why parcel not measured variable
+      shiny::freezeReactiveValue(input, "why_not_measured_var")
+      shiny::updateSelectInput(
+        inputId = "why_not_measured_var",
+        choice = NULL,
+        selected = NULL
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
     if (!is.null(r6$plot_gps_provided)) {
-
-      shiny::req(
-        r6$plot_gps_df_choices, r6$plot_gps_df,
-        r6$plot_gps_gps_var_choices, r6$plot_gps_gps_var,
-        r6$plot_gps_not_measured_val_choices, r6$plot_gps_not_measured_val,
-        r6$plot_gps_why_not_measured_var_choices, r6$plot_gps_why_not_measured_var,
-        r6$plot_gps_provided
-      )
 
       # data
       shiny::freezeReactiveValue(input, "data")
@@ -155,6 +191,8 @@ mod_4_quality_1_setup_2_data_plot_gps_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$data, {
 
+      shiny::req(input$data)
+
       # load variables data frame from disk
       qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
         readRDS()
@@ -170,6 +208,7 @@ mod_4_quality_1_setup_2_data_plot_gps_server <- function(id, parent, r6){
         )
 
       # update GPS measurement var in UI
+      shiny::freezeReactiveValue(input, "gps_var")
       shiny::updateSelectInput(
         inputId = "gps_var",
         choices = input_choices$gps_var,
@@ -177,6 +216,7 @@ mod_4_quality_1_setup_2_data_plot_gps_server <- function(id, parent, r6){
       )
 
       # update why not measured vals to `NULL`, since prior choice invalidated
+      shiny::freezeReactiveValue(input, "not_measured_val")
       shiny::updateSelectInput(
         inputId = "not_measured_val",
         choices = NULL,
@@ -197,13 +237,14 @@ mod_4_quality_1_setup_2_data_plot_gps_server <- function(id, parent, r6){
         )
 
       # update why parcel not measured choices
+      shiny::freezeReactiveValue(input, "why_not_measured_var")
       shiny::updateSelectInput(
         inputId = "why_not_measured_var",
         choices = input_choices$why_not_measured_var,
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
     # GPS measurement variable
@@ -211,10 +252,7 @@ mod_4_quality_1_setup_2_data_plot_gps_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$gps_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$gps_var
-      )
+      shiny::req(input$gps_var)
 
       # load questionnaire data frame from disk
       qnr_df <- fs::path(r6$dirs$qnr, "qnr_full.rds") |>
@@ -226,6 +264,7 @@ mod_4_quality_1_setup_2_data_plot_gps_server <- function(id, parent, r6){
       # get use value answer options
       input_choices$not_measured_val <- make_val_options(
         qnr_df = qnr_df,
+        categories_df = r6$q_categories_df,
         varname = var_selected
       )
 
@@ -266,7 +305,7 @@ mod_4_quality_1_setup_2_data_plot_gps_server <- function(id, parent, r6){
 
       })
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
