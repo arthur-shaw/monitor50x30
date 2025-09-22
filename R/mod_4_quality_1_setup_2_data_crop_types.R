@@ -72,6 +72,7 @@ mod_4_quality_1_setup_2_data_crop_types_server <- function(id, parent, r6){
     gargoyle::on("download_data", {
 
       # update UI to reflect data choices
+      shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
         choices = input_choices$data,
@@ -79,15 +80,18 @@ mod_4_quality_1_setup_2_data_crop_types_server <- function(id, parent, r6){
       )
 
       # (re)set to `NULL` variable and value selections
+      shiny::freezeReactiveValue(input, "crop_type_var")
       shiny::updateSelectInput(
         inputId = "crop_type_var",
         choices = NULL,
         selected = NULL
       )
+      shiny::freezeReactiveValue(input, "temp_crop_val")
       shiny::updateNumericInput(
         inputId = "temp_crop_val",
         value = NULL
       )
+      shiny::freezeReactiveValue(input, "perm_crop_val")
       shiny::updateNumericInput(
         inputId = "perm_crop_val",
         value = NULL
@@ -96,17 +100,48 @@ mod_4_quality_1_setup_2_data_crop_types_server <- function(id, parent, r6){
     })
 
     # --------------------------------------------------------------------------
+    # load NULL values when not previously saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$crop_types_provided)) {
+
+      # data
+      shiny::freezeReactiveValue(input, "data")
+      shiny::updateSelectInput(
+        inputId = "data",
+        choice = r6$data_choices,
+        selected = NULL
+      )
+
+      # crop type variable
+      shiny::freezeReactiveValue(input, "crop_type_var")
+      shiny::updateSelectInput(
+        inputId = "crop_type_var",
+        choice = NULL,
+        selected = NULL
+      )
+
+      # temporary crop value
+      shiny::freezeReactiveValue(input, "temp_crop_val")
+      shiny::updateNumericInput(
+        inputId = "temp_crop_val",
+        value = NULL
+      )
+
+      # permanent crop value
+      shiny::freezeReactiveValue(input, "perm_crop_val")
+      shiny::updateNumericInput(
+        inputId = "perm_crop_val",
+        value = NULL
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
     if (!is.null(r6$crop_types_provided)) {
-
-      shiny::req(
-        r6$crop_types_df_choices, r6$crop_types_df,
-        r6$crop_types_var_choices, r6$crop_types_var,
-        r6$crop_type_temp_val, r6$crop_type_perm_val,
-        r6$crop_types_provided
-      )
 
       # data
       shiny::freezeReactiveValue(input, "data")
@@ -162,23 +197,26 @@ mod_4_quality_1_setup_2_data_crop_types_server <- function(id, parent, r6){
 
       # update in UI
       # crop type variable
+      shiny::freezeReactiveValue(input, "crop_type_var")
       shiny::updateSelectInput(
         inputId = "crop_type_var",
         choices = input_choices$crop_type_var,
         selected = NULL
       )
       # temporary crop value
+      shiny::freezeReactiveValue(input, "temp_crop_val")
       shiny::updateNumericInput(
         inputId = "temp_crop_val",
         value = NULL
       )
       # permanent crop value
+      shiny::freezeReactiveValue(input, "perm_crop_val")
       shiny::updateNumericInput(
         inputId = "perm_crop_val",
         value = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
