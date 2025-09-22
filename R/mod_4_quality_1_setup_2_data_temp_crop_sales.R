@@ -148,23 +148,6 @@ mod_4_quality_1_setup_2_data_temp_crop_sales_server <- function(id, parent, r6){
 
     if (!is.null(r6$temp_crop_sales_provided)) {
 
-      shiny::req(
-        r6$dirs$micro_combine,
-        r6$temp_crop_sales_df_choices, r6$temp_crop_sales_df,
-        r6$temp_crop_sales_crop_id_var_choices, r6$temp_crop_sales_crop_id_var,
-        r6$temp_crop_sales_crop_vals_choices, r6$temp_crop_sales_crop_vals,
-        r6$temp_crop_sales_sold_var_choices, r6$temp_crop_sales_sold_var,
-        r6$temp_crop_sales_sold_val_choices, r6$temp_crop_sales_sold_val,
-        r6$temp_crop_sales_amt_sold_vars_choices,
-        r6$temp_crop_sales_amt_sold_vars,
-        r6$temp_crop_sales_amt_sold_dk_val,
-        r6$temp_crop_sales_provided,
-      )
-
-      # get list of data files in combined folder
-      input_choices$data <- r6$dirs$micro_combine |>
-        make_data_choices()
-
       # data
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
@@ -232,10 +215,6 @@ mod_4_quality_1_setup_2_data_temp_crop_sales_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$data, {
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
       # make choices from selected data
       # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -251,7 +230,7 @@ mod_4_quality_1_setup_2_data_temp_crop_sales_server <- function(id, parent, r6){
           paste0(input$data, ".dta")
         ) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -261,7 +240,7 @@ mod_4_quality_1_setup_2_data_temp_crop_sales_server <- function(id, parent, r6){
           paste0(input$data, ".dta")
         ) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "numeric"
         )
 
@@ -352,8 +331,8 @@ mod_4_quality_1_setup_2_data_temp_crop_sales_server <- function(id, parent, r6){
     shiny::observeEvent(input$sold_val, {
 
       # extract values options sold variable
-      input_choices$sold_val <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$sold_var)
       )
 
