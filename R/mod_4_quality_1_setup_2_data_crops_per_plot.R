@@ -49,7 +49,7 @@ mod_4_quality_1_setup_2_data_crops_per_plot_server <- function(id, parent, r6){
     # ==========================================================================
 
     input_choices <- shiny::reactiveValues(
-      data = r6$crops_per_plot_df_choices,
+      data = r6$data_choices,
       parcel_id_var = r6$crops_per_plot_parcel_id_var_choices,
       plot_id_var = r6$crops_per_plot_plot_id_var_choices
     )
@@ -64,12 +64,6 @@ mod_4_quality_1_setup_2_data_crops_per_plot_server <- function(id, parent, r6){
 
     # when data are downloaded, compute the choices and update the choices
     gargoyle::on("download_data", {
-
-      shiny::req(r6$dirs$micro_combine)
-
-      # get list of data files in combined folder
-      input_choices$data <- r6$dirs$micro_combine |>
-        make_data_choices()
 
       # update UI to reflect data choices
       shiny::updateSelectInput(
@@ -109,7 +103,7 @@ mod_4_quality_1_setup_2_data_crops_per_plot_server <- function(id, parent, r6){
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
-        choice = r6$crops_per_plot_df_choices,
+        choice = r6$data_choices,
         selected = r6$crops_per_plot_df
       )
 
