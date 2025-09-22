@@ -382,6 +382,10 @@ mod_2_data_server <- function(id, r6){
           }
         )
 
+        # update last questionnaire ID to match current one
+        r6$last_qnr_selected_sudo_id <- r6$qnr_selected_suso_id
+        r6$write()
+
         # send signal that new questionnaire data downloaded
         gargoyle::trigger("download_data")
 
