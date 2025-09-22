@@ -312,6 +312,38 @@ mod_4_quality_1_setup_2_data_temp_crop_sales_server <- function(id, parent, r6){
 
     }, ignoreInit = TRUE)
 
+    # --------------------------------------------------------------------------
+    # crop_id_var -> crop_vals
+    # --------------------------------------------------------------------------
+
+    shiny::observeEvent(input$crop_id_var, {
+
+      shiny::req(
+        input$data,
+        input$crop_id_var
+      )
+
+      # load variables data frame from disk
+      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
+        readRDS()
+
+      # make crop ID value choices
+      input_choices$crop_id_vals <- make_id_val_options(
+        path = fs::path(
+          r6$dirs$micro_combine,
+          paste0(input$data, ".dta")
+        ),
+        varname = extract_id_var_names(input$crop_id_var)
+      )
+
+      # update choices in UI
+      shiny::updateSelectInput(
+        inputId = "crop_vals",
+        choices = input_choices$crop_id_vals,
+        selected = NULL
+      )
+
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
     # sold variable
