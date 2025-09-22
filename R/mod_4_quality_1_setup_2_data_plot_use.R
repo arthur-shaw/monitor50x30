@@ -59,6 +59,7 @@ mod_4_quality_1_setup_2_data_plot_use_server <- function(id, parent, r6){
     gargoyle::on("download_data", {
 
       # update UI to reflect data choices
+      shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
         choices = input_choices$data,
@@ -66,6 +67,7 @@ mod_4_quality_1_setup_2_data_plot_use_server <- function(id, parent, r6){
       )
 
       # (re)set to `NULL` variable and value selections
+      shiny::freezeReactiveValue(input, "plot_use_var")
       shiny::updateSelectInput(
         inputId = "plot_use_var",
         choices = NULL,
@@ -106,11 +108,6 @@ mod_4_quality_1_setup_2_data_plot_use_server <- function(id, parent, r6){
 
     if (!is.null(r6$plot_use_provided)) {
 
-      shiny::req(
-        r6$plot_use_df_choices, r6$plot_use_df,
-        r6$plot_use_plot_use_var_choices, r6$plot_use_plot_use_var
-      )
-
       # data
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
@@ -139,10 +136,7 @@ mod_4_quality_1_setup_2_data_plot_use_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$data, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$data
-      )
+      shiny::req(input$data)
 
       # load variables data frame from disk
       qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
@@ -163,7 +157,7 @@ mod_4_quality_1_setup_2_data_plot_use_server <- function(id, parent, r6){
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
@@ -171,10 +165,7 @@ mod_4_quality_1_setup_2_data_plot_use_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$save, {
 
-      shiny::req(
-        input_choices$data, input$data,
-        input_choices$plot_use_var, input$plot_use_var
-      )
+      shiny::req(input$data, input$plot_use_var)
 
       # capture values in R6
       # data
