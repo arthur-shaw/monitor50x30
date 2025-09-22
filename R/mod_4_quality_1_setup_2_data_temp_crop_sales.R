@@ -143,6 +143,69 @@ mod_4_quality_1_setup_2_data_temp_crop_sales_server <- function(id, parent, r6){
     })
 
     # --------------------------------------------------------------------------
+    # load NULL values if vals not previously saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$temp_crop_sales_provided)) {
+
+      # data
+      shiny::freezeReactiveValue(input, "data")
+      shiny::updateSelectInput(
+        inputId = "data",
+        choice =r6$data_choices, 
+        selected = NULL
+      )
+
+      # crop ID variable
+      shiny::freezeReactiveValue(input, "crop_id_var")
+      shiny::updateSelectInput(
+        inputId = "crop_id_var",
+        choice = NULL,
+        selected = NULL
+      )
+
+      # crop ID values
+      shiny::freezeReactiveValue(input, "crop_vals")
+      shiny::updateSelectInput(
+        inputId = "crop_vals",
+        choice = NULL,
+        selected = NULL
+      )
+
+      # sold variable
+      shiny::freezeReactiveValue(input, "sold_var")
+      shiny::updateSelectInput(
+        inputId = "sold_var",
+        choice = NULL,
+        selected = NULL
+      )
+
+      # sold value
+      shiny::freezeReactiveValue(input, "sold_val")
+      shiny::updateSelectInput(
+        inputId = "sold_val",
+        choice = NULL,
+        selected = NULL
+      )
+
+      # amount sold variables
+      shiny::freezeReactiveValue(input, "amt_sold_vars")
+      shiny::updateSelectInput(
+        inputId = "amt_sold_vars",
+        choice = NULL,
+        selected = NULL
+      )
+
+      # amount sold value
+      shiny::freezeReactiveValue(input, "amt_sold_val")
+      shiny::updateNumericInput(
+        inputId = "amt_sold_val",
+        value = NULL
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
