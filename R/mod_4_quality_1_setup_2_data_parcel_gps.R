@@ -97,6 +97,43 @@ mod_4_quality_1_setup_2_data_parcel_gps_server <- function(id, parent, r6){
     })
 
     # --------------------------------------------------------------------------
+    # load null values since values not previously saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$parcel_gps_provided)) {
+
+      # update UI to reflect data choices
+      # but do not trigger reactive
+      shiny::freezeReactiveValue(input, "data")
+      shiny::updateSelectInput(
+        inputId = "data",
+        choices = r6$data_choices,
+        selected = NULL
+      )
+
+      # (re)set to `NULL` variable and value selections
+      # but do not trigger reactive
+      shiny::freezeReactiveValue(input, "gps_var")
+      shiny::updateSelectInput(
+        inputId = "gps_var",
+        choices = NULL,
+        selected = NULL
+      )
+      shiny::freezeReactiveValue(input, "not_measured_val")
+      shiny::updateNumericInput(
+        inputId = "not_measured_val",
+        value = NULL
+      )
+      shiny::freezeReactiveValue(input, "why_not_measured_var")
+      shiny::updateSelectInput(
+        inputId = "why_not_measured_var",
+        choices = NULL,
+        selected = NULL
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
