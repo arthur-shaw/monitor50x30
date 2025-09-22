@@ -156,8 +156,12 @@ mod_4_quality_1_setup_2_data_parcels_per_hhold_server <- function(id,  parent, r
     }
 
     # ==========================================================================
-    # react to data choice
+    # react to choices
     # ==========================================================================
+
+    # --------------------------------------------------------------------------
+    # data -> use
+    # --------------------------------------------------------------------------
 
     shiny::observeEvent(input$data, {
 
@@ -195,18 +199,15 @@ mod_4_quality_1_setup_2_data_parcels_per_hhold_server <- function(id,  parent, r
       )
 
     },
-    ignoreInit = TRUE)
+    ignoreInit = TRUE, ignoreNULL = TRUE)
 
-    # ==========================================================================
-    # react to variable choice
-    # ==========================================================================
+    # --------------------------------------------------------------------------
+    # use -> use_val
+    # --------------------------------------------------------------------------
 
     shiny::observeEvent(input$use, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$use
-      )
+      shiny::req(input$use)
 
       # load questionnaire data frame from disk
       qnr_df <- fs::path(r6$dirs$qnr, "qnr_full.rds") |>
@@ -229,7 +230,7 @@ mod_4_quality_1_setup_2_data_parcels_per_hhold_server <- function(id,  parent, r
       )
 
     },
-    ignoreInit = TRUE)
+    ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
