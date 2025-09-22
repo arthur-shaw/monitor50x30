@@ -150,15 +150,13 @@ mod_4_quality_1_setup_2_data_crop_types_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$data, {
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
+      shiny::req(input$data)
 
       # make crop choice var choices
       input_choices$crop_type_var <- r6$dirs$micro_combine |>
         fs::path(paste0(input$data, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
