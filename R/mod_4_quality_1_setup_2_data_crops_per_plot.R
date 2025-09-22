@@ -66,6 +66,7 @@ mod_4_quality_1_setup_2_data_crops_per_plot_server <- function(id, parent, r6){
     gargoyle::on("download_data", {
 
       # update UI to reflect data choices
+      shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
         choices = input_choices$data,
@@ -73,11 +74,13 @@ mod_4_quality_1_setup_2_data_crops_per_plot_server <- function(id, parent, r6){
       )
 
       # (re)set to `NULL` variable and value selections
+      shiny::freezeReactiveValue(input, "parcel_id_var")
       shiny::updateSelectInput(
         inputId = "parcel_id_var",
         choices = NULL,
         selected = NULL
       )
+      shiny::freezeReactiveValue(input, "plot_id_var")
       shiny::updateSelectInput(
         inputId = "plot_id_var",
         choices = NULL,
@@ -87,17 +90,42 @@ mod_4_quality_1_setup_2_data_crops_per_plot_server <- function(id, parent, r6){
     })
 
     # --------------------------------------------------------------------------
+    # load NULL values if never saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$crops_per_plot_provided)) {
+
+      # data
+      shiny::freezeReactiveValue(input, "data")
+      shiny::updateSelectInput(
+        inputId = "data",
+        choice = r6$data_choices,
+        selected = NULL
+      )
+
+      # parcel ID
+      shiny::freezeReactiveValue(input, "parcel_id_var")
+      shiny::updateSelectInput(
+        inputId = "parcel_id_var",
+        choice = NULL,
+        selected = NULL
+      )
+
+      # plot ID
+      shiny::freezeReactiveValue(input, "plot_id_var")
+      shiny::updateSelectInput(
+        inputId = "plot_id_var",
+        choice = NULL,
+        selected = NULL
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
     if (!is.null(r6$crops_per_plot_provided)) {
-
-      shiny::req(
-        r6$crops_per_plot_df_choices, r6$crops_per_plot_df,
-        r6$crops_per_plot_parcel_id_var_choices, r6$crops_per_plot_parcel_id_var,
-        r6$crops_per_plot_plot_id_var_choices, r6$crops_per_plot_plot_id_var,
-        r6$crops_per_plot_provided
-      )
 
       # data
       shiny::freezeReactiveValue(input, "data")
@@ -135,6 +163,8 @@ mod_4_quality_1_setup_2_data_crops_per_plot_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$data, {
 
+      shiny::req(input$data)
+
       # make ID variables choices
       # parcel
       input_choices$parcel_id_var <- r6$dirs$micro_combine |>
@@ -159,7 +189,7 @@ mod_4_quality_1_setup_2_data_crops_per_plot_server <- function(id, parent, r6){
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
