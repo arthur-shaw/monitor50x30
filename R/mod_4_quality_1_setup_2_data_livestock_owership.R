@@ -87,6 +87,30 @@ mod_4_quality_1_setup_2_data_livestock_owership_server <- function(id, r6, paren
     # load past selections from R6
     # --------------------------------------------------------------------------
 
+    if (is.null(r6$livestock_ownership_provided)) {
+
+      # data
+      shiny::freezeReactiveValue(input, "data")
+      shiny::updateSelectInput(
+        inputId = "data",
+        choice = r6$data_choices,
+        selected = NULL
+      )
+
+      # livestock ownership variable
+      shiny::freezeReactiveValue(input, "animal_var")
+      shiny::updateSelectInput(
+        inputId = "animal_var",
+        choice = NULL,
+        selected = NULL
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
+    # load past selections from R6
+    # --------------------------------------------------------------------------
+
     if (!is.null(r6$livestock_ownership_provided)) {
 
       # data
