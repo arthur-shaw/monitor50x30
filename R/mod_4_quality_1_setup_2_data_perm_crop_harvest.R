@@ -10,7 +10,7 @@
 mod_4_quality_1_setup_2_data_perm_crop_harvest_ui <- function(id, r6, module) {
   ns <- NS(id)
   tagList(
- 
+
     shiny::selectInput(
       inputId = ns("data"),
       label = "Parcel-plot-crop roster data set",
@@ -55,7 +55,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_ui <- function(id, r6, module) {
   )
 
 }
-    
+
 #' 4_quality_1_setup_2_data_perm_crop_harvest Server Functions
 #'
 #' @noRd 
@@ -72,7 +72,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       crop_id_var = r6$perm_crop_harvest_crop_id_var_choices,
       crop_id_vals = r6$perm_crop_harvest_crop_vals_choices,
       harvest_var = r6$perm_crop_harvest_harvest_var_choices,
-      harvest_var_vals = r6$perm_crop_harvest_crop_id_var_choices,
+      harvest_var_vals = r6$perm_crop_harvest_harvest_val_choices,
       why_not_harvest_var = r6$perm_crop_harvest_why_not_var_choices
     )
 
@@ -131,24 +131,60 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
     })
 
     # --------------------------------------------------------------------------
+    # load NULL values if never saved vals
+    # --------------------------------------------------------------------------
+
+    # when data are downloaded, compute the choices and update the choices
+    if (is.null(r6$temp_crop_harvest_provided)) {
+
+      # update UI to reflect data choices
+      # but do not trigger reactive
+      shiny::freezeReactiveValue(input, "data")
+      shiny::updateSelectInput(
+        inputId = "data",
+        choices = r6$data_choices,
+        selected = NULL
+      )
+
+      # (re)set to `NULL` variable and value selections
+      # but do not trigger reactive
+      shiny::freezeReactiveValue(input, "crop_id_var")
+      shiny::updateSelectInput(
+        inputId = "crop_id_var",
+        choices = NULL,
+        selected = NULL
+      )
+      shiny::freezeReactiveValue(input, "crop_vals")
+      shiny::updateSelectInput(
+        inputId = "crop_vals",
+        choices = NULL,
+        selected = NULL
+      )
+      shiny::freezeReactiveValue(input, "harvest_var")
+      shiny::updateSelectInput(
+        inputId = "harvest_var",
+        choices = NULL,
+        selected = NULL
+      )
+      shiny::freezeReactiveValue(input, "harvest_val")
+      shiny::updateNumericInput(
+        inputId = "harvest_val",
+        value = NULL
+      )
+      shiny::freezeReactiveValue(input, "why_not_harvest_var")
+      shiny::updateSelectInput(
+        inputId = "why_not_harvest_var",
+        choices = NULL,
+        selected = NULL
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
     if (!is.null(r6$temp_crop_harvest_provided)) {
-
-      shiny::req(
-        r6$perm_crop_harvest_df_choices, r6$perm_crop_harvest_df,
-        r6$perm_crop_harvest_crop_id_var_choices,
-        r6$perm_crop_harvest_crop_id_var,
-        r6$perm_crop_harvest_crop_vals_choices, r6$perm_crop_harvest_crop_vals,
-        r6$perm_crop_harvest_harvest_var_choices,
-        r6$perm_crop_harvest_harvest_var,
-        r6$perm_crop_harvest_harvest_val_choices,
-        r6$perm_crop_harvest_harvest_val,
-        r6$perm_crop_harvest_why_not_harvest_var_choices,
-        r6$perm_crop_harvest_why_not_harvest_var,
-        r6$perm_crop_harvest_provided
-      )
 
       # data
       shiny::freezeReactiveValue(input, "data")
@@ -243,6 +279,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
         selected = NULL
       )
       # crop ID values
+      shiny::freezeReactiveValue(input, "crop_vals")
       shiny::updateSelectInput(
         inputId = "crop_vals",
         choices = NULL,
@@ -256,6 +293,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
         selected = NULL
       )
       # harvest values
+      shiny::freezeReactiveValue(input, "harvest_val")
       shiny::updateSelectInput(
         inputId = "harvest_val",
         choices = NULL,
@@ -272,7 +310,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
     }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
-    # crop ID variable
+    # crop ID variable -> crop_vals
     # --------------------------------------------------------------------------
 
     shiny::observeEvent(input$crop_id_var, {
@@ -289,16 +327,17 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       )
 
       # update choices in UI
+      shiny::freezeReactiveValue(input, "crop_vals")
       shiny::updateSelectInput(
         inputId = "crop_vals",
         choices = input_choices$crop_id_vals,
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
-    # harvest variable
+    # harvest variable -> harvest_val
     # --------------------------------------------------------------------------
 
     shiny::observeEvent(input$harvest_var, {
@@ -313,13 +352,14 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       )
 
       # update choices in UI
+      shiny::freezeReactiveValue(input, "harvest_val")
       shiny::updateSelectInput(
         inputId = "harvest_val",
         choices = input_choices$harvest_var_vals,
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
