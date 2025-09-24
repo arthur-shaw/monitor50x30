@@ -260,9 +260,9 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
       )
 
       # amount sold value
-      shiny::freezeReactiveValue(input, "amt_sold_val")
+      shiny::freezeReactiveValue(input, "amt_sold_dk_val")
       shiny::updateNumericInput(
-        inputId = "amt_sold_val",
+        inputId = "amt_sold_dk_val",
         value = r6$perm_crop_sales_amt_sold_dk_val
       )
 
@@ -442,7 +442,7 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
       r6$perm_crop_sales_sold_val <- input$sold_val
       # amount sold variables
       r6$perm_crop_sales_amt_sold_vars_choices <- input_choices$amt_sold_vars
-      r6$perm_crop_sales_amt_sold_vars <- input$amt_sold_var
+      r6$perm_crop_sales_amt_sold_vars <- input$amt_sold_vars
       # amount sold DK values
       r6$perm_crop_sales_amt_sold_dk_val <- input$amt_sold_val
       # save action
