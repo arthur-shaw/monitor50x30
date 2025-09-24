@@ -314,27 +314,31 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
       # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
       # crop ID
+      shiny::freezeReactiveValue(input, "crop_id_var")
       shiny::updateSelectInput(
         inputId = "crop_id_var",
-        choices = r6$perm_crop_sales_crop_id_var_choices,
+        choices = input_choices$crop_id_vars,
         selected = NULL
       )
 
       # crop ID values
+      shiny::freezeReactiveValue(input, "crop_vals")
       shiny::updateSelectInput(
         inputId = "crop_vals",
-        choice = r6$perm_crop_sales_crop_vals_choices,
-        selected = r6$perm_crop_sales_crop_vals
+        choice = NULL,
+        selected = NULL
       )
 
       # sold variable choices
+      shiny::freezeReactiveValue(input, "sold_var")
       shiny::updateSelectInput(
         inputId = "sold_var",
-        choices = r6$perm_crop_sales_sold_var_choices,
+        choices = input_choices$sold_vars,
         selected = NULL
       )
 
       # sold variable value to `NULL`
+      shiny::freezeReactiveValue(input, "sold_val")
       shiny::updateSelectInput(
         inputId = "sold_val",
         choices = NULL,
@@ -342,18 +346,21 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
       )
 
       # amount sold variables
+      shiny::freezeReactiveValue(input, "amt_sold_vars")
       shiny::updateSelectInput(
         inputId = "amt_sold_vars",
-        choices = r6$perm_crop_sales_amt_sold_vars_choices,
+        choices = input_choices$amt_sold_vars,
         selected = NULL
       )
 
       # amount sold DK values to `NULL`
+      shiny::freezeReactiveValue(input, "sold_val")
       shiny::updateNumericInput(
         inputId = "sold_val",
         value = NULL,
       )
 
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
     # crop_id_var -> crop_vals
@@ -415,7 +422,7 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
         selected = NULL
       )
 
-    })
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
