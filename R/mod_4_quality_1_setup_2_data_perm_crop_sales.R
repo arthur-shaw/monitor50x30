@@ -232,9 +232,7 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
 
     shiny::observeEvent(input$data, {
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
+      shiny::req(input$data)
 
       # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
       # make choices from selected data
@@ -251,7 +249,7 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
           paste0(input$data, ".dta")
         ) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -261,7 +259,7 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
           paste0(input$data, ".dta")
         ) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "numeric"
         )
 
@@ -322,6 +320,8 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
       # extract values options sold variable
       input_choices$sold_val <- make_val_options(
         qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$sold_var)
       )
 
