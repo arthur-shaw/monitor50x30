@@ -209,39 +209,22 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
     # load past selections from R6
     # --------------------------------------------------------------------------
 
-    if (!is.null(r6$temp_crop_sales_provided)) {
-
-      shiny::req(
-        r6$dirs$micro_combine,
-        r6$perm_crop_sales_df_choices, r6$perm_crop_sales_df,
-        r6$perm_crop_sales_crop_id_var_choices, r6$perm_crop_sales_crop_id_var,
-        r6$perm_crop_sales_crop_vals_choices, r6$perm_crop_sales_crop_vals,
-        r6$perm_crop_sales_sold_var_choices, r6$perm_crop_sales_sold_var,
-        r6$perm_crop_sales_sold_val_choices, r6$perm_crop_sales_sold_val,
-        r6$perm_crop_sales_amt_sold_vars_choices,
-        r6$perm_crop_sales_amt_sold_vars,
-        r6$perm_crop_sales_amt_sold_dk_val,
-        r6$perm_crop_sales_provided,
-      )
-
-      # get list of data files in combined folder
-      input_choices$data <- r6$dirs$micro_combine |>
-        make_data_choices()
+    if (!is.null(r6$perm_crop_sales_provided)) {
 
       # data
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
         choice = r6$data_choices,
-        selected = r6$temp_crop_sales_df
+        selected = r6$perm_crop_sales_df
       )
 
       # crop ID variable
       shiny::freezeReactiveValue(input, "crop_id_var")
       shiny::updateSelectInput(
         inputId = "crop_id_var",
-        choice = r6$temp_crop_sales_crop_id_var_choices,
-        selected = r6$temp_crop_sales_crop_id_var
+        choice = r6$perm_crop_sales_crop_id_var_choices,
+        selected = r6$perm_crop_sales_crop_id_var
       )
 
       # crop ID values
@@ -256,31 +239,31 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
       shiny::freezeReactiveValue(input, "sold_var")
       shiny::updateSelectInput(
         inputId = "sold_var",
-        choice = r6$temp_crop_sales_sold_var_choices,
-        selected = r6$temp_crop_sales_sold_var
+        choice = r6$perm_crop_sales_sold_var_choices,
+        selected = r6$perm_crop_sales_sold_var
       )
 
       # sold value
       shiny::freezeReactiveValue(input, "sold_val")
       shiny::updateSelectInput(
         inputId = "sold_val",
-        choice = r6$temp_crop_sales_sold_val_choices,
-        selected = r6$temp_crop_sales_sold_val
+        choice = r6$perm_crop_sales_sold_val_choices,
+        selected = r6$perm_crop_sales_sold_val
       )
 
       # amount sold variables
       shiny::freezeReactiveValue(input, "amt_sold_vars")
       shiny::updateSelectInput(
         inputId = "amt_sold_vars",
-        choice = r6$temp_crop_sales_amt_sold_vars_choices,
-        selected = r6$temp_crop_sales_amt_sold_vars
+        choice = r6$perm_crop_sales_amt_sold_vars_choices,
+        selected = r6$perm_crop_sales_amt_sold_vars
       )
 
       # amount sold value
       shiny::freezeReactiveValue(input, "amt_sold_val")
       shiny::updateNumericInput(
         inputId = "amt_sold_val",
-        value = r6$temp_crop_sales_amt_sold_dk_val
+        value = r6$perm_crop_sales_amt_sold_dk_val
       )
 
     }
