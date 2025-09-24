@@ -30,20 +30,20 @@ mod_4_quality_1_setup_2_data_livestock_owership_ui <- function(id) {
 
   )
 }
-    
+
 #' 4_quality_1_setup_2_data_livestock_owership Server Functions
 #'
 #' @noRd 
 mod_4_quality_1_setup_2_data_livestock_owership_server <- function(id, r6, parent){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
- 
+
     # ==========================================================================
     # create a reactive container for input choices
     # ==========================================================================
 
     input_choices <- shiny::reactiveValues(
-      data = r6$livestock_ownership_df_choices,
+      data = r6$data_choices,
       animal_vars = r6$livestock_ownership_var_choices
     )
 
@@ -60,16 +60,12 @@ mod_4_quality_1_setup_2_data_livestock_owership_server <- function(id, r6, paren
       # compute choices from downloaded data
       # ------------------------------------------------------------------------
 
-      # get list of data files in combined folder
-      input_choices$data <- r6$dirs$micro_combine |>
-        make_data_choices()
-
       # update UI to reflect data choices
       # but do not trigger reactive
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
-        choices = input_choices$data,
+        choices = r6$data_choices,
         selected = NULL
       )
 
@@ -93,18 +89,11 @@ mod_4_quality_1_setup_2_data_livestock_owership_server <- function(id, r6, paren
 
     if (!is.null(r6$livestock_ownership_provided)) {
 
-      shiny::req(
-        r6$dirs$micro_combine,
-        r6$livestock_ownership_df_choices, r6$livestock_ownership_df,
-        r6$livestock_ownership_animal_var_choices, 
-        r6$livestock_ownership_animal_var,
-      )
-    
       # data
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
-        choice = r6$livestock_ownership_df_choices,
+        choice = r6$data_choices,
         selected = r6$livestock_ownership_df
       )
 
@@ -128,24 +117,17 @@ mod_4_quality_1_setup_2_data_livestock_owership_server <- function(id, r6, paren
 
     shiny::observeEvent(input$data, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$data
-      )
+      shiny::req(input$data)
 
       # ------------------------------------------------------------------------
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # make livestock variable choices
       input_choices$animal_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$data, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "multi-select"
         )
 
