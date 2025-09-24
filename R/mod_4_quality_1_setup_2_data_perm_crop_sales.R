@@ -143,6 +143,69 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
     })
 
     # --------------------------------------------------------------------------
+    # load NULL values when values not yet saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$perm_crop_sales_provided)) {
+
+      # data
+      shiny::freezeReactiveValue(input, "data")
+      shiny::updateSelectInput(
+        inputId = "data",
+        choice = r6$data_choices,
+        selected = r6$perm_crop_sales_df
+      )
+
+      # crop ID variable
+      shiny::freezeReactiveValue(input, "crop_id_var")
+      shiny::updateSelectInput(
+        inputId = "crop_id_var",
+        choice = r6$perm_crop_sales_crop_id_var_choices,
+        selected = r6$perm_crop_sales_crop_id_var
+      )
+
+      # crop ID values
+      shiny::freezeReactiveValue(input, "crop_vals")
+      shiny::updateSelectInput(
+        inputId = "crop_vals",
+        choice = r6$perm_crop_sales_crop_vals_choices,
+        selected = r6$perm_crop_sales_crop_vals
+      )
+
+      # sold variable
+      shiny::freezeReactiveValue(input, "sold_var")
+      shiny::updateSelectInput(
+        inputId = "sold_var",
+        choice = r6$perm_crop_sales_sold_var_choices,
+        selected = r6$perm_crop_sales_sold_var
+      )
+
+      # sold value
+      shiny::freezeReactiveValue(input, "sold_val")
+      shiny::updateSelectInput(
+        inputId = "sold_val",
+        choice = r6$perm_crop_sales_sold_val_choices,
+        selected = r6$perm_crop_sales_sold_val
+      )
+
+      # amount sold variables
+      shiny::freezeReactiveValue(input, "amt_sold_vars")
+      shiny::updateSelectInput(
+        inputId = "amt_sold_vars",
+        choice = r6$perm_crop_sales_amt_sold_vars_choices,
+        selected = r6$perm_crop_sales_amt_sold_vars
+      )
+
+      # amount sold value
+      shiny::freezeReactiveValue(input, "amt_sold_dk_val")
+      shiny::updateNumericInput(
+        inputId = "amt_sold_dk_val",
+        value = r6$perm_crop_sales_amt_sold_dk_val
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
