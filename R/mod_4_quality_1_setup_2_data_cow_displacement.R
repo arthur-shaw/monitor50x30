@@ -224,7 +224,7 @@ mod_4_quality_1_setup_2_data_cow_displacement_server <- function(id, r6, parent)
       shiny::freezeReactiveValue(input, "bull_val")
       shiny::updateSelectInput(
         inputId = "bull_val",
-        choices = r6$cow_displacement_animal_val_choices, 
+        choices = r6$cow_displacement_val_choices,
         selected = r6$cow_displacement_bull_val
       )
 
@@ -232,7 +232,7 @@ mod_4_quality_1_setup_2_data_cow_displacement_server <- function(id, r6, parent)
       shiny::freezeReactiveValue(input, "cow_val")
       shiny::updateSelectInput(
         inputId = "cow_val",
-        choices = r6$cow_displacement_animal_val_choices, 
+        choices = r6$cow_displacement_val_choices, 
         selected = r6$cow_displacement_cow_val
       )
 
@@ -240,7 +240,7 @@ mod_4_quality_1_setup_2_data_cow_displacement_server <- function(id, r6, parent)
       shiny::freezeReactiveValue(input, "steer_heifer_val")
       shiny::updateSelectInput(
         inputId = "steer_heifer_val",
-        choices = r6$cow_displacement_animal_val_choices, 
+        choices = r6$cow_displacement_val_choices,
         selected = r6$cow_displacement_steer_heifer_val
       )
 
@@ -248,7 +248,7 @@ mod_4_quality_1_setup_2_data_cow_displacement_server <- function(id, r6, parent)
       shiny::freezeReactiveValue(input, "calf_val")
       shiny::updateSelectInput(
         inputId = "calf_val",
-        choices = r6$cow_displacement_animal_val_choices, 
+        choices = r6$cow_displacement_val_choices,
         selected = r6$cow_displacement_calf_val
       )
 
@@ -379,7 +379,7 @@ mod_4_quality_1_setup_2_data_cow_displacement_server <- function(id, r6, parent)
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
