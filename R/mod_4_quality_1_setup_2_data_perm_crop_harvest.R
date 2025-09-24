@@ -135,7 +135,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
     # --------------------------------------------------------------------------
 
     # when data are downloaded, compute the choices and update the choices
-    if (is.null(r6$temp_crop_harvest_provided)) {
+    if (is.null(r6$perm_crop_sales_provided)) {
 
       # update UI to reflect data choices
       # but do not trigger reactive
@@ -184,7 +184,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
     # load past selections from R6
     # --------------------------------------------------------------------------
 
-    if (!is.null(r6$temp_crop_harvest_provided)) {
+    if (!is.null(r6$perm_crop_sales_provided)) {
 
       # data
       shiny::freezeReactiveValue(input, "data")
