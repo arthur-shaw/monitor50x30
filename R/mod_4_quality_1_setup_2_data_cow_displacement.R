@@ -143,6 +143,62 @@ mod_4_quality_1_setup_2_data_cow_displacement_server <- function(id, r6, parent)
     })
 
     # --------------------------------------------------------------------------
+    # load NULL values if values not previously saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$cow_displacement_provided)) {
+
+      # data
+      shiny::freezeReactiveValue(input, "data")
+      shiny::updateSelectInput(
+        inputId = "data",
+        choice = r6$data_choices,
+        selected = NULL
+      )
+
+      # livestock ownership variable
+      shiny::freezeReactiveValue(input, "animal_var")
+      shiny::updateSelectInput(
+        inputId = "animal_var",
+        choice = NULL,
+        selected = NULL
+      )
+
+      # bulls code
+      shiny::freezeReactiveValue(input, "bull_val")
+      shiny::updateSelectInput(
+        inputId = "bull_val",
+        choices = NULL,
+        selected = NULL
+      )
+
+      # cow code
+      shiny::freezeReactiveValue(input, "cow_val")
+      shiny::updateSelectInput(
+        inputId = "cow_val",
+        choices = NULL,
+        selected = NULL
+      )
+
+      # steer/heifer code
+      shiny::freezeReactiveValue(input, "steer_heifer_val")
+      shiny::updateSelectInput(
+        inputId = "steer_heifer_val",
+        choices = NULL,
+        selected = NULL
+      )
+
+      # calf code
+      shiny::freezeReactiveValue(input, "calf_val")
+      shiny::updateSelectInput(
+        inputId = "calf_val",
+        choices = NULL,
+        selected = NULL
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
