@@ -432,7 +432,7 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
       r6$perm_crop_sales_crop_id_var_choices <- input_choices$crop_id_vars
       r6$perm_crop_sales_crop_id_var <- input$crop_id_var
       # crop values
-      r6$perm_crop_sales_crop_vals_choices <- input_choices$crop_id_vals
+      r6$perm_crop_sales_crop_vals_choices <- input_choices$crop_vals
       r6$perm_crop_sales_crop_vals <- input$crop_vals
       # sold variable
       r6$perm_crop_sales_sold_var_choices <- input_choices$sold_vars
