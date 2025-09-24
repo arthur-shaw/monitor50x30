@@ -210,14 +210,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
 
     shiny::observeEvent(input$data, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$data
-      )
-
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
+      shiny::req(input$data)
 
       # make crop ID variable choices
       input_choices$crop_id_var <- r6$dirs$micro_combine |>
@@ -228,7 +221,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       input_choices$harvest_var <- r6$dirs$micro_combine |>
         fs::path(paste0(input$data, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -237,7 +230,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       input_choices$why_not_harvest_var <- r6$dirs$micro_combine |>
         fs::path(paste0(input$data, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "categorical"
         )
 
@@ -284,14 +277,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
 
     shiny::observeEvent(input$crop_id_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$crop_id_var
-      )
-
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
+      shiny::req(input$crop_id_var)
 
       # make crop ID value choices
       input_choices$crop_id_vals <- make_id_val_options(
@@ -317,18 +303,12 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
 
     shiny::observeEvent(input$harvest_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$crop_id_var
-      )
-
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
+      shiny::req(input$crop_id_var)
 
       # make harvest value choices
       input_choices$harvest_var_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$harvest_var)
       )
 
