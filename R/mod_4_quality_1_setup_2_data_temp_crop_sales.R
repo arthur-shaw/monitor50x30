@@ -152,7 +152,7 @@ mod_4_quality_1_setup_2_data_temp_crop_sales_server <- function(id, parent, r6){
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
-        choice =r6$data_choices, 
+        choice = r6$data_choices,
         selected = NULL
       )
 
