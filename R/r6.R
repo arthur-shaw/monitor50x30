@@ -338,6 +338,7 @@ r6 <- R6::R6Class(
     livestock_ownership_df = NULL,
     livestock_ownership_animal_var_choices = NULL,
     livestock_ownership_animal_var = NULL,
+    livestock_ownership_provided = NULL,
     # cow_displacement
     cow_displacement_df_choices = NULL,
     cow_displacement_df  = NULL,
@@ -985,6 +986,7 @@ r6 <- R6::R6Class(
       livestock_ownership_df = NULL,
       livestock_ownership_animal_var_choices = NULL,
       livestock_ownership_animal_var = NULL,
+      livestock_ownership_provided = NULL,
       # cow_displacement
       cow_displacement_df_choices = NULL,
       cow_displacement_df  = NULL,
