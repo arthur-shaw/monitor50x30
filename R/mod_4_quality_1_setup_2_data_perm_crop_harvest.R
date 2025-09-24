@@ -372,7 +372,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       r6$perm_crop_harvest_df_choices <- input_choices$data
       r6$perm_crop_harvest_df  <- input$data
       # crop ID variable
-      r6$perm_crop_harvest_crop_id_var_choices <- input_choices$crop_id_vars
+      r6$perm_crop_harvest_crop_id_var_choices <- input_choices$crop_id_var
       r6$perm_crop_harvest_crop_id_var <- input$crop_id_var
       # crop values
       r6$perm_crop_harvest_crop_vals_choices <- input_choices$crop_id_vals
