@@ -18,17 +18,17 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_ui <- function(id) {
       selected = NULL
     ),
     shiny::selectInput(
+      inputId = ns("crop_id_var"),
+      label = "Crop ID variable",
+      choices = NULL,
+      selected = NULL
+    ),
+    shiny::selectInput(
       inputId = ns("crop_vals"),
       label = "Crops that are permanent crops",
       choices = NULL,
       selected = NULL,
       multiple = TRUE
-    ),
-    shiny::selectInput(
-      inputId = ns("crop_vals"),
-      label = "Codes for permanent crops",
-      choices = NULL,
-      selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("sold_var"),
