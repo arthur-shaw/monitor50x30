@@ -371,7 +371,44 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
         value = NULL,
       )
 
-    }, ignoreInit = TRUE)
+
+    # --------------------------------------------------------------------------
+    # crop_id_var -> crop_vals
+    # --------------------------------------------------------------------------
+
+    shiny::observeEvent(input$crop_id_var, {
+
+      shiny::req(
+        input$data,
+        input$crop_id_var
+      )
+
+      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+      # make choices from selected data
+      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+      # make crop ID value choices
+      input_choices$crop_vals <- make_id_val_options(
+        path = fs::path(
+          r6$dirs$micro_combine,
+          paste0(input$data, ".dta")
+        ),
+        varname = extract_id_var_names(input$crop_id_var)
+      )
+
+      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+      # update choices in UI
+      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+      # update choices in UI
+      shiny::updateSelectInput(
+        inputId = "crop_vals",
+        choices = input_choices$crop_vals,
+        selected = NULL
+      )
+
+
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
 
     # --------------------------------------------------------------------------
