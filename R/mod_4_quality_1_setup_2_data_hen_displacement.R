@@ -120,6 +120,54 @@ mod_4_quality_1_setup_2_data_hen_displacement_server <- function(id, r6, parent)
     })
 
     # --------------------------------------------------------------------------
+    # when vals not previously saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$hen_displacement_provided)) {
+
+      # data
+      shiny::freezeReactiveValue(input, "data")
+      shiny::updateSelectInput(
+        inputId = "data",
+        choice = r6$data_choices,
+        selected = NULL
+      )
+
+      # livestock ownership variable
+      shiny::freezeReactiveValue(input, "animal_var")
+      shiny::updateSelectInput(
+        inputId = "animal_var",
+        choice = NULL,
+        selected = NULL
+      )
+
+      # cock code
+      shiny::freezeReactiveValue(input, "cock_val")
+      shiny::updateSelectInput(
+        inputId = "cock_val",
+        choices = NULL,
+        selected = NULL
+      )
+
+      # hen code
+      shiny::freezeReactiveValue(input, "hen_val")
+      shiny::updateSelectInput(
+        inputId = "hen_val",
+        choices = NULL,
+        selected = NULL
+      )
+
+      # pullet
+      shiny::freezeReactiveValue(input, "pullet_val")
+      shiny::updateSelectInput(
+        inputId = "pullet_val",
+        choices = NULL,
+        selected = NULL
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
