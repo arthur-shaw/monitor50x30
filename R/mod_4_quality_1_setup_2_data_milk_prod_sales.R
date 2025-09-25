@@ -141,6 +141,60 @@ mod_4_quality_1_setup_2_data_milk_prod_sales_server <- function(id, r6, parent){
     })
 
     # --------------------------------------------------------------------------
+    # when values have not been previously saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$milk_prod_provided)) {
+
+      input_specs <- tibble::tribble(
+        ~ id,             ~ updater,            ~ args,
+        "data",           updateSelectInput,    list(
+          choices = r6$data_choices,
+          selected = NULL
+        ),
+        "animal_id_var",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "animal_vals",    updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "produced_var",   updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "produced_val",   updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "sold_var",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "sold_val",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "amt_sold_vars",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "amt_sold_dk_val", updateNumericInput,  list(
+          value = NULL
+        )
+
+      )
+
+      update_inputs(
+        input = input,
+        session = session,
+        specs = input_specs
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
