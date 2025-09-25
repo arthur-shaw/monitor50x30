@@ -10,7 +10,7 @@
 mod_4_quality_1_setup_2_data_hen_displacement_ui <- function(id) {
   ns <- NS(id)
   tagList(
- 
+
     shiny::selectInput(
       inputId = ns("data"),
       label = "Household-level data set",
@@ -171,21 +171,7 @@ mod_4_quality_1_setup_2_data_hen_displacement_server <- function(id, r6, parent)
     # load past selections from R6
     # --------------------------------------------------------------------------
 
-    if (!is.null(r6$cow_displacement_provided)) {
-
-      shiny::req(
-        r6$dirs$micro_combine,
-        r6$hen_displacement_df_choices, r6$hen_displacement_df,
-        # ownership variable
-        r6$hen_displacement_animal_var_choices, 
-        r6$hen_displacement_animal_var,
-        # animal values
-        r6$hen_displacement_animal_val_choices, 
-        # values for cocks, hens, and pullets
-        r6$hen_displacement_cock_val,
-        r6$hen_displacement_hen_val,
-        r6$hen_displacement_pullet_val
-      )
+    if (!is.null(r6$hen_displacement_provided)) {
 
       # data
       shiny::freezeReactiveValue(input, "data")
@@ -207,7 +193,7 @@ mod_4_quality_1_setup_2_data_hen_displacement_server <- function(id, r6, parent)
       shiny::freezeReactiveValue(input, "cock_val")
       shiny::updateSelectInput(
         inputId = "cock_val",
-        choices = r6$hen_displacement_animal_val_choices, 
+        choices = r6$hen_displacement_animal_val_choices,
         selected = r6$hen_displacement_cock_val
       )
 
@@ -215,7 +201,7 @@ mod_4_quality_1_setup_2_data_hen_displacement_server <- function(id, r6, parent)
       shiny::freezeReactiveValue(input, "hen_val")
       shiny::updateSelectInput(
         inputId = "hen_val",
-        choices = r6$hen_displacement_animal_val_choices, 
+        choices = r6$hen_displacement_animal_val_choices,
         selected = r6$hen_displacement_hen_val
       )
 
@@ -223,7 +209,7 @@ mod_4_quality_1_setup_2_data_hen_displacement_server <- function(id, r6, parent)
       shiny::freezeReactiveValue(input, "pullet_val")
       shiny::updateSelectInput(
         inputId = "pullet_val",
-        choices = r6$hen_displacement_animal_val_choices, 
+        choices = r6$hen_displacement_animal_val_choices,
         selected = r6$hen_displacement_pullet_val
       )
 
