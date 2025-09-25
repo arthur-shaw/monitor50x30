@@ -61,7 +61,7 @@ mod_4_quality_1_setup_2_data_hen_displacement_server <- function(id, r6, parent)
     # ==========================================================================
 
     input_choices <- shiny::reactiveValues(
-      data = r6$hen_displacement_df_choices,
+      data = r6$data_choices,
       animal_vars = r6$hen_displacement_var_choices,
       animal_vals = r6$hen_displacement_val_choices
     )
@@ -76,29 +76,14 @@ mod_4_quality_1_setup_2_data_hen_displacement_server <- function(id, r6, parent)
 
     gargoyle::on("download_data", {
 
-      shiny::req(r6$dirs$micro_combine)
-
-      # ------------------------------------------------------------------------
-      # compute choices from downloaded data
-      # ------------------------------------------------------------------------
-
-      # get list of data files in combined folder
-      input_choices$data <- r6$dirs$micro_combine |>
-        make_data_choices()
-
       # update UI to reflect data choices
       # but do not trigger reactive
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
-        choices = input_choices$data,
+        choices = r6$data_choices,
         selected = NULL
       )
-
-      # ------------------------------------------------------------------------
-      # (re)set to `NULL` variable and value selections
-      # but do not trigger reactive
-      # ------------------------------------------------------------------------
 
       # livestock ownership variable
       shiny::freezeReactiveValue(input, "animal_var")
@@ -158,7 +143,7 @@ mod_4_quality_1_setup_2_data_hen_displacement_server <- function(id, r6, parent)
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
-        choice = r6$hen_displacement_df_choices,
+        choice = r6$data_choices,
         selected = r6$hen_displacement_df
       )
 
@@ -206,24 +191,17 @@ mod_4_quality_1_setup_2_data_hen_displacement_server <- function(id, r6, parent)
 
     shiny::observeEvent(input$data, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$data
-      )
+      shiny::req(input$data)
 
       # ------------------------------------------------------------------------
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # make livestock variable choices
       input_choices$animal_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$data, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "multi-select"
         )
 
@@ -271,22 +249,16 @@ mod_4_quality_1_setup_2_data_hen_displacement_server <- function(id, r6, parent)
 
     shiny::observeEvent(input$animal_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$animal_var
-      )
+      shiny::req(input$animal_var)
 
       # ------------------------------------------------------------------------
       # compute choices
       # ------------------------------------------------------------------------
-
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
 
       # compute choices
       input_choices$animal_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$animal_var)
       )
 
