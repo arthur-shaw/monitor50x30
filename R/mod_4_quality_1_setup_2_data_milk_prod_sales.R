@@ -220,37 +220,6 @@ mod_4_quality_1_setup_2_data_milk_prod_sales_server <- function(id, r6, parent){
 
     if (!is.null(r6$milk_prod_provided)) {
 
-      shiny::req(
-        # data directory
-        r6$dirs$micro_combine,
-        # data
-        r6$milk_prod_df_choices,
-        r6$milk_prod_df,
-        # animal ID variable
-        r6$milk_prod_animal_id_var_choices, 
-        r6$milk_prod_animal_id_var,
-        # animal values
-        r6$milk_prod_animal_val_choices, 
-        r6$milk_prod_animal_val, 
-        # production variable
-        r6$milk_prod_produced_var_choices,
-        r6$milk_prod_produced_var,
-        # produced value
-        r6$milk_prod_produced_val_choices,
-        r6$milk_prod_produced_val,
-        # sold variable
-        r6$milk_prod_sold_var_choices,
-        r6$milk_prod_sold_var,
-        # sold value
-        r6$milk_prod_sold_val_choices,
-        r6$milk_prod_sold_val,
-        # amount sold variables
-        r6$milk_prod_amt_sold_vars_choices,
-        r6$milk_prod_amt_sold_vars,
-        # amount sold DK value
-        r6$milk_prod_amt_sold_dk_val
-      )
-
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         "data",           updateSelectInput,    list(
@@ -398,10 +367,7 @@ mod_4_quality_1_setup_2_data_milk_prod_sales_server <- function(id, r6, parent){
 
     shiny::observeEvent(input$animal_id_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$animal_id_var
-      )
+      shiny::req(input$animal_id_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -426,7 +392,7 @@ mod_4_quality_1_setup_2_data_milk_prod_sales_server <- function(id, r6, parent){
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
     # produced variable -> produced values
@@ -434,10 +400,7 @@ mod_4_quality_1_setup_2_data_milk_prod_sales_server <- function(id, r6, parent){
 
     shiny::observeEvent(input$produced_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$produced_var
-      )
+      shiny::req(input$produced_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -460,7 +423,7 @@ mod_4_quality_1_setup_2_data_milk_prod_sales_server <- function(id, r6, parent){
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
     # sold variable -> sold values
@@ -468,10 +431,7 @@ mod_4_quality_1_setup_2_data_milk_prod_sales_server <- function(id, r6, parent){
 
     shiny::observeEvent(input$sold_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$sold_var
-      )
+      shiny::req(input$sold_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -494,7 +454,7 @@ mod_4_quality_1_setup_2_data_milk_prod_sales_server <- function(id, r6, parent){
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
