@@ -271,6 +271,12 @@ mod_4_quality_1_setup_2_data_milk_prod_sales_server <- function(id, r6, parent){
 
       )
 
+      update_inputs(
+        input = input,
+        session = session,
+        specs = input_specs
+      )
+
     }
 
     # ==========================================================================
