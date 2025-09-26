@@ -178,7 +178,7 @@ make_data_var_choices <- function(
       # questions
       type %in% var_type_json |
       # computed variables
-      (!is.na(calc_var_type_json) & type_variable %in% calc_var_type_json)
+      (all(!is.na(calc_var_type_json)) & type_variable %in% calc_var_type_json)
     ) |>
     # prepare option text for display
     dplyr::mutate(
