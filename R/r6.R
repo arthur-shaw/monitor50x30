@@ -376,7 +376,7 @@ r6 <- R6::R6Class(
     milk_prod_sold_val_choices = NULL,
     milk_prod_sold_val = NULL,
     milk_prod_amt_sold_var_choices = NULL,
-    milk_prod_amt_sold_var = NULL,
+    milk_prod_amt_sold_vars = NULL,
     milk_prod_amt_sold_dk_val = NULL,
     milk_prod_provided = NULL,
     # egg_prod_sales
@@ -1024,7 +1024,7 @@ r6 <- R6::R6Class(
       milk_prod_sold_val_choices = NULL,
       milk_prod_sold_val = NULL,
       milk_prod_amt_sold_var_choices = NULL,
-      milk_prod_amt_sold_var = NULL,
+      milk_prod_amt_sold_vars = NULL,
       milk_prod_amt_sold_dk_val = NULL,
       milk_prod_provided = NULL,
       # egg_prod_sales
@@ -1405,6 +1405,7 @@ r6 <- R6::R6Class(
         "milk_prod_sold_var_choices",
         "milk_prod_sold_val_choices",
         "milk_prod_amt_sold_var_choices",
+        "milk_prod_amt_sold_vars",
         # egg_prod_sales
         "egg_prod_df_choices",
         "egg_prod_animal_id_var_choices",
