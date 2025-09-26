@@ -10,7 +10,7 @@
 mod_4_quality_1_setup_2_data_milk_prod_sales_ui <- function(id) {
   ns <- NS(id)
   tagList(
- 
+
     shiny::selectInput(
       inputId = ns("data"),
       label = "Livestock-level data set",
@@ -115,21 +115,41 @@ mod_4_quality_1_setup_2_data_milk_prod_sales_server <- function(id, r6, parent){
         selected = NULL
       )
 
-      # ------------------------------------------------------------------------
       # (re)set to `NULL` variable and value selections
       # but do not trigger reactive
-      # ------------------------------------------------------------------------
-
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
-        "animal_id_var",  updateSelectInput,    list(choices = NULL, selected = NULL),
-        "animal_vals",    updateSelectInput,    list(choices = NULL, selected = NULL),
-        "produced_var",   updateSelectInput,    list(choices = NULL, selected = NULL),
-        "produced_val",   updateSelectInput,    list(choices = NULL, selected = NULL),
-        "sold_var",       updateSelectInput,    list(choices = NULL, selected = NULL),
-        "sold_val",       updateSelectInput,    list(choices = NULL, selected = NULL),
-        "amt_sold_vars",  updateSelectInput,    list(choices = NULL, selected = NULL),
-        "amt_sold_dk_val", updateNumericInput,  list(value = NULL),
+        "animal_id_var",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "animal_vals",    updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "produced_var",   updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "produced_val",   updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "sold_var",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "sold_val",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "amt_sold_vars",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "amt_sold_dk_val", updateNumericInput,  list(
+          value = NULL
+        ),
       )
 
       update_inputs(
@@ -238,7 +258,7 @@ mod_4_quality_1_setup_2_data_milk_prod_sales_server <- function(id, r6, parent){
           selected = r6$milk_prod_df
         ),
         "animal_id_var",  updateSelectInput,    list(
-          choices = r6$milk_prod_animal_id_var_choices, 
+          choices = r6$milk_prod_animal_id_var_choices,
           selected = r6$milk_prod_animal_id_var
         ),
         "animal_vals",    updateSelectInput,    list(
