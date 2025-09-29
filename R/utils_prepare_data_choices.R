@@ -117,9 +117,9 @@ make_data_var_choices <- function(
   if (var_type == "categorical") {
     var_type_json <- c("MultyOptionsQuestion", "SingleQuestion")
     calc_var_type_json <- c(
-      1, # Boolean
+      1, # Long Integer
       2, # Double
-      4 # Long Integer
+      3 # Boolean
     )
   } else if (var_type == "multi-select") {
     var_type_json <- "MultyOptionsQuestion"
@@ -127,16 +127,16 @@ make_data_var_choices <- function(
   } else if (var_type == "single-select") {
     var_type_json <- "SingleQuestion"
     calc_var_type_json <- c(
-      1, # Boolean
+      1, # Long Integer
       2, # Double
-      4 # Long Integer
+      3 # Boolean
     )
   } else if (var_type == "numeric") {
     var_type_json <- "NumericQuestion"
     calc_var_type_json <- c(
-      1, # Boolean
+      1, # Long Integer
       2, # Double
-      4 # Long Integer
+      3 # Boolean
     )
   } else if (var_type == "gps") {
     var_type_json <- "GpsCoordinateQuestion"
@@ -149,10 +149,10 @@ make_data_var_choices <- function(
       "GpsCoordinateQuestion"
     )
     calc_var_type_json <- c(
-      1, # Boolean
+      1, # Long Integer
       2, # Double
-      3, # Date/Time
-      4, # Long Integer
+      3, # Boolean
+      4, # Date/Time
       5 # String
     )
   }
@@ -178,7 +178,7 @@ make_data_var_choices <- function(
       # questions
       type %in% var_type_json |
       # computed variables
-      (all(!is.na(calc_var_type_json)) & type_variable %in% calc_var_type_json)
+      (all(!is.na(calc_var_type_json)) & (type_variable %in% calc_var_type_json))
     ) |>
     # prepare option text for display
     dplyr::mutate(
