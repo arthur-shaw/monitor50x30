@@ -97,13 +97,13 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
     # ==========================================================================
 
     input_choices <- shiny::reactiveValues(
-      hhold_dfs = r6$process_crop_prod_hhold_df_choices,
-      temp_crop_vars = r6$process_crop_prod_temp_crop_choices,
-      perm_crop_vars = r6$process_crop_prod_perm_crop_choices,
+      hhold_dfs = r6$data_choices,
+      temp_crop_vars = r6$process_crop_prod_temp_crops_var_choices,
+      perm_crop_vars = r6$process_crop_prod_perm_crops_vars_choices,
       processed_vars = r6$process_crop_prod_processed_var_choices,
       processed_vals = r6$process_crop_prod_processed_val_choices,
       products_vars = r6$process_crop_prod_products_var_choices,
-      product_dfs = r6$process_crop_prod_product_df_choices,
+      product_dfs = r6$data_choices,
       sold_vars = r6$process_crop_prod_sold_var_choices,
       sold_vals = r6$process_crop_prod_sold_val_choices,
       amt_sold_vars = r6$process_crop_prod_sold_var_choices
@@ -125,25 +125,18 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       # compute choices from downloaded data
       # ------------------------------------------------------------------------
 
-      # get list of data files in combined folder
-      input_choices$data <- r6$dirs$micro_combine |>
-        make_data_choices()
-
-      input_choices$hhold_dfs <- input_choices$data
-      input_choices$product_dfs <- input_choices$data
-
       # update UI to reflect data choices
       # but do not trigger reactive
       shiny::freezeReactiveValue(input, "hhold_df")
       shiny::updateSelectInput(
         inputId = "hhold_df",
-        choices = input_choices$data,
+        choices = r6$data_choices,
         selected = NULL
       )
       shiny::freezeReactiveValue(input, "product_df")
       shiny::updateSelectInput(
         inputId = "product_df",
-        choices = input_choices$data,
+        choices = r6$data_choices,
         selected = NULL
       )
 
@@ -239,7 +232,7 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         "hhold_df",           updateSelectInput,    list(
-          choices = r6$process_crop_prod_hhold_df_choices,
+          choices = r6$data_choices,
           selected = r6$process_crop_prod_hhold_df
         ),
         "temp_crops_var",  updateSelectInput,    list(
@@ -263,7 +256,7 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
           selected = r6$process_crop_prod_products_var,
         ),
         "product_df",   updateSelectInput,    list(
-          choices = r6$process_crop_prod_product_df_choices,
+          choices = r6$data_choices,
           selected = r6$process_crop_prod_product_df
         ),
         "sold_var",       updateSelectInput,    list(
@@ -311,15 +304,11 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # temporary and permanent crop harvest variables
       input_choices$temp_crop_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
       input_choices$perm_crop_vars <- input_choices$temp_crop_vars
@@ -328,7 +317,7 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       input_choices$processed_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -336,7 +325,7 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       input_choices$products_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "multi-select"
         )
 
@@ -388,13 +377,9 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # compute choices
       input_choices$processed_val <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$processed_var)
       )
 
@@ -425,15 +410,11 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # sold variable
       input_choices$sold_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$product_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -441,7 +422,7 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       input_choices$amt_sold_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$product_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "numeric"
         )
 
@@ -492,13 +473,10 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # compute choices
       input_choices$sold_val <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$sold_var)
       )
 
