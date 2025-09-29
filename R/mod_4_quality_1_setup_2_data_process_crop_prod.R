@@ -25,7 +25,7 @@ mod_4_quality_1_setup_2_data_process_crop_prod_ui <- function(id) {
     ),
     shiny::selectInput(
       inputId = ns("perm_crops_var"),
-      label = "Indicator variable: whether harvested any temporary crops",
+      label = "Indicator variable: whether harvested any permanent crops",
       choices = NULL,
       selected = NULL
     ),
