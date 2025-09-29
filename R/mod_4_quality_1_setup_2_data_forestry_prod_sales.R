@@ -278,7 +278,7 @@ mod_4_quality_1_setup_2_data_forestry_prod_sales_server <- function(id, parent, 
         ),
         "products_var",   updateSelectInput,    list(
           choices = r6$forestry_prod_products_var_choices,
-          selected = r6$forestry_prod_products_var,
+          selected = r6$forestry_prod_products_var
         ),
         "product_df",   updateSelectInput,    list(
           choices = r6$data_choices,
