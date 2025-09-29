@@ -91,9 +91,9 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       animal_vals = r6$egg_prod_val_choices,
       produced_vars = r6$egg_prod_var_choices,
       produced_vals = r6$egg_prod_val_choices,
-      sold_vars = r6$egg_sold_var_choices,
-      sold_vals = r6$egg_sold_val_choices,
-      amt_sold_vars = r6$egg_sold_var_choices
+      sold_vars = r6$egg_prod_sold_var_choices,
+      sold_vals = r6$egg_prod_sold_val_choices,
+      amt_sold_vars = r6$egg_prod_amt_sold_var_choices
     )
 
     # ==========================================================================
@@ -259,12 +259,12 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
           selected = r6$egg_prod_df
         ),
         "animal_id_var",  updateSelectInput,    list(
-          choices = r6$egg_prod_animal_id_var_choices, 
+          choices = r6$egg_prod_animal_id_var_choices,
           selected = r6$egg_prod_animal_id_var
         ),
         "animal_vals",    updateSelectInput,    list(
-          choices = r6$egg_prod_animal_val_choices, 
-          selected = r6$egg_prod_animal_val
+          choices = r6$egg_prod_animal_vals_choices,
+          selected = r6$egg_prod_animal_vals
         ),
         "produced_var",   updateSelectInput,    list(
           choices = r6$egg_prod_produced_var_choices,
@@ -283,7 +283,7 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
           selected = r6$egg_prod_sold_val
         ),
         "amt_sold_vars",  updateSelectInput,    list(
-          choices = r6$egg_prod_amt_sold_vars_choices,
+          choices = r6$egg_prod_amt_sold_var_choices,
           selected = r6$egg_prod_amt_sold_vars
         ),
         "amt_sold_dk_val", updateNumericInput,  list(
@@ -449,6 +449,7 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       # ------------------------------------------------------------------------
 
       # compute choices
+      input_choices$produced_vals <- make_val_options(
         qnr_df = r6$qnr_vars_df,
         categories_df = r6$q_categories_df,
         varname = extract_var_names(input$produced_var)
@@ -461,7 +462,7 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       shiny::freezeReactiveValue(input, "produced_val")
       shiny::updateSelectInput(
         inputId = "produced_val",
-        choices = input_choices$produced_val,
+        choices = input_choices$produced_vals,
         selected = NULL
       )
 
@@ -483,6 +484,7 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       # ------------------------------------------------------------------------
 
       # compute choices
+      input_choices$sold_vals <- make_val_options(
         qnr_df = r6$qnr_vars_df,
         categories_df = r6$q_categories_df,
         varname = extract_var_names(input$sold_var)
@@ -495,7 +497,7 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       shiny::freezeReactiveValue(input, "sold_val")
       shiny::updateSelectInput(
         inputId = "sold_val",
-        choices = input_choices$sold_val,
+        choices = input_choices$sold_vals,
         selected = NULL
       )
 
@@ -517,7 +519,7 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       r6$egg_prod_animal_id_var <- input$animal_id_var
       # livestock IDs
       r6$egg_prod_animal_vals_choices <- input_choices$animal_vals
-      r6$egg_prod_animal_val <- input$animal_vals
+      r6$egg_prod_animal_vals <- input$animal_vals
       # produced variable
       r6$egg_prod_produced_var_choices <- input_choices$produced_vars
       r6$egg_prod_produced_var <- input$produced_var
@@ -532,7 +534,7 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       r6$egg_prod_sold_val <- input$sold_val
       # amount sold variables
       r6$egg_prod_amt_sold_var_choices <- input_choices$amt_sold_vars
-      r6$egg_prod_amt_sold_var <- input$amt_sold_vars
+      r6$egg_prod_amt_sold_vars <- input$amt_sold_vars
       # amount sold DK values
       r6$egg_prod_amt_sold_dk_val <- input$amt_sold_dk_val
       # save action

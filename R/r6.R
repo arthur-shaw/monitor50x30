@@ -395,7 +395,7 @@ r6 <- R6::R6Class(
     egg_prod_sold_val_choices = NULL,
     egg_prod_sold_val = NULL,
     egg_prod_amt_sold_var_choices = NULL,
-    egg_prod_amt_sold_var = NULL,
+    egg_prod_amt_sold_vars = NULL,
     egg_prod_amt_sold_dk_val = NULL,
     egg_prod_provided = NULL,
     # fisheries_prod_sales
@@ -1043,7 +1043,7 @@ r6 <- R6::R6Class(
       egg_prod_sold_val_choices = NULL,
       egg_prod_sold_val = NULL,
       egg_prod_amt_sold_var_choices = NULL,
-      egg_prod_amt_sold_var = NULL,
+      egg_prod_amt_sold_vars = NULL,
       egg_prod_amt_sold_dk_val = NULL,
       egg_prod_provided = NULL,
       # fisheries_prod_sales
@@ -1416,6 +1416,7 @@ r6 <- R6::R6Class(
         "egg_prod_sold_var_choices",
         "egg_prod_sold_val_choices",
         "egg_prod_amt_sold_var_choices",
+        "egg_prod_amt_sold_vars",
         # fisheries_prod_sales
         "fisheries_prod_hhold_df_choices",
         "fisheries_prod_practice_var_choices",
