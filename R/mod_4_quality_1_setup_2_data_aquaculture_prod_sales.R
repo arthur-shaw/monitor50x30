@@ -171,6 +171,60 @@ mod_4_quality_1_setup_2_data_aquaculture_prod_sales_server <- function(id, paren
     })
 
     # --------------------------------------------------------------------------
+    # load NULL values when values not previously saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$aquaculture_prod_provided)) {
+
+      input_specs <- tibble::tribble(
+        ~ id,             ~ updater,            ~ args,
+        "hhold_df",           updateSelectInput,    list(
+          choices = r6$data_choices,
+          selected = NULL
+        ),
+        "practice_var",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "practice_vals",    updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "products_var",   updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "product_df",   updateSelectInput,    list(
+          choices = r6$data_choices,
+          selected = NULL
+        ),
+        "sold_var",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "sold_val",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "amt_sold_vars",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "amt_sold_dk_val", updateNumericInput,  list(
+          value = NULL
+        )
+
+      )
+
+      update_inputs(
+        input = input,
+        session = session,
+        specs = input_specs
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
