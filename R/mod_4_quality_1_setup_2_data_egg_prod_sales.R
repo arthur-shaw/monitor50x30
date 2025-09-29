@@ -86,7 +86,7 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
     # ==========================================================================
 
     input_choices <- shiny::reactiveValues(
-      data = r6$egg_prod_df_choices,
+      data = r6$data_choices,
       animal_id_vars = r6$egg_prod_var_choices,
       animal_vals = r6$egg_prod_val_choices,
       produced_vars = r6$egg_prod_var_choices,
@@ -108,28 +108,17 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
 
       shiny::req(r6$dirs$micro_combine)
 
-      # ------------------------------------------------------------------------
-      # compute choices from downloaded data
-      # ------------------------------------------------------------------------
-
-      # get list of data files in combined folder
-      input_choices$data <- r6$dirs$micro_combine |>
-        make_data_choices()
-
       # update UI to reflect data choices
       # but do not trigger reactive
       shiny::freezeReactiveValue(input, "data")
       shiny::updateSelectInput(
         inputId = "data",
-        choices = input_choices$data,
+        choices = r6$data_choices,
         selected = NULL
       )
 
-      # ------------------------------------------------------------------------
       # (re)set to `NULL` variable and value selections
       # but do not trigger reactive
-      # ------------------------------------------------------------------------
-
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         "animal_id_var",  updateSelectInput,    list(
@@ -213,7 +202,7 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         "data",           updateSelectInput,    list(
-          choices = r6$egg_prod_df_choices,
+          choices = r6$data_choices,
           selected = r6$egg_prod_df
         ),
         "animal_id_var",  updateSelectInput,    list(
@@ -271,10 +260,6 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # livestock ID variable choices
       input_choices$animal_id_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$data, ".dta")) |>
@@ -284,7 +269,7 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       input_choices$produced_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$data, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -292,7 +277,7 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       input_choices$sold_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$data, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -300,7 +285,7 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       input_choices$amt_sold_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$data, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "numeric"
         )
 
@@ -405,13 +390,9 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # compute choices
-      input_choices$produced_val <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$produced_var)
       )
 
@@ -443,13 +424,9 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # compute choices
-      input_choices$sold_val <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$sold_var)
       )
 
