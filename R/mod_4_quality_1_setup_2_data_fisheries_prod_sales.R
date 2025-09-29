@@ -278,7 +278,7 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
         ),
         "products_var",   updateSelectInput,    list(
           choices = r6$fisheries_prod_products_var_choices,
-          selected = r6$fisheries_prod_products_var,
+          selected = r6$fisheries_prod_products_var
         ),
         "product_df",   updateSelectInput,    list(
           choices = r6$data_choices,
@@ -358,7 +358,7 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
         "products_var",   updateSelectInput,    list(
           choices = input_choices$products_vars,
           selected = NULL
-        ),
+        )
 
       )
 
