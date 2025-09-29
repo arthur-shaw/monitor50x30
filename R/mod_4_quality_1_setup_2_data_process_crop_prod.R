@@ -449,8 +449,9 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       # update choices in the UI
       # ------------------------------------------------------------------------
 
-      shiny::freezeReactiveVal("processed_val")
+      shiny::freezeReactiveValue(input, "processed_val")
       shiny::updateSelectInput(
+        inputId = "processed_val",
         choices = input_choices$processed_vals,
         selected = NULL
       )
@@ -546,8 +547,9 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       # update choices in the UI
       # ------------------------------------------------------------------------
 
-      shiny::freezeReactiveVal("sold_val")
+      shiny::freezeReactiveValue(input, "sold_val")
       shiny::updateSelectInput(
+        inputId = "sold_val",
         choices = input_choices$sold_vals,
         selected = NULL
       )
