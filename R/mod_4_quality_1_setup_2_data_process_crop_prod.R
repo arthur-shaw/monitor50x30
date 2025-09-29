@@ -315,7 +315,7 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
         ),
         "products_var",   updateSelectInput,    list(
           choices = r6$process_crop_prod_products_var_choices,
-          selected = r6$process_crop_prod_products_var,
+          selected = r6$process_crop_prod_products_var
         ),
         "product_df",   updateSelectInput,    list(
           choices = r6$data_choices,
