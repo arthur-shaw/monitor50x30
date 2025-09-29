@@ -106,7 +106,7 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       product_dfs = r6$data_choices,
       sold_vars = r6$process_crop_prod_sold_var_choices,
       sold_vals = r6$process_crop_prod_sold_val_choices,
-      amt_sold_vars = r6$process_crop_prod_sold_var_choices
+      amt_sold_vars = r6$process_crop_prod_amt_sold_var_choices
     )
 
     # ==========================================================================
@@ -236,18 +236,18 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
           selected = r6$process_crop_prod_hhold_df
         ),
         "temp_crops_var",  updateSelectInput,    list(
-          choices = r6$process_crop_prod_temp_crop_choices,
-          selected = r6$process_crop_prod_temp_crop
+          choices = r6$process_crop_prod_temp_crops_var_choices,
+          selected = r6$process_crop_prod_temp_crops_var
         ),
         "perm_crops_var",   updateSelectInput,    list(
-          choices = r6$process_crop_prod_temp_crop_choices,
-          selected = r6$process_crop_prod_temp_crop
+          choices = r6$process_crop_prod_perm_crops_var_choices,
+          selected = r6$process_crop_prod_perm_crops_var
         ),
         "processed_var",  updateSelectInput,    list(
           choices = r6$process_crop_prod_processed_var_choices,
           selected = r6$process_crop_prod_processed_var
         ),
-        "processed_vals",    updateSelectInput,    list(
+        "processed_val",    updateSelectInput,    list(
           choices = r6$process_crop_prod_processed_val_choices,
           selected = r6$process_crop_prod_processed_val
         ),
@@ -377,7 +377,7 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       # compute choices
       # ------------------------------------------------------------------------
 
-      input_choices$processed_val <- make_val_options(
+      input_choices$processed_vals <- make_val_options(
         qnr_df = r6$qnr_vars_df,
         categories_df = r6$q_categories_df,
         varname = extract_var_names(input$processed_var)
@@ -389,7 +389,7 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
 
       shiny::freezeReactiveVal("processed_val")
       shiny::updateSelectInput(
-        choices = input_choices$processed_val,
+        choices = input_choices$processed_vals,
         selected = NULL
       )
 
@@ -474,7 +474,7 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       # ------------------------------------------------------------------------
 
       # compute choices
-      input_choices$sold_val <- make_val_options(
+      input_choices$sold_vals <- make_val_options(
         qnr_df = r6$qnr_vars_df,
         categories_df = r6$q_categories_df,
         varname = extract_var_names(input$sold_var)
@@ -486,7 +486,7 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
 
       shiny::freezeReactiveVal("sold_val")
       shiny::updateSelectInput(
-        choices = input_choices$sold_val,
+        choices = input_choices$sold_vals,
         selected = NULL
       )
 
@@ -506,11 +506,11 @@ mod_4_quality_1_setup_2_data_process_crop_prod_server <- function(id, parent, r6
       # temporary crop harvest variable
       r6$process_crop_prod_temp_crops_var_choices <-
         input_choices$temp_crop_vars
-      r6$process_crop_prod_temp_crops_var <- input$temp_crop_var
+      r6$process_crop_prod_temp_crops_var <- input$temp_crops_var
       # permanent crop harvest variable
       r6$process_crop_prod_perm_crops_var_choices <-
         input_choices$perm_crop_vars
-      r6$process_crop_prod_perm_crops_var <- input$perm_crop_var 
+      r6$process_crop_prod_perm_crops_var <- input$perm_crops_var 
       # processed variable
       r6$process_crop_prod_processed_var_choices <- input_choices$processed_vars
       r6$process_crop_prod_processed_var <- input$processed_var
