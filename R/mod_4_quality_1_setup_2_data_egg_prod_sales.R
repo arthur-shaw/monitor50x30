@@ -411,14 +411,13 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_server <- function(id, r6, parent){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # compute choices
-      input_choices$animal_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
-        varname = extract_var_names(input$animal_id_var)
+      input_choices$animal_vals <- make_id_val_options(
+        path = fs::path(
+          r6$dirs$micro_combine,
+          paste0(input$data, ".dta")
+        ),
+        varname = extract_id_var_names(input$animal_id_var)
       )
 
       # ------------------------------------------------------------------------
