@@ -231,37 +231,6 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
 
     if (!is.null(r6$fisheries_prod_provided)) {
 
-      shiny::req(
-        # data directory
-        r6$dirs$micro_combine,
-        # household data
-        r6$fisheries_prod_hhold_df_choices,
-        r6$fisheries_prod_hhold_df,
-        # practiced fisheries variables
-        r6$fisheries_prod_practice_var_choices,
-        r6$fisheries_prod_practice_var,
-        # practiced fisheries value
-        r6$fisheries_prod_practice_val_choices,
-        r6$fisheries_prod_practice_val,
-        # fisheries products variable
-        r6$fisheries_prod_products_var_choices,
-        r6$fisheries_prod_products_var,
-        # products data
-        r6$fisheries_prod_product_df_choices,
-        r6$fisheries_prod_product_df,
-        # sold variable
-        r6$fisheries_prod_sold_var_choices,
-        r6$fisheries_prod_sold_var,
-        # sold value
-        r6$fisheries_prod_sold_val_choices,
-        r6$fisheries_prod_sold_val,
-        # amount sold variables
-        r6$fisheries_prod_amt_sold_var_choices,
-        r6$fisheries_prod_amt_sold_var,
-        # amount sold DK value
-        r6$fisheries_prod_amt_sold_dk_val
-      )
-
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         "hhold_df",           updateSelectInput,    list(
@@ -320,10 +289,7 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
 
     shiny::observeEvent(input$hhold_df, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$hhold_df
-      )
+      shiny::req(input$hhold_df)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -376,10 +342,7 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
 
     shiny::observeEvent(input$practice_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$practice_var
-      )
+      shiny::req(input$practice_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -402,7 +365,7 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
     # product data -> variables in data
@@ -473,10 +436,7 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
 
     shiny::observeEvent(input$sold_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$sold_var
-      )
+      shiny::req(input$sold_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -498,7 +458,7 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
