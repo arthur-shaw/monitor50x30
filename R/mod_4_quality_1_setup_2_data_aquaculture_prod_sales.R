@@ -271,7 +271,7 @@ mod_4_quality_1_setup_2_data_aquaculture_prod_sales_server <- function(id, paren
           choices = r6$aquaculture_prod_practice_var_choices,
           selected = r6$aquaculture_prod_practice_var
         ),
-        "practice_vals",    updateSelectInput,    list(
+        "practice_val",    updateSelectInput,    list(
           choices = r6$aquaculture_prod_practice_val_choices,
           selected = r6$aquaculture_prod_practice_val
         ),
@@ -384,11 +384,8 @@ mod_4_quality_1_setup_2_data_aquaculture_prod_sales_server <- function(id, paren
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # compute choices
+      input_choices$practice_vals <- make_val_options(
         qnr_df = r6$qnr_vars_df,
         categories_df = r6$q_categories_df,
         varname = extract_var_names(input$practice_var)
@@ -400,7 +397,7 @@ mod_4_quality_1_setup_2_data_aquaculture_prod_sales_server <- function(id, paren
 
       shiny::freezeReactiveVal("practice_val")
       shiny::updateSelectInput(
-        choices = input_choices$practice_val,
+        choices = input_choices$practice_vals,
         selected = NULL
       )
 
@@ -484,6 +481,7 @@ mod_4_quality_1_setup_2_data_aquaculture_prod_sales_server <- function(id, paren
       # compute choices
       # ------------------------------------------------------------------------
 
+      input_choices$sold_vals <- make_val_options(
         qnr_df = r6$qnr_vars_df,
         categories_df = r6$q_categories_df,
         varname = extract_var_names(input$sold_var)
@@ -495,7 +493,7 @@ mod_4_quality_1_setup_2_data_aquaculture_prod_sales_server <- function(id, paren
 
       shiny::freezeReactiveVal("sold_val")
       shiny::updateSelectInput(
-        choices = input_choices$sold_val,
+        choices = input_choices$sold_vals,
         selected = NULL
       )
 
