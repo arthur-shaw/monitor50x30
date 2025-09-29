@@ -86,11 +86,11 @@ mod_4_quality_1_setup_2_data_forestry_prod_sales_server <- function(id, parent, 
     # ==========================================================================
 
     input_choices <- shiny::reactiveValues(
-      hhold_dfs = r6$forestry_prod_hhold_df_choices,
+      hhold_dfs = r6$data_choices,
       practice_vars = r6$forestry_prod_practice_var_choices,
       practice_vals = r6$forestry_prod_practice_val_choices,
       products_vars = r6$forestry_prod_products_var_choices,
-      product_dfs = r6$forestry_prod_product_df_choices,
+      product_dfs = r6$data_choices,
       sold_vars = r6$forestry_prod_sold_var_choices,
       sold_vals = r6$forestry_prod_sold_val_choices,
       amt_sold_vars = r6$forestry_prod_sold_var_choices
@@ -112,25 +112,18 @@ mod_4_quality_1_setup_2_data_forestry_prod_sales_server <- function(id, parent, 
       # compute choices from downloaded data
       # ------------------------------------------------------------------------
 
-      # get list of data files in combined folder
-      input_choices$data <- r6$dirs$micro_combine |>
-        make_data_choices()
-
-      input_choices$hhold_dfs <- input_choices$data
-      input_choices$product_dfs <- input_choices$data
-
       # update UI to reflect data choices
       # but do not trigger reactive
       shiny::freezeReactiveValue(input, "hhold_df")
       shiny::updateSelectInput(
         inputId = "hhold_df",
-        choices = input_choices$data,
+        choices = r6$data_choices,
         selected = NULL
       )
       shiny::freezeReactiveValue(input, "product_df")
       shiny::updateSelectInput(
         inputId = "product_df",
-        choices = input_choices$data,
+        choices = r6$data_choices,
         selected = NULL
       )
 
@@ -218,7 +211,7 @@ mod_4_quality_1_setup_2_data_forestry_prod_sales_server <- function(id, parent, 
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         "hhold_df",           updateSelectInput,    list(
-          choices = r6$forestry_prod_hhold_df_choices,
+          choices = r6$data_choices,
           selected = r6$forestry_prod_hhold_df
         ),
         "practice_var",  updateSelectInput,    list(
@@ -234,7 +227,7 @@ mod_4_quality_1_setup_2_data_forestry_prod_sales_server <- function(id, parent, 
           selected = r6$forestry_prod_products_var,
         ),
         "product_df",   updateSelectInput,    list(
-          choices = r6$forestry_prod_product_df_choices,
+          choices = r6$data_choices,
           selected = r6$forestry_prod_product_df
         ),
         "sold_var",       updateSelectInput,    list(
@@ -282,15 +275,11 @@ mod_4_quality_1_setup_2_data_forestry_prod_sales_server <- function(id, parent, 
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # practice variable
       input_choices$practice_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -298,7 +287,7 @@ mod_4_quality_1_setup_2_data_forestry_prod_sales_server <- function(id, parent, 
       input_choices$products_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "multi-select"
         )
 
@@ -347,8 +336,8 @@ mod_4_quality_1_setup_2_data_forestry_prod_sales_server <- function(id, parent, 
         readRDS()
 
       # compute choices
-      input_choices$practice_val <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$practice_var)
       )
 
@@ -379,15 +368,11 @@ mod_4_quality_1_setup_2_data_forestry_prod_sales_server <- function(id, parent, 
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # sold variable
       input_choices$sold_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$product_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -395,7 +380,7 @@ mod_4_quality_1_setup_2_data_forestry_prod_sales_server <- function(id, parent, 
       input_choices$amt_sold_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$product_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "numeric"
         )
 
@@ -446,13 +431,9 @@ mod_4_quality_1_setup_2_data_forestry_prod_sales_server <- function(id, parent, 
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # compute choices
-      input_choices$sold_val <- make_val_options(
-        qnr_df = qnr_vars_df,
+      input_choices$sold_vals <- make_val_options(
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$sold_var)
       )
 
