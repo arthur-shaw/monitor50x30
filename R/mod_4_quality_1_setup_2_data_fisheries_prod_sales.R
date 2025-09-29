@@ -93,7 +93,7 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
       product_dfs = r6$data_choices,
       sold_vars = r6$fisheries_prod_sold_var_choices,
       sold_vals = r6$fisheries_prod_sold_val_choices,
-      amt_sold_vars = r6$fisheries_prod_sold_var_choices
+      amt_sold_vars = r6$fisheries_prod_amt_sold_var_choices
     )
 
     # ==========================================================================
@@ -272,7 +272,7 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
           choices = r6$fisheries_prod_practice_var_choices,
           selected = r6$fisheries_prod_practice_var
         ),
-        "practice_vals",    updateSelectInput,    list(
+        "practice_val",    updateSelectInput,    list(
           choices = r6$fisheries_prod_practice_val_choices,
           selected = r6$fisheries_prod_practice_val
         ),
@@ -385,6 +385,7 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
       # compute choices
       # ------------------------------------------------------------------------
 
+      input_choices$practice_vals <- make_val_options(
         qnr_df = r6$qnr_vars_df,
         categories_df = r6$q_categories_df,
         varname = extract_var_names(input$practice_var)
@@ -480,6 +481,7 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
       # compute choices
       # ------------------------------------------------------------------------
 
+      input_choices$sold_vals <- make_val_options(
         qnr_df = r6$qnr_vars_df,
         categories_df = r6$q_categories_df,
         varname = extract_var_names(input$sold_var)
@@ -491,7 +493,7 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
 
       shiny::freezeReactiveVal("sold_val")
       shiny::updateSelectInput(
-        choices = input_choices$sold_val,
+        choices = input_choices$sold_vals,
         selected = NULL
       )
 
