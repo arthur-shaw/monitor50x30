@@ -91,7 +91,7 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
       have_anim_vals = r6$livestock_labor_have_anim_val_choices,
       anim_labor_dfs = r6$data_choices,
       anim_labor_id_vars = r6$livestock_labor_anim_labor_id_var_choices,
-      anim_labor_id_vals = r6$livestock_labor_anim_labor_id_vals
+      anim_labor_id_vals = r6$livestock_anim_id_val_choices
     )
 
     # ==========================================================================
@@ -287,7 +287,7 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
           choices = r6$livestock_anim_id_val_choices,
           selected = r6$livestock_labor_anim_labor_none_val
         ),
-        "anim_labor_hhold_labor_val",   updateSelectInput,    list(
+        "hhold_labor_vals",   updateSelectInput,    list(
           choices = r6$livestock_anim_id_val_choices,
           selected = r6$livestock_labor_hhold_labor_vals
         ),
@@ -344,7 +344,7 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         "have_anim_var",  updateSelectInput,    list(
-          choices = input_choices$anim_labor_id_vars,
+          choices = input_choices$have_anim_vars,
           selected = NULL
         ),
         "have_anim_val",  updateSelectInput,    list(
@@ -398,19 +398,16 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
     # anim_labor_df data -> variables in data
     # --------------------------------------------------------------------------
 
-    shiny::observeEvent(input$anim_labor_df_df, {
+    shiny::observeEvent(input$anim_labor_df, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$anim_labor_df_df
-      )
+      shiny::req(input$anim_labor_df)
 
       # ------------------------------------------------------------------------
       # compute choices
       # ------------------------------------------------------------------------
 
       input_choices$anim_labor_id_vars <- r6$dirs$micro_combine |>
-        fs::path(paste0(input$member_df, ".dta")) |>
+        fs::path(paste0(input$anim_labor_df, ".dta")) |>
         make_id_var_choices()
 
       # ------------------------------------------------------------------------
@@ -426,14 +423,14 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
     }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
-    # anim_labor_var variable -> anim_labor_var values
+    # anim_labor_id_var variable -> anim_labor_id_var values
     # --------------------------------------------------------------------------
 
-    shiny::observeEvent(input$anim_labor_var, {
+    shiny::observeEvent(input$anim_labor_id_var, {
 
       shiny::req(
-        r6$dirs$qnr,
-        input$anim_labor_var
+        input$anim_labor_id_var,
+        input$anim_labor_df
       )
 
       # ------------------------------------------------------------------------
@@ -457,19 +454,19 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         "anim_labor_none_val",  updateSelectInput,    list(
-          choices = input_choices$anim_labor_vals,
+          choices = input_choices$anim_labor_id_vals,
           selected = NULL
         ),
         "hhold_labor_vals",  updateSelectInput,    list(
-          choices = input_choices$anim_labor_vals,
+          choices = input_choices$anim_labor_id_vals,
           selected = NULL
         ),
         "free_labor_val",  updateSelectInput,    list(
-          choices = input_choices$anim_labor_vals,
+          choices = input_choices$anim_labor_id_vals,
           selected = NULL
         ),
         "paid_labor_val",  updateSelectInput,    list(
-          choices = input_choices$anim_labor_vals,
+          choices = input_choices$anim_labor_id_vals,
           selected = NULL
         ),
       )
