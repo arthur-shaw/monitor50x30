@@ -79,12 +79,12 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
     # ==========================================================================
 
     input_choices <- shiny::reactiveValues(
-      hhold_dfs = r6$crop_labor_hhold_df_choices,
+      hhold_dfs = r6$data_choices,
       grew_crops_vars = r6$crop_labor_grew_crops_var_choices,
       grew_crops_vals = r6$crop_labor_grew_crops_val_choices,
       paid_vars = r6$crop_labor_paid_var_choices,
       free_vars = r6$crop_labor_free_var_choices,
-      members_dfs = r6$crop_labor_members_df_choices,
+      members_dfs = r6$data_choices,
       member_worked_vars = r6$crop_labor_member_worked_var_choices,
       member_worked_vals = r6$crop_labor_member_worked_val_choices
     )
@@ -102,26 +102,20 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       shiny::req(r6$dirs$micro_combine)
 
       # ------------------------------------------------------------------------
-      # compute choices from downloaded data
-      # ------------------------------------------------------------------------
-
-      # get list of data files in combined folder
-      input_choices$hhold_dfs <- r6$dirs$micro_combine |>
-        make_data_choices()
-      input_choices$members_dfs <- input_choices$hhold_dfs
-
       # update UI to reflect data choices
       # but do not trigger reactive
+      # ------------------------------------------------------------------------
+
       shiny::freezeReactiveValue(input, "hhold_df")
       shiny::updateSelectInput(
         inputId = "hhold_df",
-        choices = input_choices$hhold_dfs,
+        choices = r6$data_choices,
         selected = NULL
       )
       shiny::freezeReactiveValue(input, "members_df")
       shiny::updateSelectInput(
         inputId = "members_df",
-        choices = input_choices$members_dfs,
+        choices = r6$data_choices,
         selected = NULL
       )
 
@@ -200,7 +194,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         "hhold_df",           updateSelectInput,    list(
-          choices = r6$crop_labor_hhold_df_choices,
+          choices = r6$data_choices,
           selected = r6$crop_labor_hhold_df
         ),
         "grew_crops_var",  updateSelectInput,    list(
@@ -220,7 +214,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
           selected = r6$crop_labor_free_var,
         ),
         "members_df",   updateSelectInput,    list(
-          choices = r6$crop_labor_members_df_choices,
+          choices = r6$data_choices,
           selected = r6$crop_labor_members_df
         ),
         "member_worked_var",       updateSelectInput,    list(
@@ -261,15 +255,11 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # temporary and permanent crop harvest variables
       input_choices$grew_crops_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -277,7 +267,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       input_choices$paid_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -285,7 +275,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       input_choices$free_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -332,13 +322,9 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # compute choices
-      input_choices$grew_crops_val <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$grew_crops_var)
       )
 
@@ -446,15 +432,11 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # member worked variable
       input_choices$member_worked_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$members_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -486,13 +468,9 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # compute choices
-      input_choices$member_worked_val <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$member_worked_var)
       )
 
