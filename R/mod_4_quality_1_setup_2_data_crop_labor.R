@@ -252,7 +252,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
           choices = r6$crop_labor_grew_crops_var_choices,
           selected = r6$crop_labor_grew_crops_var
         ),
-        "grew_crops_vals",    updateSelectInput,    list(
+        "grew_crops_val",    updateSelectInput,    list(
           choices = r6$crop_labor_grew_crops_val_choices,
           selected = r6$crop_labor_grew_crops_val
         ),
@@ -374,6 +374,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       # ------------------------------------------------------------------------
 
       # compute choices
+      input_choices$grew_crops_vals <- make_val_options(
         qnr_df = r6$qnr_vars_df,
         categories_df = r6$q_categories_df,
         varname = extract_var_names(input$grew_crops_var)
@@ -386,7 +387,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       shiny::freezeReactiveValue(input, "grew_crops_val")
       shiny::updateSelectInput(
         inputId = "grew_crops_val",
-        choices = input_choices$grew_crops_val,
+        choices = input_choices$grew_crops_vals,
         selected = NULL
       )
 
@@ -520,6 +521,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       # ------------------------------------------------------------------------
 
       # compute choices
+      input_choices$member_worked_vals <- make_val_options(
         qnr_df = r6$qnr_vars_df,
         categories_df = r6$q_categories_df,
         varname = extract_var_names(input$member_worked_var)
@@ -532,7 +534,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
       shiny::freezeReactiveValue(input, "member_worked_val")
       shiny::updateSelectInput(
         inputId = "member_worked_val",
-        choices = input_choices$member_worked_val,
+        choices = input_choices$member_worked_vals,
         selected = NULL
       )
 
