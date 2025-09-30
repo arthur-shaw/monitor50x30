@@ -258,11 +258,11 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
         ),
         "paid_var",   updateSelectInput,    list(
           choices = r6$crop_labor_paid_var_choices,
-          selected = r6$crop_labor_paid_var,
+          selected = r6$crop_labor_paid_var
         ),
         "free_var",   updateSelectInput,    list(
           choices = r6$crop_labor_free_var_choices,
-          selected = r6$crop_labor_free_var,
+          selected = r6$crop_labor_free_var
         ),
         "members_df",   updateSelectInput,    list(
           choices = r6$data_choices,
@@ -275,7 +275,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
         "member_worked_val",       updateSelectInput,    list(
           choices = r6$crop_labor_member_worked_val_choices,
           selected = r6$crop_labor_member_worked_val
-        ),
+        )
 
       )
 
@@ -347,7 +347,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
         "free_var",  updateSelectInput,    list(
           choices = input_choices$free_vars,
           selected = NULL
-        ),
+        )
       )
 
       update_inputs(
