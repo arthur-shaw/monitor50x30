@@ -233,32 +233,6 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
 
     if (!is.null(r6$livestock_labor_provided)) {
 
-      shiny::req(
-        # data directory
-        r6$dirs$micro_combine,
-        # household data
-        r6$livestock_labor_hhold_df_choices,
-        r6$livestock_labor_hhold_df,
-        # have animals variable
-        r6$livestock_labor_have_anim_var_choices,
-        r6$livestock_labor_have_anim_var,
-        # have animal values
-        r6$livestock_labor_have_anim_val_choices,
-        r6$livestock_labor_have_anim_val,
-        # livestock labor data
-        r6$livestock_labor_anim_labor_df_choices,
-        r6$livestock_labor_anim_labor_df,
-        # livestock labor ID variable
-        r6$livestock_labor_anim_labor_id_var_choices,
-        r6$livestock_labor_anim_labor_id_var,
-        # livestock labor values
-        r6$livestock_labor_anim_labor_id_val_choices,
-        r6$livestock_labor_anim_labor_none_val,
-        r6$livestock_labor_hhold_labor_vals,
-        r6$livestock_labor_free_labor_val,
-        r6$livestock_labor_paid_labor_val
-      )
-
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         # hhold data
@@ -320,10 +294,7 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$hhold_df, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$hhold_df
-      )
+      shiny::req(input$hhold_df)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -367,10 +338,7 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$have_anim_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$have_anim_var
-      )
+      shiny::req(input$have_anim_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -393,7 +361,7 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
     # anim_labor_df data -> variables in data
@@ -478,7 +446,7 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
         specs = input_specs
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
