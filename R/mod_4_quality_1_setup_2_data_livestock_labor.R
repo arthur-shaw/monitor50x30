@@ -386,9 +386,10 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
       # update choices in the UI
       # ------------------------------------------------------------------------
 
-      shiny::freezeReactiveVal("have_anim_val")
+      shiny::freezeReactiveValue(input, "have_anim_val")
       shiny::updateSelectInput(
-        choices = input_choices$have_anim_val,
+        inputId = "have_anim_val",
+        choices = input_choices$have_anim_vals,
         selected = NULL
       )
 
@@ -414,9 +415,10 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
       # update choices in the UI
       # ------------------------------------------------------------------------
 
-      shiny::freezeReactiveVal("anim_labor_id_var")
+      shiny::freezeReactiveValue(input, "anim_labor_id_var")
       shiny::updateSelectInput(
-        choices = input_choices$anim_labor_id_var,
+        inputId = "anim_labor_id_var",
+        choices = input_choices$anim_labor_id_vars,
         selected = NULL
       )
 
