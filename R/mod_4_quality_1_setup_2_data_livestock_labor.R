@@ -439,15 +439,14 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # compute choices
-      input_choices$anim_labor_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
-        varname = extract_var_names(input$anim_labor_var)
-      )
+      input_choices$anim_labor_id_vals <- make_id_val_options(
+        path = fs::path(
+          r6$dirs$micro_combine,
+          paste0(input$anim_labor_df, ".dta")
+        ),
+        varname = extract_id_var_names(input$anim_labor_id_var)
+      ) |>
+        append(values = c("[0] : None"))
 
       # ------------------------------------------------------------------------
       # update choices in the UI
