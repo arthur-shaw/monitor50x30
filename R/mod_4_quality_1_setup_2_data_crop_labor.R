@@ -213,35 +213,6 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
 
     if (!is.null(r6$crop_labor_provided)) {
 
-      shiny::req(
-        # data directory
-        r6$dirs$micro_combine,
-        # household data
-        r6$crop_labor_hhold_df_choices,
-        r6$crop_labor_hhold_df,
-        # grew crops variables
-        r6$crop_labor_grew_crops_var_choices,
-        r6$crop_labor_grew_crops_var,
-        # grew crops value
-        r6$crop_labor_grew_crops_val_choices,
-        r6$crop_labor_grew_crops_val,
-        # paid labor variable
-        r6$crop_labor_paid_var_choices,
-        r6$crop_labor_paid_var,
-        # free labor variable
-        r6$crop_labor_free_var_choices,
-        r6$crop_labor_free_var,
-        # memberss data
-        r6$crop_labor_members_df_choices,
-        r6$crop_labor_members_df,
-        # member_worked variable
-        r6$crop_labor_member_worked_var_choices,
-        r6$crop_labor_member_worked_var,
-        # member_worked value
-        r6$crop_labor_member_worked_val_choices,
-        r6$crop_labor_member_worked_val
-      )
-
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         "hhold_df",           updateSelectInput,    list(
@@ -297,10 +268,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$hhold_df, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$hhold_df
-      )
+      shiny::req(input$hhold_df)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -364,10 +332,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$grew_crops_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$grew_crops_var
-      )
+      shiny::req(input$grew_crops_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -391,7 +356,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
         selected = NULL
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
     # paid variable -> paid values
@@ -463,10 +428,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$members_df, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$members_df
-      )
+      shiny::req(input$members_df)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -499,10 +461,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$member_worked_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$member_worked_var
-      )
+      shiny::req(input$member_worked_var)
 
       # ------------------------------------------------------------------------
       # compute choices
