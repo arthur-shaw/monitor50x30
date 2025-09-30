@@ -157,6 +157,57 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
     })
 
     # --------------------------------------------------------------------------
+    # load NULL values when values not previously saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$crop_labor_provided)) {
+
+      input_specs <- tibble::tribble(
+        ~ id,             ~ updater,            ~ args,
+        "hhold_df",           updateSelectInput,    list(
+          choices = r6$data_choices,
+          selected = NULL
+        ),
+        "grew_crops_var",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "grew_crops_val",    updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "paid_var",   updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "free_var",   updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "members_df",   updateSelectInput,    list(
+          choices = r6$data_choices,
+          selected = NULL
+        ),
+        "member_worked_var",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "member_worked_val",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        )
+
+      )
+
+      update_inputs(
+        input = input,
+        session = session,
+        specs = input_specs
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
