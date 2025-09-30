@@ -319,7 +319,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
           vars_df = r6$qnr_vars_df,
-          var_type = "single-select"
+          var_type = "multi-select"
         )
 
       # free labor variable
@@ -327,7 +327,7 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
           vars_df = r6$qnr_vars_df,
-          var_type = "single-select"
+          var_type = "multi-select"
         )
 
       # ------------------------------------------------------------------------
