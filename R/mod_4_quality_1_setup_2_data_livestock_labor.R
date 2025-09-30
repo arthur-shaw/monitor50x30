@@ -86,10 +86,10 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
     # ==========================================================================
 
     input_choices <- shiny::reactiveValues(
-      hhold_dfs = r6$livestock_labor_hhold_df_choices,
+      hhold_dfs = r6$data_choices,
       have_anim_vars = r6$livestock_labor_have_anim_var_choices,
       have_anim_vals = r6$livestock_labor_have_anim_val_choices,
-      anim_labor_dfs = r6$livestock_labor_anim_labor_dfs_choices,
+      anim_labor_dfs = r6$data_choices,
       anim_labor_id_vars = r6$livestock_labor_anim_labor_id_var_choices,
       anim_labor_id_vals = r6$livestock_labor_anim_labor_id_vals
     )
@@ -104,29 +104,22 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
 
     gargoyle::on("download_data", {
 
-      shiny::req(r6$dirs$micro_combine)
-
       # ------------------------------------------------------------------------
       # compute choices from downloaded data
       # ------------------------------------------------------------------------
-
-      # get list of data files in combined folder
-      input_choices$hhold_dfs <- r6$dirs$micro_combine |>
-        make_data_choices()
-      input_choices$anim_labor_dfs <- input_choices$hhold_dfs
 
       # update UI to reflect data choices
       # but do not trigger reactive
       shiny::freezeReactiveValue(input, "hhold_df")
       shiny::updateSelectInput(
         inputId = "hhold_df",
-        choices = input_choices$hhold_dfs,
+        choices = r6$data_choices,
         selected = NULL
       )
       shiny::freezeReactiveValue(input, "anim_labor_df")
       shiny::updateSelectInput(
         inputId = "anim_labor_df",
-        choices = input_choices$anim_labor_dfs,
+        choices = r6$data_choices,
         selected = NULL
       )
 
@@ -213,7 +206,7 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
         ~ id,             ~ updater,            ~ args,
         # hhold data
         "hhold_df",           updateSelectInput,    list(
-          choices = r6$livestock_labor_hhold_df_choices,
+          choices = r6$data_choices,
           selected = r6$livestock_labor_hhold_df
         ),
         "have_anim_var",  updateSelectInput,    list(
@@ -226,7 +219,7 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
         ),
         # labor data
         "anim_labor_df",           updateSelectInput,    list(
-          choices = r6$livestock_labor_anim_labor_df_choices,
+          choices = r6$data_choices,
           selected = r6$livestock_labor_anim_labor_df
         ),
         "anim_labor_id_var",   updateSelectInput,    list(
@@ -279,15 +272,11 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # temporary and permanent crop harvest variables
       input_choices$have_anim_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "multi-select"
         )
 
@@ -330,13 +319,9 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # compute choices
       input_choices$have_anim_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$have_anim_var)
       )
 
@@ -367,11 +352,6 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # labor category ID variable variable
       input_choices$anim_labor_id_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$member_df, ".dta")) |>
         make_id_var_choices()
