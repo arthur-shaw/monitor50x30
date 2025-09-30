@@ -78,7 +78,7 @@ mod_4_quality_1_setup_2_data_fisheries_labor_server <- function(id, parent, r6){
       produce_vars = r6$fisheries_labor_produce_var_choices,
       produce_vals = r6$fisheries_labor_produce_val_choices,
       labor_vars = r6$fisheries_labor_labor_var_choices,
-      labor_vals = r6$fisheries_labor_labor_vals
+      labor_vals = r6$fisheries_labor_labor_val_choices
     )
 
     # ==========================================================================
@@ -243,16 +243,16 @@ mod_4_quality_1_setup_2_data_fisheries_labor_server <- function(id, parent, r6){
           choices = r6$fisheries_labor_labor_var_choices,
           selected = r6$fisheries_labor_labor_var
         ),
-        "hhold_labor_val",   updateSelectInput,    list(
-          choices = r6$fisheries_labor_labor_choices,
+        "hhold_labor_vals",   updateSelectInput,    list(
+          choices = r6$fisheries_labor_labor_val_choices,
           selected = r6$fisheries_labor_hhold_labor_vals
         ),
         "free_labor_val",   updateSelectInput,    list(
-          choices = r6$fisheries_labor_labor_choices,
+          choices = r6$fisheries_labor_labor_val_choices,
           selected = r6$fisheries_labor_free_labor_val
         ),
         "paid_labor_val",   updateSelectInput,    list(
-          choices = r6$fisheries_labor_labor_choices,
+          choices = r6$fisheries_labor_labor_val_choices,
           selected = r6$fisheries_labor_paid_labor_val
         ),
       )
@@ -435,7 +435,7 @@ mod_4_quality_1_setup_2_data_fisheries_labor_server <- function(id, parent, r6){
 
       # household data
       r6$fisheries_labor_hhold_df_choices <- input_choices$hhold_dfs
-      r6$fisheries_labor_hhold_df <- input$data
+      r6$fisheries_labor_hhold_df <- input$hhold_df
       # fisheries production variable
       r6$fisheries_labor_produce_var_choices <- input_choices$produce_vars
       r6$fisheries_labor_produce_var <- input$produce_var
