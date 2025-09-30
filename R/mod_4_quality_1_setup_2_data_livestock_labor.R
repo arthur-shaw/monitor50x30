@@ -334,7 +334,7 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
           vars_df = r6$qnr_vars_df,
-          var_type = "multi-select"
+          var_type = "single-select"
         )
 
       # ------------------------------------------------------------------------
