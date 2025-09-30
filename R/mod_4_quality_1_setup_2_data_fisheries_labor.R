@@ -37,7 +37,7 @@ mod_4_quality_1_setup_2_data_fisheries_labor_ui <- function(id) {
     ),
     shiny::selectInput(
       inputId = ns("hhold_labor_vals"),
-      label = "Value: household labor",
+      label = "Value(s): household labor",
       choices = NULL,
       selected = NULL,
       multiple = TRUE
