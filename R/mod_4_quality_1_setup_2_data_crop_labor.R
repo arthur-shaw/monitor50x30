@@ -397,77 +397,65 @@ mod_4_quality_1_setup_2_data_crop_labor_server <- function(id, parent, r6){
     # paid variable -> paid values
     # --------------------------------------------------------------------------
 
-    shiny::observeEvent(input$paid_var, {
+    # shiny::observeEvent(input$paid_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$paid_var
-      )
+    #   shiny::req(input$paid_var)
 
-      # ------------------------------------------------------------------------
-      # compute choices
-      # ------------------------------------------------------------------------
+    #   # ------------------------------------------------------------------------
+    #   # compute choices
+    #   # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
+    #   # compute choices
+    #   input_choices$paid_vals <- make_val_options(
+    #     qnr_df = r6$qnr_vars_df,
+    #     categories_df = r6$q_categories_df,
+    #     varname = extract_var_names(input$paid_var)
+    #   )
 
-      # compute choices
-      input_choices$paid_val <- make_val_options(
-        qnr_df = qnr_vars_df,
-        varname = extract_var_names(input$paid_var)
-      )
+    #   # ------------------------------------------------------------------------
+    #   # update choices in the UI
+    #   # ------------------------------------------------------------------------
 
-      # ------------------------------------------------------------------------
-      # update choices in the UI
-      # ------------------------------------------------------------------------
+    #   shiny::freezeReactiveValue(input, "paid_val")
+    #   shiny::updateSelectInput(
+    #     inputId = "paid_val",
+    #     choices = input_choices$paid_vals,
+    #     selected = NULL
+    #   )
 
-      shiny::freezeReactiveValue(input, "paid_val")
-      shiny::updateSelectInput(
-        inputId = "paid_val",
-        choices = input_choices$paid_val,
-        selected = NULL
-      )
-
-    }, ignoreInit = TRUE)
+    # }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
     # free variable -> free values
     # --------------------------------------------------------------------------
 
-    shiny::observeEvent(input$free_var, {
+    # shiny::observeEvent(input$free_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$free_var
-      )
+    #   shiny::req(input$free_var)
 
-      # ------------------------------------------------------------------------
-      # compute choices
-      # ------------------------------------------------------------------------
+    #   # ------------------------------------------------------------------------
+    #   # compute choices
+    #   # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
+    #   # compute choices
+    #   input_choices$free_vals <- make_val_options(
+    #     qnr_df = r6$qnr_vars_df,
+    #     categories_df = r6$q_categories_df,
+    #     varname = extract_var_names(input$free_var)
+    #   )
 
-      # compute choices
-      input_choices$free_val <- make_val_options(
-        qnr_df = qnr_vars_df,
-        varname = extract_var_names(input$free_var)
-      )
+    #   # ------------------------------------------------------------------------
+    #   # update choices in the UI
+    #   # ------------------------------------------------------------------------
 
-      # ------------------------------------------------------------------------
-      # update choices in the UI
-      # ------------------------------------------------------------------------
+    #   shiny::freezeReactiveValue(input, "free_val")
+    #   shiny::updateSelectInput(
+    #     inputId = "free_val",
+    #     choices = input_choices$free_vals,
+    #     selected = NULL
+    #   )
 
-      shiny::freezeReactiveValue(input, "free_val")
-      shiny::updateSelectInput(
-        inputId = "free_val",
-        choices = input_choices$free_val,
-        selected = NULL
-      )
-
-    }, ignoreInit = TRUE)
+    # }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
     # members data -> variables in data
