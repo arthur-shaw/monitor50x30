@@ -91,8 +91,6 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
 
     gargoyle::on("download_data", {
 
-      shiny::req(r6$dirs$micro_combine)
-
       # ------------------------------------------------------------------------
       # compute choices from downloaded data
       # ------------------------------------------------------------------------
@@ -204,28 +202,6 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
 
     if (!is.null(r6$livestock_labor_provided)) {
 
-      shiny::req(
-        # data directory
-        r6$dirs$micro_combine,
-        # household data
-        r6$forestry_labor_hhold_df_choices,
-        r6$forestry_labor_hhold_df,
-        # forestry production variable
-        r6$forestry_labor_produce_var_choices,
-        r6$forestry_labor_produce_var,
-        # forestry production values
-        r6$forestry_labor_produce_val_choices,
-        r6$forestry_labor_produce_val,
-        # forestry labor variable
-        r6$forestry_labor_labor_var_choices,
-        r6$forestry_labor_labor_var,
-        # forestry labor values
-        r6$forestry_labor_labor_val_choices,
-        r6$forestry_labor_hhold_labor_vals,
-        r6$forestry_labor_free_labor_val,
-        r6$forestry_labor_paid_labor_val
-      )
-
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         # hhold data
@@ -279,10 +255,7 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$hhold_df, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$hhold_df
-      )
+      shiny::req(input$hhold_df)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -352,10 +325,7 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$produce_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$produce_var
-      )
+      shiny::req(input$produce_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -386,10 +356,7 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$labor_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$labor_var
-      )
+      shiny::req(input$labor_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -427,7 +394,7 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
         specs = input_specs
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
