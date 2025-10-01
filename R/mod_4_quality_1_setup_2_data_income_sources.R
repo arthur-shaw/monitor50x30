@@ -389,105 +389,146 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
     })
 
     # --------------------------------------------------------------------------
+    # load NULL values when values not previously saved
+    # --------------------------------------------------------------------------
+
+    if (is.null(r6$income_sources_provided)) {
+
+      input_specs <- tibble::tribble(
+        ~ id,             ~ updater,            ~ args,
+        "hhold_df",   updateSelectInput,    list(
+          choices = r6$data_choices,
+          selected = NULL
+        ),
+        # raises crops
+        "crop_var",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "crop_val",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        # raises livestock
+        "livestock_var",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "livestock_val",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        # temporary crops
+        "temp_crop_df",  updateSelectInput,    list(
+          choices = r6$data_choices,
+          selected = NULL
+        ),
+        "temp_crop_var",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "temp_crop_val",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        # permanent crops
+        "perm_crop_df",   updateSelectInput,    list(
+          choices = r6$data_choices,
+          selected = NULL
+        ),
+        "perm_crop_var",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "perm_crop_val",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        # processed crop products
+        "processed_df",   updateSelectInput,    list(
+          choices = r6$data_choices,
+          selected = NULL
+        ),
+        "processed_var",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "processed_val",  updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        # livestock
+        "anim_df",       updateSelectInput,    list(
+          choices = r6$data_choices,
+          selected = NULL
+        ),
+        "sold_live_anim_var",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "slaughter_anim_var",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "slaughter_anim_val",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "sold_live_poultry_var",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "slaughter_poultry_var",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "slaughter_poultry_val",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "milk_var",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "milk_val",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "eggs_var",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "eggs_val",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "oth_anim_prod_df",       updateSelectInput,    list(
+          choices = r6$data_choices,
+          selected = NULL
+        ),
+        "oth_anim_var",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "oth_anim_val",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+      )
+
+      update_inputs(
+        input = input,
+        session = session,
+        specs = input_specs
+      )
+
+    }
+
+    # --------------------------------------------------------------------------
     # load past selections from R6
     # --------------------------------------------------------------------------
 
     if (!is.null(r6$income_sources_provided)) {
-
-      shiny::req(
-        # data directory
-        r6$dirs$micro_combine,
-        # household data
-        r6$income_sources_hhold_df_choices,
-        r6$income_sources_hhold_df,
-        # grew crops variable
-        r6$income_sources_crops_var_choices,
-        r6$income_sources_crops_var,
-        # grew crops value
-        r6$income_soures_crops_val_choices,
-        r6$income_soures_crops_val,
-        # raised livestock variable
-        r6$income_soures_livestock_var_choices,
-        r6$income_soures_livestock_var,
-        # raised livestock value
-        r6$income_soures_livestock_val_choices,
-        r6$income_soures_livestock_val,
-        # temporary crop data
-        r6$income_sources_temp_crop_df_choices,
-        r6$income_sources_temp_crop_df,
-        # temporary crop variable
-        r6$income_sources_temp_crop_var_choices,
-        r6$income_sources_temp_crop_var,
-        # temporary crop value
-        r6$income_sources_temp_crop_val_choices,
-        r6$income_sources_temp_crop_val,
-        # permanent crop data
-        r6$income_sources_perm_crop_df_choices,
-        r6$income_sources_perm_crop_df,
-        # permanent crop variable
-        r6$income_sources_perm_crop_var_choices,
-        r6$income_sources_perm_crop_var,
-        # permanent crop value
-        r6$income_sources_perm_crop_val_choices,
-        r6$income_sources_perm_crop_val,
-        # processed crop product data
-        r6$income_sources_processed_df_choices,
-        r6$income_sources_processed_df,
-        # processed crop product variable
-        r6$income_sources_processed_var_choices,
-        r6$income_sources_processed_var,
-        # processed crop product value
-        r6$income_sources_processed_val_choices,
-        r6$income_sources_processed_val,
-        # livestock data
-        r6$income_sources_anim_df_choices,
-        r6$income_sources_anim_df,
-        # sold live animals variable
-        r6$income_sources_sold_live_anim_var_choices,
-        r6$income_sources_sold_live_anim_var,
-        # sold live animals value
-        r6$income_sources_sold_live_anim_val_choices,
-        r6$income_sources_sold_live_anim_val,
-        # sold slaughtered animals variable
-        r6$income_sources_slaughter_anim_var_choices,
-        r6$income_sources_slaughter_anim_var,
-        # sold slaughtered animals value
-        r6$income_sources_slaughter_anim_val_choices,
-        r6$income_sources_slaughter_anim_val,
-        # sold live poultry variable
-        r6$income_sources_sold_live_poultry_var_choices,
-        r6$income_sources_sold_live_poultry_var,
-        # sold live poultry value
-        r6$income_sources_sold_live_poultry_val_choices,
-        r6$income_sources_sold_live_poultry_val,
-        # sold slaughtered poultry variable
-        r6$income_sources_slaughter_poultry_var_choices,
-        r6$income_sources_slaughter_poultry_var,
-        # sold slaughtered poultry value
-        r6$income_sources_slaughter_poultry_val_choices,
-        r6$income_sources_slaughter_poultry_val,
-        # sold milk variable
-        r6$income_sources_milk_var_choices,
-        r6$income_sources_milk_var,
-        # sold milk value
-        r6$income_sources_milk_val_choices,
-        r6$income_sources_milk_val,
-        # sold eggs variable
-        r6$income_sources_eggs_var_choices,
-        r6$income_sources_eggs_var,
-        # sold eggs value
-        r6$income_sources_eggs_val_choices,
-        r6$income_sources_eggs_val,
-        # other animal products data
-        r6$income_sources_oth_anim_prod_df_choices,
-        r6$income_sources_oth_anim_prod_df,
-        # sold other animal products variable
-        r6$income_sources_oth_anim_prod_var_choices,
-        r6$income_sources_oth_anim_prod_var,
-        # sold other animal products value
-        r6$income_sources_oth_anim_prod_val_choices,
-        r6$income_sources_oth_anim_prod_val
-      )
 
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
