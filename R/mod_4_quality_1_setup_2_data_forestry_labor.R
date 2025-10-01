@@ -371,8 +371,9 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
       # update choices in the UI
       # ------------------------------------------------------------------------
 
-      shiny::freezeReactiveVal("produce_val")
+      shiny::freezeReactiveValue(input, "produce_val")
       shiny::updateSelectInput(
+        inputId = "produce_val",
         choices = input_choices$produce_vals,
         selected = NULL
       )
