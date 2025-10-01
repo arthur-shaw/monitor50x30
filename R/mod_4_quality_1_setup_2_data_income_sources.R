@@ -972,6 +972,44 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
     }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # --------------------------------------------------------------------------
+    # sell processed crop variable -> values
+    # --------------------------------------------------------------------------
+
+    shiny::observeEvent(input$processed_var, {
+
+      shiny::req(input$processed_var)
+
+      # ------------------------------------------------------------------------
+      # compute choices
+      # ------------------------------------------------------------------------
+
+      input_choices$processed_vals <- make_val_options(
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
+        varname = extract_var_names(input$processed_var)
+      )
+
+      # ------------------------------------------------------------------------
+      # update choices in the UI
+      # ------------------------------------------------------------------------
+
+      input_specs <- tibble::tribble(
+        ~ id,             ~ updater,            ~ args,
+        "processed_val",   updateSelectInput,    list(
+          choices = input_choices$processed_vals,
+          selected = NULL
+        ),
+      )
+
+      update_inputs(
+        input = input,
+        session = session,
+        specs = input_specs
+      )
+
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
+
+    # --------------------------------------------------------------------------
     # livestock data -> variables in data
     # --------------------------------------------------------------------------
 
