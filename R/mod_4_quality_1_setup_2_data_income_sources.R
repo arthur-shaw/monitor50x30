@@ -178,6 +178,10 @@ mod_4_quality_1_setup_2_data_income_sources_ui <- function(id) {
       label = "Value: sold some [ANIMAL PRODUCT]",
       choices = NULL,
       selected = NULL
+    ),
+    shiny::actionButton(
+      inputId = ns("save"),
+      label = "Save"
     )
 
   )
