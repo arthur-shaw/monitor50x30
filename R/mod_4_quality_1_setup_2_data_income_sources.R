@@ -681,10 +681,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$crop_var, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$crop_var
-      )
+      shiny::req(input$crop_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -722,10 +719,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$livestock_var, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$livestock_var
-      )
+      shiny::req(input$livestock_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -763,10 +757,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$temp_crop_df, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$temp_crop_df
-      )
+      shiny::req(input$temp_crop_df)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -807,10 +798,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$temp_crop_var, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$temp_crop_var
-      )
+      shiny::req(input$temp_crop_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -848,10 +836,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$perm_crop_df, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$perm_crop_df
-      )
+      shiny::req(input$perm_crop_df)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -892,10 +877,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$perm_crop_var, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$perm_crop_var
-      )
+      shiny::req(input$perm_crop_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -933,10 +915,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$processed_df, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$processed_df
-      )
+      shiny::req(input$processed_df)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -1015,10 +994,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$anim_df, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$anim_df
-      )
+      shiny::req(input$anim_df)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -1093,10 +1069,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$slaughter_anim_var, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$slaughter_anim_var
-      )
+      shiny::req(input$slaughter_anim_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -1134,10 +1107,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$slaughter_poultry_var, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$slaughter_poultry_var
-      )
+      shiny::req(input$slaughter_poultry_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -1175,10 +1145,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$milk_var, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$milk_var
-      )
+      shiny::req(input$milk_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -1216,10 +1183,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$eggs_var, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$eggs_var
-      )
+      shiny::req(input$eggs_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -1257,10 +1221,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$oth_anim_prod_df, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$oth_anim_prod_df
-      )
+      shiny::req(input$oth_anim_prod_df)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -1300,10 +1261,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$oth_anim_var, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$oth_anim_var
-      )
+      shiny::req(input$oth_anim_var)
 
       # ------------------------------------------------------------------------
       # compute choices
