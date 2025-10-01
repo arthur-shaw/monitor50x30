@@ -986,30 +986,28 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # numeric: number of live animals sold
-      input_choices$sold_live_anim_vars <- r6$dirs$micro_combine |>
+      # numeric variables: number of animals sold
+      numeric_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$anim_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "numeric"
         )
-      input_choices$sold_live_poultry_var <- input_choices$sold_live_anim_var
-
-      # single-select
-      input_choices$sold_live_anim_vars <- r6$dirs$micro_combine |>
+    
+      # single-select vars: whether sold
+      single_select_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$anim_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
-          var_type = "numeric"
+          vars_df = r6$qnr_vars_df,
+          var_type = "single-select"
         )
-      slaughter_anim_vars <- input_choices$sold_live_anim_var
-      slaughter_poultry_vars <- input_choices$sold_live_anim_var
-      milk_vars <- input_choices$sold_live_anim_var
-      eggs_vars <- input_choices$sold_live_anim_var
+
+      input_choices$sold_live_anim_vars <- numeric_vars
+      input_choices$slaughter_anim_vars <- single_select_vars
+      input_choices$sold_live_poultry_vars <- numeric_vars
+      input_choices$slaughter_poultry_vars <- single_select_vars
+      input_choices$milk_vars <- single_select_vars
+      input_choices$eggs_vars <- single_select_vars 
 
       # ------------------------------------------------------------------------
       # update choices in the UI
