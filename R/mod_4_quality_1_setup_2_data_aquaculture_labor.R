@@ -195,28 +195,6 @@ mod_4_quality_1_setup_2_data_aquaculture_labor_server <- function(id, parent, r6
 
     if (!is.null(r6$livestock_labor_provided)) {
 
-      shiny::req(
-        # data directory
-        r6$dirs$micro_combine,
-        # household data
-        r6$aquaculture_labor_hhold_df_choices,
-        r6$aquaculture_labor_hhold_df,
-        # aquaculture production variable
-        r6$aquaculture_labor_produce_var_choices,
-        r6$aquaculture_labor_produce_var,
-        # aquaculture production values
-        r6$aquaculture_labor_produce_val_choices,
-        r6$aquaculture_labor_produce_val,
-        # aquaculture labor variable
-        r6$aquaculture_labor_labor_var_choices,
-        r6$aquaculture_labor_labor_var,
-        # aquaculture labor values
-        r6$aquaculture_labor_labor_val_choices,
-        r6$aquaculture_labor_hhold_labor_vals,
-        r6$aquaculture_labor_free_labor_val,
-        r6$aquaculture_labor_paid_labor_val
-      )
-
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         # hhold data
@@ -270,10 +248,7 @@ mod_4_quality_1_setup_2_data_aquaculture_labor_server <- function(id, parent, r6
 
     shiny::observeEvent(input$hhold_df, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$hhold_df
-      )
+      shiny::req(input$hhold_df)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -343,10 +318,7 @@ mod_4_quality_1_setup_2_data_aquaculture_labor_server <- function(id, parent, r6
 
     shiny::observeEvent(input$produce_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$produce_var
-      )
+      shiny::req(input$produce_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -377,10 +349,7 @@ mod_4_quality_1_setup_2_data_aquaculture_labor_server <- function(id, parent, r6
 
     shiny::observeEvent(input$labor_var, {
 
-      shiny::req(
-        r6$dirs$qnr,
-        input$labor_var
-      )
+      shiny::req(input$labor_var)
 
       # ------------------------------------------------------------------------
       # compute choices
@@ -418,7 +387,7 @@ mod_4_quality_1_setup_2_data_aquaculture_labor_server <- function(id, parent, r6
         specs = input_specs
       )
 
-    }, ignoreInit = TRUE)
+    }, ignoreInit = TRUE, ignoreNULL = TRUE)
 
     # ==========================================================================
     # react to save
