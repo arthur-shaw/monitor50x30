@@ -195,7 +195,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
     # ==========================================================================
 
     input_choices <- shiny::reactiveValues(
-      hhold_dfs = r6$income_sources_hhold_df_choices,
+      hhold_dfs = r6$data_choices,
       # raises crops
       crop_vars = r6$income_sources_crop_var_choices,
       crop_vals = r6$income_sources_crop_val_choices,
@@ -203,19 +203,19 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       livestock_vars = r6$income_sources_livestock_var_choices,
       livestock_vals = r6$income_sources_livestock_val_choices,
       # temporary crops
-      temp_crop_dfs = r6$income_sources_temp_crop_df_choices,
+      temp_crop_dfs = r6$data_choices,
       temp_crop_vars = r6$income_sources_temp_crop_var_choices,
       temp_crop_vals = r6$income_sources_temp_crop_vals,
       # permanent crops
-      perm_crop_dfs = r6$income_sources_perm_crop_df_choices,
+      perm_crop_dfs = r6$data_choices,
       perm_crop_vars = r6$income_sources_perm_crop_var_choices,
       perm_crop_vals = r6$income_sources_perm_crop_vals,
       # processed crop products
-      processed_dfs = r6$income_sources_processed_df_choices,
+      processed_dfs = r6$data_choices,
       processed_vars = r6$income_sources_processed_var_choices,
       processed_vals = r6$income_sources_processed_vals,
       # livestock
-      anim_dfs = r6$income_sources_anim_df_choices,
+      anim_dfs = r6$data_choices,
       sold_live_anim_vars = r6$income_sources_sold_live_anim_var_choices,
       slaughter_anim_vars = r6$income_sources_slaughter_anim_var_choices,
       slaughter_anim_vals = r6$income_sources_slaughter_anim_val_choices,
@@ -234,21 +234,16 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     gargoyle::on("download_data", {
 
-      shiny::req(r6$dirs$micro_combine)
-
       # ------------------------------------------------------------------------
       # compute choices from downloaded data
       # ------------------------------------------------------------------------
 
-      # get list of data files in combined folder
-      input_choices$hhold_dfs <- r6$dirs$micro_combine |>
-        make_data_choices()
-
       # pass list to all data reactives
-      input_choices$temp_crop_dfs <- input_choices$hhold_dfs
-      input_choices$perm_crop_dfs <- input_choices$hhold_dfs
-      input_choices$processed_dfs <- input_choices$hhold_dfs
-      input_choices$anim_dfs <- input_choices$hhold_dfs
+      input_choices$temp_crop_dfs <- r6$data_choices
+      input_choices$perm_crop_dfs <- r6$data_choices
+      input_choices$processed_dfs <- r6$data_choices
+      input_choices$anim_dfs <- r6$data_choices
+      input_choices$oth_anim_prod_dfs <- r6$data_choices
 
       # ------------------------------------------------------------------------
       # update values
@@ -258,7 +253,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         "hhold_df",   updateSelectInput,    list(
-          choices = input_choices$hhold_dfs,
+          choices = r6$data_choices,
           selected = NULL
         ),
         # raises crops
@@ -281,7 +276,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
         ),
         # temporary crops
         "temp_crop_df",  updateSelectInput,    list(
-          choices = input_choices$temp_crop_dfs,
+          choices = r6$data_choices,
           selected = NULL
         ),
         "temp_crop_var",  updateSelectInput,    list(
@@ -294,7 +289,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
         ),
         # permanent crops
         "perm_crop_df",   updateSelectInput,    list(
-          choices = input_choices$perm_crop_dfs,
+          choices = r6$data_choices,
           selected = NULL
         ),
         "perm_crop_var",  updateSelectInput,    list(
@@ -307,7 +302,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
         ),
         # processed crop products
         "processed_df",   updateSelectInput,    list(
-          choices = input_choices$processed_dfs,
+          choices = r6$data_choices,
           selected = NULL
         ),
         "processed_var",  updateSelectInput,    list(
@@ -320,7 +315,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
         ),
         # livestock
         "anim_df",       updateSelectInput,    list(
-          choices = input_choices$anim_dfs,
+          choices = r6$data_choices,
           selected = NULL
         ),
         "sold_live_anim_var",       updateSelectInput,    list(
@@ -477,7 +472,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
         "hhold_df",   updateSelectInput,    list(
-          choices = r6$income_sources_hhold_df_choices,
+          choices = r6$data_choices,
           selected = r6$income_sources_hhold_df
         ),
         # raises crops
@@ -500,7 +495,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
         ),
         # temporary crops
         "temp_crop_df",  updateSelectInput,    list(
-          choices = r6$income_sources_temp_crop_df_choices,
+          choices = r6$data_choices,
           selected = r6$income_sources_temp_crop_df
         ),
         "temp_crop_var",  updateSelectInput,    list(
@@ -513,7 +508,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
         ),
         # permanent crops
         "perm_crop_df",   updateSelectInput,    list(
-          choices = r6$income_sources_perm_crop_df_choices,
+          choices = r6$data_choices,
           selected = r6$income_sources_perm_crop_df
         ),
         "perm_crop_var",  updateSelectInput,    list(
@@ -526,7 +521,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
         ),
         # processed crop products
         "processed_df",   updateSelectInput,    list(
-          choices = r6$income_sources_processed_df_choices,
+          choices = r6$data_choices,
           selected = r6$income_sources_processed_df
         ),
         "processed_var",  updateSelectInput,    list(
@@ -539,7 +534,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
         ),
         # livestock
         "anim_df",       updateSelectInput,    list(
-          choices = r6$income_sources_anim_df_choices,
+          choices = r6$data_choices,
           selected = r6$income_sources_anim_df
         ),
         "sold_live_anim_var",       updateSelectInput,    list(
@@ -602,24 +597,17 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$hhold_df, {
 
-      shiny::req(
-        r6$dirs$qnr, r6$dirs$micro_combine,
-        input$hhold_df
-      )
+      shiny::req(input$hhold_df)
 
       # ------------------------------------------------------------------------
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # grew crops variables
       input_choices$crop_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -627,7 +615,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       input_choices$livestock_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -670,13 +658,9 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # compute choices
       input_choices$crop_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$crop_var)
       )
 
@@ -715,13 +699,9 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # compute choices
       input_choices$livestock_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$livestock_var)
       )
 
@@ -760,15 +740,11 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # grew crops variables
       input_choices$temp_crop_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$temp_crop_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -808,13 +784,9 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # compute choices
       input_choices$temp_crop_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$temp_crop_var)
       )
 
@@ -853,15 +825,11 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # grew crops variables
       input_choices$perm_crop_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$perm_crop_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -901,13 +869,9 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # compute choices
       input_choices$perm_crop_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$perm_crop_var)
       )
 
@@ -946,15 +910,11 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # grew crops variables
       input_choices$processed_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$processed_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -1074,13 +1034,9 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # compute choices
       input_choices$slaughter_anim_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$slaughter_anim_var)
       )
 
@@ -1119,13 +1075,9 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # compute choices
       input_choices$slaughter_poultry_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$slaughter_poultry_var)
       )
 
@@ -1164,13 +1116,9 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # compute choices
       input_choices$milk_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$milk_var)
       )
 
@@ -1209,13 +1157,9 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # compute choices
       input_choices$eggs_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$eggs_var)
       )
 
@@ -1254,15 +1198,11 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # sold any products variables
       input_choices$oth_anim_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$oth_anim_prod_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -1301,13 +1241,10 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # compute choices
       input_choices$oth_anim_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$oth_anim_var)
       )
 
