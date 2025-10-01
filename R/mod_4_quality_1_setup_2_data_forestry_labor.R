@@ -74,7 +74,7 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
     # ==========================================================================
 
     input_choices <- shiny::reactiveValues(
-      hhold_dfs = r6$forestry_labor_hhold_df_choices,
+      hhold_dfs = r6$data_choices,
       produce_vars = r6$forestry_labor_produce_var_choices,
       produce_vals = r6$forestry_labor_produce_val_choices,
       labor_vars = r6$forestry_labor_labor_var_choices,
@@ -97,16 +97,12 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
       # compute choices from downloaded data
       # ------------------------------------------------------------------------
 
-      # get list of data files in combined folder
-      input_choices$hhold_dfs <- r6$dirs$micro_combine |>
-        make_data_choices()
-
       # update UI to reflect data choices
       # but do not trigger reactive
       shiny::freezeReactiveValue(input, "hhold_df")
       shiny::updateSelectInput(
         inputId = "hhold_df",
-        choices = input_choices$hhold_dfs,
+        choices = r6$data_choices,
         selected = NULL
       )
 
@@ -117,11 +113,6 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
 
       input_specs <- tibble::tribble(
         ~ id,             ~ updater,            ~ args,
-        # data
-        "hhold_df",   updateSelectInput,    list(
-          choices = NULL,
-          selected = NULL
-        ),
         # produce
         "produce_var",   updateSelectInput,    list(
           choices = NULL,
@@ -190,7 +181,7 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
         ~ id,             ~ updater,            ~ args,
         # hhold data
         "hhold_df",           updateSelectInput,    list(
-          choices = r6$forestry_labor_hhold_df_choices,
+          choices = r6$data_choices,
           selected = r6$forestry_labor_hhold_df
         ),
         # produce
@@ -248,15 +239,11 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # produce variables
       input_choices$produce_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "single-select"
         )
 
@@ -264,7 +251,7 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
       input_choices$labor_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$hhold_df, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "multi-select"
         )
 
@@ -325,13 +312,9 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # compute choices
       input_choices$produce_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$produce_var)
       )
 
@@ -362,13 +345,9 @@ mod_4_quality_1_setup_2_data_forestry_labor_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
-      # compute choices
       input_choices$labor_vals <- make_val_options(
-        qnr_df = qnr_vars_df,
+        qnr_df = r6$qnr_vars_df,
+        categories_df = r6$q_categories_df,
         varname = extract_var_names(input$labor_var)
       )
 
