@@ -606,6 +606,12 @@ r6 <- R6::R6Class(
     income_sources_eggs_var = NULL,
     income_sources_eggs_val_choice = NULL,
     income_sources_eggs_val = NULL,
+    oth_anim_prod_df_choices = NULL,
+    oth_anim_prod_df = NULL,
+    oth_anim_var_choices = NULL,
+    oth_anim_var = NULL,
+    oth_anim_val_choices = NULL,
+    oth_anim_val = NULL,
     income_sources_provided = NULL,
 
     # ==========================================================================
@@ -1254,6 +1260,12 @@ r6 <- R6::R6Class(
       income_sources_eggs_var = NULL,
       income_sources_eggs_val_choice = NULL,
       income_sources_eggs_val = NULL,
+      oth_anim_prod_df_choices = NULL,
+      oth_anim_prod_df = NULL,
+      oth_anim_var_choices = NULL,
+      oth_anim_var = NULL,
+      oth_anim_val_choices = NULL,
+      oth_anim_val = NULL,
       income_sources_provided = NULL
 
     ) {
@@ -1522,7 +1534,10 @@ r6 <- R6::R6Class(
         "income_sources_milk_var_choices",
         "income_sources_milk_val_choices",
         "income_sources_eggs_var_choices",
-        "income_sources_eggs_val_choice"
+        "income_sources_eggs_val_choice",
+        "oth_anim_prod_df_choices",
+        "oth_anim_var_choices",
+        "oth_anim_val_choices"
       )
 
       # other fields not to write

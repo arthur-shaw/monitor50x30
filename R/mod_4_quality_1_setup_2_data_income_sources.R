@@ -229,7 +229,11 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       milk_vars = r6$income_sources_milk_var_choices,
       milk_vals = r6$income_sources_milk_val_choices,
       eggs_vars = r6$income_sources_eggs_var_choices,
-      eggs_vals = r6$income_sources_eggs_val_choices
+      eggs_vals = r6$income_sources_eggs_val_choices,
+      # other animal products
+      oth_anim_prod_dfs = r6$data_choices,
+      oth_anim_vars = r6$oth_anim_var_choices,
+      oth_anim_vals = r6$oth_anim_val_choices
     )
 
     # --------------------------------------------------------------------------
@@ -359,6 +363,18 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
           selected = NULL
         ),
         "eggs_val",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "oth_anim_prod_df",       updateSelectInput,    list(
+          choices = r6$data_choices,
+          selected = NULL
+        ),
+        "oth_anim_var",       updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
+        "oth_anim_val",       updateSelectInput,    list(
           choices = NULL,
           selected = NULL
         ),
@@ -580,6 +596,18 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
         "eggs_val",       updateSelectInput,    list(
           choices = r6$income_sources_eggs_val_choices,
           selected = r6$income_sources_eggs_val
+        ),
+        "oth_anim_prod_df",       updateSelectInput,    list(
+          choices = r6$data_choices,
+          selected = r6$oth_anim_prod_df
+        ),
+        "oth_anim_var",       updateSelectInput,    list(
+          choices = r6$oth_anim_var_choices,
+          selected = r6$oth_anim_var
+        ),
+        "oth_anim_val",       updateSelectInput,    list(
+          choices = r6$oth_anim_val_choices,
+          selected = r6$oth_anim_val
         ),
       )
 
@@ -1341,6 +1369,13 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       r6$income_sources_eggs_var <- input$eggs_var
       r6$income_sources_eggs_val_choice <- input_choices$eggs_vals
       r6$income_sources_eggs_val <- input$eggs_val
+      # other animal products
+      r6$oth_anim_prod_df_choices <- input_choices$oth_anim_prod_dfs
+      r6$oth_anim_prod_df <- input$oth_anim_prod_df
+      r6$oth_anim_var_choices <- input_choices$oth_anim_vars
+      r6$oth_anim_var <- input$oth_anim_var
+      r6$oth_anim_val_choices <- input_choices$oth_anim_vals
+      r6$oth_anim_val <- input$oth_anim_val
       # save action
       r6$income_sources_provided <- TRUE
 
