@@ -497,21 +497,21 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
         ),
         # raises crops
         "crop_var",  updateSelectInput,    list(
-          choices = r6$income_sources_crops_var_choices,
-          selected = r6$income_sources_crops_var
+          choices = r6$income_sources_crop_var_choices,
+          selected = r6$income_sources_crop_var
         ),
         "crop_val",  updateSelectInput,    list(
-          choices = r6$income_sources_crops_val_choices,
-          selected = r6$income_sources_crops_val
+          choices = r6$income_sources_crop_val_choices,
+          selected = r6$income_sources_crop_val
         ),
         # raises livestock
         "livestock_var",  updateSelectInput,    list(
-          choices = r6$income_soures_livestock_var_choices,
-          selected = r6$income_soures_livestock_var
+          choices = r6$income_sources_livestock_var_choices,
+          selected = r6$income_sources_livestock_var
         ),
         "livestock_val",  updateSelectInput,    list(
-          choices = r6$income_soures_livestock_val_choices,
-          selected = r6$income_soures_livestock_val
+          choices = r6$income_sources_livestock_val_choices,
+          selected = r6$income_sources_livestock_val
         ),
         # temporary crops
         "temp_crop_df",  updateSelectInput,    list(
@@ -523,7 +523,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
           selected = r6$income_sources_temp_crop_var
         ),
         "temp_crop_val",  updateSelectInput,    list(
-          choices = r6$income_sources_temp_crop_val_choices,
+          choices = r6$income_sources_temp_crop_vals,
           selected = r6$income_sources_temp_crop_val
         ),
         # permanent crops
@@ -536,7 +536,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
           selected = r6$income_sources_perm_crop_var
         ),
         "perm_crop_val",  updateSelectInput,    list(
-          choices = r6$income_sources_perm_crop_val_choices,
+          choices = r6$income_sources_perm_crop_vals,
           selected = r6$income_sources_perm_crop_val
         ),
         # processed crop products
@@ -549,7 +549,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
           selected = r6$income_sources_processed_var
         ),
         "processed_val",  updateSelectInput,    list(
-          choices = r6$income_sources_processed_val_choices,
+          choices = r6$income_sources_processed_vals,
           selected = r6$income_sources_processed_val
         ),
         # livestock
@@ -594,7 +594,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
           selected = r6$income_sources_eggs_var
         ),
         "eggs_val",       updateSelectInput,    list(
-          choices = r6$income_sources_eggs_val_choices,
+          choices = r6$income_sources_eggs_val_choice,
           selected = r6$income_sources_eggs_val
         ),
         "oth_anim_prod_df",       updateSelectInput,    list(
@@ -1074,7 +1074,7 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
           selected = NULL
         ),
         "eggs_var",  updateSelectInput,    list(
-          choices = input_choices$egg_vars,
+          choices = input_choices$eggs_vars,
           selected = NULL
         ),
       )
