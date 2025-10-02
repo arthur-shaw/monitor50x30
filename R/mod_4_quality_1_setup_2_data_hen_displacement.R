@@ -62,7 +62,7 @@ mod_4_quality_1_setup_2_data_hen_displacement_server <- function(id, r6, parent)
 
     input_choices <- shiny::reactiveValues(
       data = r6$data_choices,
-      animal_vars = r6$hen_displacement_var_choices,
+      animal_vars = r6$hen_displacement_animal_var_choices,
       animal_vals = r6$hen_displacement_val_choices
     )
 
@@ -193,7 +193,7 @@ mod_4_quality_1_setup_2_data_hen_displacement_server <- function(id, r6, parent)
       shiny::freezeReactiveValue(input, "cock_val")
       shiny::updateSelectInput(
         inputId = "cock_val",
-        choices = r6$hen_displacement_animal_val_choices,
+        choices = r6$hen_displacement_val_choices,
         selected = r6$hen_displacement_cock_val
       )
 
@@ -201,7 +201,7 @@ mod_4_quality_1_setup_2_data_hen_displacement_server <- function(id, r6, parent)
       shiny::freezeReactiveValue(input, "hen_val")
       shiny::updateSelectInput(
         inputId = "hen_val",
-        choices = r6$hen_displacement_animal_val_choices,
+        choices = r6$hen_displacement_val_choices,
         selected = r6$hen_displacement_hen_val
       )
 
@@ -209,7 +209,7 @@ mod_4_quality_1_setup_2_data_hen_displacement_server <- function(id, r6, parent)
       shiny::freezeReactiveValue(input, "pullet_val")
       shiny::updateSelectInput(
         inputId = "pullet_val",
-        choices = r6$hen_displacement_animal_val_choices,
+        choices = r6$hen_displacement_val_choices,
         selected = r6$hen_displacement_pullet_val
       )
 
