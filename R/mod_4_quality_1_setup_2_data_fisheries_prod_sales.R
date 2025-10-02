@@ -138,7 +138,7 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
           choices = NULL,
           selected = NULL
         ),
-        "practice_vals",  updateSelectInput,    list(
+        "practice_val",  updateSelectInput,    list(
           choices = NULL,
           selected = NULL
         ),
@@ -454,6 +454,7 @@ mod_4_quality_1_setup_2_data_fisheries_prod_sales_server <- function(id, parent,
 
       shiny::freezeReactiveValue(input, "sold_val")
       shiny::updateSelectInput(
+        inputId = "sold_val",
         choices = input_choices$sold_vals,
         selected = NULL
       )
