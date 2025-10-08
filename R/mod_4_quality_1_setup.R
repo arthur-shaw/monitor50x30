@@ -31,8 +31,8 @@ mod_4_quality_1_setup_ui <- function(id) {
       bslib::accordion_panel(
         title = "Interviews",
         value = "interviews",
-        id = mod_4_quality_1_setup_3_interviews_ui(
-          ns("4_quality_1_setup_3_interviews_1")
+        mod_4_quality_1_setup_3_interviews_ui(
+          id = ns("4_quality_1_setup_3_interviews_1")
         )
       )
 
