@@ -83,6 +83,7 @@ app_server <- function(input, output, session) {
   gargoyle::init("saved_aquaculture_labor_sales")
   gargoyle::init("saved_forestry_labor_sales")
   gargoyle::init("saved_income_sources_sales")
+  gargoyle::init("saved_interviews")
 
   # load module server logic
   mod_1_setup_server("1_setup_1", r6 = r6)
