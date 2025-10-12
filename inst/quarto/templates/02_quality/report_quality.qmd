@@ -84,7 +84,7 @@ supervisor_interviewer_interview <- supervisor_interviewer |>
 
 ```{r}
 #| label: parcels per household header
-#| eval: !expr params_df$use_parcels_per_hhold == TRUE
+#| eval: !expr '!is.null(params_df$use_parcels_per_hhold) && params_df$use_parcels_per_hhold == TRUE'
 #| output: asis
 cat("## Plots per household")
 ```
@@ -92,7 +92,7 @@ cat("## Plots per household")
 
 ```{r}
 #| label: parcels per household table
-#| eval: !expr params_df$use_parcels_per_hhold == TRUE
+#| eval: !expr '!is.null(params_df$use_parcels_per_hhold) && params_df$use_parcels_per_hhold == TRUE'
 
 # load parcels data frame
 parcels <- fs::path(
