@@ -138,3 +138,16 @@ cat(
 )
 ```
 
+
+```{r}
+#| label: livestock ownership
+#| eval: !expr '!is.null(params_df$use_livestock_owership) & params_df$use_livestock_owership == TRUE'
+#| output: asis
+cat(
+  knitr::knit_child(
+    text = readr::read_file("_livestock_ownership.qmd"),
+    quiet = TRUE
+  ),
+  sep = "\n"
+)
+```

@@ -1,0 +1,18 @@
+## Livestock ownership
+
+```{r}
+#| label: livestock ownership table
+
+livestock_ownership_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "livestock_ownership_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30:: livestock_ownership(
+  hhold_df = livestock_ownership_df,
+  animal_var = monitor50x30:::extract_var_names(params_df$livestock_ownership_animal_var),
+  cases = cases_for_report,
+  group_var = "supervisor"
+)
+```
