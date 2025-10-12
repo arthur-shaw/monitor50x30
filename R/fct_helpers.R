@@ -270,62 +270,76 @@ render_report <- function(
 ) {
 
   # ============================================================================
-  # set paths as a function of project path and report type
+  # construct paths
   # ============================================================================
 
   # ----------------------------------------------------------------------------
-  # app paths
+  # make a function of report type
   # ----------------------------------------------------------------------------
 
-  report_name <- glue::glue("report_{report_type}.qmd")
-
+  # directory in which to look
   report_dir <- dplyr::case_when(
     report_type == "completeness" ~ "01_completeness",
     report_type == "quality" ~ "02_quality",
     TRUE ~ ""
   )
 
-  # top-level report-specific directory
-  report_app_dir <- fs::path(
-    proj_dir, "02_reports", report_dir
-  )
-
-  # where template should be copied
-  template_app_path <- fs::path(
-    report_app_dir, "resources", report_name
-  )
+  # file name for the main file
+  report_name <- glue::glue("report_{report_type}.qmd")
 
   # ----------------------------------------------------------------------------
-  # package paths
+  # package paths, from which to copy
   # ----------------------------------------------------------------------------
 
+  # directory where report templates are found
   pkg_path <- fs::path_package(
     package = "monitor50x30",
     "quarto", "templates"
   )
 
-  template_pkg_path <- fs::path(
-    pkg_path, glue::glue("{report_dir}"), report_name
+  # vector of paths to package template files
+  template_pkg_paths <- fs::path(pkg_path, glue::glue("{report_dir}")) |>
+    fs::dir_ls()
+
+
+  # ----------------------------------------------------------------------------
+  # app paths, to which to paste
+  # ----------------------------------------------------------------------------
+
+  # directory where templates will be pasted
+  report_app_dir <- fs::path(
+    proj_dir, "02_reports", report_dir
   )
+
+  # where templates should be copied
+  # constructed from app template directory and file names in package
+  template_app_names <- fs::path_file(template_pkg_paths)
+  template_app_paths <- fs::path(
+    report_app_dir, "resources",
+    template_app_names
+  )
+
+  # path to the main report file
+  template_app_names <- fs::path_file(template_app_paths)
+  main_report_index <- which(template_app_names == report_name)
+  main_report_path <- template_app_paths[main_report_index]
 
   # ============================================================================
   # copy resources from package to app
   # ============================================================================
 
   fs::file_copy(
-    path = template_pkg_path,
-    new_path = template_app_path,
+    path = template_pkg_paths,
+    new_path = template_app_paths,
     overwrite = TRUE
   )
-
-  # TODO: add files/revise approach as needed
 
   # ============================================================================
   # render report in situ
   # ============================================================================
 
   quarto::quarto_render(
-    input = template_app_path,
+    input = main_report_path,
     execute_params = params
   )
 
