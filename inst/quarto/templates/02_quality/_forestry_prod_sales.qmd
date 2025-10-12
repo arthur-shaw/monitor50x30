@@ -1,0 +1,34 @@
+## Forestry production and sales
+
+```{r}
+#| label: aquaculture production and sales table
+
+# household df
+forestry_prod_hhold_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "forestry_prod_hhold_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+# proudct df
+forestry_prod_product_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "forestry_prod_product_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::other_prod_sales(
+  hhold_df = forestry_prod_hhold_df,
+  product_df = forestry_prod_product_df,
+  cases = cases_for_report,
+  practice_var = monitor50x30:::extract_var_names(params_df$forestry_prod_practice_var),
+  practice_val = monitor50x30:::extract_var_values(params_df$forestry_prod_practice_val),
+  products_var = monitor50x30:::extract_var_names(params_df$forestry_prod_products_var),
+  sold_var = monitor50x30:::extract_var_names(params_df$forestry_prod_sold_var),
+  sold_val = monitor50x30:::extract_var_values(params_df$forestry_prod_sold_val),
+  amt_sold_vars = monitor50x30:::extract_var_names(params_df$forestry_prod_amt_sold_var[[1]]),
+  amt_sold_dk_val = monitor50x30:::extract_var_values(params_df$forestry_prod_amt_sold_dk_val),
+  group_var = "supervisor",
+  table_title = "Forestry production and sales"
+)
+```
