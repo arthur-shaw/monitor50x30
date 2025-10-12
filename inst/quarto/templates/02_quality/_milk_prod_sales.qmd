@@ -1,0 +1,27 @@
+## Sales and production of milk
+
+```{r}
+#| label: milk production and sales table
+
+milk_prod_sales_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "milk_prod_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::anim_prod_sales(
+  livestock_df = milk_prod_sales_df,
+  cases = cases_for_report,
+  anim_id_var = monitor50x30:::extract_id_var_names(params_df$milk_prod_animal_id_var),
+  anim_vals = monitor50x30:::extract_var_values(params_df$milk_prod_animal_vals[[1]]),
+  produced_var = monitor50x30:::extract_var_names(params_df$milk_prod_produced_var),
+  produced_val = monitor50x30:::extract_var_values(params_df$milk_prod_produced_val),
+  sold_var = monitor50x30:::extract_var_names(params_df$milk_prod_sold_var),
+  sold_val = monitor50x30:::extract_var_values(params_df$milk_prod_sold_val),
+  amt_sold_vars = monitor50x30:::extract_var_names(params_df$milk_prod_amt_sold_vars[[1]]),
+  amt_sold_dk_val = monitor50x30:::extract_var_values(params_df$milk_prod_amt_sold_dk_val),
+  group_var = "supervisor",
+  table_title = "Milk, production and sales",
+  anim_type_label = "Milk-producing animals"
+)
+```
