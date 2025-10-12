@@ -1,0 +1,22 @@
+## Cow displacement
+
+```{r}
+#| label: cow displacement table
+
+cow_displacement_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "cow_displacement_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::cow_displacement(
+  hhold_df = cow_displacement_df,
+  cases = cases_for_report,
+  animal_var = monitor50x30:::extract_var_names(params_df$cow_displacement_animal_var),
+  bull_val = monitor50x30:::extract_var_values(params_df$cow_displacement_bull_val),
+  cow_val = monitor50x30:::extract_var_values(params_df$cow_displacement_cow_val),
+  steer_heifer_val = monitor50x30:::extract_var_values(params_df$cow_displacement_steer_heifer_val),
+  calf_val = monitor50x30:::extract_var_values(params_df$cow_displacement_calf_val),
+  group_var = "supervisor"
+)
+```

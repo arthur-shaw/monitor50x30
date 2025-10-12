@@ -151,3 +151,16 @@ cat(
   sep = "\n"
 )
 ```
+
+```{r}
+#| label: cow displacement
+#| eval: !expr '!is.null(params_df$use_cow_displacement) & params_df$use_cow_displacement == TRUE'
+#| output: asis
+cat(
+  knitr::knit_child(
+    text = readr::read_file("_cow_displacement.qmd"),
+    quiet = TRUE
+  ),
+  sep = "\n"
+)
+```
