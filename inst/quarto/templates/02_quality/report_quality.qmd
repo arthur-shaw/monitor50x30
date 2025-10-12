@@ -83,6 +83,12 @@ supervisor_interviewer_interview <- supervisor_interviewer |>
 ```
 
 ```{r}
+#| label: load data prep and table utility functions
+
+source("reporting_fct.R")
+```
+
+```{r}
 #| label: parcels per household header
 #| eval: !expr '!is.null(params_df$use_parcels_per_hhold) && params_df$use_parcels_per_hhold == TRUE'
 #| output: asis
