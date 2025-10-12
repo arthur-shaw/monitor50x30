@@ -1,0 +1,36 @@
+## Temporary crop sales
+
+```{r}
+#| label: temporary crop sales table
+
+temp_crop_sales <- fs::path(
+    params$dir_data,
+    paste0(params_df$temp_crop_sales_df, ".dta")
+  ) |>
+	haven::read_dta()
+
+temp_crop_sales_df <- supervisor_interviewer_interview |>
+	dplyr::left_join(
+    y = temp_crop_sales,
+    by = c("interview__id", "interview__key")
+  )
+
+tbls50x30::temp_crop_sales(
+  crops_sales_df = temp_crop_sales_df,
+  cases = cases_for_report,
+  crop_id_var = monitor50x30:::extract_id_var_names(
+    params_df$temp_crop_sales_crop_id_var
+  ),
+  sold_var = monitor50x30:::extract_var_names(
+    params_df$temp_crop_sales_sold_var
+  ),
+  sold_val = monitor50x30:::extract_var_values(
+    params_df$temp_crop_sales_sold_val
+  ),
+  amt_sold_vars = monitor50x30:::extract_var_names(
+    params_df$temp_crop_sales_amt_sold_vars[[1]]
+  ),
+  amt_sold_dk_val = params_df$temp_crop_sales_amt_sold_dk_val,
+  group_var = "supervisor"
+)
+```
