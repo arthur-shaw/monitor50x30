@@ -1,0 +1,33 @@
+## Permanent crop sales
+
+```{r}
+#| label: temporary crop sales table
+
+perm_crop_sales_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "perm_crop_sales_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::perm_crop_sales(
+  crops_sales_df = perm_crop_sales_df,
+  cases = cases_for_report,
+  crop_id_var = monitor50x30:::extract_id_var_names(
+    params_df$perm_crop_sales_crop_id_var
+  ),
+  crop_vals = monitor50x30:::extract_var_values(
+    parms_df$perm_crop_sales_crop_vals[[1]]
+  ),
+  sold_var = monitor50x30:::extract_var_names(
+    params_df$perm_crop_sales_sold_var
+  ),
+  sold_val = monitor50x30:::extract_var_values(
+    params_df$perm_crop_sales_sold_val
+  ),
+  amt_sold_vars = monitor50x30:::extract_var_names(
+    params_df$perm_crop_sales_amt_sold_vars[[1]]
+  ),
+  amt_sold_dk_val = params_df$perm_crop_sales_amt_sold_dk_val,
+  group_var = "supervisor"
+)
+```
