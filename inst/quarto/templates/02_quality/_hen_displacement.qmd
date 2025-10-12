@@ -1,0 +1,21 @@
+## Hen displacement
+
+```{r}
+#| label: hen displacement table
+
+hen_displacement_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "hen_displacement_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::hen_displacement(
+  hhold_df = hen_displacement_df,
+  cases = cases_for_report,
+  animal_var = monitor50x30:::extract_var_names(params_df$hen_displacement_animal_var),
+  cock_val = monitor50x30:::extract_var_values(params_df$hen_displacement_cock_val),
+  hen_val = monitor50x30:::extract_var_values(params_df$hen_displacement_hen_val),
+  pullet_val = monitor50x30:::extract_var_values(params_df$hen_displacement_pullet_val),
+  group_var = "supervisor"
+)
+```
