@@ -254,3 +254,16 @@ cat(
   sep = "\n"
 )
 ```
+
+```{r}
+#| label: crop processing
+#| eval: !expr '!is.null(params_df$use_process_crop_prod) & params_df$use_process_crop_prod == TRUE'
+#| output: asis
+cat(
+  knitr::knit_child(
+    text = readr::read_file("_process_crop_prod.qmd"),
+    quiet = TRUE
+  ),
+  sep = "\n"
+)
+```

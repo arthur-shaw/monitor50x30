@@ -1,0 +1,37 @@
+## Processed crop products
+
+
+```{r}
+#| label: processed crop production
+
+# household df
+process_crop_prod_hhold_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "process_crop_prod_hhold_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+# product df
+process_crop_prod_product_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "process_crop_prod_product_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::process_crop_prod(
+  hhold_df = process_crop_prod_hhold_df,
+  temp_crops_var = monitor50x30:::extract_var_names(params_df$process_crop_prod_temp_crops_var),
+  perm_crops_var = monitor50x30:::extract_var_names(params_df$process_crop_prod_perm_crops_var),
+  processed_var = monitor50x30:::extract_var_names(params_df$process_crop_prod_processed_var),
+  processed_val = monitor50x30:::extract_var_values(params_df$process_crop_prod_processed_val),
+  products_var = monitor50x30:::extract_var_names(params_df$process_crop_prod_products_var),
+  cases = cases_for_report,
+  product_df =  process_crop_prod_product_df,
+  # add funs
+  sold_var = monitor50x30:::extract_var_names(params_df$process_crop_prod_sold_var),
+  sold_val = monitor50x30:::extract_var_values(params_df$process_crop_prod_sold_val),
+  amt_sold_vars = monitor50x30:::extract_var_names(params_df$process_crop_prod_amt_sold_var[[1]]),
+  amt_sold_dk_val = monitor50x30:::extract_var_values(params_df$process_crop_prod_amt_sold_dk_val),
+  group_var = "supervisor"
+)
+```
