@@ -293,3 +293,16 @@ cat(
   sep = "\n"
 )
 ```
+
+```{r}
+#| label: fisheries labor
+#| eval: !expr '!is.null(params_df$use_fisheries_labor_tbl) & params_df$use_fisheries_labor_tbl == TRUE'
+#| output: asis
+cat(
+  knitr::knit_child(
+    text = readr::read_file("_fisheries_labor.qmd"),
+    quiet = TRUE
+  ),
+  sep = "\n"
+)
+```
