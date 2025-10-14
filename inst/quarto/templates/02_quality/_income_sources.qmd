@@ -1,0 +1,79 @@
+## Income sources
+
+```{r}
+#| label: income sources table
+
+# household df
+income_sources_hhold_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "income_sources_hhold_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+# temporary crop df
+income_sources_temp_crop_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "income_sources_temp_crop_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+# permanent crop df
+income_sources_perm_crop_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "income_sources_perm_crop_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+# processed crop df
+income_sources_processed_crop_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "income_sources_processed_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+# livestock df
+income_sources_livestock_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "income_sources_anim_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+# other animal products df
+income_sources_oth_anim_prod_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "oth_anim_prod_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::income_sources(
+  hhold_df = income_sources_hhold_df,
+  crop_var = monitor50x30:::extract_var_names(params_df$income_sources_crop_var),
+  livestock_var = monitor50x30:::extract_var_names(params_df$income_sources_livestock_var),
+  temp_crop_df = income_sources_temp_crop_df,
+  temp_crop_var = monitor50x30:::extract_var_names(params_df$income_sources_temp_crop_var),
+  temp_crop_val = monitor50x30:::extract_var_values(params_df$income_sources_perm_crop_var),
+  perm_crop_df = income_sources_perm_crop_df,
+  perm_crop_var = monitor50x30:::extract_var_names(params_df$income_sources_perm_crop_var),
+  perm_crop_val = monitor50x30:::extract_var_values(params_df$income_sources_perm_crop_val),
+  processed_df = income_sources_processed_crop_df,
+  processed_var = monitor50x30:::extract_var_names(params_df$income_sources_processed_var),
+  processed_val = monitor50x30:::extract_var_values(params_df$income_sources_processed_val),
+  anim_df = income_sources_livestock_df,
+  sold_live_anim_var = monitor50x30:::extract_var_names(params_df$income_sources_sold_live_anim_var),
+  slaughter_anim_var = monitor50x30:::extract_var_names(params_df$income_sources_slaughter_anim_var),
+  slaughter_anim_val = monitor50x30:::extract_var_values(params_df$income_sources_slaughter_anim_val),
+  sold_live_poultry_var = monitor50x30:::extract_var_names(params_df$income_sources_sold_live_poultry_var),
+  slaughter_poultry_var = monitor50x30:::extract_var_names(params_df$income_sources_slaughter_poultry_var),
+  slaughter_poultry_val = monitor50x30:::extract_var_values(params_df$income_sources_slaughter_poultry_val),
+  milk_var = monitor50x30:::extract_var_names(params_df$income_sources_milk_var),
+  milk_val = monitor50x30:::extract_var_values(params_df$income_sources_milk_val),
+  eggs_var = monitor50x30:::extract_var_names(params_df$income_sources_eggs_var),
+  eggs_val = monitor50x30:::extract_var_values(params_df$income_sources_eggs_val),
+  oth_anim_prod_df = income_sources_oth_anim_prod_df,
+  oth_anim_var = monitor50x30:::extract_var_names(params_df$oth_anim_var),
+  oth_anim_val = monitor50x30:::extract_var_values(params_df$oth_anim_val),
+  cases = cases_for_report,
+  group_var = "supervisor"
+)
+
+```

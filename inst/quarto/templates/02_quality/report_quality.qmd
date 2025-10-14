@@ -332,3 +332,16 @@ cat(
   sep = "\n"
 )
 ```
+
+```{r}
+#| label: income sources
+#| eval: !expr '!is.null(params_df$use_income_sources_tbl) & params_df$use_income_sources_tbl == TRUE'
+#| output: asis
+cat(
+  knitr::knit_child(
+    text = readr::read_file("_income_sources.qmd"),
+    quiet = TRUE
+  ),
+  sep = "\n"
+)
+```
