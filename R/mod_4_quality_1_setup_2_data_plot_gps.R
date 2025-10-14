@@ -193,17 +193,13 @@ mod_4_quality_1_setup_2_data_plot_gps_server <- function(id, parent, r6){
 
       shiny::req(input$data)
 
-      # load variables data frame from disk
-      qnr_vars_df <- fs::path(r6$dirs$qnr, "qnr_vars.rds") |>
-        readRDS()
-
       # get variable names from selected file
       input_choices$gps_var <- fs::path(
           r6$dirs$micro_combine,
           paste0(input$data, ".dta")
         ) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "numeric"
         )
 
@@ -227,7 +223,7 @@ mod_4_quality_1_setup_2_data_plot_gps_server <- function(id, parent, r6){
       input_choices$why_not_measured_var <- r6$dirs$micro_combine |>
         fs::path(paste0(input$data, ".dta")) |>
         make_data_var_choices(
-          vars_df = qnr_vars_df,
+          vars_df = r6$qnr_vars_df,
           var_type = "categorical"
         ) |>
         # add "None" in case there is no such question
