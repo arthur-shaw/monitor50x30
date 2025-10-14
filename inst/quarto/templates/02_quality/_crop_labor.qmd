@@ -1,0 +1,32 @@
+## Crop labor inputs
+
+```{r}
+#| label: crop labor table
+
+# household df
+crop_labor_hhold_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "crop_labor_hhold_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+# members df
+crop_labor_members_df<- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "crop_labor_members_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::crop_labor(
+  hhold_df = crop_labor_hhold_df,
+  cases = cases_for_report,
+  grew_crops_var = monitor50x30:::extract_var_names(params_df$crop_labor_grew_crops_var),
+  grew_crops_val = monitor50x30:::extract_var_values(params_df$crop_labor_grew_crops_val),
+  paid_var = monitor50x30:::extract_var_names(params_df$crop_labor_paid_var),
+  free_var = monitor50x30:::extract_var_names(params_df$crop_labor_free_var),
+  members_df = crop_labor_members_df,
+  member_worked_var = monitor50x30:::extract_var_names(params_df$crop_labor_member_worked_var),
+  member_worked_val = monitor50x30:::extract_var_values(params_df$crop_labor_member_worked_val),
+  group_var = "supervisor"
+)
+```
