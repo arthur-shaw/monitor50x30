@@ -1,0 +1,26 @@
+## Aquaculture labor
+
+```{r}
+#| label: aquaculture labor table
+
+# household df
+aquaculture_labor_hhold_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "aquaculture_labor_hhold_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::sector_labor(
+  hhold_df = aquaculture_labor_hhold_df,
+  produce_var = monitor50x30:::extract_var_names(params_df$aquaculture_labor_produce_var),
+  produce_val = monitor50x30:::extract_var_values(params_df$aquaculture_labor_produce_val),
+  cases = cases_for_report,
+  labor_var = monitor50x30:::extract_var_names(params_df$aquaculture_labor_labor_var),
+  hhold_labor_vals = monitor50x30:::extract_var_values(params_df$aquaculture_labor_hhold_labor_vals[[1]]),
+  free_labor_val = monitor50x30:::extract_var_values(params_df$aquaculture_labor_free_labor_val),
+  paid_labor_val = monitor50x30:::extract_var_values(params_df$aquaculture_labor_paid_labor_val),
+  group_var = "supervisor",
+  table_title = "Aquaculture labor",
+  sector_label = "Practice aquaculture"
+)
+```
