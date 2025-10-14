@@ -278,6 +278,8 @@ mod_4_quality_1_setup_2_data_temp_crop_sales_server <- function(id, parent, r6){
 
     shiny::observeEvent(input$data, {
 
+      shiny::req(input$data)
+
       # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
       # make choices from selected data
       # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
