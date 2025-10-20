@@ -148,7 +148,6 @@ cat(
 
 ```
 
-
 ```{r}
 #| label: plot GPS measurement
 #| eval: !expr '!is.null(params_df$use_plot_gps) && params_df$use_plot_gps == TRUE'
@@ -157,6 +156,22 @@ cat(
 cat(
   knitr::knit_child(
     text = readr::read_file("_plot_gps.qmd"),
+    quiet = TRUE
+  ),
+  sep = "\n"
+)
+
+```
+
+
+```{r}
+#| label: crops per plot
+#| eval: !expr '!is.null(params_df$use_crops_per_plot) && params_df$use_crops_per_plot == TRUE'
+#| output: asis
+
+cat(
+  knitr::knit_child(
+    text = readr::read_file("_crops_per_plot.qmd"),
     quiet = TRUE
   ),
   sep = "\n"

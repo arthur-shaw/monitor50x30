@@ -1,0 +1,20 @@
+## Crops per plot
+
+```{r}
+#| label: crops per plot table
+
+crops_per_plot_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "crops_per_plot_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::crops_per_plot(
+  crop_df = crops_per_plot_df,
+  cases = cases_for_report,
+  parcel_id_var = monitor50x30:::extract_id_var_names(params_df$crops_per_plot_parcel_id_var),
+  plot_id_var = monitor50x30:::extract_id_var_names(params_df$crops_per_plot_plot_id_var),
+  group_var = "supervisor"
+)
+
+```
