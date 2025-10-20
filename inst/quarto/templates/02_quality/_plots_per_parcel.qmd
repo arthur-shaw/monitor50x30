@@ -1,0 +1,19 @@
+## Plots per parcel
+
+```{r}
+#| label: plots per parcel table
+
+plots_per_parcel_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "plots_per_parcel_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::plots_per_parcel(
+  parcel_plot_df = plots_per_parcel_df,
+  cases = cases_for_report,
+  parcel_id_var = monitor50x30:::extract_id_var_names(params_df$plots_per_parcel_parcel_id_var),
+  group_var = "supervisor"
+)
+
+```

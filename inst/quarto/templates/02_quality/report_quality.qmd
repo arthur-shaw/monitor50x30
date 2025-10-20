@@ -119,6 +119,21 @@ cat(
 ```
 
 ```{r}
+#| label: plots per parcel
+#| eval: !expr '!is.null(params_df$use_plots_per_parcel) && params_df$use_plots_per_parcel == TRUE'
+#| output: asis
+
+cat(
+  knitr::knit_child(
+    text = readr::read_file("_plots_per_parcel"),
+    quiet = TRUE
+  ),
+  sep = "\n"
+)
+
+```
+
+```{r}
 #| label: temporary crop sales
 #| eval: !expr '!is.null(params_df$use_temp_crop_sales) & params_df$use_temp_crop_sales == TRUE'
 #| output: asis
