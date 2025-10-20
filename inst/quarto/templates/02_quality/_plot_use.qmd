@@ -1,0 +1,19 @@
+## Plot use
+
+```{r}
+#| label: plot use table
+
+plot_use_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "plot_use_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::plot_use(
+  plot_df = plot_use_df,
+  cases = cases_for_report,
+  plot_use_var = monitor50x30:::extract_var_names(params_df$plot_use_plot_use_var),
+  group_var = "supervisor"
+)
+
+```

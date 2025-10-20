@@ -125,7 +125,21 @@ cat(
 
 cat(
   knitr::knit_child(
-    text = readr::read_file("_plots_per_parcel"),
+    quiet = TRUE
+  ),
+  sep = "\n"
+)
+
+```
+
+```{r}
+#| label: plot use
+#| eval: !expr '!is.null(params_df$use_plot_use) && params_df$use_plot_use == TRUE'
+#| output: asis
+
+cat(
+  knitr::knit_child(
+    text = readr::read_file("_plot_use.qmd"),
     quiet = TRUE
   ),
   sep = "\n"
