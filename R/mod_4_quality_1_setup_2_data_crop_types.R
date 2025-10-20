@@ -232,9 +232,9 @@ mod_4_quality_1_setup_2_data_crop_types_server <- function(id, parent, r6){
       r6$crop_types_var_choices <- input_choices$crop_type_var
       r6$crop_types_var <- input$crop_type_var
       # temporary crop value
-      crop_type_temp_val <- input$temp_crop_val
+      r6$crop_type_temp_val <- input$temp_crop_val
       # permanent crop value
-      crop_type_perm_val <- input$perm_crop_val
+      r6$crop_type_perm_val <- input$perm_crop_val
       # save action
       r6$crop_types_provided <- TRUE
 
