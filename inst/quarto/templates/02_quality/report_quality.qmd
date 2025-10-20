@@ -89,38 +89,16 @@ source("reporting_fct.R")
 ```
 
 ```{r}
-#| label: parcels per household header
+#| label: parcels per household
 #| eval: !expr '!is.null(params_df$use_parcels_per_hhold) && params_df$use_parcels_per_hhold == TRUE'
 #| output: asis
-cat("## Plots per household")
-```
 
-
-```{r}
-#| label: parcels per household table
-#| eval: !expr '!is.null(params_df$use_parcels_per_hhold) && params_df$use_parcels_per_hhold == TRUE'
-
-# load parcels data frame
-parcels <- fs::path(
-    params$dir_data,
-    paste0(params_df$parcels_per_hhold_df, ".dta")
-  ) |>
-  haven::read_dta()
-
-parcels_df <- parcels |>
-	dplyr::left_join(
-    y = supervisor_interviewer_interview,
-    by = dplyr::join_by(interview__id, interview__key)
-  )
-
-tbls50x30::parcels_per_hhold(
-  parcel_df = parcels_df,
-  cases = cases_for_report,
-  use_var = monitor50x30:::extract_var_names(params_df$parcels_per_hhold_use),
-  use_vals = monitor50x30:::extract_var_values(
-    params_df$parcels_per_hhold_use_val[[1]]
+cat(
+  knitr::knit_child(
+    text = readr::read_file("_parcels_per_hhold.qmd"),
+    quiet = TRUE
   ),
-  group_var = "supervisor"
+  sep = "\n"
 )
 
 ```

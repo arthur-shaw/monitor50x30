@@ -1,0 +1,20 @@
+## Parcels per househo;ld
+
+```{r}
+#| label: parcels per household table
+
+parcels_per_hhold_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "parcels_per_hhold_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::parcels_per_hhold(
+  parcel_df = parcels_per_hhold_df,
+  cases = cases_for_report,
+  use_var = monitor50x30:::extract_var_names(params_df$parcels_per_hhold_use),
+  use_vals = monitor50x30:::extract_var_values(params_df$parcels_per_hhold_use_val[[1]]),
+  group_var = "supervisor"
+)
+
+```
