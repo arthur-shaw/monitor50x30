@@ -110,7 +110,7 @@ cat(
 
 cat(
   knitr::knit_child(
-    text = readr::read_file("_parcel_gps"),
+    text = readr::read_file("_parcel_gps.qmd"),
     quiet = TRUE
   ),
   sep = "\n"
@@ -125,6 +125,7 @@ cat(
 
 cat(
   knitr::knit_child(
+    text = readr::read_file("_plots_per_parcel.qmd"),
     quiet = TRUE
   ),
   sep = "\n"
