@@ -163,7 +163,6 @@ cat(
 
 ```
 
-
 ```{r}
 #| label: crops per plot
 #| eval: !expr '!is.null(params_df$use_crops_per_plot) && params_df$use_crops_per_plot == TRUE'
@@ -172,6 +171,21 @@ cat(
 cat(
   knitr::knit_child(
     text = readr::read_file("_crops_per_plot.qmd"),
+    quiet = TRUE
+  ),
+  sep = "\n"
+)
+
+```
+
+```{r}
+#| label: crop types
+#| eval: !expr '!is.null(params_df$use_crop_types) && params_df$use_crop_types == TRUE'
+#| output: asis
+
+cat(
+  knitr::knit_child(
+    text = readr::read_file("_crop_types.qmd"),
     quiet = TRUE
   ),
   sep = "\n"

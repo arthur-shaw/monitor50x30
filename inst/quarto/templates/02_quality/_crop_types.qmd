@@ -1,0 +1,21 @@
+## Crop types
+
+```{r}
+#| label: crop types table
+
+crop_types_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "crop_types_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::crop_types(
+  crop_df = crop_types_df,
+  cases = cases_for_report,
+  crop_type_var = monitor50x30:::extract_var_names(params_df$crop_types_var),
+  temp_crop_val = as.numeric(params_df$crop_type_temp_val),
+  perm_crop_val = as.numeric(params_df$crop_type_perm_val),
+  group_var = "supervisor"
+)
+
+```
