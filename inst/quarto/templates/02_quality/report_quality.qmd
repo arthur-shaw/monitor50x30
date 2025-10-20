@@ -364,7 +364,7 @@ cat(
 
 ```{r}
 #| label: fisheries labor
-#| eval: !expr '!is.null(params_df$use_fisheries_labor_tbl) & params_df$use_fisheries_labor_tbl == TRUE'
+#| eval: !expr '!is.null(params_df$use_fisheries_labor) & params_df$use_fisheries_labor == TRUE'
 #| output: asis
 cat(
   knitr::knit_child(
@@ -377,7 +377,7 @@ cat(
 
 ```{r}
 #| label: aquaculture labor
-#| eval: !expr '!is.null(params_df$use_aquaculture_labor_tbl) & params_df$use_aquaculture_labor_tbl == TRUE'
+#| eval: !expr '!is.null(params_df$use_aquaculture_labor) & params_df$use_aquaculture_labor == TRUE'
 #| output: asis
 cat(
   knitr::knit_child(
@@ -390,7 +390,7 @@ cat(
 
 ```{r}
 #| label: forestry labor
-#| eval: !expr '!is.null(params_df$use_forestry_labor_tbl) & params_df$use_forestry_labor_tbl == TRUE'
+#| eval: !expr '!is.null(params_df$use_forestry_labor) & params_df$use_forestry_labor == TRUE'
 #| output: asis
 cat(
   knitr::knit_child(
@@ -403,7 +403,7 @@ cat(
 
 ```{r}
 #| label: income sources
-#| eval: !expr '!is.null(params_df$use_income_sources_tbl) & params_df$use_income_sources_tbl == TRUE'
+#| eval: !expr '!is.null(params_df$use_income_sources) & params_df$use_income_sources == TRUE'
 #| output: asis
 cat(
   knitr::knit_child(
