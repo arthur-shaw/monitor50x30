@@ -1,0 +1,21 @@
+### Parcel GPS measurement
+
+```{r}
+#| label: parcel gps measurement table
+
+parcel_gps_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "parcel_gps_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::parcel_gps(
+  parcel_df = parcel_gps_df,
+  cases = cases_for_report,
+  gps_var = monitor50x30:::extract_var_names(params_df$parcel_gps_gps_var),
+  not_measured_val = as.numeric(params_df$parcel_gps_not_measured_val),
+  why_no_gps_var = monitor50x30:::extract_var_names(params_df$parcel_gps_why_not_measured_var),
+  group_var = "supervisor"
+)
+
+```

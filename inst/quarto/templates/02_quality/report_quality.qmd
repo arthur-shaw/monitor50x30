@@ -104,6 +104,21 @@ cat(
 ```
 
 ```{r}
+#| label: parcel GPS measurement
+#| eval: !expr '!is.null(params_df$use_parcel_gps) && params_df$use_parcel_gps == TRUE'
+#| output: asis
+
+cat(
+  knitr::knit_child(
+    text = readr::read_file("_parcel_gps"),
+    quiet = TRUE
+  ),
+  sep = "\n"
+)
+
+```
+
+```{r}
 #| label: temporary crop sales
 #| eval: !expr '!is.null(params_df$use_temp_crop_sales) & params_df$use_temp_crop_sales == TRUE'
 #| output: asis
