@@ -1,4 +1,4 @@
-## Parcels per househo;ld
+## Parcels per household
 
 ```{r}
 #| label: parcels per household table
