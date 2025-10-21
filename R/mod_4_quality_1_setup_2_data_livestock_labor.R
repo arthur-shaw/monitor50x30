@@ -42,6 +42,12 @@ mod_4_quality_1_setup_2_data_livestock_labor_ui <- function(id) {
       selected = NULL
     ),
     shiny::selectInput(
+      inputId = ns("anim_labor_var"),
+      label = "Variable: number of workers",
+      choices = NULL,
+      selected = NULL
+    ),
+    shiny::selectInput(
       inputId = ns("anim_labor_none_val"),
       label = "Value: none as number keeping/managing livestock",
       choices = NULL,
@@ -90,6 +96,7 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
       have_anim_vars = r6$livestock_labor_have_anim_var_choices,
       have_anim_vals = r6$livestock_labor_have_anim_val_choices,
       anim_labor_dfs = r6$data_choices,
+      anim_labor_vars = r6$livestock_labor_anim_var_choices,
       anim_labor_id_vars = r6$livestock_labor_anim_labor_id_var_choices,
       anim_labor_id_vals = r6$livestock_anim_id_val_choices
     )
@@ -140,6 +147,10 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
           selected = NULL
         ),
         # labor data
+        "anim_labor_var",   updateSelectInput,    list(
+          choices = NULL,
+          selected = NULL
+        ),
         "anim_labor_id_var",   updateSelectInput,    list(
           choices = NULL,
           selected = NULL
@@ -194,6 +205,10 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
         # labor data
         "anim_labor_df",           updateSelectInput,    list(
           choices = r6$data_choices,
+          selected = NULL
+        ),
+        "anim_labor_var",   updateSelectInput,    list(
+          choices = NULL,
           selected = NULL
         ),
         "anim_labor_id_var",   updateSelectInput,    list(
@@ -252,6 +267,10 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
         "anim_labor_df",           updateSelectInput,    list(
           choices = r6$data_choices,
           selected = r6$livestock_labor_anim_labor_df
+        ),
+        "anim_labor_var",   updateSelectInput,    list(
+          choices = r6$livestock_labor_anim_var_choices,
+          selected = r6$livestock_labor_anim_var
         ),
         "anim_labor_id_var",   updateSelectInput,    list(
           choices = r6$livestock_labor_anim_labor_id_var_choices,
@@ -375,6 +394,13 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
       # compute choices
       # ------------------------------------------------------------------------
 
+      input_choices$anim_labor_vars <- r6$dirs$micro_combine |>
+        fs::path(paste0(input$anim_labor_df, ".dta")) |>
+        make_data_var_choices(
+          vars_df = r6$qnr_vars_df,
+          var_type = "numeric"
+        )
+
       input_choices$anim_labor_id_vars <- r6$dirs$micro_combine |>
         fs::path(paste0(input$anim_labor_df, ".dta")) |>
         make_id_var_choices()
@@ -382,6 +408,13 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
       # ------------------------------------------------------------------------
       # update choices in the UI
       # ------------------------------------------------------------------------
+
+      shiny::freezeReactiveValue(input, "anim_labor_var")
+      shiny::updateSelectInput(
+        inputId = "anim_labor_var",
+        choices = input_choices$anim_labor_vars,
+        selected = NULL
+      )
 
       shiny::freezeReactiveValue(input, "anim_labor_id_var")
       shiny::updateSelectInput(
@@ -468,6 +501,9 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
       # livestock labor data
       r6$livestock_labor_anim_labor_df_choices <- input_choices$anim_labor_dfs
       r6$livestock_labor_anim_labor_df <- input$anim_labor_df
+      # livestock labor quantity variable
+      r6$livestock_labor_anim_var_choices <- input_choices$anim_labor_vars
+      r6$livestock_labor_anim_var <- input$anim_labor_var
       # livestock labor ID variable
       r6$livestock_labor_anim_labor_id_var_choices <-
         input_choices$anim_labor_id_vars
