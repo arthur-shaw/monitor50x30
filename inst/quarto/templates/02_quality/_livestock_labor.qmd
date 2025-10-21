@@ -24,15 +24,13 @@ tbls50x30::livestock_labor_tbl(
   have_anim_var = monitor50x30:::extract_var_names(params_df$livestock_labor_have_anim_var),
   have_anim_val = monitor50x30:::extract_var_values(params_df$livestock_labor_have_anim_val),
   anim_labor_df = livestock_labor_labor_df,
-  anim_labor_id_var = monitor50x30:::make_id_var_choices(params_df$livestock_labor_anim_labor_id_var),
-  # TODO: add field to Shiny module
-  # what's missing: anim_labor_var
-      # Character. Number of workers variable.
-  # anim_labor_var,
-  anim_labor_none_val = monitor50x30:::make_id_var_choices(params_df$livestock_labor_anim_labor_none_val),
-  hhold_labor_vals = monitor50x30:::make_id_var_choices(params_df$livestock_labor_hhold_labor_vals),
-  free_labor_val = monitor50x30:::make_id_var_choices(params_df$livestock_labor_free_labor_val),
-  paid_labor_val = monitor50x30:::make_id_var_choices(params_df$livestock_labor_paid_labor_val),
+  anim_labor_id_var = monitor50x30:::extract_id_var_names(params_df$livestock_labor_anim_labor_id_var),
+  anim_labor_var = monitor50x30:::extract_var_names(params_df$livestock_labor_anim_var),
+  anim_labor_none_val = monitor50x30:::extract_var_values(params_df$livestock_labor_anim_labor_none_val),
+  hhold_labor_vals = monitor50x30:::extract_var_values(params_df$livestock_labor_hhold_labor_vals[[1]]),
+  free_labor_val = monitor50x30:::extract_var_values(params_df$livestock_labor_free_labor_val),
+  paid_labor_val = monitor50x30:::extract_var_values(params_df$livestock_labor_paid_labor_val),
   group_var = "supervisor"
 )
+
 ```
