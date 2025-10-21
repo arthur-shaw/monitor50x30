@@ -135,7 +135,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
     # --------------------------------------------------------------------------
 
     # when data are downloaded, compute the choices and update the choices
-    if (is.null(r6$perm_crop_sales_provided)) {
+    if (is.null(r6$perm_crop_harvest_provided)) {
 
       # update UI to reflect data choices
       # but do not trigger reactive
@@ -184,7 +184,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
     # load past selections from R6
     # --------------------------------------------------------------------------
 
-    if (!is.null(r6$perm_crop_sales_provided)) {
+    if (!is.null(r6$perm_crop_harvest_provided)) {
 
       # data
       shiny::freezeReactiveValue(input, "data")
@@ -307,6 +307,13 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       )
 
     }, ignoreInit = TRUE, ignoreNULL = TRUE)
+
+    # --------------------------------------------------------------------------
+    # crop ID variable -> crop_vals
+    # --------------------------------------------------------------------------
+
+    shiny::observeEvent(input$crop_id_var, {
+
       shiny::req(input$crop_id_var)
 
       # make crop ID value choices
@@ -380,7 +387,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       r6$perm_crop_harvest_harvest_val <- input$harvest_val
 
       # save action
-      r6$perm_crop_sales_provided <- TRUE
+      r6$perm_crop_harvest_provided <- TRUE
 
       # write R6 to disk
       r6$write()
