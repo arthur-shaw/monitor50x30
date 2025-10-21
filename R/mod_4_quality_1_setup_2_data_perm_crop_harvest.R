@@ -31,6 +31,12 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_ui <- function(id, r6, module) {
       multiple = TRUE
     ),
     shiny::selectInput(
+      inputId = ns("produce_var"),
+      label = "Question on number of plants in production",
+      choices = NULL,
+      selected = NULL
+    ),
+    shiny::selectInput(
       inputId = ns("harvest_var"),
       label = "Question on whether the crop was harvested",
       choices = NULL,
@@ -65,6 +71,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       data = r6$data_choices,
       crop_id_var = r6$perm_crop_harvest_crop_id_var_choices,
       crop_id_vals = r6$perm_crop_harvest_crop_vals_choices,
+      produce_var = r6$perm_crop_harvest_produce_var_choices,
       harvest_var = r6$perm_crop_harvest_harvest_var_choices,
       harvest_var_vals = r6$perm_crop_harvest_harvest_val_choices
     )
@@ -100,6 +107,12 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       shiny::freezeReactiveValue(input, "crop_vals")
       shiny::updateSelectInput(
         inputId = "crop_vals",
+        choices = NULL,
+        selected = NULL
+      )
+      shiny::freezeReactiveValue(input, "produce_var")
+      shiny::updateSelectInput(
+        inputId = "produce_var",
         choices = NULL,
         selected = NULL
       )
@@ -147,6 +160,12 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
         choices = NULL,
         selected = NULL
       )
+      shiny::freezeReactiveValue(input, "produce_var")
+      shiny::updateSelectInput(
+        inputId = "produce_var",
+        choices = NULL,
+        selected = NULL
+      )
       shiny::freezeReactiveValue(input, "harvest_var")
       shiny::updateSelectInput(
         inputId = "harvest_var",
@@ -191,6 +210,14 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
         selected = r6$perm_crop_harvest_crop_vals
       )
 
+      # produce variable
+      shiny::freezeReactiveValue(input, "produce_var")
+      shiny::updateSelectInput(
+        inputId = "produce_var",
+        choices = r6$perm_crop_harvest_produce_var_choices,
+        selected = r6$perm_crop_harvest_produce_var
+      )
+
       # harvest variable
       shiny::freezeReactiveValue(input, "harvest_var")
       shiny::updateSelectInput(
@@ -226,6 +253,14 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
         fs::path(paste0(input$data, ".dta")) |>
         make_id_var_choices()
 
+      # make choices for crop produced
+      input_choices$produce_var <- r6$dirs$micro_combine |>
+        fs::path(paste0(input$data, ".dta")) |>
+        make_data_var_choices(
+          vars_df = r6$qnr_vars_df,
+          var_type = "numeric"
+        )
+
       # make choices harvest variable
       input_choices$harvest_var <- r6$dirs$micro_combine |>
         fs::path(paste0(input$data, ".dta")) |>
@@ -247,6 +282,13 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       shiny::updateSelectInput(
         inputId = "crop_vals",
         choices = NULL,
+        selected = NULL
+      )
+      # produce variable
+      shiny::freezeReactiveValue(input, "produce_var")
+      shiny::updateSelectInput(
+        inputId = "produce_var",
+        choices = input_choices$produce_var,
         selected = NULL
       )
       # harvest variable
@@ -327,6 +369,9 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       # crop values
       r6$perm_crop_harvest_crop_vals_choices <- input_choices$crop_id_vals
       r6$perm_crop_harvest_crop_vals <- input$crop_vals
+      # produce variable
+      r6$perm_crop_harvest_produce_var_choices <- input_choices$produce_var
+      r6$perm_crop_harvest_produce_var <- input$produce_var
       # harvest variable
       r6$perm_crop_harvest_harvest_var_choices <- input_choices$harvest_var
       r6$perm_crop_harvest_harvest_var <- input$harvest_var
