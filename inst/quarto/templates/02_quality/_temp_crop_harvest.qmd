@@ -1,0 +1,25 @@
+## Temporary crop harvest
+
+```{r}
+#| label: temporary crop harvest table
+
+parcel_plot_crop_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "temp_crop_harvest_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::temp_crop_harvest(
+  parcel_plot_crop_df = parcel_plot_crop_df,
+  cases = cases_for_report,
+  categories_df = params_df$q_categories_df[[1]],
+  crop_id_var = monitor50x30:::extract_id_var_names(params_df$temp_crop_harvest_crop_id_var),
+  crop_vals = monitor50x30:::extract_var_values(params_df$temp_crop_harvest_crop_vals[[1]]),
+  harvest_var = monitor50x30:::extract_var_names(params_df$temp_crop_harvest_harvest_var),
+  harvest_val = monitor50x30:::extract_var_values(params_df$temp_crop_harvest_harvest_val),
+  why_not_harvest_var = monitor50x30:::extract_var_names(params_df$temp_crop_harvest_why_not_harvest_var),
+  group_var = "supervisor",
+  json_qnr_path = fs::path(params_df$dirs[[1]]$qnr, "document.json")
+)
+
+```
