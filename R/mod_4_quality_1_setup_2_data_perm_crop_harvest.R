@@ -42,12 +42,6 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_ui <- function(id, r6, module) {
       choices = NULL,
       selected = NULL
     ),
-    shiny::selectInput(
-      inputId = ns("why_not_harvest_var"),
-      label = "Question on why not harvested",
-      choices = NULL,
-      selected = NULL
-    ),
     shiny::actionButton(
       inputId = ns("save"),
       label = "Save"
@@ -72,8 +66,7 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       crop_id_var = r6$perm_crop_harvest_crop_id_var_choices,
       crop_id_vals = r6$perm_crop_harvest_crop_vals_choices,
       harvest_var = r6$perm_crop_harvest_harvest_var_choices,
-      harvest_var_vals = r6$perm_crop_harvest_harvest_val_choices,
-      why_not_harvest_var = r6$perm_crop_harvest_why_not_var_choices
+      harvest_var_vals = r6$perm_crop_harvest_harvest_val_choices
     )
 
     # ==========================================================================
@@ -121,12 +114,6 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
         inputId = "harvest_val",
         value = NULL
       )
-      shiny::freezeReactiveValue(input, "why_not_harvest_var")
-      shiny::updateSelectInput(
-        inputId = "why_not_harvest_var",
-        choices = NULL,
-        selected = NULL
-      )
 
     })
 
@@ -170,12 +157,6 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       shiny::updateNumericInput(
         inputId = "harvest_val",
         value = NULL
-      )
-      shiny::freezeReactiveValue(input, "why_not_harvest_var")
-      shiny::updateSelectInput(
-        inputId = "why_not_harvest_var",
-        choices = NULL,
-        selected = NULL
       )
 
     }
@@ -226,14 +207,6 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
         selected = r6$perm_crop_harvest_harvest_val
       )
 
-      # why not harvest variable
-      shiny::freezeReactiveValue(input, "why_not_harvest_var")
-      shiny::updateSelectInput(
-        inputId = "why_not_harvest_var",
-        choice = r6$perm_crop_harvest_why_not_harvest_var_choices,
-        selected = r6$perm_crop_harvest_why_not_harvest_var
-      )
-
     }
 
     # ==========================================================================
@@ -259,15 +232,6 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
         make_data_var_choices(
           vars_df = r6$qnr_vars_df,
           var_type = "single-select"
-        )
-
-      # make choices for why not harvested
-      # allowing it to be either single-select (main reason) or multi-select
-      input_choices$why_not_harvest_var <- r6$dirs$micro_combine |>
-        fs::path(paste0(input$data, ".dta")) |>
-        make_data_var_choices(
-          vars_df = r6$qnr_vars_df,
-          var_type = "categorical"
         )
 
       # update in UI
@@ -299,22 +263,8 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
         choices = NULL,
         selected = NULL
       )
-      # why not harvest variable
-      shiny::freezeReactiveValue(input, "why_not_harvest_var")
-      shiny::updateSelectInput(
-        inputId = "why_not_harvest_var",
-        choices = input_choices$why_not_harvest_var,
-        selected = NULL
-      )
 
     }, ignoreInit = TRUE, ignoreNULL = TRUE)
-
-    # --------------------------------------------------------------------------
-    # crop ID variable -> crop_vals
-    # --------------------------------------------------------------------------
-
-    shiny::observeEvent(input$crop_id_var, {
-
       shiny::req(input$crop_id_var)
 
       # make crop ID value choices
@@ -383,10 +333,6 @@ mod_4_quality_1_setup_2_data_perm_crop_harvest_server <- function(id, parent, r6
       # harvest value
       r6$perm_crop_harvest_harvest_val_choices <- input_choices$harvest_var_vals
       r6$perm_crop_harvest_harvest_val <- input$harvest_val
-      # why not harvest variable
-      r6$perm_crop_harvest_why_not_harvest_var_choices <-
-        input_choices$why_not_harvest_var
-      r6$perm_crop_harvest_why_not_harvest_var <- input$why_not_harvest_var
 
       # save action
       r6$perm_crop_sales_provided <- TRUE

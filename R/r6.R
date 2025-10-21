@@ -315,8 +315,6 @@ r6 <- R6::R6Class(
     perm_crop_harvest_harvest_var = NULL,
     perm_crop_harvest_harvest_val_choices = NULL,
     perm_crop_harvest_harvest_val = NULL,
-    perm_crop_harvest_why_not_harvest_var_choices = NULL,
-    perm_crop_harvest_why_not_harvest_var = NULL,
     perm_crop_harvest_provided = NULL,
     # perm_crop_sales
     perm_crop_sales_df_choices = NULL,
@@ -971,8 +969,6 @@ r6 <- R6::R6Class(
       perm_crop_harvest_harvest_var = NULL,
       perm_crop_harvest_harvest_val_choices = NULL,
       perm_crop_harvest_harvest_val = NULL,
-      perm_crop_harvest_why_not_harvest_var_choices = NULL,
-      perm_crop_harvest_why_not_harvest_var = NULL,
       perm_crop_harvest_provided = NULL,
       # perm_crop_sales
       perm_crop_sales_df_choices = NULL,
@@ -1390,7 +1386,6 @@ r6 <- R6::R6Class(
         "perm_crop_harvest_crop_vals",
         "perm_crop_harvest_harvest_var_choices",
         "perm_crop_harvest_harvest_val_choices",
-        "perm_crop_harvest_why_not_harvest_var_choices",
         # perm_crop_sales
         "perm_crop_sales_df_choices",
         "perm_crop_sales_crop_id_var_choices",
