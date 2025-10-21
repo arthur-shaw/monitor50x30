@@ -220,6 +220,19 @@ cat(
 ```
 
 ```{r}
+#| label: permanent crop harvest
+#| eval: !expr '!is.null(params_df$use_perm_crop_harvest) & params_df$use_perm_crop_harvest == TRUE'
+#| output: asis
+cat(
+  knitr::knit_child(
+    text = readr::read_file("_perm_crop_harvest.qmd"),
+    quiet = TRUE
+  ),
+  sep = "\n"
+)
+```
+
+```{r}
 #| label: permanent crop sales
 #| eval: !expr '!is.null(params_df$use_perm_crop_sales) & params_df$use_perm_crop_sales == TRUE'
 #| output: asis

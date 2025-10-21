@@ -1,0 +1,23 @@
+## Permanent crop harvest
+
+```{r}
+#| label: permanent crop harvest table
+
+perm_parcel_plot_crop_df <- create_df_for_table(
+  data_path = params$dir_data,
+  analysis_df_name = "perm_crop_harvest_df",
+  interview_meta_df = supervisor_interviewer_interview
+)
+
+tbls50x30::perm_crop_harvest(
+  parcel_plot_crop_df = perm_parcel_plot_crop_df,
+  cases = cases_for_report,
+  crop_id_var = monitor50x30:::extract_id_var_names(params_df$perm_crop_harvest_crop_id_var),
+  crop_vals = monitor50x30:::extract_var_values(params_df$perm_crop_harvest_crop_vals[[1]]),
+  produce_var = monitor50x30:::extract_var_names(params_df$perm_crop_harvest_produce_var),
+  harvest_var = monitor50x30:::extract_var_names(params_df$perm_crop_harvest_harvest_var),
+  harvest_val = 1,
+  group_var = "supervisor"
+)
+
+```
