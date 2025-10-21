@@ -242,7 +242,10 @@ mod_2_data_server <- function(id, r6){
 
         # parse the categories into a data frame
         categories_df <- susometa::parse_categories(
-          dir = fs::path(main_qnr_dl_dir, "Questionnaire", "content")
+          dir = fs::path(
+            main_qnr_dl_dir,
+            "Questionnaire", "content", "Categories"
+          )
         )
 
         # write that data frame to disk
