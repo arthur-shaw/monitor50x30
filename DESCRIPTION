@@ -45,7 +45,7 @@ Imports:
     susoapi (>= 0.2.0),
     susoflows (>= 0.1.0),
     susometa (>= 0.3.2),
-    tbls50x30 (>= 0.0.0.9001),
+    tbls50x30 (>= 0.1.0),
     tibble,
     waiter,
     zip
