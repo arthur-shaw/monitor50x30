@@ -13,19 +13,34 @@ mod_4_quality_1_setup_2_data_parcels_per_hhold_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("data"),
-      label = "Parcel data set",
+      label = info_popover(
+        lbl = "Data: Parcels",
+        desc = paste(
+          "Roster of parcels",
+          "from the section about parcels, land use, or land tenure."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("use"),
-      label = "Question on the parcel's main use(s)",
+      label = info_popover(
+        lbl = "Question: how the parcel is used on the parcel's main use(s)",
+        desc = "Multi-select question on the parcels' use(s)."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("use_val"),
-      label = "Values of the use question that denote an agricultural use",
+      label = info_popover(
+        lbl = "Value(s): that denote an agricultural use",
+        desc = paste(
+          "If any of these is selected, the parcel would be considered",
+          "agricultural."
+        )
+      ),
       choices = NULL,
       selected = NULL,
       multiple = TRUE
