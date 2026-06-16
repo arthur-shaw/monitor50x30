@@ -13,24 +13,39 @@ mod_4_quality_1_setup_2_data_parcel_gps_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("data"),
-      label = "Parcel data set",
+      label = info_popover(
+        lbl = "Data: Parcels",
+        desc = paste(
+          "Roster of parcels",
+          "from the section about parcels, land use, or land tenure."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("gps_var"),
-      label = "Question that captures the GPS area measurement",
+      label = info_popover(
+        lbl = "Question: parcel area measured with GPS.",
+        desc = "Numeric question that captures the GPS-measured area."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::numericInput(
       inputId = ns("not_measured_val"),
-      label = "Value of the question indicating the parcel was not measured.",
+      label = info_popover(
+        lbl = "Value: denotes parcel area not measured.",
+        desc = "For example: `[-9999] Cannot measure`"
+      ),
       value = NULL
     ),
     shiny::selectInput(
       inputId = ns("why_not_measured_var"),
-      label = "Question about why the area was not measured.",
+      label = info_popover(
+        lbl = "Question: why the area was not measured with GPS.",
+        desc = ""
+      ),
       choices = NULL,
       selected = NULL
     ),
