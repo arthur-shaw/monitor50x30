@@ -35,7 +35,7 @@ Imports:
     R6,
     rappdirs,
     reactable,
-    reactablefmtr,
+    reactablefmtr (>= 2.1.0),
     rhandsontable,
     rlang,
     shiny (>= 1.8.0),
@@ -53,11 +53,12 @@ Imports:
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.1
-Remotes:  
+Remotes: 
     github::ColinFay/gargoyle,
     github::arthur-shaw/susoapi,
     github::arthur-shaw/susoflows,
     github::lsms-worldbank/susometa,
-    github::arthur-shaw/tbls50x30
+    github::arthur-shaw/tbls50x30,
+    github::kcuilla/reactablefmtr
 Suggests: 
     webshot2
