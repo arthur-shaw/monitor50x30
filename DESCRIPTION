@@ -36,6 +36,7 @@ Imports:
     rappdirs,
     reactable,
     reactablefmtr,
+    rhandsontable,
     rlang,
     shiny (>= 1.8.0),
     shinyFeedback,
