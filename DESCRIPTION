@@ -45,7 +45,7 @@ Imports:
     stringr,
     susoapi (>= 0.2.0),
     susoflows (>= 0.1.0),
-    susometa (>= 0.3.2),
+    susometa (>= 0.4.1),
     tbls50x30 (>= 0.1.0),
     tibble,
     waiter,

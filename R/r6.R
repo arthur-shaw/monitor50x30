@@ -151,8 +151,10 @@ r6 <- R6::R6Class(
     # survey settings checkpoint
     core_settings_saved = NULL,
     # questionnaire metadata
+    json_path = NULL,
     qnr_meta_df = NULL,
     qnr_vars_df = NULL,
+    categories_dir = NULL,
     q_categories_df = NULL,
     data_choices = NULL,
     # data download
@@ -810,8 +812,10 @@ r6 <- R6::R6Class(
       # survey settings checkpoint
       core_settings_saved = NULL,
       # questionnaire metadata
+      json_path = NULL,
       qnr_meta_df = NULL,
       qnr_vars_df = NULL,
+      categories_dir = NULL,
       q_categories_df = NULL,
       data_choices = NULL,
       # data download

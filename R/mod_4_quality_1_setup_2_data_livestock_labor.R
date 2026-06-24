@@ -364,8 +364,8 @@ mod_4_quality_1_setup_2_data_livestock_labor_server <- function(id, parent, r6){
       # ------------------------------------------------------------------------
 
       input_choices$have_anim_vals <- make_val_options(
-        qnr_df = r6$qnr_vars_df,
-        categories_df = r6$q_categories_df,
+        json_path = r6$json_path,
+        categories_dir = r6$categories_dir,
         varname = extract_var_names(input$have_anim_var)
       )
 

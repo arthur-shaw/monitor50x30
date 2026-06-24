@@ -107,7 +107,9 @@ make_vars_options <- function(
 
 #' Create data frame of domain var values combinations
 #'
-#' @param path Path. Path to the raw questionnaire metadata data frame.
+#' @param json_path Character Path to the questionnaire JSON.
+#' @param categories_dir Character. Directory where Excel categories files
+#' can be found.
 #' @param domain_vars Character vector. Names of domain vars.
 #'
 #' @return Data frame.
@@ -120,17 +122,17 @@ make_vars_options <- function(
 #' @importFrom tibble tibble
 create_domain_var_val_df <- function(
   path,
+  json_path,
+  categories_dir,
   domain_vars
 ) {
-
-  # read in the data
-  qnr_df <- readRDS(path)
 
   # extract answer options for a given variable
   answer_options <- purrr::map(
     .x = domain_vars,
     .f = ~ susometa::get_answer_options(
-      qnr_df = qnr_df,
+      json_path = json_path,
+      categories_dir = categories_dir,
       varname = .data[[.x]]
     )
   )

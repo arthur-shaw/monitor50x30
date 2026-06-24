@@ -729,8 +729,8 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # ------------------------------------------------------------------------
 
       input_choices$crop_vals <- make_val_options(
-        qnr_df = r6$qnr_vars_df,
-        categories_df = r6$q_categories_df,
+        json_path = r6$json_path,
+        categories_dir = r6$categories_dir,
         varname = extract_var_names(input$crop_var)
       )
 
@@ -767,8 +767,8 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # ------------------------------------------------------------------------
 
       input_choices$livestock_vals <- make_val_options(
-        qnr_df = r6$qnr_vars_df,
-        categories_df = r6$q_categories_df,
+        json_path = r6$json_path,
+        categories_dir = r6$categories_dir,
         varname = extract_var_names(input$livestock_var)
       )
 
@@ -846,8 +846,8 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # ------------------------------------------------------------------------
 
       input_choices$temp_crop_vals <- make_val_options(
-        qnr_df = r6$qnr_vars_df,
-        categories_df = r6$q_categories_df,
+        json_path = r6$json_path,
+        categories_dir = r6$categories_dir,
         varname = extract_var_names(input$temp_crop_var)
       )
 
@@ -925,8 +925,8 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # ------------------------------------------------------------------------
 
       input_choices$perm_crop_vals <- make_val_options(
-        qnr_df = r6$qnr_vars_df,
-        categories_df = r6$q_categories_df,
+        json_path = r6$json_path,
+        categories_dir = r6$categories_dir,
         varname = extract_var_names(input$perm_crop_var)
       )
 
@@ -1004,8 +1004,8 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # ------------------------------------------------------------------------
 
       input_choices$processed_vals <- make_val_options(
-        qnr_df = r6$qnr_vars_df,
-        categories_df = r6$q_categories_df,
+        json_path = r6$json_path,
+        categories_dir = r6$categories_dir,
         varname = extract_var_names(input$processed_var)
       )
 
@@ -1117,8 +1117,8 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # ------------------------------------------------------------------------
 
       input_choices$slaughter_anim_vals <- make_val_options(
-        qnr_df = r6$qnr_vars_df,
-        categories_df = r6$q_categories_df,
+        json_path = r6$json_path,
+        categories_dir = r6$categories_dir,
         varname = extract_var_names(input$slaughter_anim_var)
       )
 
@@ -1155,8 +1155,8 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # ------------------------------------------------------------------------
 
       input_choices$slaughter_poultry_vals <- make_val_options(
-        qnr_df = r6$qnr_vars_df,
-        categories_df = r6$q_categories_df,
+        json_path = r6$json_path,
+        categories_dir = r6$categories_dir,
         varname = extract_var_names(input$slaughter_poultry_var)
       )
 
@@ -1193,8 +1193,8 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # ------------------------------------------------------------------------
 
       input_choices$milk_vals <- make_val_options(
-        qnr_df = r6$qnr_vars_df,
-        categories_df = r6$q_categories_df,
+        json_path = r6$json_path,
+        categories_dir = r6$categories_dir,
         varname = extract_var_names(input$milk_var)
       )
 
@@ -1231,8 +1231,8 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
       # ------------------------------------------------------------------------
 
       input_choices$eggs_vals <- make_val_options(
-        qnr_df = r6$qnr_vars_df,
-        categories_df = r6$q_categories_df,
+        json_path = r6$json_path,
+        categories_dir = r6$categories_dir,
         varname = extract_var_names(input$eggs_var)
       )
 
@@ -1310,8 +1310,8 @@ mod_4_quality_1_setup_2_data_income_sources_server <- function(id, parent, r6){
 
       # compute choices
       input_choices$oth_anim_vals <- make_val_options(
-        qnr_df = r6$qnr_vars_df,
-        categories_df = r6$q_categories_df,
+        json_path = r6$json_path,
+        categories_dir = r6$categories_dir,
         varname = extract_var_names(input$oth_anim_var)
       )
 

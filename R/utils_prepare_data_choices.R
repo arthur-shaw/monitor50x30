@@ -270,10 +270,9 @@ extract_id_var_names <- function(vars) {
 
 #' Construct variable value options for selection in UI
 #'
-#' @param qnr_df Data frame. Of the form returned by
-#' `susometa::parse_questionnaire()`.
-#' @param categories_df Data frame. Of the form returned by
-#' `susometa::parse_categories()`.
+#' @param json_path Character. Path to the questionnaire JSON.
+#' @param categories_dir Character. Path to the directory containing
+#' reusable categories.
 #' @param varname Character. Name of the target variable.
 #'
 #' @return Named numeric vector. Values are codes. Names are value labels.
@@ -282,8 +281,8 @@ extract_id_var_names <- function(vars) {
 #' @importFrom susometa get_answer_options
 #' @importFrom glue glue
 make_val_options <- function(
-  qnr_df,
-  categories_df,
+  json_path,
+  categories_dir,
   varname
 ) {
 
@@ -293,8 +292,8 @@ make_val_options <- function(
 
       # extract answer options
       susometa::get_answer_options(
-        qnr_df = qnr_df,
-        categories_df = categories_df,
+        json_path = json_path,
+        categories_dir = categories_dir,
         varname = !!rlang::sym(varname)
       )
 

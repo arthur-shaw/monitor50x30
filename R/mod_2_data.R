@@ -208,6 +208,7 @@ mod_2_data_server <- function(id, r6){
         )
 
         # store metadata in R6 fields
+        r6$json_path   <- qnr_file_path
         r6$qnr_meta_df <- qnr_metadata
         r6$qnr_vars_df <- vars_metadata
 
@@ -241,11 +242,12 @@ mod_2_data_server <- function(id, r6){
         )
 
         # parse the categories into a data frame
+        categories_dir <- fs::path(
+          main_qnr_dl_dir,
+          "Questionnaire", "content", "Categories"
+        )
         categories_df <- susometa::parse_categories(
-          dir = fs::path(
-            main_qnr_dl_dir,
-            "Questionnaire", "content", "Categories"
-          )
+          dir = categories_dir
         )
 
         # write that data frame to disk
@@ -255,6 +257,7 @@ mod_2_data_server <- function(id, r6){
         )
 
         # store value in R6
+        r6$categories_dir <- categories_dir
         r6$q_categories_df <- categories_df
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 

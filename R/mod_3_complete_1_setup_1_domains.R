@@ -47,7 +47,8 @@ mod_3_complete_1_setup_1_domains_server <- function(id, parent, r6){
     # if never set, the value will be null
     domain_vars <- shiny::reactiveValues(choices = r6$domain_var_choices)
 
-    # when data are downloaded, compute the choices and update the choices
+    # when data are downloaded for a new template,
+    # compute the choices and update the choices
     gargoyle::on("download_data", {
 
       domain_vars$choices <- make_vars_options(
@@ -59,6 +60,29 @@ mod_3_complete_1_setup_1_domains_server <- function(id, parent, r6){
         inputId = "domain_vars",
         choices = domain_vars$choices
       )
+
+    })
+
+    # if domain var choices were never set,
+    # compute them and update the input field
+    shiny::observe({
+
+      if (
+        is.null(r6$domain_var_choices) &&
+        rlang::is_true(r6$data_downloaded)
+      ) {
+
+        domain_vars$choices <- make_vars_options(
+          path = fs::path(r6$dirs$qnr, "qnr_vars.rds"),
+          var_types = "SingleQuestion"
+        )
+
+        shiny::updateSelectizeInput(
+          inputId = "domain_vars",
+          choices = domain_vars$choices
+        )
+
+      }
 
     })
 
@@ -97,7 +121,8 @@ mod_3_complete_1_setup_1_domains_server <- function(id, parent, r6){
 
           # create a table of all possible values of selected variables
           obs_per_domain_df <- create_domain_var_val_df(
-            path = fs::path(r6$dirs$qnr, "qnr_full.rds"),
+            json_path = r6$json_path,
+            categories_dir = r6$categories_dir,
             domain_vars = domain_df_col_names
           )
 

@@ -407,8 +407,8 @@ mod_4_quality_1_setup_2_data_milk_prod_sales_server <- function(id, r6, parent){
       # ------------------------------------------------------------------------
 
       input_choices$produced_vals <- make_val_options(
-        qnr_df = r6$qnr_vars_df,
-        categories_df = r6$q_categories_df,
+        json_path = r6$json_path,
+        categories_dir = r6$categories_dir,
         varname = extract_var_names(input$produced_var)
       )
 
@@ -438,8 +438,8 @@ mod_4_quality_1_setup_2_data_milk_prod_sales_server <- function(id, r6, parent){
       # ------------------------------------------------------------------------
 
       input_choices$sold_vals <- make_val_options(
-        qnr_df = r6$qnr_vars_df,
-        categories_df = r6$q_categories_df,
+        json_path = r6$json_path,
+        categories_dir = r6$categories_dir,
         varname = extract_var_names(input$sold_var)
       )
 

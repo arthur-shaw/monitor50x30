@@ -259,8 +259,8 @@ mod_4_quality_1_setup_2_data_plot_gps_server <- function(id, parent, r6){
 
       # get use value answer options
       input_choices$not_measured_val <- make_val_options(
-        qnr_df = qnr_df,
-        categories_df = r6$q_categories_df,
+        json_path = r6$json_path,
+        categories_dir = r6$categories_dir,
         varname = var_selected
       )
 
