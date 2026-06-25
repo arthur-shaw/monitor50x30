@@ -13,13 +13,25 @@ mod_4_quality_1_setup_2_data_plots_per_parcel_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("data"),
-      label = "Plot data set",
+      label = info_popover(
+        lbl = "Data: Plots",
+        desc = paste(
+          "Roster of plots,",
+          "from the section typically named 'Plot roster and details'"
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("parcel_id_var"),
-      label = "Parcel ID variable",
+      label = info_popover(
+        lbl = "Variable: Parcel ID",
+        desc = paste(
+          "System-generated ID variable that identifies parcels",
+          "and typically ends in `__id`"
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
