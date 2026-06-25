@@ -51,7 +51,14 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_ui <- function(id) {
     ),
     shiny::numericInput(
       inputId = ns("amt_sold_dk_val"),
-      label = "Value indicating do not know (DK)",
+      label = label_tooltip(
+        lbl = "Value: 'Do not know' value for sales",
+        desc = paste(
+          "Often, the questionnaire provides a code for a 'do not know' code.",
+          "This code might be a special value in Designer,",
+          "an interview instruction, or a note in the interviewer manual."
+        )
+      ),
       value = NULL
     ),
     shiny::actionButton(
