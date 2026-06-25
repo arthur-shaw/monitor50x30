@@ -70,7 +70,7 @@ mod_3_complete_1_setup_2_clusters_2_computer_id_server <- function(id, parent, r
 
       shiny::updateSelectizeInput(
         inputId = "computer_id_vars",
-        choices = r6$domain_var_choices,
+        choices = r6$cluster_id_var_choices,
         selected = r6$computer_id_vars_selected
       )
 
