@@ -13,45 +13,80 @@ mod_4_quality_1_setup_2_data_temp_crop_sales_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("data"),
-      label = "Parcel-plot-crop roster data set",
+      label = label_tooltip(
+        lbl = "Data: Crops",
+        desc = paste(
+          "Roster of parcel-plot-crop observations.",
+          "Typically, named `harvestedCrops`."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("crop_id_var"),
-      label = "Crop ID variable",
+      label = label_tooltip(
+        lbl = "Variable: Crop ID",
+        desc = "System-generated ID variable that identifies crops."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("crop_vals"),
-      label = "Crops that are temporary crops",
+      label = label_tooltip(
+        lbl = "Values: crops that are temporary crops.",
+        desc = "Select all that apply."
+      ),
       choices = NULL,
       selected = NULL,
       multiple = TRUE
     ),
     shiny::selectInput(
       inputId = ns("sold_var"),
-      label = "Whether sold any crop variable",
+      label = label_tooltip(
+        lbl = "Question: Whether sold any of the crop since harvest.",
+        desc = paste(
+          "Typically, 'sell any' is in the question text",
+          "of the target question.",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("sold_val"),
-      label = "Value indicating that crop was sold",
+      label = label_tooltip(
+        lbl = "Value: Crop sold",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("amt_sold_vars"),
-      label = "Variables for total value and unit value of sales",
+      label = label_tooltip(
+        lbl = "Question(s): value of sales.",
+        desc = paste(
+          "In some cases, a single variable.",
+          "In others, one variable for total value, another for unit value."
+        )
+      ),
       multiple = TRUE,
       choices = NULL,
       selected = NULL
     ),
     shiny::numericInput(
       inputId = ns("amt_sold_dk_val"),
-      label = "Value indicating do not know (DK)",
+      label = label_tooltip(
+        lbl = "Value: 'Do not know' value for sales",
+        desc = paste(
+          "Often, the questionnaire provides a code for a 'do not know' code.",
+          "This code might be a special value in Designer,",
+          "an interview instruction, or a note in the interviewer manual."
+        )
+      ),
       value = NULL
     ),
     shiny::actionButton(
