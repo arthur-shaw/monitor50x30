@@ -13,38 +13,69 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("data"),
-      label = "Parcel-plot-crop roster data set",
+      label = label_tooltip(
+        lbl = "Data: Harvested temporary crops",
+        desc = paste(
+          "Roster of parcel-plot-crop observations.",
+          "Named `harvestedCrops` in the public SuSo application."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("crop_id_var"),
-      label = "Crop ID variable",
+      label = label_tooltip(
+        lbl = "Variable: Crop ID",
+        desc = "System-generated ID variable that identifies crops."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("crop_vals"),
-      label = "Crops that are temporary crops",
+      label = label_tooltip(
+        lbl = "Values: crops that are temporary crops.",
+        desc = "Select all that apply."
+      ),
       choices = NULL,
       selected = NULL,
       multiple = TRUE
     ),
     shiny::selectInput(
       inputId = ns("harvest_var"),
-      label = "Question on whether the crop was harvested",
+      label = label_tooltip(
+        lbl = "Question: Whether the crop was harvested.",
+        desc = paste(
+          "Typically, 'harvest' is in the question text",
+          "of the target question.",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("harvest_val"),
-      label = "Value indicating that the crop was harvested",
+      label = label_tooltip(
+        lbl = "Value: Crop harvested",
+        desc = paste(
+          "Typically, the value is 1 for 'Yes'."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("why_not_harvest_var"),
-      label = "Question on why not harvested",
+      label = label_tooltip(
+        lbl = "Question: Why not harvested",
+        desc = paste(
+          "Typically, 'not harvest' is in the question text",
+          "of the target question.",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
@@ -402,7 +433,6 @@ mod_4_quality_1_setup_2_data_temp_crop_harvest_server <- function(id, parent, r6
 
       # capture values in R6
       # data
-      r6$temp_crop_harvest_df_choices <- input_choices$data
       r6$temp_crop_harvest_df  <- input$data
       # crop ID variable
       r6$temp_crop_harvest_crop_id_var_choices <- input_choices$crop_id_var
