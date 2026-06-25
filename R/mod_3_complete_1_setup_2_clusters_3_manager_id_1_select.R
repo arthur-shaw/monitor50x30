@@ -66,6 +66,33 @@ mod_3_complete_1_setup_2_clusters_3_manager_id_1_select_server <- function(id, p
 
     })
 
+    # if manager ID variables were never set,
+    # compute them and update the input field
+    shiny::observe({
+
+      if (
+        is.null(r6$cluster_id_var_choices) &&
+        rlang::is_true(r6$data_downloaded)
+      ) {
+
+        manager_id_vars$choices <- make_vars_options(
+          path = fs::path(r6$dirs$qnr, "qnr_vars.rds"),
+          var_types = c(
+            "SingleQuestion",
+            "TextQuestion",
+            "NumericQuestion"
+          )
+        )
+        
+        shiny::updateSelectizeInput(
+          inputId = "manager_id_vars",
+          choices = manager_id_vars$choices
+        )
+
+      }
+
+    })
+
     # otherwise, load past selections from R6 and computed choices
     if (!is.null(r6$cluster_manager_id_provided)) {
 
