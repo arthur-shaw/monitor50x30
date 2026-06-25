@@ -13,24 +13,49 @@ mod_4_quality_1_setup_2_data_plot_gps_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("data"),
-      label = "Plot data set",
+      label = label_tooltip(
+        lbl = "Data: Plots",
+        desc = paste(
+          "Roster of plots,",
+          "from the section typically named 'Plot roster and details'"
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("gps_var"),
-      label = "Question that captures the GPS area measurement",
+      label = label_tooltip(
+        lbl = "Question: GPS-measured area of the plot",
+        desc = paste(
+          "Not to be confused with the farmer-estimated plot area.",
+          "This question often begins with the text 'GPS MEASURE'"
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::numericInput(
       inputId = ns("not_measured_val"),
-      label = "Value of the question indicating the parcel was not measured.",
+      label = label_tooltip(
+        lbl = "Value: Numeric value indicating that the plot was not measured",
+        desc = paste(
+          "Note: if the value is a special value in Survey Solutions,",
+          "it will appear as a hint above this field.",
+          "Typically, the value is -9999"
+        )
+      ),
       value = NULL
     ),
     shiny::selectInput(
       inputId = ns("why_not_measured_var"),
-      label = "Question about why the area was not measured.",
+      label = label_tooltip(
+        lbl = "Question: Why the plot was not measured with GPS.",
+        desc = paste(
+          "Typically, the text of this question begins with 'ENUMERATOR:'",
+          "since this question is asked of the enumerator rather than the respondent."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
