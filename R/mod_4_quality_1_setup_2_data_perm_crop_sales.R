@@ -414,6 +414,8 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_server <- function(id, r6, parent){
 
     shiny::observeEvent(input$sold_var, {
 
+      shiny::req(input$sold_var)
+
       # extract values options sold variable
       input_choices$sold_vals <- make_val_options(
         json_path = r6$json_path,
