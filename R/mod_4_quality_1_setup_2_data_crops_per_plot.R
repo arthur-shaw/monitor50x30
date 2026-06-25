@@ -13,19 +13,31 @@ mod_4_quality_1_setup_2_data_crops_per_plot_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("data"),
-      label = "Crop roster data set",
+      label = label_tooltip(
+        lbl = "Data: Crops",
+        desc = paste(
+          "Roster of parcel-plot-crop observations.",
+          "Often found in the section labelled 'CROP ROSTER'."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("parcel_id_var"),
-      label = "Parcel ID variable",
+      label = label_tooltip(
+        lbl = "Variable: Parcel ID",
+        desc = "System-generated ID variable that identifies parcels."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("plot_id_var"),
-      label = "Plot ID variable",
+      label = label_tooltip(
+        lbl = "Variable: Plot ID",
+        desc = "System-generated ID variable that identifies plots."
+      ),
       choices = NULL,
       selected = NULL
     ),
