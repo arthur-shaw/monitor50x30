@@ -13,37 +13,71 @@ mod_4_quality_1_setup_2_data_cow_displacement_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("data"),
-      label = "Household-level data set",
+      label = label_tooltip(
+        lbl = "Data: Households.",
+        desc = "The main, household-level data set."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("animal_var"),
-      label = "Livestock ownership variable",
+      label = label_tooltip(
+        lbl = "Question: Which livestock owned.",
+        desc = paste(
+          "The question that indicates, yes or no,",
+          "which livestock are owned from a list.",
+          "Typing either of these may help find the right question."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("bull_val"),
-      label = "Code for bulls",
+      label = label_tooltip(
+        lbl = "Value: Bulls",
+        desc = paste(
+          "Livestock code corresponding to bulls",
+          "In the public SuSo template, code 10."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("cow_val"),
-      label = "Code for cows",
+      label = label_tooltip(
+        lbl = "Value: Cows",
+        desc = paste(
+          "Livestock code corresponding to cows",
+          "In the public SuSo template, code 12."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("steer_heifer_val"),
-      label = "Code for steers / heifers",
+      label = label_tooltip(
+        lbl = "Value: steers / heifers",
+        desc = paste(
+          "Livestock code corresponding to steers/heifers",
+          "In the public SuSo template, code 13."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("calf_val"),
-      label = "Code for calves (male and female)",
+      label = label_tooltip(
+        lbl = "Value: calves (male and female)",
+        desc = paste(
+          "Livestock code corresponding to calves",
+          "In the public SuSo template, code 14."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
@@ -54,7 +88,7 @@ mod_4_quality_1_setup_2_data_cow_displacement_ui <- function(id) {
 
   )
 }
-    
+
 #' 4_quality_1_setup_2_data_cow_displacement Server Functions
 #'
 #' @noRd 
