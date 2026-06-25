@@ -13,27 +13,51 @@ mod_4_quality_1_setup_2_data_crop_types_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("data"),
-      label = "Crop roster data set",
+      label = label_tooltip(
+        lbl = "Data: Crops",
+        desc = paste(
+          "Roster of parcel-plot-crop observations.",
+          "Often found in the section labelled 'CROP ROSTER'."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("crop_type_var"),
-      label = paste0(
-        "Question/variable that captures the crop type ",
-        "(i.e., whether temporary or tree/permanent)"
+      label = label_tooltip(
+        lbl = paste(
+          "Question/variable: Type of crop",
+          "(i.e., whether temporary or tree/permanent)"
+        ),
+        desc = paste(
+          "In the public SuSo apps on Designer, this is a computed variable."
+        )
       ),
       choices = NULL,
       selected = NULL
     ),
     shiny::numericInput(
       inputId = ns("temp_crop_val"),
-      label = "Value indicating a temporary crop",
+      label = label_tooltip(
+        lbl = "Value: Temporary crop",
+        desc = paste(
+          "In the public SuSo apps on Designer,",
+          "temporary crops have value 1."
+        )
+      ),
+      "Value indicating a temporary crop",
       value = NULL
     ),
     shiny::numericInput(
       inputId = ns("perm_crop_val"),
-      label = "Value indicating a permanent crop",
+      label = label_tooltip(
+        lbl = "Value: Permanent crop",
+        desc = paste(
+          "In the public SuSo apps on Designer,",
+          "permanent crops have value 2."
+        )
+      ),
       value = NULL
     ),
     shiny::actionButton(
