@@ -13,38 +13,66 @@ mod_4_quality_1_setup_2_data_perm_crop_sales_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("data"),
-      label = "Parcel-plot-crop roster data set",
+      label = label_tooltip(
+        lbl = "Data: Permanent crop destination.",
+        desc = paste(
+          "Roster of parcel-plot-crop observations.",
+          "Named `harvestedCropsPermanent` in the public SuSo application."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("crop_id_var"),
-      label = "Crop ID variable",
+      label = label_tooltip(
+        lbl = "Variable: Crop ID",
+        desc = "System-generated ID variable that identifies crops."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("crop_vals"),
-      label = "Crops that are permanent crops",
+      label = label_tooltip(
+        lbl = "Values: crops that are permanent crops.",
+        desc = "Select all that apply."
+      ),
       choices = NULL,
       selected = NULL,
       multiple = TRUE
     ),
     shiny::selectInput(
       inputId = ns("sold_var"),
-      label = "Whether sold any crop variable",
+      label = label_tooltip(
+        lbl = "Question: Whether sold any of the crop.",
+        desc = paste(
+          "Typically, 'sell any' is in the question text",
+          "of the target question.",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("sold_val"),
-      label = "Value indicating that crop was sold",
+      label = label_tooltip(
+        lbl = "Value: Crop sold",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("amt_sold_vars"),
-      label = "Variables for total value and unit value of sales",
+      label = label_tooltip(
+        lbl = "Question(s): value of sales.",
+        desc = paste(
+          "In some cases, a single variable.",
+          "In others, one variable for total value, another for unit value."
+        )
+      ),
       multiple = TRUE,
       choices = NULL,
       selected = NULL
