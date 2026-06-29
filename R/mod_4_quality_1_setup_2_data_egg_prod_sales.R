@@ -13,57 +13,102 @@ mod_4_quality_1_setup_2_data_egg_prod_sales_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("data"),
-      label = "Livestock-level data set",
+      label = label_tooltip(
+        lbl = "Data: Livestock",
+        desc = paste(
+          "Livestock-level data set",
+          "containing one observation per livestock",
+          "and information on livestock ownership and production."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("animal_id_var"),
-      label = "Livestock ID variable",
+      label = label_tooltip(
+        lbl = "Variable: Livestock ID",
+        desc = "System-generated ID variable that identifies livestock."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("animal_vals"),
-      label = "Egg-producing animals",
+      label = label_tooltip(
+        lbl = "Value(s): Egg-producing animals",
+        desc = "Select all that apply"
+      ),
       choices = NULL,
       multiple = TRUE,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("produced_var"),
-      label = "Whether produced eggs variable",
+      label = label_tooltip(
+        lbl = "Question: Whether produced eggs",
+        desc = paste(
+          "Typically, the first question in the EGG PRODUCTION section.",
+          "Often, 'produced any eggs' appears in the question text.",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("produced_val"),
-      label = "Value indicating eggs produced",
+      label = label_tooltip(
+        lbl = "Value: Eggs produced",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("sold_var"),
-      label = "Whether sold eggs variable",
+      label = label_tooltip(
+        lbl = "Question: Whether sold eggs",
+        desc = paste(
+          "Typically, 'sell' and 'eggs' is in the question text",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("sold_val"),
-      label = "Value indicating eggs sold",
+      label = label_tooltip(
+        lbl = "Value: Eggs sold.",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("amt_sold_vars"),
-      label = "Amount eggs sold variables",
+      label = label_tooltip(
+        lbl = "Question(s): value of eggs sales.",
+        desc = paste(
+          "In some cases, a single variable.",
+          "In others, one variable for total value, another for unit value."
+        )
+      ),
       choices = NULL,
       multiple = TRUE,
       selected = NULL
     ),
     shiny::numericInput(
       inputId = ns("amt_sold_dk_val"),
-      label = "Code for 'do not know' sales amount",
+      label = label_tooltip(
+        lbl = "Value: 'Do not know' value for sales",
+        desc = paste(
+          "Often, the questionnaire provides a code for a 'do not know' code.",
+          "This code might be a special value in Designer,",
+          "an interview instruction, or a note in the interviewer manual."
+        )
+      ),
       value = NULL
     ),
     shiny::actionButton(
