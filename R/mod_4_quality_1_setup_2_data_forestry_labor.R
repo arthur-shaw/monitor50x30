@@ -13,44 +13,86 @@ mod_4_quality_1_setup_2_data_forestry_labor_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("hhold_df"),
-      label = "Household-level data set",
+      label = label_tooltip(
+        lbl = "Data: Households.",
+        desc = "The main, household-level data set."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("produce_var"),
-      label = "Question: whether involved in forestry",
+      label = label_tooltip(
+        lbl = "Question: whether involved in forestry",
+        desc = paste(
+          "Typically, 'any forest products' is part of the question text.",
+          "Type that to narrow the list of candidate questions.",
+          "Frequently, this is the second question in the 'FORESTRY PRODUCTION'",
+          "section."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("produce_val"),
-      label = "Value: involved in forestry",
+      label = label_tooltip(
+        lbl = "Value: involved in forestry",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("labor_var"),
-      label = "Variable: which categories of labor involved in forestry",
+      label = label_tooltip(
+        lbl = "Question: Which categories of labor involved in forestry.",
+        desc = paste(
+          "Typically, the questionn text contains",
+          "'did ... worked to collect forest / wild products'",
+          "Type this text to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("hhold_labor_vals"),
-      label = "Value: household labor",
+      label = label_tooltip(
+        lbl = "Value(s): household labor",
+        desc = paste(
+          "Values of the question selected in the previous field",
+          "that correspond to household labor.",
+          "In the SuSo template app, typically values 1, 2, and 3."
+        )
+      ),
       choices = NULL,
       selected = NULL,
       multiple = TRUE
     ),
     shiny::selectInput(
       inputId = ns("free_labor_val"),
-      label = "Value: free labor",
+      label = label_tooltip(
+        lbl = "Value: free labor",
+        desc = paste(
+          "Values of the question selected in the previous field",
+          "that correspond to household labor.",
+          "In the SuSo template app, typically value 4."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("paid_labor_val"),
-      label = "Value: paid labor",
+      label = label_tooltip(
+        lbl = "Value: paid labor",
+        desc = paste(
+          "Values of the question selected in the previous field",
+          "that correspond to household labor.",
+          "In the SuSo template app, typically value 5."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
