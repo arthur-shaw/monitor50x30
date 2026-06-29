@@ -13,169 +13,313 @@ mod_4_quality_1_setup_2_data_income_sources_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("hhold_df"),
-      label = "File: Household-level data set",
+      label = label_tooltip(
+        lbl = "Data: Households.",
+        desc = "The main, household-level data set."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("crop_var"),
-      label = "Preloaded variable: whether grew any crops",
+      label = label_tooltip(
+        lbl = "Preloaded question: whether grew any crops",
+        desc = paste(
+          "Since this question is preloaded from the post-planting visit,",
+          "the question text starts with 'PRELOADED' and also contains",
+          "'growing crops'.",
+          "Type these bits of text to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("crop_val"),
-      label = "Value: grew crops",
+      label = label_tooltip(
+        lbl = "Value: grew any crops",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("livestock_var"),
-      label = "Preloaded variable: whether raised any livestock",
+      label = label_tooltip(
+        lbl = "Preloaded question: whether raised any livestock.",
+        desc = paste(
+          "Since this question is preloaded from the post-planting visit,",
+          "the question text starts with 'PRELOADED' and also contains",
+          "'household raised livestock in the past'.",
+          "Type this text to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("livestock_val"),
-      label = "Value: raised livestocks",
+      label = label_tooltip(
+        lbl = "Value: raised livestock",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("temp_crop_df"),
-      label = "File: temporary crop-level data",
+      label = label_tooltip(
+        lbl = "Data: Destination of temporary crops",
+        desc = paste(
+          "Roster of parcel-plot-crop observations.",
+          "Typically, named `harvestedCrops`."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("temp_crop_var"),
-      label = "Question: whether sold any [TEMPORARY CROP]",
+      label = label_tooltip(
+        lbl = "Question: Whether sold any of the temporary crop.",
+        desc = paste(
+          "Typically, 'sell any' is in the question text",
+          "of the target question.",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("temp_crop_val"),
-      label = "Value: sold some [TEMPORARY CROP]",
+      label = label_tooltip(
+        lbl = "Value: Temporary crop sold",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("perm_crop_df"),
-      label = "File: permanent crop-level data",
+      label = label_tooltip(
+        lbl = "Data: Destination permanent crops.",
+        desc = paste(
+          "Roster of parcel-plot-crop observations.",
+          "Named `harvestedCropsPermanent` in the public SuSo application."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("perm_crop_var"),
-      label = "Question: whether sold any [PERMANENT CROP]",
+      label = label_tooltip(
+        lbl = "Question: Whether sold any of the permanent crop.",
+        desc = paste(
+          "Typically, 'sell any' is in the question text",
+          "of the target question.",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("perm_crop_val"),
-      label = "Value: sold some [PERMANENT CROP]",
+      label = label_tooltip(
+        lbl = "Value: Permanent crop sold",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("processed_df"),
-      label = "File: processed crop product-level data",
+      label = label_tooltip(
+        lbl = "Data: Processed crop products",
+        desc = paste(
+          "Data set with one observation per crop product",
+          "Typically, the data set has '_roster' in the name.",
+          "Type this to narrow down the list of candidate data sets."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("processed_var"),
-      label = "Question: whether sold any [PROCESSED CROP PRODUCT]",
+      label = label_tooltip(
+        lbl = "Question: Whether crop product sold.",
+        desc = paste(
+          "Typically, 'sell any' is in the question text",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("processed_val"),
-      label = "Value: sold some [PROCESSED CROP PRODUCT]",
+      label = label_tooltip(
+        lbl = "Value: product sold",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("anim_df"),
-      label = "File: livestock-level data",
+      label = label_tooltip(
+        lbl = "Data: Livestock",
+        desc = paste(
+          "Livestock-level data set",
+          "containing one observation per livestock",
+          "and information on livestock ownership and production."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("sold_live_anim_var"),
-      label = "Question: number of live [ANIMAL] sold",
+      label = label_tooltip(
+        lbl = "Question: number of live animals sold",
+        desc = paste(
+          "In the SuSo template apps, the text of the target question",
+          "contains 'sold alive'"
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("slaughter_anim_var"),
-      label = "Question: whether sold any slaughtered [ANIMAL]",
+      label = label_tooltip(
+        lbl = "Question: whether sold any slaughtered animals",
+        desc = paste(
+          "In the SuSo template apps, the text of the target question",
+          "contains 'sell any slaughtered'"
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("slaughter_anim_val"),
-      label = "Value: sold slaughtered [ANIMAL]",
+      label = label_tooltip(
+        lbl = "Value: sold slaughtered animal",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("sold_live_poultry_var"),
-      label = "Question: number [POULTRY] sold alive",
+      label = label_tooltip(
+        lbl = "Question: number of poultry sold alive",
+        desc = paste(
+          "In the SuSo template apps, the text of the target question",
+          "contains 'sold alive'"
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("slaughter_poultry_var"),
-      label = "Question: whether sold any slaughtered [POULTRY]",
+      label = label_tooltip(
+        lbl = "Question: whether sold any slaughtered poultry",
+        desc = paste(
+          "In the SuSo template apps, the text of the target question",
+          "contains 'sell any slaughtered'"
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("slaughter_poultry_val"),
-      label = "Value: sold slaughtered [POULTRY]",
+      label = label_tooltip(
+        lbl = "Value: sold slaughtered poultry",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("milk_var"),
-      label = "Question: whether sold any [ANIMAL] milk",
+      label = label_tooltip(
+        lbl = "Question: Whether sold milk.",
+        desc = paste(
+          "Typically, 'sell the milk of' is in the question text",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("milk_val"),
-      label = "Value: sold [ANIMAL] milk",
+      label = label_tooltip(
+        lbl = "Value: Milk sold.",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("eggs_var"),
-      label = "Question: whether sold any [POULTRY] eggs",
+      label = label_tooltip(
+        lbl = "Question: Whether sold eggs",
+        desc = paste(
+          "Typically, 'sell' and 'eggs' is in the question text",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("eggs_val"),
-      label = "Value: sold [POULTRY] eggs",
+      label = label_tooltip(
+        lbl = "Value: Eggs sold.",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("oth_anim_prod_df"),
-      label = "File: other animal products-level data",
+      label = label_tooltip(
+        lbl = "Data: Livestock products",
+        desc = paste(
+          "Roster of other livestock product-level observations",
+          "In the SuSo template apps, the roster ends in `_product`",
+          "Type that to narrow the list of candidate rosters"
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("oth_anim_var"),
-      label = "Question: whether sold any [ANIMAL PRODUCT]",
+      label = label_tooltip(
+        lbl = "Question: whether sold any other livestock product",
+        desc = paste(
+          "Typically, 'sell any' is in the question text",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("oth_anim_val"),
-      label = "Value: sold some [ANIMAL PRODUCT]",
+      label = label_tooltip(
+        lbl = "Value: Other livestock product sold.",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
