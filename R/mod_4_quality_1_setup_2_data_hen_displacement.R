@@ -13,31 +13,60 @@ mod_4_quality_1_setup_2_data_hen_displacement_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("data"),
-      label = "Household-level data set",
+      label = label_tooltip(
+        lbl = "Data: Households.",
+        desc = "The main, household-level data set."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("animal_var"),
-      label = "Livestock ownership variable",
+      label = label_tooltip(
+        lbl = "Question: Which livestock owned.",
+        desc = paste(
+          "The question that indicates, yes or no,",
+          "which livestock are owned from a list.",
+          "The question text contains 'keep' and 'own'.",
+          "Typing either of these may help find the right question."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("cock_val"),
-      label = "Code for cocks / broilers",
+      label = label_tooltip(
+        lbl = "Value: Cocks / broilers",
+        desc = paste(
+          "Livestock code corresponding to cocks / broilers",
+          "In the public SuSo template, code 51."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("hen_val"),
-      label = "Code for hens / layers",
+      label = label_tooltip(
+        lbl = "Value: Hens / layers",
+        desc = paste(
+          "Livestock code corresponding to hens / layers",
+          "In the public SuSo template, code 52."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("pullet_val"),
-      label = "Code for pullets / DOCs",
+      label = label_tooltip(
+        lbl = "Value: Pullets / DOCs",
+        desc = paste(
+          "Livestock code corresponding to pullets / DOCs",
+          "In the public SuSo template, code 53."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
