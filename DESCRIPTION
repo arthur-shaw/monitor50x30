@@ -32,6 +32,7 @@ Imports:
     htmltools,
     labelled,
     purrr,
+    quarto,
     R6,
     rappdirs,
     reactable,
