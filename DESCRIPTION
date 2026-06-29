@@ -64,3 +64,4 @@ Remotes:
     github::kcuilla/reactablefmtr
 Suggests: 
     webshot2
+SystemRequirements: quarto (>= 1.6.39) - https://quarto.org/
