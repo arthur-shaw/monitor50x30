@@ -19,6 +19,7 @@ Depends:
 Imports: 
     bsicons,
     bslib,
+    cli,
     config (>= 0.3.2),
     crosstalk,
     desc,
