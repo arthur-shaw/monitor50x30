@@ -13,62 +13,118 @@ mod_4_quality_1_setup_2_data_livestock_labor_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("hhold_df"),
-      label = "Household-level data set",
+      label = label_tooltip(
+        lbl = "Data: Households.",
+        desc = "The main, household-level data set."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("have_anim_var"),
-      label = "Question: whether keep any livestock",
+      label = label_tooltip(
+        lbl = "Preloaded question: whether raised any livestock.",
+        desc = paste(
+          "Since this question is preloaded from the post-planting visit,",
+          "the question text starts with 'PRELOADED' and also contains",
+          "'household raised livestock in the past'.",
+          "Type this text to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("have_anim_val"),
-      label = "Value: keep livestock",
+      label = label_tooltip(
+        lbl = "Value: raise livestock",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("anim_labor_df"),
-      label = "Data set: livestock labor",
+      label = label_tooltip(
+        lbl = "Data: livestock labor",
+        desc = paste(
+          "Roster with one observation per category of worker.",
+          "In the SuSo template app, the roster appears in the",
+          "'LIVESTOCK LABOUR' section and the roster variable ends",
+          "in `_workerCategory`"
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("anim_labor_id_var"),
-      label = "Variable: labor category ID variable",
+      label = label_tooltip(
+        lbl = "Variable: livestock labor category ID variable",
+        desc = "System-generated ID variable that identifies crops."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("anim_labor_var"),
-      label = "Variable: number of workers",
+      label = label_tooltip(
+        lbl = "Question: number of workers",
+        desc = paste(
+          "Typically, the question text contains 'How many'",
+          "and 'keeping/managing livestock'",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("anim_labor_none_val"),
-      label = "Value: none as number keeping/managing livestock",
+      label = label_tooltip(
+        lbl = "Value: none as number keeping/managing livestock",
+        desc = paste(
+          "In SuSo app, the special value for 'none'.",
+          "Typically 0"
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("hhold_labor_vals"),
-      label = "Value: household labor inputs",
+      label = label_tooltip(
+        lbl = "Value: ID for household labor inputs",
+        desc = paste(
+          "Value of the roster ID variable that identifies household labor.",
+          "In SuSo template app, typically 1, 2, and 3"
+        )
+      ),
       choices = NULL,
       selected = NULL,
       multiple = TRUE
     ),
     shiny::selectInput(
       inputId = ns("free_labor_val"),
-      label = "Value: free labor inputs",
+      label = label_tooltip(
+        lbl = "Value: ID free labor inputs",
+        desc = paste(
+          "Value of the roster ID variable that identifies free labor.",
+          "In SuSo template app, typically 4."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("paid_labor_val"),
-      label = "Value: paid labor inputs",
+      label = label_tooltip(
+        lbl = "Value: ID paid labor inputs",
+        desc = paste(
+          "Value of the roster ID variable that identifies paid labor.",
+          "In SuSo template app, typically 5."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
