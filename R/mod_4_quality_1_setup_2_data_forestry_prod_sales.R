@@ -13,56 +13,107 @@ mod_4_quality_1_setup_2_data_forestry_prod_sales_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("hhold_df"),
-      label = "Household-level data set",
+      label = label_tooltip(
+        lbl = "Data: Households.",
+        desc = "The main, household-level data set."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("practice_var"),
-      label = "Whether practice forestry variable",
+      label = label_tooltip(
+        lbl = "Question: Whether collected any forest products.",
+        desc = paste(
+          "Typically, 'any forest products' is part of the question text.",
+          "Type that to narrow the list of candidate questions.",
+          "Frequently, this is the first question in the 'FORESTRY PRODUCTION'",
+          "section."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("practice_val"),
-      label = "Value indicating that the household practices forestry",
+      label = label_tooltip(
+        lbl = "Value: Collected forestry products.",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("products_var"),
-      label = "forestry products variable",
+      label = label_tooltip(
+        lbl = "Question: Which forestry products collected.",
+        desc = paste(
+          "The question that indicates, yes or no,",
+          "which forestry products are collected from a list.",
+          "The question text contains 'collected'.",
+          "Typing either of these may help find the right question."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("product_df"),
-      label = "forestry products-level data set",
+      label = label_tooltip(
+        lbl = "Data: Forestry production",
+        desc = paste(
+          "Data set with one observation per forestry product",
+          "Typically, the data set has '_products' in the name.",
+          "Type this to narrow down the list of candidate data sets."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("sold_var"),
-      label = "Whether sold forestry product variable",
+      label = label_tooltip(
+        lbl = "Question: Whether sold forestry products.",
+        desc = paste(
+          "Typically, 'sell' and 'collected' are in the question text",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("sold_val"),
-      label = "Value indicating forestry product sold",
+      label = label_tooltip(
+        lbl = "Value: Sold forestry products.",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("amt_sold_vars"),
-      label = "Amount forestry sold variables",
+      label = label_tooltip(
+        lbl = "Question(s): Value of forestry products sold.",
+        desc = paste(
+          "In some cases, a single variable.",
+          "In others, one variable for total value, another for unit value."
+        )
+      ),
       choices = NULL,
       multiple = TRUE,
       selected = NULL
     ),
     shiny::numericInput(
       inputId = ns("amt_sold_dk_val"),
-      label = "Code for 'do not know' sales amount",
+      label = label_tooltip(
+        lbl = "Value: 'Do not know' value for sales",
+        desc = paste(
+          "Often, the questionnaire provides a code for a 'do not know' code.",
+          "This code might be a special value in Designer,",
+          "an interview instruction, or a note in the interviewer manual."
+        )
+      ),
       value = NULL
     ),
     shiny::actionButton(
