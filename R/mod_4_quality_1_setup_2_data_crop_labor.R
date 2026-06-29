@@ -13,49 +13,92 @@ mod_4_quality_1_setup_2_data_crop_labor_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("hhold_df"),
-      label = "Household-level data set",
+      label = label_tooltip(
+        lbl = "Data: Households.",
+        desc = "The main, household-level data set."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("grew_crops_var"),
-      label = "Question: whether grew any crops",
+      label = label_tooltip(
+        lbl = "Preloaded question: whether grew any crops",
+        desc = paste(
+          "Since this question is preloaded from the post-planting visit,",
+          "the question text starts with 'PRELOADED' and also contains",
+          "'growing crops'.",
+          "Type these bits of text to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("grew_crops_val"),
-      label = "Value: grew any crops",
+      label = label_tooltip(
+        lbl = "Value: grew any crops",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("paid_var"),
-      label = "Variable: whether paid for any labor inputs",
+      label = label_tooltip(
+        lbl = "Question: which type(s) of paid labor inputs.",
+        desc = paste(
+          "Frequently found in the 'LABOR INPUT (HIRED AND EXCHANGE)',",
+          "section of the questionnaire,",
+          "the target question's question text typically contains 'hired any'",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("free_var"),
-      label = "Variable: whether got any free or exchange labor; which type(s)",
+      label = label_tooltip(
+        lbl = "Question: which type(s) of free or exchange labor inputs.",
+        desc = paste(
+          "Frequently found in the 'LABOR INPUT (HIRED AND EXCHANGE)',",
+          "section of the questionnaire,",
+          "the target question's question text typically contains 'have any ...'",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("members_df"),
-      label = "Member-level data set",
+      label = label_tooltip(
+        lbl = "Data: Members",
+        desc = "Roster of member-level observations."
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("member_worked_var"),
-      label = "Variable: whether member worked in any hhold cropping activity",
+      label = label_tooltip(
+        lbl = "Question: whether the member worked in any hhold ag. activity",
+        desc = paste(
+          "Typically, the question text contains",
+          "'worked for this holding in any agricultural'",
+          "Type that to narrow the list of candidate questions."
+        )
+      ),
       choices = NULL,
       selected = NULL
     ),
     shiny::selectInput(
       inputId = ns("member_worked_val"),
-      label = "Value: member worked in hhold cropping activity.",
+      label = label_tooltip(
+        lbl = "Value: member worked in hhold ag. activity.",
+        desc = "Typically, the value is 1 for 'Yes'."
+      ),
       choices = NULL,
       selected = NULL
     ),
