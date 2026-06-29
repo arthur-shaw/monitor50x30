@@ -48,6 +48,7 @@ Imports:
     susometa (>= 0.4.1),
     tbls50x30 (>= 0.1.0),
     tibble,
+    tidyr,
     waiter,
     zip
 Encoding: UTF-8
