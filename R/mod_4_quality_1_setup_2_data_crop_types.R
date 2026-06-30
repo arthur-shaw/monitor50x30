@@ -31,7 +31,9 @@ mod_4_quality_1_setup_2_data_crop_types_ui <- function(id) {
           "(i.e., whether temporary or tree/permanent)"
         ),
         desc = paste(
-          "In the public SuSo apps on Designer, this is a computed variable."
+          "In the public SuSo apps on Designer, this is a computed variable.",
+          "Note: you may want to find this in Designer to find values for",
+          "the next two fields."
         )
       ),
       choices = NULL,
@@ -43,7 +45,9 @@ mod_4_quality_1_setup_2_data_crop_types_ui <- function(id) {
         lbl = "Value: Temporary crop",
         desc = paste(
           "In the public SuSo apps on Designer,",
-          "temporary crops have value 1."
+          "temporary crops have value 1.",
+          "Note: you may need to look at the code in Designer",
+          "to find the value."
         )
       ),
       "Value indicating a temporary crop",
@@ -55,7 +59,9 @@ mod_4_quality_1_setup_2_data_crop_types_ui <- function(id) {
         lbl = "Value: Permanent crop",
         desc = paste(
           "In the public SuSo apps on Designer,",
-          "permanent crops have value 2."
+          "permanent crops have value 2.",
+          "Note: you may need to look at the code in Designer",
+          "to find the value."
         )
       ),
       value = NULL
