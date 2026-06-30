@@ -114,7 +114,7 @@ unpack_all_zip_to_dir <- function(dir) {
 #' @return Side-effect of creating data frame objects in the global environment
 #' with the name `name`.
 #'
-#' @importFrom rlang `.data`
+#' @importFrom rlang .data
 #' @importFrom dplyr filter pull
 #' @importFrom purrr map_dfr
 #' @importFrom haven read_dta
@@ -158,7 +158,7 @@ combine_and_save_dta <- function(
 #' @importFrom fs dir_ls path_file
 #' @importFrom purrr map_dfr walk
 #' @importFrom dplyr mutate distinct pull
-#' @importFrom rlang `.data`
+#' @importFrom rlang .data
 #'
 #' @noRd
 combine_and_save_all_dta <- function(
@@ -296,7 +296,7 @@ decide_whether_to_parse_json <- function(qnr_dir) {
 #' Otherwise, use the much longer question text
 #'
 #' @importFrom dplyr filter select mutate if_else
-#' @importFrom rlang `.data`
+#' @importFrom rlang .data
 #'
 #' @noRd
 extract_vars_metadata <- function(df) {
