@@ -13,7 +13,7 @@ mod_4_quality_1_setup_2_data_plot_use_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("data"),
-      label = info_popover(
+      label = label_tooltip(
         lbl = "Data: plots",
         desc = paste(
           "Roster of plots,",
@@ -25,7 +25,7 @@ mod_4_quality_1_setup_2_data_plot_use_ui <- function(id) {
     ),
     shiny::selectInput(
       inputId = ns("plot_use_var"),
-      label = info_popover(
+      label = label_tooltip(
         lbl = "Question: How the plot was used",
         desc = "For example, whether it was cultivated, left fallow, etc."
       ),

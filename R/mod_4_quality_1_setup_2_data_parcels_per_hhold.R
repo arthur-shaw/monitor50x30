@@ -13,7 +13,7 @@ mod_4_quality_1_setup_2_data_parcels_per_hhold_ui <- function(id) {
 
     shiny::selectInput(
       inputId = ns("data"),
-      label = info_popover(
+      label = label_tooltip(
         lbl = "Data: Parcels",
         desc = paste(
           "Roster of parcels",
@@ -25,7 +25,7 @@ mod_4_quality_1_setup_2_data_parcels_per_hhold_ui <- function(id) {
     ),
     shiny::selectInput(
       inputId = ns("use"),
-      label = info_popover(
+      label = label_tooltip(
         lbl = "Question: how the parcel is used on the parcel's main use(s)",
         desc = "Multi-select question on the parcels' use(s)."
       ),
@@ -34,7 +34,7 @@ mod_4_quality_1_setup_2_data_parcels_per_hhold_ui <- function(id) {
     ),
     shiny::selectInput(
       inputId = ns("use_val"),
-      label = info_popover(
+      label = label_tooltip(
         lbl = "Value(s): that denote an agricultural use",
         desc = paste(
           "If any of these is selected, the parcel would be considered",
