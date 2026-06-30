@@ -7,6 +7,8 @@
 #'
 #' @importFrom bslib popover
 #' @importFrom bsicons bs_icon
+#'
+#' @noRd
 info_popover <- function(
   lbl,
   icon = "info-circle",
@@ -30,6 +32,8 @@ info_popover <- function(
 #'
 #' @importFrom bslib tooltip
 #' @importFrom bsicons bs_icon
+#'
+#' @noRd
 label_tooltip <- function(
   lbl,
   desc,

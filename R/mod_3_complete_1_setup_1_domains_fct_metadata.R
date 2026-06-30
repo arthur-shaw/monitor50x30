@@ -10,6 +10,8 @@
 #'
 #' @importFrom glue glue
 #' @importFrom stringr str_remove_all str_replace_all
+#'
+#' @noRd
 sanitize_suso_text <- function(string) {
 
   # compose list of allowed colors
@@ -78,6 +80,8 @@ sanitize_suso_text <- function(string) {
 #' @importFrom dplyr filter mutate pull
 #' @importFrom stringr str_remove_all str_replace_all
 #' @importFrom rlang .data
+#'
+#' @noRd
 make_vars_options <- function(
   path,
   var_types
@@ -126,6 +130,8 @@ make_vars_options <- function(
 #' @importFrom purrr map
 #' @importFrom susometa get_answer_options
 #' @importFrom tibble tibble
+#'
+#' @noRd
 create_domain_var_val_df <- function(
   path,
   json_path,

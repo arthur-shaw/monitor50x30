@@ -80,6 +80,8 @@ create_user_app_dir <- function() {
 #' @return List of paths to directories created by this function
 #'
 #' @importFrom fs path dir_create
+#'
+#' @noRd
 create_app_file_system <- function(app_dir) {
 
   # ===========================================================================
@@ -264,6 +266,8 @@ create_team_choices <- function(
 #' @importFrom quarto quarto_render
 #'
 #' @return Side-effect of producing a rendered report in a certain directory
+#'
+#' @noRd
 render_report <- function(
   report_type,
   proj_dir,
@@ -369,6 +373,8 @@ render_report <- function(
 #'
 #' @importFrom shinyjs hide
 #' @importFrom glue glue
+#'
+#' @noRd
 hide_accordion_panel <- function(value) {
 
   shinyjs::hide(
@@ -390,6 +396,8 @@ hide_accordion_panel <- function(value) {
 #'
 #' @importFrom shinyjs show
 #' @importFrom glue glue
+#'
+#' @noRd
 show_accordion_panel <- function(value) {
   shinyjs::show(
     selector = glue::glue(".accordion-item[data-value='{value}']")
@@ -410,6 +418,8 @@ show_accordion_panel <- function(value) {
 #' @return Side-effect of hiding/showing the target accordion panel in the UI
 #'
 #' @importFrom glue glue
+#'
+#' @noRd
 set_table_accordion_state <- function(r6, tbl_id) {
 
   # compose name of target table field in R6 object
@@ -455,6 +465,8 @@ set_table_accordion_state <- function(r6, tbl_id) {
 #' @importFrom purrr pwalk
 #' @importFrom shiny freezeReactiveValue
 #' @importFrom rlang exec
+#'
+#' @noRd
 update_inputs <- function(input, session, specs) {
 
   purrr::pwalk(

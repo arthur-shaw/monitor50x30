@@ -9,6 +9,8 @@
 #'
 #' @importFrom fs dir_ls path_file path_ext_remove
 #' @importFrom purrr discard
+#'
+#' @noRd
 make_data_choices <- function(dir) {
 
   data_choices <- dir |>
@@ -54,6 +56,8 @@ make_data_choices <- function(dir) {
 #'
 #' @importFrom glue glue_collapse
 #' @importFrom stringr str_replace_all
+#'
+#' @noRd
 convert_vars_from_export_to_designer <- function(vars) {
 
   # construct the regular expression for selecting variable suffixes
@@ -104,6 +108,8 @@ convert_vars_from_export_to_designer <- function(vars) {
 #' @importFrom haven read_dta
 #' @importFrom tibble enframe
 #' @importFrom rlang .data
+#'
+#' @noRd
 make_data_var_choices <- function(
   data_path,
   vars_df,
@@ -213,6 +219,8 @@ make_data_var_choices <- function(
 #' @importFrom dplyr mutate pull
 #' @importFrom glue glue
 #' @importFrom rlang .data
+#'
+#' @noRd
 make_id_var_choices <- function(path) {
 
   id_var_choices <- path |>
@@ -238,6 +246,8 @@ make_id_var_choices <- function(path) {
 #'
 #' @importFrom purrr map_chr
 #' @importFrom stringr str_extract
+#'
+#' @noRd
 extract_var_names <- function(vars) {
 
   vars_extracted <- purrr::map_chr(
@@ -261,6 +271,8 @@ extract_var_names <- function(vars) {
 #'
 #' @importFrom purrr map_chr
 #' @importFrom stringr str_extract
+#'
+#' @noRd
 extract_id_var_names <- function(vars) {
 
   vars_extracted <- purrr::map_chr(
@@ -287,6 +299,8 @@ extract_id_var_names <- function(vars) {
 #' @importFrom rlang sym
 #' @importFrom susometa get_answer_options
 #' @importFrom glue glue
+#'
+#' @noRd
 make_val_options <- function(
   json_path,
   categories_dir,
@@ -344,6 +358,8 @@ make_val_options <- function(
 #' @importFrom dplyr mutate pull
 #' @importFrom glue glue
 #' @importFrom rlang .data
+#'
+#' @noRd
 make_id_val_options <- function(
   path,
   varname
@@ -391,6 +407,8 @@ make_id_val_options <- function(
 #'
 #' @importFrom purrr map_chr
 #' @importFrom stringr str_extract
+#'
+#' @noRd
 extract_var_values <- function(vals) {
 
   vals_extracted <- vals |>
