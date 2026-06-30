@@ -186,13 +186,13 @@ manage_tbl_toggles <- function(r6) {
 
       # show
       set_tbl_visibility(
-        id = ilp_1v_show,
+        tbl = ilp_1v_show,
         action = "show"
       )
 
       # hide
       set_tbl_visibility(
-        id = ilp_1v_hide,
+        tbl = ilp_1v_hide,
         action = "hide"
       )
       # reset values of hidden fields
