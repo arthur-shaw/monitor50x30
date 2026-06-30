@@ -28,7 +28,7 @@ info_popover <- function(
 #' Create a tooltip attached to the label of Shiny inputs
 #'
 #' @inheritParams info_popover
-#' @parm placement Character. Takes values from `bslib::tooltip()`.
+#' @param placement Character. Takes values from `bslib::tooltip()`.
 #'
 #' @importFrom bslib tooltip
 #' @importFrom bsicons bs_icon

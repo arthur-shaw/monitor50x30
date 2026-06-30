@@ -8,7 +8,7 @@
 #' @importFrom shiny shinyApp
 #' @importFrom golem with_golem_options
 #' @importFrom quarto quarto_path
-#' @importFrom cli cli_abort cli_info
+#' @importFrom cli cli_abort cli_inform
 run_app <- function(
   onStart = NULL,
   options = list(),
