@@ -86,6 +86,7 @@ app_server <- function(input, output, session) {
   gargoyle::init("saved_interviews")
 
   # load module server logic
+  mod_0_about_server("0_about_1")
   mod_1_setup_server("1_setup_1", r6 = r6)
   mod_2_data_server("2_data_1", r6 = r6)
   mod_3_complete_server("3_complete_1", r6 = r6)
