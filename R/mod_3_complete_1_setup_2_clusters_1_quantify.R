@@ -32,6 +32,7 @@ mod_3_complete_1_setup_2_clusters_1_quantify_ui <- function(id){
     
 #' 3_complete_1_setup_2_clusters_1_quantify Server Functions
 #'
+#' @importFrom rlang .data
 #' @noRd 
 mod_3_complete_1_setup_2_clusters_1_quantify_server <- function(id, parent, r6){
   moduleServer( id, function(input, output, session){
@@ -90,7 +91,7 @@ mod_3_complete_1_setup_2_clusters_1_quantify_server <- function(id, parent, r6){
 
         # compute total obs from domain table
         tot_obs_domain <- r6$obs_per_domain |>
-          dplyr::pull(Obs) |>
+          dplyr::pull(.data$Obs) |>
           sum(na.rm = TRUE)
 
         # compute total obs implied by cluster number and size

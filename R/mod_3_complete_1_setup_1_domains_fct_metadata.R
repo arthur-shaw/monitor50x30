@@ -77,6 +77,7 @@ sanitize_suso_text <- function(string) {
 #'
 #' @importFrom dplyr filter mutate pull
 #' @importFrom stringr str_remove_all str_replace_all
+#' @importFrom rlang .data
 make_vars_options <- function(
   path,
   var_types
@@ -86,20 +87,25 @@ make_vars_options <- function(
     # load data frame of questionnaire metadata
     readRDS(file = path) |>
     # exclude any questionnaire objects that do not have `variable_description`
-    dplyr::filter(!is.na(variable_description) & variable_description != "") |>
+    dplyr::filter(
+      is.na(.data$variable_description) &
+      .data$variable_description != ""
+    ) |>
     # select questions that are single-select
-    dplyr::filter(type %in% var_types) |>
+    dplyr::filter(.data$type %in% var_types) |>
     # remove HTML tags from variable description
     dplyr::mutate(
-      variable_description = sanitize_suso_text(variable_description)
+      variable_description = sanitize_suso_text(.data$variable_description)
     ) |>
     # compose the variable display text as `{varname} : {variable_description}`
     dplyr::mutate(
-      to_display = paste(variable_description,
-        paste0("{", varname, "}"), sep = " : "
+      to_display = paste(
+        .data$variable_description,
+        paste0("{", .data$varname, "}"),
+        sep = " : "
       )
     ) |>
-    dplyr::pull(to_display)
+    dplyr::pull(.data$to_display)
 
   return(q_vars_out)
 

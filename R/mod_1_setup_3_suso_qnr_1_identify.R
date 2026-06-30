@@ -44,6 +44,8 @@ mod_1_setup_3_suso_qnr_1_identify_ui <- function(id){
     
 #' 1_setup_3_suso_qnr_1_identify Server Functions
 #'
+#' @importFrom rlang .data
+#'
 #' @noRd 
 mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
   moduleServer( id, function(input, output, session){
@@ -134,7 +136,7 @@ mod_1_setup_3_suso_qnr_1_identify_server <- function(id, parent, r6){
         # take the first row, where variable qnr variable is assumed the same
         dplyr::filter(dplyr::row_number() == 1) |>
         # extract the variable column
-        dplyr::pull(variable)
+        dplyr::pull(.data$variable)
 
       output$qnrs <- reactable::renderReactable({
         reactable::reactable(

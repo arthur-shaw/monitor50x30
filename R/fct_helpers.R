@@ -223,6 +223,7 @@ disable_navbar_element <- function(id) {
 #'
 #' @importFrom haven read_dta
 #' @importFrom dplyr distinct pull
+#' @importFrom rlang .data
 #'
 #' @noRd
 create_team_choices <- function(
@@ -234,8 +235,8 @@ create_team_choices <- function(
     haven::read_dta() |>
     # data frame of supervisors and their interviewers
     # reduced to distinct supervisors (aka teams)
-    dplyr::distinct(SupervisorName) |>
-    dplyr::pull(SupervisorName)
+    dplyr::distinct(.data$SupervisorName) |>
+    dplyr::pull(.data$SupervisorName)
 
   # pre-pend "All teams" option
   teams <- c(all_teams_txt, teams_from_df)

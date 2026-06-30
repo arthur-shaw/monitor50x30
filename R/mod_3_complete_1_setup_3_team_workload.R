@@ -23,6 +23,8 @@ mod_3_complete_1_setup_3_team_workload_ui <- function(id){
     
 #' 3_complete_1_setup_3_team_workload Server Functions
 #'
+#' @importFrom rlang .data
+#'
 #' @noRd 
 mod_3_complete_1_setup_3_team_workload_server <- function(id, parent, r6){
   moduleServer( id, function(input, output, session){
@@ -39,8 +41,8 @@ mod_3_complete_1_setup_3_team_workload_server <- function(id, parent, r6){
         teams_df <- haven::read_dta(
           file = fs::path(r6$dirs$team, "team_composition.dta")
         ) |>
-        dplyr::distinct(SupervisorName) |>
-        dplyr::select(team = SupervisorName) |>
+        dplyr::distinct(.data$SupervisorName) |>
+        dplyr::select(team = .data$SupervisorName) |>
         dplyr::mutate(Obs = NA_integer_)
 
       } else if (!is.null(r6$team_workload_provided)) {
@@ -86,7 +88,7 @@ mod_3_complete_1_setup_3_team_workload_server <- function(id, parent, r6){
 
       # compute total obs from domain table
       tot_obs_team <- rhandsontable::hot_to_r(input$n_per_team) |>
-        dplyr::pull(Obs) |>
+        dplyr::pull(.data$Obs) |>
         sum(na.rm = TRUE)
 
       # check whether sample sizes implied by cluster and team workload are same

@@ -103,6 +103,7 @@ convert_vars_from_export_to_designer <- function(vars) {
 #' @importFrom dplyr case_when select left_join filter pull
 #' @importFrom haven read_dta
 #' @importFrom tibble enframe
+#' @importFrom rlang .data
 make_data_var_choices <- function(
   data_path,
   vars_df,
@@ -165,33 +166,38 @@ make_data_var_choices <- function(
     convert_vars_from_export_to_designer() |>
     # construct a variable name data frame for joining with variable metadata
     tibble::enframe() |>
-    dplyr::select(varname = value) |>
+    dplyr::select(varname = .data$value) |>
     # join in metadata on variable type and other attributes
     dplyr::left_join(
       y = vars_df,
       by = "varname"
     ) |>
     # exclude linked questions
-    dplyr::filter(is_linked == FALSE) |>
+    dplyr::filter(.data$is_linked == FALSE) |>
     # select only desired variable types
     dplyr::filter(
       # questions
-      type %in% var_type_json |
+      .data$type %in% var_type_json |
       # computed variables
-      (all(!is.na(calc_var_type_json)) & (type_variable %in% calc_var_type_json))
+      (
+        all(!is.na(calc_var_type_json)) &
+        (.data$type_variable %in% calc_var_type_json)
+      )
     ) |>
     # prepare option text for display
     dplyr::mutate(
       # santize variable description,
       # removing HTML and replacing roster title
-      variable_description = sanitize_suso_text(variable_description),
+      variable_description = sanitize_suso_text(.data$variable_description),
       # compose the variable display text as
       # `{varname} : {variable_description}`
-      to_display = paste(variable_description,
-        paste0("{", varname, "}"), sep = " : "
+      to_display = paste(
+        .data$variable_description,
+        paste0("{", .data$varname, "}"),
+        sep = " : "
       )
     ) |>
-    dplyr::pull(to_display)
+    dplyr::pull(.data$to_display)
 
 }
 
@@ -206,6 +212,7 @@ make_data_var_choices <- function(
 #' @importFrom labelled look_for
 #' @importFrom dplyr mutate pull
 #' @importFrom glue glue
+#' @importFrom rlang .data
 make_id_var_choices <- function(path) {
 
   id_var_choices <- path |>
@@ -216,7 +223,7 @@ make_id_var_choices <- function(path) {
       values = FALSE
     ) |>
     dplyr::mutate(choices = glue::glue("{variable} : {label}")) |>
-    dplyr::pull(choices)
+    dplyr::pull(.data$choices)
 
   return(id_var_choices)
 
@@ -336,6 +343,7 @@ make_val_options <- function(
 #' @importFrom tibble enframe
 #' @importFrom dplyr mutate pull
 #' @importFrom glue glue
+#' @importFrom rlang .data
 make_id_val_options <- function(
   path,
   varname
@@ -366,7 +374,7 @@ make_id_val_options <- function(
     id_val_options <- val_lbls |>
       tibble::enframe() |>
       dplyr::mutate(choices = glue::glue("[{value}] : {name}")) |>
-      dplyr::pull(choices)
+      dplyr::pull(.data$choices)
 
   }
 

@@ -312,16 +312,18 @@ extract_vars_metadata <- function(df) {
       is_question = !is.na(.data$question_type),
       is_variable = !is.na(.data$type_variable),
       is_linked = (
-        (!linked_to_roster_id  %in% c("", NA_character_)) |
-        (!linked_to_question_id  %in% c("", NA_character_))
+        (!.data$linked_to_roster_id  %in% c("", NA_character_)) |
+        (!.data$linked_to_question_id  %in% c("", NA_character_))
       ),
-      uses_reusable_categories = (!categories_id %in% c("", NA_character_)),
+      uses_reusable_categories = (
+        !.data$categories_id %in% c("", NA_character_)
+      ),
       has_val_labels = rowSums(
         (
           # either answer categories input manually
           !is.na(dplyr::pick(dplyr::starts_with("answer_value"))) |
           # or reusuable categories specified
-          !is.na(categories_id)
+          !is.na(.data$categories_id)
         ),
         na.rm = TRUE
       ) > 0
@@ -339,7 +341,7 @@ extract_vars_metadata <- function(df) {
           false = .data$variable_label,
           missing = .data$variable_label
         ),
-        is_variable == TRUE ~ label_variable,
+        .data$is_variable == TRUE ~ .data$label_variable,
         TRUE ~ NA_character_
       )
     )|>
@@ -355,7 +357,7 @@ extract_vars_metadata <- function(df) {
       .data$is_linked, .data$uses_reusable_categories,
       .data$has_val_labels,
       # answer options or links to them
-      categories_id,
+      .data$categories_id,
       dplyr::starts_with("answer_text_"), dplyr::starts_with("answer_value_")
     )
 
