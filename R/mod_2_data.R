@@ -51,6 +51,38 @@ mod_2_data_server <- function(id, r6){
     ns <- session$ns
 
     # ==========================================================================
+    # initialize page
+    # ==========================================================================
+
+    # if data never downloaded, disable buttons
+    if (is.null(r6$data_downloaded)) {
+
+      # disable download buttons
+      shinyjs::disable(id = "microdata")
+      shinyjs::disable(id = "teams")
+
+      # close accordion panel
+      bslib::accordion_panel_close(
+        id = "download_data",
+        value = "data_panel"
+      )
+
+
+    } else if (!is.null(r6$data_downloaded)) {
+
+      # enable download buttons
+      shinyjs::enable(id = "microdata")
+      shinyjs::enable(id = "teams")
+
+      # open accordion panel
+      bslib::accordion_panel_open(
+        id = "download_data",
+        values = "data_panel"
+      )
+
+    }
+
+    # ==========================================================================
     # react to fetch download button
     # ==========================================================================
 
@@ -343,14 +375,30 @@ mod_2_data_server <- function(id, r6){
       # update UI elements
       # ========================================================================
 
+      # ------------------------------------------------------------------------
       # in this module
+      # ------------------------------------------------------------------------
+
       # enable the next button
       shinyjs::show(id = "select_action")
 
       # enable the accordion for downloading data
       shinyjs::enable("download_data")
 
-      # in a parent module
+      # enable download buttons
+      shinyjs::enable(id = "microdata")
+      shinyjs::enable(id = "teams")
+
+      # open accordion panel
+      bslib::accordion_panel_open(
+        id = "download_data",
+        values = "data_panel"
+      )
+
+      # ------------------------------------------------------------------------
+      # in a parent and sibling modules
+      # ------------------------------------------------------------------------
+
       # indirectly, by signal that data downloaded
       # if the downloaded data is for a different questionnaire
       if (
