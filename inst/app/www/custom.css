@@ -67,29 +67,29 @@
    ============================================ */
 
 /* Default action buttons */
-.btn.action-button {
+.btn:is(.action-button, .shiny-download-link) {
   background-color: var(--green);
   border-color: var(--green);
   color: var(--white);
 }
 
 /* Hover and focus for action buttons */
-.btn.action-button:hover,
-.btn.action-button:focus {
+.btn:is(.action-button, .shiny-download-link):hover,
+.btn:is(.action-button, .shiny-download-link):focus {
   background-color: var(--green-darker);
   border-color: var(--green-darker);
   color: var(--white);
 }
 
 /* Focus visible outline for accessibility */
-.btn.action-button:focus-visible {
+.btn:is(.action-button, .shiny-download-link):focus-visible {
   outline: 3px solid var(--lime);
   outline-offset: 2px;
 }
 
 /* Disabled state for buttons */
-.btn.action-button:disabled,
-.btn.action-button.disabled {
+.btn:is(.action-button, .shiny-download-link):disabled,
+.btn:is(.action-button, .shiny-download-link).disabled {
   background-color: var(--grey);
   border-color: var(--grey);
   color: var(--grey-muted);
