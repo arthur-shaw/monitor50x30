@@ -16,7 +16,17 @@ mod_1_setup_3_suso_qnr_ui <- function(id){
       open = FALSE,
 
       bslib::accordion_panel(
-        title = "Identify all",
+        title = label_tooltip(
+          lbl = "Identify all",
+          desc = paste(
+            "The app needs to identify all questionnaires",
+            "whose data to download.",
+            "Initially, the app will display the full list of questionnaires",
+            "imported on your Survey Solutions server.",
+            "To narrow the list, write a sub-string or regular expression",
+            "that matches the questionnaire(s) of interest."
+          )
+        ),
         value = "identify_qnrs_panel",
         mod_1_setup_3_suso_qnr_1_identify_ui(
           ns("1_setup_3_suso_qnr_1_identify_1")
@@ -24,7 +34,15 @@ mod_1_setup_3_suso_qnr_ui <- function(id){
       ),
 
       bslib::accordion_panel(
-        title = "Select main",
+        title = label_tooltip(
+          lbl = "Select main",
+          desc = paste(
+            "The app needs to know which questionnaire among these is the",
+            "main/latest questionnaire.",
+            "This questionnaire will be used by the app as the source of",
+            "questions and answer options for setting up reports."
+          )
+        ),
         value = "select_qnr_panel",
         mod_1_setup_3_suso_qnr_2_select_ui(
           ns("1_setup_3_suso_qnr_2_select_1")
