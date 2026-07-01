@@ -12,7 +12,9 @@ app_ui <- function(request) {
     bslib::page_navbar(
       title = "monitor50x30",
       id = "navbar",
-      underline = TRUE,
+      navbar_options = bslib::navbar_options(
+        underline = TRUE
+      ),
       theme = bslib::bs_theme(version = 5),
       bslib::nav_panel(
         title = "About",
