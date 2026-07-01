@@ -26,7 +26,13 @@ mod_1_setup_4_template_ui <- function(id){
     ),
     shiny::selectizeInput(
       inputId = ns("qnr_extensions"),
-      label = "Which optional extension(s)?",
+      label = label_tooltip(
+        lbl = "Which optional extension(s)?",
+        desc = paste(
+          "Choose all that apply.",
+          "If none, choose 'None'."
+        )
+      ),
       choices = c(
         "None",
         "Crop labor inputs",
