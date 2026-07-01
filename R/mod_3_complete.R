@@ -29,7 +29,6 @@ mod_3_complete_ui <- function(id){
       # settings
       fillable = FALSE,
       # contents
-      shiny::tags$p("Main area"),
       mod_3_complete_2_report_ui(ns("3_complete_2_report_1"))
     )
 
