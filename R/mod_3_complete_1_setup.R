@@ -14,21 +14,46 @@ mod_3_complete_1_setup_ui <- function(id){
     bslib::accordion(
       id = ns("setup"),
       bslib::accordion_panel(
-        title = "Domains",
+        title = label_tooltip(
+          lbl = "Domains",
+          desc = paste(
+            "The app plans to measure progress towards completion",
+            "by survey domain.",
+            "To do so, it needs to know two things:",
+            "first, the variables that define a survey domain;",
+            "second, the number of observations expected per domain."
+          )
+        ),
         value = "domains",
         mod_3_complete_1_setup_1_domains_ui(
           ns("3_complete_1_setup_1_domains_1")
         )
       ),
       bslib::accordion_panel(
-        title = "Clusters",
+        title = label_tooltip(
+          lbl = "Clusters",
+          desc = paste(
+            "The app plans to check that all observations expected per cluster",
+            "have been received.",
+            "To do so, it needs information on the size of each cluster",
+            "as well as the variables that define it, for a computer, and",
+            "those that help identify it, for a human in a report."
+          )
+        ),
         value = "clusters",
         mod_3_complete_1_setup_2_clusters_ui(
           ns("3_complete_1_setup_2_clusters_1")
         )
       ),
       bslib::accordion_panel(
-        title = "Workloads",
+        title = label_tooltip(
+          lbl = "Workloads",
+          desc = paste(
+            "The app plans to measure progress per survey team.",
+            "To calculate the % complete, the app needs to know",
+            "how many observations to expect per team."
+          )
+        ),
         value = "workloads",
         mod_3_complete_1_setup_3_team_workload_ui(
           ns("3_complete_1_setup_3_team_workload_1")
