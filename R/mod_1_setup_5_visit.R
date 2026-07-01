@@ -24,7 +24,16 @@ mod_1_setup_5_visit_ui <- function(id){
     ),
     shiny::selectizeInput(
       inputId = ns("svy_current_visit"),
-      label = "What is the current visit to the household?",
+      label = label_tooltip(
+        lbl = "What is the current visit to the household?",
+        desc = paste(
+          "The app needs to know the visit number.",
+          "If the survey has a single visit to the household",
+          "then choose 1.",
+          "If the survey has multiple visits,",
+          "choose the visit number (e.g., 2 for second visit)."
+        )
+      ),
       choices = c(
         "Single visit",
         "Post-planting",
@@ -38,7 +47,16 @@ mod_1_setup_5_visit_ui <- function(id){
     ),
     shiny::dateInput(
       inputId = ns("svy_start_date"),
-      label = "When will the survey data collection start?"
+      label = label_tooltip(
+        lbl = "When will the survey data collection start?",
+        desc = paste(
+          "The app uses this date in a few ways.",
+          "First, it uses it as a starting point for collecting",
+          "tablet sync records for interviewers.",
+          "Second, it uses it as the default start date",
+          "for reports."
+        )
+      )
     ),
     shiny::actionButton(
       inputId = ns("save"),
