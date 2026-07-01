@@ -13,7 +13,14 @@ mod_3_complete_2_report_ui <- function(id){
 
     shiny::selectizeInput(
       inputId = ns("report_teams"),
-      label = "Please choose the teams for which to generate the report",
+      label = label_tooltip(
+        lbl = "Please choose the teams for which to generate the report",
+        desc = paste(
+          "The app can generate the report for one team, multiple teams,",
+          "or all teams.",
+          "Please indicate the scope of the desired report."
+        )
+      ),
       choices = NULL,
       selected = NULL,
       multiple = TRUE
