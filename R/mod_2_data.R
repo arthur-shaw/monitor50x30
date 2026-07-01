@@ -468,6 +468,74 @@ mod_2_data_server <- function(id, r6){
 
     })
 
+    # ==========================================================================
+    # react to download buttons
+    # ==========================================================================
+
+    # --------------------------------------------------------------------------
+    # microdata
+    # --------------------------------------------------------------------------
+
+    output$microdata <- shiny::downloadHandler(
+      filename = "microdata.zip",
+      content = function(file) {
+
+        # return null if data files does not exist
+        # this leads Shiny not to serve up an `.htm` file
+        data_file_exists <- fs::file_exists(
+          fs::path(r6$dirs$micro_combine, paste0(r6$qnr_var, ".dta"))
+        )
+        shiny::req(data_file_exists)
+
+        # zip file path
+        zip_file_path <- fs::path(r6$dirs$micro_combine, "microdata.zip")
+
+        # files to zip
+        files_to_zip <- fs::dir_ls(
+          path = r6$dirs$micro_combine,
+          type = "file",
+          regexp = "\\.dta"
+        )
+
+        # zip data files
+        zip::zipr(
+          zipfile = zip_file_path,
+          files = files_to_zip
+        )
+
+        # serve them up
+        fs::file_copy(
+          path = zip_file_path,
+          new_path = file
+        )
+
+      }
+
+    )
+
+    # --------------------------------------------------------------------------
+    # team composition
+    # --------------------------------------------------------------------------
+
+    output$teams <- shiny::downloadHandler(
+      filename = "teams.dta",
+      content = function(file) {
+
+        file_path <- fs::path(r6$dirs$team, "team_composition.dta")
+
+        # require that file(s) be present
+        data_file_exists <- fs::file_exists(file_path)
+        shiny::req(data_file_exists)
+
+        # serve up single file
+        fs::file_copy(
+          path = file_path,
+          new_path = file
+        )
+
+      }
+
+    )
 
   })
 }
