@@ -15,14 +15,33 @@ mod_4_quality_1_setup_ui <- function(id) {
       id = ns("setup"),
       icon = fontawesome::fa(name = "cogs"),
       bslib::accordion_panel(
-        title = "Tables",
+        title = label_tooltip(
+          lbl = "Tables",
+          desc = paste(
+            "These are the monitoring tables that can be produced",
+            "for your survey.",
+            "To learn more about a table, click on its 'Describe'.",
+            "To choose the table, activate its toggle."
+          )
+        ),
         value = "tables",
         mod_4_quality_1_setup_1_tables_ui(
           id = ns("4_quality_1_setup_1_tables_1")
         )
       ),
       bslib::accordion_panel(
-        title = "Data",
+        title = label_tooltip(
+          lbl = "Data",
+          desc = paste(
+            "The app needs to know more which variables from your survey",
+            "to use when producing your selected tables.",
+            "For each selected table, select the appropriate data",
+            "variables, and values.",
+            "While the app draws these data from your survey, there may be",
+            "some cases, like for computed variables, where you may need",
+            "to look at the questionnaire in Designer to answer some questions."
+          )
+        ),
         value = "data",
         mod_4_quality_1_setup_2_data_ui(
           id = ns("4_quality_1_setup_2_data_1")
