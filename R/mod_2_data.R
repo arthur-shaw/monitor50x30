@@ -10,29 +10,36 @@
 mod_2_data_ui <- function(id){
   ns <- NS(id)
   shiny::tagList(
-    shiny::actionButton(
-      inputId = ns("fetch_data"),
-      label = "Fetch data"
-    ),
-    shiny::selectInput(
-      inputId = ns("select_action"),
-      label = "Select the action to take",
-      choices = c(
-        "Data completeness report",
-        "Data quality report"
-      )
-    ),
-    bslib::accordion(
-      id = ns("download_data"),
-      bslib::accordion_panel(
-        title = "Download data",
-        shiny::p("PLACEHOLDER for data details")
-      )
 
-
+    bslib::layout_columns(
+      # space for each set of things
+      col_widths = c(6, 6),
+      fillable = FALSE,
+      # left-hand side
+      shiny::actionButton(
+        inputId = ns("fetch_data"),
+        label = "Fetch data"
+      ),
+      # right-hand side
+      bslib::accordion(
+        id = ns("download_data"),
+        bslib::accordion_panel(
+          title = "Download data",
+          value = "data_panel",
+          shiny::downloadButton(
+            outputId = ns("microdata"),
+            label = "Survey"
+          ),
+          shiny::br(),
+          shiny::br(),
+          shiny::downloadButton(
+            outputId = ns("teams"),
+            label = "Team composition"
+          )
+        )
+      )
     )
 
- 
   )
 }
     
