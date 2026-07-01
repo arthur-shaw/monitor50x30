@@ -14,22 +14,42 @@ mod_1_setup_2_suso_creds_ui <- function(id){
     shiny::textInput(
       inputId = ns("server"),
       label = shiny::tags$p(
-        "Server URL",
-        bsicons::bs_icon("browser-chrome")
+        bsicons::bs_icon("browser-chrome"),
+        label_tooltip(
+          lbl = "Server URL",
+          desc = "Full URL for your Survey Solutions server"
+        )
       )
     ),
     shiny::textInput(
       inputId = ns("workspace"),
       label = shiny::tags$p(
-        "Workspace",
-        bsicons::bs_icon("diagram-3-fill")
+        bsicons::bs_icon("diagram-3-fill"),
+        label_tooltip(
+          lbl = "Workspace",
+          desc = paste(
+            "The app needs the workspace 'name', not the 'display name'.",
+            "In other words, the app needs the 'name' that appears in",
+            "the workspace's URL, rather than the 'display name' that appears",
+            "in the user interface of Headquarters.",
+            "See the Survey Solutions documentation for more details on this",
+            "distinction."
+          )
+        )
       ),
     ),
     shiny::textInput(
       inputId = ns("user"),
       label = shiny::tags$p(
-        "API user name",
-        fontawesome::fa(name = "user-shield")
+        fontawesome::fa(name = "user-shield"),
+        label_tooltip(
+          lbl = "API user name",
+          desc = paste(
+            "The app needs to connect to your server as an API users.",
+            "The credentials for other users will not work.",
+            "Do not provide the user name for admin or Headquarters ."
+          )
+        )
       )
     ),
     shiny::passwordInput(
