@@ -72,3 +72,5 @@ Suggests:
     webshot2
 SystemRequirements: quarto (>= 1.6.39) - https://quarto.org/
 Config/roxygen2/version: 8.0.0
+URL: https://github.com/lsms-worldbank/monitor50x30
+BugReports: https://github.com/lsms-worldbank/monitor50x30/issues
