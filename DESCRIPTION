@@ -9,6 +9,10 @@ Authors@R: c(
         person(
             given = "Shelmith", family = "Kariuki",
             role = c("aut"), email = "kariukishelmith@gmail.com"
+        ),
+        person(
+            "LSMS Team, World Bank Group",
+            role = c("cph", "fnd")
         )
     ) 
 Description: Application for getting data, reporting on data completeness,
